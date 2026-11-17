@@ -55,10 +55,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-bottom: calc(72px + var(--safe-bottom));
+  padding-bottom: calc(74px + var(--safe-bottom));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 820px) {
   body {
     padding-bottom: 0;
   }
@@ -75,7 +75,7 @@ header.app-bar {
 }
 
 .top-bar {
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 10px 16px;
   display: flex;
@@ -93,15 +93,15 @@ header.app-bar {
 }
 
 .brand-icon {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #ffffff;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   box-shadow: 0 4px 8px rgba(13, 148, 136, 0.25);
   flex-shrink: 0;
@@ -114,10 +114,18 @@ header.app-bar {
 }
 
 .brand-title {
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: 700;
   color: var(--text);
   line-height: 1.2;
+}
+
+.brand-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  flex-wrap: wrap;
 }
 
 .brand-subtitle-btn {
@@ -130,15 +138,27 @@ header.app-bar {
   background: var(--primary-subtle);
   border: 1px solid var(--primary-light);
   border-radius: 9999px;
-  padding: 2px 10px;
-  margin-top: 3px;
+  padding: 2px 9px;
   cursor: pointer;
-  transition: all 0.2s;
-  width: fit-content;
+  transition: all 0.15s;
 }
 
 .brand-subtitle-btn:active {
   transform: scale(0.96);
+}
+
+.exam-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid #fde68a;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  cursor: pointer;
 }
 
 .header-actions {
@@ -152,7 +172,7 @@ header.app-bar {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 9px 15px;
+  padding: 9px 14px;
   border-radius: var(--radius-sm);
   font-size: 13px;
   font-weight: 600;
@@ -197,6 +217,11 @@ header.app-bar {
   background: #b45309;
 }
 
+.btn-success {
+  background: #16a34a;
+  color: #ffffff;
+}
+
 .btn-sm {
   padding: 6px 11px;
   font-size: 12px;
@@ -204,8 +229,8 @@ header.app-bar {
 }
 
 .btn-icon-round {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   padding: 0;
   display: inline-flex;
@@ -226,21 +251,22 @@ header.app-bar {
 
 nav.desktop-nav {
   display: none;
-  gap: 6px;
+  gap: 4px;
   padding: 0 16px;
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   border-top: 1px solid var(--border);
+  overflow-x: auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 820px) {
   nav.desktop-nav {
     display: flex;
   }
 }
 
 .desktop-tab-btn {
-  padding: 10px 16px;
+  padding: 10px 14px;
   background: none;
   border: none;
   border-bottom: 3px solid transparent;
@@ -252,7 +278,7 @@ nav.desktop-nav {
   transition: all 0.15s;
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
 }
 
 .desktop-tab-btn:hover {
@@ -272,18 +298,18 @@ nav.mobile-bottom-bar {
   right: 0;
   height: calc(64px + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(226, 232, 240, 0.8);
+  border-top: 1px solid rgba(226, 232, 240, 0.85);
   display: flex;
   align-items: center;
   justify-content: space-around;
   z-index: 50;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.05);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 820px) {
   nav.mobile-bottom-bar {
     display: none !important;
   }
@@ -295,15 +321,15 @@ nav.mobile-bottom-bar {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
   background: none;
   border: none;
   cursor: pointer;
   color: #94a3b8;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  padding: 6px 0;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 5px 0;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
@@ -312,13 +338,13 @@ nav.mobile-bottom-bar {
 }
 
 .mobile-nav-icon-box {
-  width: 32px;
-  height: 26px;
-  border-radius: 13px;
+  width: 30px;
+  height: 25px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: all 0.18s;
 }
 
 .mobile-nav-item.active {
@@ -332,10 +358,10 @@ nav.mobile-bottom-bar {
 
 main.app-content {
   flex: 1;
-  max-width: 1400px;
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  padding: 14px 12px;
+  padding: 12px 10px;
 }
 
 @media (min-width: 768px) {
@@ -348,7 +374,7 @@ main.app-content {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 @media (min-width: 640px) {
@@ -360,8 +386,8 @@ main.app-content {
 @media (min-width: 1024px) {
   .stats-container {
     grid-template-columns: repeat(5, 1fr);
-    gap: 14px;
-    margin-bottom: 18px;
+    gap: 12px;
+    margin-bottom: 16px;
   }
 }
 
@@ -418,7 +444,7 @@ main.app-content {
 .chip-filters-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   overflow-x: auto;
   padding: 2px 2px 10px 2px;
   scrollbar-width: none;
@@ -432,10 +458,10 @@ main.app-content {
 .filter-chip {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 13px;
+  gap: 4px;
+  padding: 5px 12px;
   border-radius: 9999px;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -467,7 +493,7 @@ main.app-content {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -520,7 +546,7 @@ main.app-content {
 .toolbar-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
@@ -539,6 +565,19 @@ main.app-content {
 .select-native:focus {
   border-color: var(--primary);
   background: var(--surface);
+}
+
+.bulk-actions-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--primary-subtle);
+  border: 1px dashed var(--primary);
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+  overflow-x: auto;
+  font-size: 12.5px;
 }
 
 .tab-pane {
@@ -577,11 +616,11 @@ table.result-table thead {
 }
 
 table.result-table th {
-  padding: 11px 12px;
+  padding: 10px 11px;
   font-weight: 700;
   color: var(--text);
   border-left: 1px solid var(--border);
-  font-size: 12.5px;
+  font-size: 12px;
 }
 
 table.result-table th:last-child {
@@ -598,7 +637,7 @@ table.result-table tbody tr:hover {
 }
 
 table.result-table td {
-  padding: 8px 10px;
+  padding: 7px 9px;
   border-left: 1px solid var(--border);
   color: var(--text);
 }
@@ -608,9 +647,9 @@ table.result-table td:last-child {
 }
 
 .mark-input-cell {
-  width: 58px;
+  width: 56px;
   text-align: center;
-  padding: 5px;
+  padding: 4px;
   border: 1px solid transparent;
   border-radius: var(--radius-xs);
   background: transparent;
@@ -629,6 +668,12 @@ table.result-table td:last-child {
   border-color: var(--primary);
   background: var(--surface);
   box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.mark-input-cell.fail-cell {
+  color: var(--danger);
+  background: #fee2e2;
+  border-radius: 4px;
 }
 
 .badge-rank {
@@ -696,7 +741,7 @@ table.result-table td:last-child {
 @media (min-width: 1024px) {
   .cards-list {
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 14px;
   }
 }
 
@@ -704,11 +749,11 @@ table.result-table td:last-child {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 14px 16px;
+  padding: 14px 15px;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
@@ -758,7 +803,7 @@ table.result-table td:last-child {
 }
 
 .student-sub-text {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-muted);
 }
 
@@ -790,7 +835,7 @@ table.result-table td:last-child {
 }
 
 .mark-chip-sub {
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -819,23 +864,41 @@ table.result-table td:last-child {
   padding-top: 10px;
   border-top: 1px solid var(--border);
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .footer-stats-badge {
   display: flex;
   align-items: baseline;
-  gap: 5px;
-  font-size: 13px;
+  gap: 4px;
+  font-size: 12.5px;
 }
 
 .footer-actions-cluster {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: white;
+  border-radius: var(--radius-xs);
+  padding: 5px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.btn-whatsapp:active {
+  transform: scale(0.95);
 }
 
 .quick-entry-card {
-  max-width: 600px;
+  max-width: 640px;
   margin: 0 auto;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -860,13 +923,13 @@ table.result-table td:last-child {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 8px 12px;
+  padding: 9px 12px;
   background: var(--surface-alt);
   border-radius: var(--radius-sm);
 }
 
 .quick-entry-input {
-  width: 80px;
+  width: 78px;
   padding: 8px;
   text-align: center;
   font-size: 16px;
@@ -923,7 +986,7 @@ table.result-table td:last-child {
 .modal-sheet {
   background: var(--surface);
   width: 100%;
-  max-width: 560px;
+  max-width: 620px;
   border-radius: 24px 24px 0 0;
   max-height: 88vh;
   display: flex;
@@ -1094,7 +1157,7 @@ table.result-table td:last-child {
   transform: scale(0.92);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 820px) {
   .fab-native {
     bottom: 24px;
   }
@@ -1200,12 +1263,12 @@ footer.app-footer a {
   font-weight: 600;
 }
 
-.print-gazette-view {
+.print-section {
   display: none;
 }
 
 @media print {
-  header.app-bar, nav.desktop-nav, nav.mobile-bottom-bar, .search-toolbar, .stats-container, .fab-native, .no-print, .modal-backdrop-native, .chip-filters-bar, footer.app-footer, .toast-container-native {
+  header.app-bar, nav.desktop-nav, nav.mobile-bottom-bar, .search-toolbar, .stats-container, .fab-native, .no-print, .modal-backdrop-native, .chip-filters-bar, footer.app-footer, .toast-container-native, .bulk-actions-strip {
     display: none !important;
   }
   * {
@@ -1219,7 +1282,7 @@ footer.app-footer a {
     margin: 0 !important;
     max-width: 100% !important;
   }
-  .print-gazette-view {
+  .print-section {
     display: block !important;
   }
   .tab-pane {
@@ -1232,7 +1295,7 @@ footer.app-footer a {
   table.gazette-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 11pt;
+    font-size: 10.5pt;
     text-align: center;
   }
   table.gazette-table th, table.gazette-table td {
@@ -1264,10 +1327,16 @@ footer.app-footer a {
       <div class="brand-icon">ف</div>
       <div class="brand-info">
         <h1 class="brand-title" id="headerInstitution">جامعہ فاطمۃ الزہرا للبنات</h1>
-        <button type="button" class="brand-subtitle-btn" id="headerClassBadge">
-          <span id="headerClassText">درجہ متوسطہ اول</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
+        <div class="brand-chips-row">
+          <button type="button" class="brand-subtitle-btn" id="headerClassBadge">
+            <span id="headerClassText">درجہ: متوسطہ اول</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <button type="button" class="exam-badge-btn" onclick="event.stopPropagation(); openExamPickerSheet()">
+            <span id="headerExamText">ششماہی امتحان</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -1283,9 +1352,9 @@ footer.app-footer a {
         <span>ایکسل</span>
       </button>
 
-      <button class="btn btn-accent btn-sm" onclick="printGazette()" title="گزٹ پرنٹ کریں">
+      <button class="btn btn-accent btn-sm" onclick="openPrintCenterModal()" title="پرنٹ سنٹر (گزٹ، DMC، پوزیشن ہولڈرز، سلپس)">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        <span>پرنٹ</span>
+        <span>پرنٹس</span>
       </button>
     </div>
   </div>
@@ -1307,9 +1376,13 @@ footer.app-footer a {
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       کشف الدرجات (DMC)
     </button>
+    <button class="desktop-tab-btn" onclick="switchMainTab('printcenter', this)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      پرنٹ سنٹر
+    </button>
     <button class="desktop-tab-btn" onclick="switchMainTab('stats', this)">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-      شماریات و تجاویز
+      شماریات و چارٹس
     </button>
     <button class="desktop-tab-btn" onclick="switchMainTab('settings', this)">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -1364,8 +1437,20 @@ footer.app-footer a {
     <button class="filter-chip" data-filter="top3" onclick="setFilterChip('top3', this)">
       🏆 ٹاپ ۳ پوزیشن
     </button>
+    <button class="filter-chip" data-filter="ممتاز" onclick="setFilterChip('ممتاز', this)">
+      🌟 ممتاز
+    </button>
+    <button class="filter-chip" data-filter="جید جدا" onclick="setFilterChip('جید جدا', this)">
+      📘 جید جدا
+    </button>
+    <button class="filter-chip" data-filter="جید" onclick="setFilterChip('جید', this)">
+      📙 جید
+    </button>
+    <button class="filter-chip" data-filter="مقبول" onclick="setFilterChip('مقبول', this)">
+      📗 مقبول
+    </button>
     <button class="filter-chip" data-filter="passed" onclick="setFilterChip('passed', this)">
-      ✓ کامیاب طالبات
+      ✓ تمام کامیاب
     </button>
     <button class="filter-chip" data-filter="failed" onclick="setFilterChip('failed', this)">
       ✕ راسب (ناکام)
@@ -1377,24 +1462,32 @@ footer.app-footer a {
 
   <div class="search-toolbar">
     <div class="search-box-native">
-      <input type="text" id="searchInput" class="search-input-native" placeholder="تلاش کریں نام، والد کا نام یا رول نمبر..." oninput="handleSearchInput(this.value)">
+      <input type="text" id="searchInput" class="search-input-native" placeholder="تلاش کریں: نام، ولدیت، رول نمبر، رجسٹریشن یا فون نمبر..." oninput="handleSearchInput(this.value)">
       <svg class="search-icon-pos" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <button id="searchClearBtn" class="search-clear-btn" onclick="clearSearch()">&times;</button>
     </div>
 
     <div class="toolbar-actions">
       <select id="sortSelect" class="select-native btn-sm" onchange="handleSortChange(this.value)">
-        <option value="roll_asc">رول نمبر (ترتیب وار)</option>
-        <option value="rank_asc">پوزیشن (اوّل تا آخر)</option>
-        <option value="marks_desc">مجموعہ نمبر (زیادہ تا کم)</option>
-        <option value="name_asc">اسم الطالبۃ (الف بائی)</option>
+        <option value="roll_asc">رول نمبر (1 ➔ 100)</option>
+        <option value="rank_asc">پوزیشن (اول ➔ آخر)</option>
+        <option value="marks_desc">مجموعہ نمبر (زیادہ ➔ کم)</option>
+        <option value="name_asc">اسم الطالبۃ (الف ➔ ے)</option>
       </select>
 
       <button class="btn btn-primary btn-sm" onclick="openStudentModal()">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        <span>نیا طالب علم</span>
+        <span>نیا اندراج</span>
       </button>
     </div>
+  </div>
+
+  <div class="bulk-actions-strip no-print">
+    <span style="font-weight:700; color:var(--primary-dark);">اجتماعی اختیارات:</span>
+    <button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('present')">سب کو حاضر کریں</button>
+    <button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('absent')">سب کو غائب کریں</button>
+    <button class="btn btn-secondary btn-sm" onclick="downloadBlankExcelTemplate()">خالی ایکسل ٹیمپلیٹ</button>
+    <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); switchTabDirect('dmc')">سب کے DMC پرنٹ کریں</button>
   </div>
 
   <div id="pane-table" class="tab-pane active">
@@ -1426,40 +1519,94 @@ footer.app-footer a {
       </div>
       <div style="display:flex; gap:8px;">
         <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs()">سب طلبہ کے کشف دکھائیں</button>
-        <button class="btn btn-primary btn-sm" onclick="window.print()">پرنٹ کریں (Print)</button>
+        <button class="btn btn-primary btn-sm" onclick="printActiveDMC()">پرنٹ کریں (Print)</button>
       </div>
     </div>
     <div id="dmcContainer"></div>
   </div>
 
+  <div id="pane-printcenter" class="tab-pane">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+      <div class="native-card">
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📑 امتحانی گزٹ (Gazette Broadsheet)</h3>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">پوری کلاس کا باضابطہ نتیجہ گزٹ A4 لینڈ اسکیپ پرنٹ مع چار باضابطہ دستخط۔</p>
+        <button class="btn btn-primary btn-sm" onclick="printGazette()">گزٹ پرنٹ کریں</button>
+      </div>
+
+      <div class="native-card">
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">🏆 فہرست نمایاں پوزیشن ہولڈرز (Merit List)</h3>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">سالانہ جلسہ تقسیم انعامات و اسناد کے لیے اول، دوم، سوم کی خصوصی میرٹ شیٹ۔</p>
+        <button class="btn btn-accent btn-sm" onclick="printMeritList()">پوزیشن لسٹ پرنٹ کریں</button>
+      </div>
+
+      <div class="native-card">
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📜 کشف الدرجات (DMC / Sanad)</h3>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">دوہرے اسلامی بارڈر، فیصد، پوزیشن اور گریڈ کے ساتھ سند برائے طالبات۔</p>
+        <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); window.print()">تمام طالبات کے DMC پرنٹ کریں</button>
+      </div>
+
+      <div class="native-card">
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📋 مضمون وار ایوارڈ لسٹ برائے ممتحن</h3>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحان کے دوران پرچہ چیک کرنے والے ممتحن کے لیے خصوصی دستخطی ایوارڈ شیٹ۔</p>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <select id="awardListSubjectSelect" class="select-native btn-sm"></select>
+          <button class="btn btn-secondary btn-sm" onclick="printAwardSheet()">پرنٹ ایوارڈ لسٹ</button>
+        </div>
+      </div>
+
+      <div class="native-card">
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">🎫 امتحانی داخلہ کارڈ / رول نمبر سلپ</h3>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانی ہال میں بیٹھنے کے لیے طالبات کے رول نمبر سلپ مع مضامین و ہدایات۔</p>
+        <button class="btn btn-secondary btn-sm" onclick="printRollNumberSlips()">رول نمبر سلپس پرنٹ کریں</button>
+      </div>
+
+      <div class="native-card">
+        <h3 style="font-size:15px; font-weight:700; color:var(--danger); margin-bottom:6px;">⚠️ فہرست راسب طالبات (Supplementary List)</h3>
+        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانِ ضمنی (سپلیمنٹری امتحان) کی تیاری کے لیے فیل طالبات کی مضمون وار فہرست۔</p>
+        <button class="btn btn-secondary btn-sm" style="color:var(--danger);" onclick="printFailureList()">راسب لسٹ پرنٹ کریں</button>
+      </div>
+    </div>
+  </div>
+
   <div id="pane-stats" class="tab-pane">
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap:16px;">
       <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">نمایاں پوزیشن ہولڈرز (Top Achievers)</h3>
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">نمایاں پوزیشن ہولڈرز (Top Achievers)</h3>
         <div id="topRankersList" style="display:flex; flex-direction:column; gap:8px;"></div>
       </div>
       <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">تقدیر و درجات کا تناسب (Grade Breakdown)</h3>
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">تقدیر و درجات کا تناسب (Grade Breakdown)</h3>
         <div id="gradeBreakdownList" style="display:flex; flex-direction:column; gap:8px;"></div>
       </div>
       <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">مضمون وار اوسط نمبرات (Subject Averages)</h3>
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">مضمون وار اوسط نمبرات (Subject Averages)</h3>
         <div id="subjectAveragesList" style="display:flex; flex-direction:column; gap:8px;"></div>
       </div>
     </div>
   </div>
 
   <div id="pane-settings" class="tab-pane">
-    <div style="max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:16px;">
+    <div style="max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:16px;">
       <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">ادارہ و امتحان کی ترتیبات (Institute & Exam)</h3>
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">ادارہ، امتحان و تعلیمی سیشن کی ترتیبات</h3>
         <div class="form-group-native" style="margin-bottom:10px;">
           <label class="form-label-native">جامعہ / مدرسہ کا مکمل نام:</label>
           <input type="text" id="settingInstName" class="form-input-native" onchange="saveGeneralSettings()">
         </div>
-        <div class="form-group-native" style="margin-bottom:10px;">
-          <label class="form-label-native">امتحان کا عنوان:</label>
-          <input type="text" id="settingExamTitle" class="form-input-native" onchange="saveGeneralSettings()">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+          <div class="form-group-native">
+            <label class="form-label-native">امتحان کی قسم:</label>
+            <select id="settingExamType" class="select-native" onchange="saveGeneralSettings()">
+              <option value="ششماہی امتحان">ششماہی امتحان</option>
+              <option value="سالانہ امتحان">سالانہ امتحان</option>
+              <option value="سہ ماہی امتحان">سہ ماہی امتحان</option>
+              <option value="ماہانہ ٹیسٹ">ماہانہ ٹیسٹ</option>
+            </select>
+          </div>
+          <div class="form-group-native">
+            <label class="form-label-native">تعلیمی سال / سیشن:</label>
+            <input type="text" id="settingSessionYear" class="form-input-native" value="۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء" onchange="saveGeneralSettings()">
+          </div>
         </div>
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
           <div class="form-group-native">
@@ -1478,14 +1625,14 @@ footer.app-footer a {
 
       <div class="native-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">مضامین برائے موجودہ درجہ (Subjects)</h3>
+          <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">مضامین اور ان کے کل و پاس نمبرات</h3>
           <button class="btn btn-primary btn-sm" onclick="addSubjectPrompt()">+ نیا مضمون</button>
         </div>
         <div id="settingsSubjectList" style="display:flex; flex-direction:column; gap:8px;"></div>
       </div>
 
       <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">بیک اپ و بحالی (Backup & Restore)</h3>
+        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">بیک اپ، امپورٹ و بحالی (Backup & Restore)</h3>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
           <button class="btn btn-secondary" onclick="downloadJsonBackup()">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -1536,6 +1683,12 @@ footer.app-footer a {
     </div>
     <span>کشف</span>
   </button>
+  <button class="mobile-nav-item" data-tab="printcenter" onclick="switchMobileNav('printcenter', this)">
+    <div class="mobile-nav-icon-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    </div>
+    <span>پرنٹس</span>
+  </button>
   <button class="mobile-nav-item" data-tab="settings" onclick="switchMobileNav('settings', this)">
     <div class="mobile-nav-icon-box">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -1559,6 +1712,36 @@ footer.app-footer a {
   </div>
 </div>
 
+<div class="modal-backdrop-native" id="examPickerSheet" onclick="closeOnBackdrop(event, 'examPickerSheet')">
+  <div class="modal-sheet" style="max-width:440px;">
+    <div class="modal-grabber"></div>
+    <div class="modal-header-native">
+      <h3 class="modal-title-native">امتحان کی قسم منتخب کریں</h3>
+      <button class="modal-close-native" onclick="closeExamPickerSheet()">&times;</button>
+    </div>
+    <div class="modal-body-native">
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button class="btn btn-secondary" style="justify-content:space-between; padding:12px;" onclick="selectExamDirect('ششماہی امتحان')">
+          <span>ششماہی امتحان (Mid-Term)</span>
+          <span style="color:var(--primary); font-weight:bold;">انتخاب</span>
+        </button>
+        <button class="btn btn-secondary" style="justify-content:space-between; padding:12px;" onclick="selectExamDirect('سالانہ امتحان')">
+          <span>سالانہ امتحان (Annual Exam)</span>
+          <span style="color:var(--primary); font-weight:bold;">انتخاب</span>
+        </button>
+        <button class="btn btn-secondary" style="justify-content:space-between; padding:12px;" onclick="selectExamDirect('سہ ماہی امتحان')">
+          <span>سہ ماہی امتحان (Quarterly)</span>
+          <span style="color:var(--primary); font-weight:bold;">انتخاب</span>
+        </button>
+        <button class="btn btn-secondary" style="justify-content:space-between; padding:12px;" onclick="selectExamDirect('ماہانہ ٹیسٹ')">
+          <span>ماہانہ ٹیسٹ (Monthly Test)</span>
+          <span style="color:var(--primary); font-weight:bold;">انتخاب</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop-native" id="studentModal" onclick="closeOnBackdrop(event, 'studentModal')">
   <div class="modal-sheet">
     <div class="modal-grabber"></div>
@@ -1568,10 +1751,14 @@ footer.app-footer a {
     </div>
     <div class="modal-body-native">
       <input type="hidden" id="editStudentIndex">
-      <div style="display:grid; grid-template-columns: 85px 1fr 1fr; gap:10px;">
+      <div style="display:grid; grid-template-columns: 85px 120px 1fr 1fr; gap:8px;">
         <div class="form-group-native">
-          <label class="form-label-native">نمبر شمار</label>
+          <label class="form-label-native">رول نمبر</label>
           <input type="number" id="modalStudentRoll" class="form-input-native" style="text-align:center;">
+        </div>
+        <div class="form-group-native">
+          <label class="form-label-native">رجسٹریشن نمبر</label>
+          <input type="text" id="modalStudentReg" class="form-input-native" placeholder="مثلاً: REG-101">
         </div>
         <div class="form-group-native">
           <label class="form-label-native">اسم الطالبۃ *</label>
@@ -1580,6 +1767,17 @@ footer.app-footer a {
         <div class="form-group-native">
           <label class="form-label-native">اسم الاب</label>
           <input type="text" id="modalStudentFather" class="form-input-native" placeholder="والد کا نام">
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:4px;">
+        <div class="form-group-native">
+          <label class="form-label-native">والد کا فون / واٹس ایپ نمبر</label>
+          <input type="tel" id="modalStudentPhone" class="form-input-native" placeholder="03361234567">
+        </div>
+        <div class="form-group-native">
+          <label class="form-label-native">پتہ / علاقہ</label>
+          <input type="text" id="modalStudentAddress" class="form-input-native" placeholder="علاقہ / گاؤں">
         </div>
       </div>
       
@@ -1612,12 +1810,12 @@ footer.app-footer a {
   </div>
 </div>
 
-<div class="print-gazette-view">
-  <div style="text-align:center; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #0f766e;">
-    <p style="font-size:13pt; margin-bottom:2px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-    <h1 style="font-size:19pt; font-weight:bold; margin-bottom:3px; color:#0f766e;" id="printInstitutionName">جامعہ فاطمۃ الزہرا للبنات خوڑگئ موسیٰ خیل ڈومیل بنوں</h1>
-    <h2 style="font-size:14pt; margin-bottom:2px;" id="printExamTitle">نتیجہ برائے ششماہی امتحان</h2>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; font-size:11pt; font-weight:bold;">
+<div class="print-section" id="printGazetteView">
+  <div style="text-align:center; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #0f766e;">
+    <p style="font-size:13pt; margin-bottom:1px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+    <h1 style="font-size:18pt; font-weight:bold; margin-bottom:2px; color:#0f766e;" id="printInstitutionName">جامعہ فاطمۃ الزہرا للبنات خوڑگئ موسیٰ خیل ڈومیل بنوں</h1>
+    <h2 style="font-size:13.5pt; margin-bottom:2px;" id="printExamTitle">نتیجہ برائے ششماہی امتحان</h2>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px; font-size:10.5pt; font-weight:bold;">
       <span id="printClassName">درجہ: متوسطہ اول</span>
       <span id="printMetaStats">کل طالبات: 0 | حاضر: 0 | کامیاب: 0 | شرح کامیابی: 0%</span>
       <span id="printDate">تاریخ: </span>
@@ -1631,7 +1829,7 @@ footer.app-footer a {
     <tbody id="printTableBody"></tbody>
   </table>
 
-  <div style="display:flex; justify-content:space-between; margin-top:42px; padding:0 20px; font-size:11.5pt; font-weight:bold;">
+  <div style="display:flex; justify-content:space-between; margin-top:36px; padding:0 20px; font-size:11pt; font-weight:bold;">
     <div>دستخط ممتحن: _______________</div>
     <div>دستخط نگران امتحان: _______________</div>
     <div>دستخط ناظم امتحانات: _______________</div>
@@ -1639,10 +1837,15 @@ footer.app-footer a {
   </div>
 </div>
 
+<div class="print-section" id="printMeritListView"></div>
+<div class="print-section" id="printAwardSheetView"></div>
+<div class="print-section" id="printRollSlipsView"></div>
+<div class="print-section" id="printFailureListView"></div>
+
 <script>
 const CLASS_SUBJECT_DEFAULTS = {
   'متوسطہ اول': ['اردو پہلی', 'اردو قاعدہ'],
-  'متوسطہ دوم': ['اردو دوسری', 'اردو تیسری', 'تعلیم السلام'],
+  'متوسطہ دوم': ['اردو دوسری', 'اردو تیسری', 'تعلیم الاسلام'],
   'عامہ اول': ['مختصر اسلامی نصاب', 'اردو چوتھی', 'فضائل اعمال', 'عادت کو عبادت'],
   'عامہ دوم': ['بہشتی زیور دوم', 'بہشتی زیور اول', 'تاریخ اسلام', 'علم النحو', 'میزان'],
   'خاصہ اول': ['تجوید', 'نحو', 'صرف', 'طریقۃ العصریہ', 'حدیث', 'تفسیر'],
@@ -1656,21 +1859,22 @@ const CLASS_SUBJECT_DEFAULTS = {
 };
 
 const SAMPLE_STUDENTS_MUTAWASSITA_1 = [
-  { roll: 1, name: 'افرائم', father: 'انصار اللہ', marks: {'اردو پہلی': 60, 'اردو قاعدہ': 70} },
-  { roll: 2, name: 'فلحیام', father: 'زین اللہ', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
-  { roll: 3, name: 'زینب', father: 'میرشاہ باز', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
-  { roll: 4, name: 'عائشہ', father: 'مانور حمن', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
-  { roll: 5, name: 'حورین', father: 'غنی الرحمن', marks: {'اردو پہلی': 70, 'اردو قاعدہ': 80} },
-  { roll: 6, name: 'بی بی آمنہ', father: 'زاردئیپ', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
-  { roll: 7, name: 'فرشتہ', father: 'شاہین', marks: {'اردو پہلی': 30, 'اردو قاعدہ': 40} },
-  { roll: 8, name: 'ہاجرہ', father: 'لال شہان', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 60} },
-  { roll: 9, name: 'ایمان', father: 'محمد عمران', marks: {'اردو پہلی': 50, 'اردو قاعدہ': 40} },
-  { roll: 10, name: 'مدینہ', father: 'شمس الرحمن', marks: {'اردو پہلی': 'غائب', 'اردو قاعدہ': 'غائب'} }
+  { roll: 1, reg: 'REG-101', name: 'افرائم', father: 'انصار اللہ', phone: '03361593533', marks: {'اردو پہلی': 60, 'اردو قاعدہ': 70} },
+  { roll: 2, reg: 'REG-102', name: 'فلحیام', father: 'زین اللہ', phone: '03339712345', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
+  { roll: 3, reg: 'REG-103', name: 'زینب', father: 'میرشاہ باز', phone: '03459876543', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
+  { roll: 4, reg: 'REG-104', name: 'عائشہ', father: 'مانور حمن', phone: '03125678901', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
+  { roll: 5, reg: 'REG-105', name: 'حورین', father: 'غنی الرحمن', phone: '03001234567', marks: {'اردو پہلی': 70, 'اردو قاعدہ': 80} },
+  { roll: 6, reg: 'REG-106', name: 'بی بی آمنہ', father: 'زاردئیپ', phone: '03461234567', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
+  { roll: 7, reg: 'REG-107', name: 'فرشتہ', father: 'شاہین', phone: '03211234567', marks: {'اردو پہلی': 30, 'اردو قاعدہ': 40} },
+  { roll: 8, reg: 'REG-108', name: 'ہاجرہ', father: 'لال شہان', phone: '03351234567', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 60} },
+  { roll: 9, reg: 'REG-109', name: 'ایمان', father: 'محمد عمران', phone: '03321234567', marks: {'اردو پہلی': 50, 'اردو قاعدہ': 40} },
+  { roll: 10, reg: 'REG-110', name: 'مدینہ', father: 'شمس الرحمن', phone: '03341234567', marks: {'اردو پہلی': 'غائب', 'اردو قاعدہ': 'غائب'} }
 ];
 
 let appState = {
   institution: 'جامعہ فاطمۃ الزہرا للبنات خوڑگئ موسیٰ خیل ڈومیل بنوں',
-  examTitle: 'نتیجہ برائے ششماہی امتحان',
+  examTitle: 'ششماہی امتحان',
+  sessionYear: '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء',
   rankFormat: 'urdu',
   passThreshold: 40,
   currentClass: 'متوسطہ اول',
@@ -1742,6 +1946,7 @@ function initializeClassData(className) {
   appState.classesData[className] = {
     subjects: defaultSubs,
     subjectMaxMarks: defaultSubs.reduce((acc, sub) => { acc[sub] = 100; return acc; }, {}),
+    subjectPassMarks: defaultSubs.reduce((acc, sub) => { acc[sub] = 40; return acc; }, {}),
     totalMarks: totalMarks,
     students: students
   };
@@ -1759,18 +1964,26 @@ function calculateStudent(student, subjects, totalMarks) {
   let hasValidMarks = false;
   let allAbsent = true;
   let passThreshold = Number(appState.passThreshold) || 40;
+  let failedSubjectsCount = 0;
+  let cData = getCurrentClassData();
 
   subjects.forEach(sub => {
     let val = student.marks ? student.marks[sub] : undefined;
+    let minPass = (cData.subjectPassMarks && cData.subjectPassMarks[sub]) ? cData.subjectPassMarks[sub] : 40;
     if (val !== undefined && val !== null && val !== '') {
       if (typeof val === 'number') {
         obtained += val;
         hasValidMarks = true;
         allAbsent = false;
+        if (val < minPass) failedSubjectsCount++;
       } else if (!isNaN(Number(val))) {
-        obtained += Number(val);
+        let n = Number(val);
+        obtained += n;
         hasValidMarks = true;
         allAbsent = false;
+        if (n < minPass) failedSubjectsCount++;
+      } else if (String(val).includes('غائب')) {
+        failedSubjectsCount++;
       }
     }
   });
@@ -1779,21 +1992,24 @@ function calculateStudent(student, subjects, totalMarks) {
   let grade = 'راسب';
   if (allAbsent && !hasValidMarks) {
     grade = 'غیر حاضر';
-  } else if (percentage >= 80) {
+  } else if (percentage >= 80 && failedSubjectsCount === 0) {
     grade = 'ممتاز';
-  } else if (percentage >= 70) {
+  } else if (percentage >= 70 && failedSubjectsCount === 0) {
     grade = 'جید جدا';
-  } else if (percentage >= 60) {
+  } else if (percentage >= 60 && failedSubjectsCount === 0) {
     grade = 'جید';
-  } else if (percentage >= passThreshold) {
+  } else if (percentage >= passThreshold && failedSubjectsCount === 0) {
     grade = 'مقبول';
+  } else {
+    grade = 'راسب';
   }
 
   return {
     obtained,
     percentage: Math.round(percentage * 100) / 100,
     grade,
-    isAbsent: allAbsent && !hasValidMarks
+    isAbsent: allAbsent && !hasValidMarks,
+    failedSubjectsCount
   };
 }
 
@@ -1839,6 +2055,8 @@ function getFilteredAndSortedStudents() {
     computed = computed.filter(s => 
       (s.name && s.name.toLowerCase().includes(q)) ||
       (s.father && s.father.toLowerCase().includes(q)) ||
+      (s.reg && s.reg.toLowerCase().includes(q)) ||
+      (s.phone && s.phone.includes(q)) ||
       (String(s.roll).includes(q))
     );
   }
@@ -1851,6 +2069,8 @@ function getFilteredAndSortedStudents() {
     computed = computed.filter(s => s.grade === 'راسب' && !s.isAbsent);
   } else if (appState.filterOption === 'absent') {
     computed = computed.filter(s => s.isAbsent);
+  } else if (['ممتاز', 'جید جدا', 'جید', 'مقبول'].includes(appState.filterOption)) {
+    computed = computed.filter(s => s.grade === appState.filterOption);
   }
 
   if (appState.sortOption === 'roll_asc') {
@@ -1869,8 +2089,10 @@ function getFilteredAndSortedStudents() {
 function updateHeaderDisplay() {
   document.getElementById('headerInstitution').innerText = appState.institution;
   document.getElementById('headerClassText').innerText = 'درجہ: ' + appState.currentClass;
+  document.getElementById('headerExamText').innerText = appState.examTitle;
   document.getElementById('settingInstName').value = appState.institution;
-  document.getElementById('settingExamTitle').value = appState.examTitle;
+  document.getElementById('settingExamType').value = appState.examTitle;
+  document.getElementById('settingSessionYear').value = appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
   document.getElementById('settingRankFormat').value = appState.rankFormat;
   document.getElementById('settingPassThreshold').value = appState.passThreshold || 40;
 }
@@ -1884,6 +2106,7 @@ function renderApp() {
   renderQuickEntry(cData);
   renderSettingsTab(cData);
   renderDmcTab(cData);
+  renderAwardSheetSubjectOptions(cData);
   saveToLocalStorage();
 }
 
@@ -1952,6 +2175,7 @@ function renderStats(cData) {
   subAveragesList.innerHTML = cData.subjects.map(sub => {
     let subSum = 0;
     let subCount = 0;
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
     cData.students.forEach(s => {
       let v = s.marks ? s.marks[sub] : undefined;
       if (typeof v === 'number') { subSum += v; subCount++; }
@@ -1961,7 +2185,7 @@ function renderStats(cData) {
     return `
       <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">
         <span style="font-weight:600;">${sub}</span>
-        <span style="font-weight:700; color:var(--primary);">${subAvg} / 100</span>
+        <span style="font-weight:700; color:var(--primary);">${subAvg} / ${max}</span>
       </div>
     `;
   }).join('');
@@ -1978,10 +2202,14 @@ function getGradeClass(grade) {
 
 function renderTable(cData, students) {
   let thead = document.getElementById('tableHeaderRow');
-  let subsHeaders = cData.subjects.map(sub => `<th>${sub}</th>`).join('');
+  let subsHeaders = cData.subjects.map(sub => {
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+    return `<th>${sub}<br><span style="font-size:10px; color:var(--text-muted); font-weight:normal;">(${max})</span></th>`;
+  }).join('');
+
   thead.innerHTML = `
-    <th style="width:40px;">#</th>
-    <th style="width:55px;">رول نمبر</th>
+    <th style="width:35px;">#</th>
+    <th style="width:50px;">رول</th>
     <th style="min-width:130px; text-align:right;">اسم الطالبۃ</th>
     <th style="min-width:130px; text-align:right;">اسم الاب</th>
     ${subsHeaders}
@@ -1990,7 +2218,7 @@ function renderTable(cData, students) {
     <th style="width:65px;">فیصد٪</th>
     <th style="width:70px;">پوزیشن</th>
     <th style="width:75px;">تقدیر</th>
-    <th style="width:70px;" class="no-print">عمل</th>
+    <th style="width:90px;" class="no-print">عمل</th>
   `;
 
   let tbody = document.getElementById('tableBody');
@@ -2001,11 +2229,14 @@ function renderTable(cData, students) {
 
   tbody.innerHTML = students.map((s, idx) => {
     let rankBadgeClass = s.rankNum === 1 ? 'rank-1' : (s.rankNum === 2 ? 'rank-2' : (s.rankNum === 3 ? 'rank-3' : 'rank-other'));
-    let subTds = cData.subjects.map(sub => {
+    let subTds = cData.subjects.map((sub, sIdx) => {
       let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+      let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+      let isFail = typeof val === 'number' && val < minPass;
       return `<td>
-        <input type="text" class="mark-input-cell" value="${val}" 
-          data-orig-index="${s.originalIndex}" data-subject="${sub}"
+        <input type="text" class="mark-input-cell ${isFail ? 'fail-cell' : ''}" value="${val}" 
+          data-orig-index="${s.originalIndex}" data-subject="${sub}" data-row="${idx}" data-col="${sIdx}"
+          onkeydown="handleTableKeyNav(event, ${idx}, ${sIdx})"
           onchange="updateStudentMarkInline(${s.originalIndex}, '${sub}', this.value)"
           onfocus="this.select()">
       </td>`;
@@ -2024,18 +2255,33 @@ function renderTable(cData, students) {
         <td><span class="badge-rank ${rankBadgeClass}">${s.rank}</span></td>
         <td><span class="grade-badge ${getGradeClass(s.grade)}">${s.grade}</span></td>
         <td class="no-print">
-          <div style="display:flex; justify-content:center; gap:5px;">
-            <button class="btn-icon-round" style="width:30px; height:30px;" onclick="editStudent(${s.originalIndex})" title="ترمیم">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <div style="display:flex; justify-content:center; gap:4px;">
+            <button class="btn-whatsapp" onclick="shareWhatsAppResult(${s.originalIndex})" title="واٹس ایپ پر نتیجہ بھیجیں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
             </button>
-            <button class="btn-icon-round" style="width:30px; height:30px; color:var(--danger);" onclick="deleteStudent(${s.originalIndex})" title="حذف">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            <button class="btn-icon-round" style="width:28px; height:28px;" onclick="editStudent(${s.originalIndex})" title="ترمیم">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+            <button class="btn-icon-round" style="width:28px; height:28px; color:var(--danger);" onclick="deleteStudent(${s.originalIndex})" title="حذف">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
             </button>
           </div>
         </td>
       </tr>
     `;
   }).join('');
+}
+
+function handleTableKeyNav(e, rowIdx, colIdx) {
+  if (e.key === 'Enter' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    let next = document.querySelector(`input[data-row="${rowIdx + 1}"][data-col="${colIdx}"]`);
+    if (next) next.focus();
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    let prev = document.querySelector(`input[data-row="${rowIdx - 1}"][data-col="${colIdx}"]`);
+    if (prev) prev.focus();
+  }
 }
 
 function updateStudentMarkInline(originalIndex, subject, value) {
@@ -2073,9 +2319,10 @@ function renderCards(cData, students) {
     
     let marksHtml = cData.subjects.map(sub => {
       let v = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '-';
+      let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
       let numClass = '';
       if (typeof v === 'number') {
-        numClass = v >= 40 ? 'pass' : 'fail';
+        numClass = v >= minPass ? 'pass' : 'fail';
       }
       return `
         <div class="mark-chip-item">
@@ -2092,7 +2339,7 @@ function renderCards(cData, students) {
             <div class="student-avatar">${initial}</div>
             <div class="student-details">
               <span class="student-name-text">${s.name || '-'}</span>
-              <span class="student-sub-text">رول نمبر: <strong>${s.roll}</strong> | ولد: ${s.father || '-'}</span>
+              <span class="student-sub-text">رول نمبر: <strong>${s.roll}</strong> ${s.reg ? '| ' + s.reg : ''} | ولد: ${s.father || '-'}</span>
             </div>
           </div>
           <div class="card-badges-cluster">
@@ -2112,6 +2359,9 @@ function renderCards(cData, students) {
             <span style="color:var(--text-muted); font-size:12px;">/ ${cData.totalMarks} (${s.percentage}%)</span>
           </div>
           <div class="footer-actions-cluster">
+            <button class="btn-whatsapp" onclick="shareWhatsAppResult(${s.originalIndex})">
+              <span>واٹس ایپ</span>
+            </button>
             <button class="btn btn-secondary btn-sm" onclick="showStudentDMC(${s.originalIndex})">DMC</button>
             <button class="btn btn-secondary btn-sm" onclick="editStudent(${s.originalIndex})">ترمیم</button>
             <button class="btn btn-secondary btn-sm" style="color:var(--danger);" onclick="deleteStudent(${s.originalIndex})">حذف</button>
@@ -2120,6 +2370,21 @@ function renderCards(cData, students) {
       </div>
     `;
   }).join('');
+}
+
+function shareWhatsAppResult(index) {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let s = computed[index];
+  if (!s) return;
+
+  let phone = (s.phone || '').replace(/[^0-9]/g, '');
+  if (phone.startsWith('0')) phone = '92' + phone.substring(1);
+
+  let text = `السلام علیکم ورحمۃ اللہ وبرکاتہ!%0Aمحترم سرپرست ${s.father || ''}!%0Aطالبہ: *${s.name}*%0Aرول نمبر: *${s.roll}* | درجہ: *${appState.currentClass}*%0Aامتحان: *${appState.examTitle}*%0Aمجموعہ نمبرات: *${s.obtained} / ${cData.totalMarks}*%0Aفیصد: *${s.percentage}%*%0Aپوزیشن: *${s.rank}*%0Aکیفیت و نتیجہ: *${s.grade}*%0Aجامعہ فاطمۃ الزہرا للبنات`;
+
+  let url = phone ? `https://wa.me/${phone}?text=${text}` : `https://wa.me/?text=${text}`;
+  window.open(url, '_blank');
 }
 
 function renderQuickEntry(cData) {
@@ -2139,14 +2404,15 @@ function renderQuickEntry(cData) {
 
   let subjectsInputs = cData.subjects.map(sub => {
     let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
     return `
       <div class="quick-entry-row">
         <div>
           <strong style="font-size:14px;">${sub}</strong>
-          <span style="color:var(--text-muted); font-size:11px; display:block;">کل نمبر: 100</span>
+          <span style="color:var(--text-muted); font-size:11px; display:block;">کل نمبر: ${max}</span>
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
-          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', 100)">100</button>
+          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', ${max})">${max}</button>
           <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', 'غائب')">غائب</button>
           <input type="text" id="quick_input_${sub}" class="quick-entry-input" value="${val}"
             onchange="updateStudentMarkInline(${appState.quickEntryIndex}, '${sub}', this.value); renderQuickEntry(getCurrentClassData());">
@@ -2222,20 +2488,52 @@ function prevQuickStudent() {
 
 function renderSettingsTab(cData) {
   let list = document.getElementById('settingsSubjectList');
-  list.innerHTML = cData.subjects.map((sub, idx) => `
-    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm);">
-      <span style="font-weight:700; font-size:13.5px;">${idx + 1}. ${sub}</span>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <span style="font-size:12px; color:var(--text-muted);">کل نمبر: 100</span>
-        <button class="btn-icon-round" style="width:32px; height:32px;" onclick="renameSubjectPrompt('${sub}')" title="نام بدلیں">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        </button>
-        <button class="btn-icon-round" style="width:32px; height:32px; color:var(--danger);" onclick="deleteSubjectPrompt('${sub}')" title="حذف کریں">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
+  list.innerHTML = cData.subjects.map((sub, idx) => {
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+    let pass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+    return `
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); flex-wrap:wrap; gap:8px;">
+        <span style="font-weight:700; font-size:13.5px;">${idx + 1}. ${sub}</span>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <div style="display:flex; align-items:center; gap:4px; font-size:12px;">
+            <span>کل:</span>
+            <input type="number" value="${max}" style="width:55px; text-align:center; padding:3px; border-radius:4px; border:1px solid var(--border);"
+              onchange="updateSubjectMaxMark('${sub}', this.value)">
+          </div>
+          <div style="display:flex; align-items:center; gap:4px; font-size:12px;">
+            <span>پاس:</span>
+            <input type="number" value="${pass}" style="width:50px; text-align:center; padding:3px; border-radius:4px; border:1px solid var(--border);"
+              onchange="updateSubjectPassMark('${sub}', this.value)">
+          </div>
+          <button class="btn-icon-round" style="width:30px; height:30px;" onclick="renameSubjectPrompt('${sub}')" title="نام بدلیں">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
+          <button class="btn-icon-round" style="width:30px; height:30px; color:var(--danger);" onclick="deleteSubjectPrompt('${sub}')" title="حذف کریں">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
+}
+
+function updateSubjectMaxMark(sub, val) {
+  let cData = getCurrentClassData();
+  let n = Number(val) || 100;
+  if (!cData.subjectMaxMarks) cData.subjectMaxMarks = {};
+  cData.subjectMaxMarks[sub] = n;
+  cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] || 100), 0);
+  renderApp();
+  showToast(`مضمون "${sub}" کے کل نمبر ${n} ہو گئے`, 'info');
+}
+
+function updateSubjectPassMark(sub, val) {
+  let cData = getCurrentClassData();
+  let n = Number(val) || 40;
+  if (!cData.subjectPassMarks) cData.subjectPassMarks = {};
+  cData.subjectPassMarks[sub] = n;
+  renderApp();
+  showToast(`مضمون "${sub}" کے پاس مارکس ${n} ہو گئے`, 'info');
 }
 
 function renderDmcTab(cData) {
@@ -2273,13 +2571,15 @@ function showStudentDMC(index) {
 function generateDmcCardHtml(s, cData) {
   let subRows = cData.subjects.map((sub, i) => {
     let mark = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '-';
-    let status = (typeof mark === 'number' && mark >= 40) ? '<span style="color:var(--success); font-weight:bold;">کامیاب</span>' : '<span style="color:var(--danger); font-weight:bold;">راسب</span>';
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+    let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+    let status = (typeof mark === 'number' && mark >= minPass) ? '<span style="color:var(--success); font-weight:bold;">کامیاب</span>' : '<span style="color:var(--danger); font-weight:bold;">راسب</span>';
     return `
       <tr>
         <td>${i + 1}</td>
         <td style="text-align:right; font-weight:700;">${sub}</td>
-        <td>100</td>
-        <td>40</td>
+        <td>${max}</td>
+        <td>${minPass}</td>
         <td style="font-weight:700;">${mark}</td>
         <td>${status}</td>
       </tr>
@@ -2292,14 +2592,16 @@ function generateDmcCardHtml(s, cData) {
         <p style="font-size:12px; margin-bottom:2px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
         <h2>${appState.institution}</h2>
         <h3>کشف الدرجات (Detailed Marks Certificate)</h3>
-        <p>${appState.examTitle} - درجہ: ${appState.currentClass}</p>
+        <p>${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'}) - درجہ: ${appState.currentClass}</p>
       </div>
 
       <div class="dmc-meta">
         <div><strong>رول نمبر:</strong> ${s.roll}</div>
+        <div><strong>رجسٹریشن نمبر:</strong> ${s.reg || '-'}</div>
         <div><strong>اسم الطالبۃ:</strong> ${s.name}</div>
         <div><strong>اسم الاب:</strong> ${s.father || '-'}</div>
         <div><strong>پوزیشن:</strong> <strong style="color:var(--accent); font-size:14px;">${s.rank}</strong></div>
+        <div><strong>تاریخ اجراء:</strong> ${new Date().toLocaleDateString('ur-PK')}</div>
       </div>
 
       <table class="dmc-table">
@@ -2344,8 +2646,11 @@ function openStudentModal(editIndex = null) {
   let cData = getCurrentClassData();
   let title = document.getElementById('modalStudentTitle');
   let rollInput = document.getElementById('modalStudentRoll');
+  let regInput = document.getElementById('modalStudentReg');
   let nameInput = document.getElementById('modalStudentName');
   let fatherInput = document.getElementById('modalStudentFather');
+  let phoneInput = document.getElementById('modalStudentPhone');
+  let addressInput = document.getElementById('modalStudentAddress');
   let editInput = document.getElementById('editStudentIndex');
   let marksContainer = document.getElementById('modalMarksInputs');
 
@@ -2354,18 +2659,22 @@ function openStudentModal(editIndex = null) {
     let s = cData.students[editIndex];
     editInput.value = editIndex;
     rollInput.value = s.roll;
+    regInput.value = s.reg || '';
     nameInput.value = s.name;
     fatherInput.value = s.father || '';
+    phoneInput.value = s.phone || '';
+    addressInput.value = s.address || '';
 
     marksContainer.innerHTML = cData.subjects.map(sub => {
       let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
       return `
         <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
-          <label style="font-size:13px; font-weight:600; min-width:120px;">${sub}:</label>
+          <label style="font-size:13px; font-weight:600; min-width:120px;">${sub} (${max}):</label>
           <div style="display:flex; gap:6px; flex:1;">
             <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="${val}">
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='100'">100</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'">${max}</button>
           </div>
         </div>
       `;
@@ -2375,19 +2684,25 @@ function openStudentModal(editIndex = null) {
     editInput.value = '';
     let nextRoll = cData.students.length > 0 ? (Math.max(...cData.students.map(s => Number(s.roll) || 0)) + 1) : 1;
     rollInput.value = nextRoll;
+    regInput.value = 'REG-' + (100 + nextRoll);
     nameInput.value = '';
     fatherInput.value = '';
+    phoneInput.value = '';
+    addressInput.value = '';
 
-    marksContainer.innerHTML = cData.subjects.map(sub => `
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
-        <label style="font-size:13px; font-weight:600; min-width:120px;">${sub}:</label>
-        <div style="display:flex; gap:6px; flex:1;">
-          <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="">
-          <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
-          <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='100'">100</button>
+    marksContainer.innerHTML = cData.subjects.map(sub => {
+      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+      return `
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+          <label style="font-size:13px; font-weight:600; min-width:120px;">${sub} (${max}):</label>
+          <div style="display:flex; gap:6px; flex:1;">
+            <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'">${max}</button>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
   document.getElementById('studentModal').classList.add('open');
@@ -2402,8 +2717,11 @@ function saveStudentModal() {
   let cData = getCurrentClassData();
   let editIndex = document.getElementById('editStudentIndex').value;
   let roll = Number(document.getElementById('modalStudentRoll').value) || (cData.students.length + 1);
+  let reg = document.getElementById('modalStudentReg').value.trim();
   let name = document.getElementById('modalStudentName').value.trim();
   let father = document.getElementById('modalStudentFather').value.trim();
+  let phone = document.getElementById('modalStudentPhone').value.trim();
+  let address = document.getElementById('modalStudentAddress').value.trim();
 
   if (!name) {
     showToast('براہ کرم طالب علم کا نام درج کریں', 'warning');
@@ -2422,10 +2740,10 @@ function saveStudentModal() {
   });
 
   if (editIndex !== '') {
-    cData.students[Number(editIndex)] = { roll, name, father, marks };
+    cData.students[Number(editIndex)] = { roll, reg, name, father, phone, address, marks };
     showToast('طالب علم کا ڈیٹا اپ ڈیٹ ہو گیا', 'info');
   } else {
-    cData.students.push({ roll, name, father, marks });
+    cData.students.push({ roll, reg, name, father, phone, address, marks });
     showToast('نیا طالب علم کامیابی سے شامل کر لیا گیا', 'info');
   }
 
@@ -2482,6 +2800,26 @@ function selectClassDirect(cls) {
   updateHeaderDisplay();
   renderApp();
   showToast(`درجہ تبدیل ہو گیا: ${cls}`, 'info');
+}
+
+function openExamPickerSheet() {
+  document.getElementById('examPickerSheet').classList.add('open');
+}
+
+function closeExamPickerSheet() {
+  document.getElementById('examPickerSheet').classList.remove('open');
+}
+
+function selectExamDirect(exam) {
+  appState.examTitle = exam;
+  closeExamPickerSheet();
+  updateHeaderDisplay();
+  renderApp();
+  showToast(`امتحان منتخب ہو گیا: ${exam}`, 'info');
+}
+
+function openPrintCenterModal() {
+  switchTabDirect('printcenter');
 }
 
 function switchMainTab(tabId, btn) {
@@ -2548,9 +2886,26 @@ function handleSortChange(sortVal) {
   renderCards(getCurrentClassData(), students);
 }
 
+function bulkMarkAll(status) {
+  let cData = getCurrentClassData();
+  let msg = status === 'present' ? 'سب کو حاضر (100) کریں؟' : 'سب کو غیر حاضر (غائب) کریں؟';
+  openConfirmDialog('اجتماعی کارروائی', msg, function() {
+    cData.students.forEach(s => {
+      if (!s.marks) s.marks = {};
+      cData.subjects.forEach(sub => {
+        let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+        s.marks[sub] = (status === 'present') ? max : 'غائب';
+      });
+    });
+    renderApp();
+    showToast('اجتماعی حاضری اپ ڈیٹ ہو گئی', 'info');
+  });
+}
+
 function saveGeneralSettings() {
   appState.institution = document.getElementById('settingInstName').value.trim() || 'جامعہ فاطمۃ الزہرا للبنات';
-  appState.examTitle = document.getElementById('settingExamTitle').value.trim() || 'نتیجہ برائے ششماہی امتحان';
+  appState.examTitle = document.getElementById('settingExamType').value;
+  appState.sessionYear = document.getElementById('settingSessionYear').value.trim() || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
   appState.rankFormat = document.getElementById('settingRankFormat').value;
   appState.passThreshold = Number(document.getElementById('settingPassThreshold').value) || 40;
   updateHeaderDisplay();
@@ -2565,7 +2920,11 @@ function addSubjectPrompt() {
     sub = sub.trim();
     if (!cData.subjects.includes(sub)) {
       cData.subjects.push(sub);
-      cData.totalMarks = cData.subjects.length * 100;
+      if (!cData.subjectMaxMarks) cData.subjectMaxMarks = {};
+      if (!cData.subjectPassMarks) cData.subjectPassMarks = {};
+      cData.subjectMaxMarks[sub] = 100;
+      cData.subjectPassMarks[sub] = 40;
+      cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] || 100), 0);
       renderApp();
       showToast(`مضمون "${sub}" شامل ہو گیا`, 'info');
     }
@@ -2580,6 +2939,14 @@ function renameSubjectPrompt(oldSub) {
     let idx = cData.subjects.indexOf(oldSub);
     if (idx !== -1) {
       cData.subjects[idx] = newSub;
+      if (cData.subjectMaxMarks && cData.subjectMaxMarks[oldSub]) {
+        cData.subjectMaxMarks[newSub] = cData.subjectMaxMarks[oldSub];
+        delete cData.subjectMaxMarks[oldSub];
+      }
+      if (cData.subjectPassMarks && cData.subjectPassMarks[oldSub]) {
+        cData.subjectPassMarks[newSub] = cData.subjectPassMarks[oldSub];
+        delete cData.subjectPassMarks[oldSub];
+      }
       cData.students.forEach(s => {
         if (s.marks && s.marks[oldSub] !== undefined) {
           s.marks[newSub] = s.marks[oldSub];
@@ -2599,7 +2966,9 @@ function deleteSubjectPrompt(sub) {
     function() {
       let cData = getCurrentClassData();
       cData.subjects = cData.subjects.filter(s => s !== sub);
-      cData.totalMarks = cData.subjects.length * 100;
+      if (cData.subjectMaxMarks) delete cData.subjectMaxMarks[sub];
+      if (cData.subjectPassMarks) delete cData.subjectPassMarks[sub];
+      cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks && cData.subjectMaxMarks[s] ? cData.subjectMaxMarks[s] : 100), 0);
       cData.students.forEach(s => {
         if (s.marks && s.marks[sub] !== undefined) {
           delete s.marks[sub];
@@ -2611,22 +2980,30 @@ function deleteSubjectPrompt(sub) {
   );
 }
 
+function renderAwardSheetSubjectOptions(cData) {
+  let sel = document.getElementById('awardListSubjectSelect');
+  if (sel) {
+    sel.innerHTML = cData.subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+  }
+}
+
 function exportToExcel() {
   if (typeof XLSX === 'undefined') {
-    showToast('SheetJS لائبریری لوڈ نہیں ہو سکی۔ انٹرنیٹ چیک کریں۔', 'error');
+    showToast('SheetJS لائبریری لوڈ نہیں ہو سکی۔', 'error');
     return;
   }
 
   let cData = getCurrentClassData();
   let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
-
   let wb = XLSX.utils.book_new();
 
   let colsConfig = [
     { label: 'نمبر شمار', wch: 10 },
+    { label: 'رجسٹریشن', wch: 14 },
     { label: 'اسم الطالبۃ', wch: 22 },
     { label: 'اسم الاب', wch: 20 },
-    ...cData.subjects.map(sub => ({ label: sub, wch: 15 })),
+    { label: 'رابطہ فون', wch: 15 },
+    ...cData.subjects.map(sub => ({ label: `${sub} (${cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100})`, wch: 15 })),
     { label: 'مجموعہ', wch: 13 },
     { label: 'کل نمبر', wch: 11 },
     { label: 'فیصد٪', wch: 12 },
@@ -2665,7 +3042,7 @@ function exportToExcel() {
 
   ws['A2'] = {
     t: 's',
-    v: `${appState.institution} - ${appState.examTitle} (درجہ: ${appState.currentClass})`,
+    v: `${appState.institution} - ${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'}) - درجہ: ${appState.currentClass}`,
     s: {
       font: { name: 'Calibri', sz: 15, bold: true, color: { rgb: 'FFFFFF' } },
       fill: { fgColor: { rgb: '0F766E' } },
@@ -2702,14 +3079,13 @@ function exportToExcel() {
   });
 
   let numSubs = cData.subjects.length;
-  let subStartCol = 3;
+  let subStartCol = 5;
   let subEndCol = subStartCol + numSubs - 1;
   let subStartLetter = XLSX.utils.encode_col(subStartCol);
   let subEndLetter = XLSX.utils.encode_col(subEndCol);
   let majColLetter = XLSX.utils.encode_col(subEndCol + 1);
   let maxColLetter = XLSX.utils.encode_col(subEndCol + 2);
 
-  let dataRowCount = Math.max(computed.length, 1);
   for (let i = 0; i < computed.length; i++) {
     let s = computed[i];
     let rowIdx = 4 + i;
@@ -2737,45 +3113,44 @@ function exportToExcel() {
     ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
       t: 'n',
       v: s.roll || (i + 1),
-      s: {
-        font: { name: 'Calibri', sz: 11, bold: true },
-        fill: { fgColor: { rgb: rowBg } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: thinBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11, bold: true }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 's',
+      v: s.reg || '',
+      s: { font: { name: 'Calibri', sz: 10, color: { rgb: '64748B' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
     };
 
     ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
       t: 's',
       v: s.name || '',
-      s: {
-        font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F172A' } },
-        fill: { fgColor: { rgb: rowBg } },
-        alignment: { horizontal: 'right', vertical: 'center' },
-        border: thinBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F172A' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'right' }, border: thinBorder }
     };
 
     ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
       t: 's',
       v: s.father || '',
-      s: {
-        font: { name: 'Calibri', sz: 11, color: { rgb: '475569' } },
-        fill: { fgColor: { rgb: rowBg } },
-        alignment: { horizontal: 'right', vertical: 'center' },
-        border: thinBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11, color: { rgb: '475569' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'right' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 's',
+      v: s.phone || '',
+      s: { font: { name: 'Calibri', sz: 10, color: { rgb: '64748B' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
     };
 
     cData.subjects.forEach(sub => {
       let markVal = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
       let isNum = typeof markVal === 'number' || (!isNaN(Number(markVal)) && markVal !== '');
+      let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+      let isFail = isNum && Number(markVal) < minPass;
       ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
         t: isNum ? 'n' : 's',
         v: isNum ? Number(markVal) : String(markVal),
         s: {
-          font: { name: 'Calibri', sz: 11, bold: isNum && Number(markVal) >= 70 },
-          fill: { fgColor: { rgb: rowBg } },
+          font: { name: 'Calibri', sz: 11, bold: isNum && Number(markVal) >= 70, color: isFail ? { rgb: 'DC2626' } : undefined },
+          fill: { fgColor: { rgb: isFail ? 'FEE2E2' : rowBg } },
           alignment: { horizontal: 'center', vertical: 'center' },
           border: thinBorder
         }
@@ -2786,65 +3161,36 @@ function exportToExcel() {
       t: 'n',
       f: `SUM(${subStartLetter}${excelRow}:${subEndLetter}${excelRow})`,
       v: s.obtained,
-      s: {
-        font: { name: 'Calibri', sz: 11.5, bold: true, color: { rgb: '0F766E' } },
-        fill: { fgColor: { rgb: 'CCFBF1' } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: thinBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11.5, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'CCFBF1' } }, alignment: { horizontal: 'center' }, border: thinBorder }
     };
 
     ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
       t: 'n',
       v: cData.totalMarks,
-      s: {
-        font: { name: 'Calibri', sz: 11, color: { rgb: '64748B' } },
-        fill: { fgColor: { rgb: rowBg } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: thinBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11, color: { rgb: '64748B' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
     };
 
     ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
       t: 'n',
       f: `ROUND(${majColLetter}${excelRow}/${maxColLetter}${excelRow}*100, 2)`,
       v: s.percentage,
-      s: {
-        font: { name: 'Calibri', sz: 11, bold: true },
-        fill: { fgColor: { rgb: rowBg } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: thinBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11, bold: true }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
     };
 
     ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
       t: 's',
       v: String(s.rank),
-      s: {
-        font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: rankColor } },
-        fill: { fgColor: { rgb: rankBg } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: thinBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: rankColor } }, fill: { fgColor: { rgb: rankBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
     };
 
     ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
       t: 's',
       v: s.grade,
-      s: {
-        font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: gradeColor } },
-        fill: { fgColor: { rgb: gradeBg } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: thinBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: gradeColor } }, fill: { fgColor: { rgb: gradeBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
     };
   }
 
   let summaryRowIdx = 4 + computed.length;
-  let summaryExcelRow = summaryRowIdx + 1;
-  let startDataExcelRow = 5;
-  let endDataExcelRow = 4 + computed.length;
-
   let doubleBottomBorder = {
     top: { style: 'thin', color: { rgb: '0F766E' } },
     bottom: { style: 'double', color: { rgb: '0F766E' } },
@@ -2855,15 +3201,10 @@ function exportToExcel() {
   ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: 0 })] = {
     t: 's',
     v: 'میزان / اوسط',
-    s: {
-      font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } },
-      fill: { fgColor: { rgb: 'E2E8F0' } },
-      alignment: { horizontal: 'center', vertical: 'center' },
-      border: doubleBottomBorder
-    }
+    s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
   };
 
-  for (let c = 1; c < 3; c++) {
+  for (let c = 1; c < 5; c++) {
     ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: c })] = {
       t: 's',
       v: '',
@@ -2871,64 +3212,42 @@ function exportToExcel() {
     };
   }
 
+  let startDataExcelRow = 5;
+  let endDataExcelRow = 4 + computed.length;
+
   for (let sIdx = 0; sIdx < numSubs; sIdx++) {
     let colLet = XLSX.utils.encode_col(subStartCol + sIdx);
     ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: subStartCol + sIdx })] = {
       t: 'n',
       f: `ROUND(AVERAGE(${colLet}${startDataExcelRow}:${colLet}${endDataExcelRow}), 1)`,
-      s: {
-        font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } },
-        fill: { fgColor: { rgb: 'E2E8F0' } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: doubleBottomBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
     };
   }
 
   ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: subEndCol + 1 })] = {
     t: 'n',
     f: `ROUND(AVERAGE(${majColLetter}${startDataExcelRow}:${majColLetter}${endDataExcelRow}), 1)`,
-    s: {
-      font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } },
-      fill: { fgColor: { rgb: 'CCFBF1' } },
-      alignment: { horizontal: 'center', vertical: 'center' },
-      border: doubleBottomBorder
-    }
+    s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'CCFBF1' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
   };
 
   ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: subEndCol + 2 })] = {
     t: 'n',
     v: cData.totalMarks,
-    s: {
-      font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '475569' } },
-      fill: { fgColor: { rgb: 'E2E8F0' } },
-      alignment: { horizontal: 'center', vertical: 'center' },
-      border: doubleBottomBorder
-    }
+    s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '475569' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
   };
 
   let pctColLetter = XLSX.utils.encode_col(subEndCol + 3);
   ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: subEndCol + 3 })] = {
     t: 'n',
     f: `ROUND(AVERAGE(${pctColLetter}${startDataExcelRow}:${pctColLetter}${endDataExcelRow}), 2)`,
-    s: {
-      font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } },
-      fill: { fgColor: { rgb: 'E2E8F0' } },
-      alignment: { horizontal: 'center', vertical: 'center' },
-      border: doubleBottomBorder
-    }
+    s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
   };
 
   for (let c = subEndCol + 4; c < totalCols; c++) {
     ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: c })] = {
       t: 's',
       v: '-',
-      s: {
-        font: { name: 'Calibri', sz: 11, color: { rgb: '94A3B8' } },
-        fill: { fgColor: { rgb: 'E2E8F0' } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: doubleBottomBorder
-      }
+      s: { font: { name: 'Calibri', sz: 11, color: { rgb: '94A3B8' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
     };
   }
 
@@ -2936,81 +3255,37 @@ function exportToExcel() {
     { s: { r: 0, c: 0 }, e: { r: 0, c: totalCols - 1 } },
     { s: { r: 1, c: 0 }, e: { r: 1, c: totalCols - 1 } },
     { s: { r: 2, c: 0 }, e: { r: 2, c: totalCols - 1 } },
-    { s: { r: summaryRowIdx, c: 0 }, e: { r: summaryRowIdx, c: 2 } }
+    { s: { r: summaryRowIdx, c: 0 }, e: { r: summaryRowIdx, c: 4 } }
   ];
 
   ws['!cols'] = colsConfig.map(col => ({ wch: col.wch }));
-
-  let rowHeights = [{ hpt: 24 }, { hpt: 32 }, { hpt: 22 }, { hpt: 28 }];
-  for (let r = 0; r < computed.length; r++) rowHeights.push({ hpt: 22 });
-  rowHeights.push({ hpt: 26 });
-  ws['!rows'] = rowHeights;
-
   ws['!views'] = [{ rightToLeft: true }];
-
-  let maxRowRef = summaryRowIdx + 1;
-  ws['!ref'] = `A1:${lastColLetter}${maxRowRef}`;
+  ws['!ref'] = `A1:${lastColLetter}${summaryRowIdx + 1}`;
 
   XLSX.utils.book_append_sheet(wb, ws, appState.currentClass.slice(0, 31));
 
-  let templateHeaders = ['نمبرشمار', 'اسم الطالبۃ', 'اسم الاب', 'حدر', 'مشق', 'مقدمۃالجزری', 'تفہیم الوقوف', 'علوم القراءت', 'معلم التجوید', 'مجموعہ', 'کل نمبر', 'فیصد٪', 'پوزیشن', 'تقدیر'];
-  let templateCols = [
-    { wch: 10 }, { wch: 22 }, { wch: 20 },
-    { wch: 14 }, { wch: 14 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 15 },
-    { wch: 13 }, { wch: 11 }, { wch: 12 }, { wch: 12 }, { wch: 14 }
-  ];
-
-  function createTemplateSheet(title) {
-    let sWs = {};
-    sWs['A1'] = {
-      t: 's',
-      v: `${appState.institution} - ${title}`,
-      s: {
-        font: { name: 'Calibri', sz: 14, bold: true, color: { rgb: 'FFFFFF' } },
-        fill: { fgColor: { rgb: '0F766E' } },
-        alignment: { horizontal: 'center', vertical: 'center' }
-      }
-    };
-    templateHeaders.forEach((th, cIdx) => {
-      sWs[XLSX.utils.encode_cell({ r: 1, c: cIdx })] = {
-        t: 's',
-        v: th,
-        s: {
-          font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: 'FFFFFF' } },
-          fill: { fgColor: { rgb: '0D9488' } },
-          alignment: { horizontal: 'center', vertical: 'center' },
-          border: headerBorder
-        }
-      };
-    });
-    for (let r = 2; r <= 14; r++) {
-      let exR = r + 1;
-      sWs[XLSX.utils.encode_cell({ r: r, c: 0 })] = { t: 'n', v: r - 1, s: { font: { name: 'Calibri' }, alignment: { horizontal: 'center' }, border: thinBorder } };
-      sWs[XLSX.utils.encode_cell({ r: r, c: 1 })] = { t: 's', v: '', s: { font: { name: 'Calibri' }, border: thinBorder } };
-      sWs[XLSX.utils.encode_cell({ r: r, c: 2 })] = { t: 's', v: '', s: { font: { name: 'Calibri' }, border: thinBorder } };
-      for (let sc = 3; sc <= 8; sc++) {
-        sWs[XLSX.utils.encode_cell({ r: r, c: sc })] = { t: 's', v: '', s: { font: { name: 'Calibri' }, alignment: { horizontal: 'center' }, border: thinBorder } };
-      }
-      sWs[XLSX.utils.encode_cell({ r: r, c: 9 })] = { t: 'n', f: `SUM(D${exR}:I${exR})`, s: { font: { name: 'Calibri', bold: true }, fill: { fgColor: { rgb: 'CCFBF1' } }, alignment: { horizontal: 'center' }, border: thinBorder } };
-      sWs[XLSX.utils.encode_cell({ r: r, c: 10 })] = { t: 'n', v: 600, s: { font: { name: 'Calibri' }, alignment: { horizontal: 'center' }, border: thinBorder } };
-      sWs[XLSX.utils.encode_cell({ r: r, c: 11 })] = { t: 'n', f: `ROUND(J${exR}/K${exR}*100, 2)`, s: { font: { name: 'Calibri', bold: true }, alignment: { horizontal: 'center' }, border: thinBorder } };
-      sWs[XLSX.utils.encode_cell({ r: r, c: 12 })] = { t: 's', f: `IF(_xlfn.RANK.EQ(J${exR}, $J$3:$J$15)=1, "1st", IF(_xlfn.RANK.EQ(J${exR}, $J$3:$J$15)=2, "2nd", IF(_xlfn.RANK.EQ(J${exR}, $J$3:$J$15)=3, "3rd", _xlfn.RANK.EQ(J${exR}, $J$3:$J$15))))`, s: { font: { name: 'Calibri', bold: true }, alignment: { horizontal: 'center' }, border: thinBorder } };
-      sWs[XLSX.utils.encode_cell({ r: r, c: 13 })] = { t: 's', v: '', s: { font: { name: 'Calibri' }, alignment: { horizontal: 'center' }, border: thinBorder } };
-    }
-    sWs['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 13 } }];
-    sWs['!cols'] = templateCols;
-    sWs['!rows'] = [{ hpt: 30 }, { hpt: 26 }];
-    sWs['!views'] = [{ rightToLeft: true }];
-    sWs['!ref'] = 'A1:N15';
-    return sWs;
-  }
-
-  XLSX.utils.book_append_sheet(wb, createTemplateSheet('درجہ اول'), 'draja awak');
-  XLSX.utils.book_append_sheet(wb, createTemplateSheet('درجہ دوم'), 'draja dowam');
-
-  let filename = `${appState.currentClass}_نتیجہ.xlsx`;
+  let filename = `${appState.currentClass}_${appState.examTitle}.xlsx`;
   XLSX.writeFile(wb, filename);
   showToast(`کیلیبری فونٹ میں ایکسل فائل "${filename}" ڈاؤن لوڈ ہو گئی`, 'info');
+}
+
+function downloadBlankExcelTemplate() {
+  if (typeof XLSX === 'undefined') return;
+  let cData = getCurrentClassData();
+  let headers = ['نمبر شمار', 'رجسٹریشن', 'اسم الطالبۃ', 'اسم الاب', 'رابطہ فون', ...cData.subjects];
+  let rows = [
+    [`${appState.institution} - ${appState.currentClass} - خالی ایکسل شیٹ`],
+    headers
+  ];
+  cData.students.forEach((s, i) => {
+    rows.push([s.roll || (i + 1), s.reg || '', s.name || '', s.father || '', s.phone || '', ...cData.subjects.map(() => '')]);
+  });
+  let ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!views'] = [{ rightToLeft: true }];
+  let wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'ٹیمپلیٹ');
+  XLSX.writeFile(wb, `${appState.currentClass}_خالی_ٹیمپلیٹ.xlsx`);
+  showToast('خالی ایکسل ٹیمپلیٹ شیٹ ڈاؤن لوڈ ہو گئی', 'info');
 }
 
 function triggerImport() {
@@ -3020,7 +3295,6 @@ function triggerImport() {
 function handleExcelImport(event) {
   let file = event.target.files[0];
   if (!file) return;
-
   if (typeof XLSX === 'undefined') {
     showToast('SheetJS لائبریری لوڈ نہیں ہو سکی۔', 'error');
     return;
@@ -3034,7 +3308,6 @@ function handleExcelImport(event) {
       let sheetName = wb.SheetNames[0];
       let matchedClsSheet = wb.SheetNames.find(s => Object.keys(CLASS_SUBJECT_DEFAULTS).some(k => s.includes(k)));
       if (matchedClsSheet) sheetName = matchedClsSheet;
-      else if (wb.SheetNames.includes('Sheet2')) sheetName = 'Sheet2';
 
       let ws = wb.Sheets[sheetName];
       let rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null });
@@ -3057,15 +3330,19 @@ function handleExcelImport(event) {
       let hRow = rows[headerRowIndex];
 
       let serialCol = -1;
+      let regCol = -1;
       let nameCol = -1;
       let fatherCol = -1;
+      let phoneCol = -1;
       let majmughaCol = -1;
 
       hRow.forEach((val, c) => {
         let str = String(val || '');
         if (/شمار|رول|roll|sr/i.test(str)) serialCol = c;
+        else if (/رجسٹر|reg/i.test(str)) regCol = c;
         else if (/طالب|نام|name|student/i.test(str)) nameCol = c;
         else if (/الاب|والد|father/i.test(str)) fatherCol = c;
+        else if (/فون|رابطہ|موبائل|phone/i.test(str)) phoneCol = c;
         else if (/مجموعہ|میزان|obtained|total/i.test(str)) majmughaCol = c;
       });
 
@@ -3073,13 +3350,14 @@ function handleExcelImport(event) {
       if (fatherCol === -1) fatherCol = 2;
       if (serialCol === -1) serialCol = 0;
 
-      let nonSubPattern = /شمار|رول|طالب|طالبہ|اسم|الاب|والد|مجموعہ|میزان|کل|فیصد|پوزیشن|کیفیت|تقدیر|rank|grade|percent|total|name|father|roll|sr/i;
+      let nonSubPattern = /شمار|رول|رجسٹر|طالب|طالبہ|اسم|الاب|والد|فون|موبائل|رابطہ|مجموعہ|میزان|کل|فیصد|پوزیشن|کیفیت|تقدیر|rank|grade|percent|total|name|father|roll|sr/i;
 
       let subjectCols = [];
       hRow.forEach((val, c) => {
         let str = String(val || '').trim();
-        if (str && c !== serialCol && c !== nameCol && c !== fatherCol && c !== majmughaCol && !nonSubPattern.test(str)) {
-          subjectCols.push({ index: c, name: str });
+        if (str && c !== serialCol && c !== regCol && c !== nameCol && c !== fatherCol && c !== phoneCol && c !== majmughaCol && !nonSubPattern.test(str)) {
+          let cleanName = str.replace(/\(.*?\)/g, '').trim();
+          subjectCols.push({ index: c, name: cleanName });
         }
       });
 
@@ -3095,6 +3373,8 @@ function handleExcelImport(event) {
         let sName = row[nameCol];
         let sFather = row[fatherCol];
         let sRoll = row[serialCol];
+        let sReg = regCol !== -1 ? row[regCol] : '';
+        let sPhone = phoneCol !== -1 ? row[phoneCol] : '';
 
         if ((sName && String(sName).trim() !== '' && !String(sName).includes('میزان') && !String(sName).includes('اوسط')) || (sRoll !== null && sRoll !== undefined && !isNaN(Number(sRoll)))) {
           let marks = {};
@@ -3107,8 +3387,10 @@ function handleExcelImport(event) {
 
           importedStudents.push({
             roll: Number(sRoll) || (importedStudents.length + 1),
+            reg: sReg ? String(sReg).trim() : '',
             name: sName ? String(sName).trim() : '',
             father: sFather ? String(sFather).trim() : '',
+            phone: sPhone ? String(sPhone).trim() : '',
             marks: marks
           });
         }
@@ -3120,6 +3402,7 @@ function handleExcelImport(event) {
       appState.classesData[matchedClass] = {
         subjects: subjects,
         subjectMaxMarks: subjects.reduce((acc, sub) => { acc[sub] = 100; return acc; }, {}),
+        subjectPassMarks: subjects.reduce((acc, sub) => { acc[sub] = 40; return acc; }, {}),
         totalMarks: matchedClass === 'خاصہ اول' ? 700 : (subjects.length * 100),
         students: importedStudents
       };
@@ -3140,8 +3423,12 @@ function printGazette() {
   let cData = getCurrentClassData();
   let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
 
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printGazetteView');
+  view.style.display = 'block';
+
   document.getElementById('printInstitutionName').innerText = appState.institution;
-  document.getElementById('printExamTitle').innerText = appState.examTitle;
+  document.getElementById('printExamTitle').innerText = appState.examTitle + ' (' + (appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ') + ')';
   document.getElementById('printClassName').innerText = 'درجہ: ' + appState.currentClass;
 
   let nonAbsent = computed.filter(s => !s.isAbsent);
@@ -3189,6 +3476,232 @@ function printGazette() {
     `;
   }).join('');
 
+  window.print();
+}
+
+function printMeritList() {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let topAchievers = computed.filter(s => !s.isAbsent && s.rankNum <= 3).sort((a, b) => a.rankNum - b.rankNum);
+
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printMeritListView');
+  view.style.display = 'block';
+
+  view.innerHTML = `
+    <div style="text-align:center; padding-bottom:12px; border-bottom:2px solid #d97706; margin-bottom:16px;">
+      <p style="font-size:13pt; font-weight:bold; margin-bottom:2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <h1 style="font-size:20pt; font-weight:bold; color:#0f766e; margin-bottom:4px;">${appState.institution}</h1>
+      <h2 style="font-size:15pt; color:#d97706;">فہرست نمایاں پوزیشن ہولڈرز - جلسہ تقسیمِ انعامات و اسناد</h2>
+      <p style="font-size:12pt; font-weight:bold; margin-top:4px;">${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'}) - درجہ: ${appState.currentClass}</p>
+    </div>
+
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th>پوزیشن</th>
+          <th>رول نمبر</th>
+          <th>رجسٹریشن نمبر</th>
+          <th style="text-align:right;">اسم الطالبۃ</th>
+          <th style="text-align:right;">اسم الاب</th>
+          <th>حاصل کردہ نمبرات</th>
+          <th>کل نمبرات</th>
+          <th>فیصد</th>
+          <th>تقدیر</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${topAchievers.map(s => `
+          <tr style="font-size:12pt; height:36px;">
+            <td><strong style="color:#d97706; font-size:13pt;">${s.rank}</strong></td>
+            <td><strong>${s.roll}</strong></td>
+            <td>${s.reg || '-'}</td>
+            <td style="text-align:right; font-weight:bold;">${s.name}</td>
+            <td style="text-align:right;">${s.father || '-'}</td>
+            <td><strong style="color:#0f766e;">${s.obtained}</strong></td>
+            <td>${cData.totalMarks}</td>
+            <td><strong>${s.percentage}%</strong></td>
+            <td><strong>${s.grade}</strong></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+
+    <div style="display:flex; justify-content:space-between; margin-top:60px; padding:0 30px; font-size:12pt; font-weight:bold;">
+      <div>دستخط ناظمِ امتحانات: _______________</div>
+      <div>دستخط نگرانِ اعلیٰ: _______________</div>
+      <div>مہر و دستخط مہتمم جامعہ: _______________</div>
+    </div>
+  `;
+
+  window.print();
+}
+
+function printAwardSheet() {
+  let cData = getCurrentClassData();
+  let sub = document.getElementById('awardListSubjectSelect').value;
+  let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+  let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printAwardSheetView');
+  view.style.display = 'block';
+
+  view.innerHTML = `
+    <div style="text-align:center; padding-bottom:10px; border-bottom:2px solid #0f766e; margin-bottom:14px;">
+      <p style="font-size:13pt; font-weight:bold; margin-bottom:2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <h1 style="font-size:18pt; font-weight:bold; color:#0f766e; margin-bottom:2px;">${appState.institution}</h1>
+      <h2 style="font-size:14pt;">مضمون وار ایوارڈ لسٹ برائے ممتحن</h2>
+      <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:11pt; font-weight:bold;">
+        <span>درجہ: ${appState.currentClass}</span>
+        <span>مضمون: ${sub} (کل نمبر: ${max} | پاس: ${minPass})</span>
+        <span>امتحان: ${appState.examTitle}</span>
+      </div>
+    </div>
+
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th style="width:40px;">#</th>
+          <th style="width:60px;">رول نمبر</th>
+          <th style="text-align:right;">اسم الطالبۃ</th>
+          <th style="text-align:right;">اسم الاب</th>
+          <th style="width:120px;">حاصل کردہ نمبر (ہندسوں میں)</th>
+          <th style="width:140px;">حاصل کردہ نمبر (الفاظ میں)</th>
+          <th style="width:90px;">کیفیت</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${cData.students.map((s, idx) => {
+          let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+          return `
+            <tr style="height:30px;">
+              <td>${idx + 1}</td>
+              <td><strong>${s.roll || idx + 1}</strong></td>
+              <td style="text-align:right; font-weight:bold;">${s.name}</td>
+              <td style="text-align:right;">${s.father || '-'}</td>
+              <td><strong>${val}</strong></td>
+              <td></td>
+              <td>${val === 'غائب' ? 'غیر حاضر' : ''}</td>
+            </tr>
+          `;
+        }).join('')}
+      </tbody>
+    </table>
+
+    <div style="display:flex; justify-content:space-between; margin-top:50px; padding:0 30px; font-size:12pt; font-weight:bold;">
+      <div>دستخط ممتحن پرچہ: _______________</div>
+      <div>دستخط ناظم امتحانات: _______________</div>
+    </div>
+  `;
+
+  window.print();
+}
+
+function printRollNumberSlips() {
+  let cData = getCurrentClassData();
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printRollSlipsView');
+  view.style.display = 'block';
+
+  view.innerHTML = `
+    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px;">
+      ${cData.students.map(s => `
+        <div style="border:2px solid #0f766e; border-radius:8px; padding:12px; background:white; font-size:10.5pt; display:flex; flex-direction:column; justify-content:space-between; min-height:220px;">
+          <div style="text-align:center; border-bottom:1px solid #0f766e; padding-bottom:4px; margin-bottom:8px;">
+            <p style="font-size:10pt; font-weight:bold; margin-bottom:1px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+            <h3 style="font-size:12pt; color:#0f766e; font-weight:bold;">${appState.institution}</h3>
+            <h4 style="font-size:11pt;">امتحانی داخلہ سلپ (Roll Number Slip)</h4>
+            <p style="font-size:9.5pt; color:#475569;">${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'})</p>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-bottom:8px;">
+            <div><strong>رول نمبر:</strong> <span style="font-size:14pt; color:#0f766e; font-weight:bold;">${s.roll}</span></div>
+            <div><strong>رجسٹریشن:</strong> ${s.reg || '-'}</div>
+            <div><strong>اسم الطالبۃ:</strong> ${s.name}</div>
+            <div><strong>اسم الاب:</strong> ${s.father || '-'}</div>
+            <div style="grid-column: span 2;"><strong>درجہ:</strong> ${appState.currentClass}</div>
+          </div>
+          <div style="font-size:9pt; background:#f8fafc; padding:4px 6px; border-radius:4px; border:1px solid #e2e8f0; margin-bottom:8px;">
+            <strong>مضامین:</strong> ${cData.subjects.join('، ')}
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:9pt; font-weight:bold; border-top:1px dashed #cbd5e1; padding-top:6px;">
+            <span>مہرِ جامعہ: [  ]</span>
+            <span>دستخط ناظم امتحانات: ___________</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  window.print();
+}
+
+function printFailureList() {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let failedStudents = computed.filter(s => !s.isAbsent && s.grade === 'راسب');
+
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printFailureListView');
+  view.style.display = 'block';
+
+  view.innerHTML = `
+    <div style="text-align:center; padding-bottom:10px; border-bottom:2px solid #dc2626; margin-bottom:14px;">
+      <p style="font-size:13pt; font-weight:bold; margin-bottom:2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <h1 style="font-size:18pt; font-weight:bold; color:#0f766e;">${appState.institution}</h1>
+      <h2 style="font-size:14pt; color:#dc2626;">فہرست راسب طالبات (برائے امتحانِ ضمنی / سپلیمنٹری)</h2>
+      <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:11pt; font-weight:bold;">
+        <span>درجہ: ${appState.currentClass}</span>
+        <span>امتحان: ${appState.examTitle}</span>
+        <span>تعداد: ${failedStudents.length}</span>
+      </div>
+    </div>
+
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>رول نمبر</th>
+          <th style="text-align:right;">اسم الطالبۃ</th>
+          <th style="text-align:right;">اسم الاب</th>
+          <th>راسب مضامین (ناکام)</th>
+          <th>مجموعہ نمبرات</th>
+          <th>فیصد</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${failedStudents.map((s, idx) => {
+          let failedSubs = cData.subjects.filter(sub => {
+            let m = s.marks ? s.marks[sub] : undefined;
+            let pass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+            return typeof m === 'number' && m < pass;
+          });
+          return `
+            <tr>
+              <td>${idx + 1}</td>
+              <td><strong>${s.roll}</strong></td>
+              <td style="text-align:right; font-weight:bold;">${s.name}</td>
+              <td style="text-align:right;">${s.father || '-'}</td>
+              <td style="color:#dc2626; font-weight:bold;">${failedSubs.join('، ') || 'مجموعی فیصد'}</td>
+              <td>${s.obtained} / ${cData.totalMarks}</td>
+              <td>${s.percentage}%</td>
+            </tr>
+          `;
+        }).join('')}
+      </tbody>
+    </table>
+
+    <div style="display:flex; justify-content:space-between; margin-top:50px; padding:0 30px; font-size:12pt; font-weight:bold;">
+      <div>دستخط ناظم امتحانات: _______________</div>
+      <div>دستخط مہتمم جامعہ: _______________</div>
+    </div>
+  `;
+
+  window.print();
+}
+
+function printActiveDMC() {
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
   window.print();
 }
 
