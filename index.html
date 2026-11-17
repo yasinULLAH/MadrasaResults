@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+
+<html dir="rtl" lang="ur">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
 <title>نظام امتحانات و نتائج - جامعہ فاطمۃ الزہرا للبنات</title>
 <script src="xlsx.full.min.js"></script>
 <script>
@@ -1316,631 +1317,644 @@ footer.app-footer a {
   }
 }
 </style>
-</head>
+<link href="manifest.json" rel="manifest"/><link href="favicon.ico" rel="icon" type="image/x-icon"/></head>
 <body>
-
-<div id="toastContainer" class="toast-container-native"></div>
-
+<div class="toast-container-native" id="toastContainer"></div>
 <header class="app-bar">
-  <div class="top-bar">
-    <div class="brand-wrapper" onclick="openClassPickerSheet()">
-      <div class="brand-icon">ف</div>
-      <div class="brand-info">
-        <h1 class="brand-title" id="headerInstitution">جامعہ فاطمۃ الزہرا للبنات</h1>
-        <div class="brand-chips-row">
-          <button type="button" class="brand-subtitle-btn" id="headerClassBadge">
-            <span id="headerClassText">درجہ: متوسطہ اول</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <button type="button" class="exam-badge-btn" onclick="event.stopPropagation(); openExamPickerSheet()">
-            <span id="headerExamText">ششماہی امتحان</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="header-actions">
-      <button class="btn btn-secondary btn-sm" onclick="triggerImport()" title="ایکسل فائل امپورٹ کریں">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        <span>امپورٹ</span>
-      </button>
-      <input type="file" id="excelFileInput" accept=".xlsx, .xls" style="display:none" onchange="handleExcelImport(event)">
-
-      <button class="btn btn-primary btn-sm" onclick="exportToExcel()" title="کیلیبری فونٹ خوبصورت ایکسل ایکسپورٹ">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span>ایکسل</span>
-      </button>
-
-      <button class="btn btn-accent btn-sm" onclick="openPrintCenterModal()" title="پرنٹ سنٹر (گزٹ، DMC، پوزیشن ہولڈرز، سلپس)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        <span>پرنٹس</span>
-      </button>
-    </div>
-  </div>
-
-  <nav class="desktop-nav">
-    <button class="desktop-tab-btn active" onclick="switchMainTab('table', this)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+<div class="top-bar">
+<div class="brand-wrapper" onclick="openClassPickerSheet()">
+<div class="brand-icon" id="headerBrandLogo">ف</div>
+<div class="brand-info">
+<h1 class="brand-title" id="headerInstitution">جامعہ فاطمۃ الزہرا للبنات</h1>
+<div class="brand-chips-row">
+<button class="brand-subtitle-btn" id="headerClassBadge" type="button">
+<span id="headerClassText">درجہ: متوسطہ اول</span>
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="12"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<button class="exam-badge-btn" onclick="event.stopPropagation(); openExamPickerSheet()" type="button">
+<span id="headerExamText">ششماہی امتحان</span>
+<svg fill="none" height="11" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="11"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+</div>
+</div>
+</div>
+<div class="header-actions">
+<button class="btn btn-secondary btn-sm" onclick="triggerImport()" title="ایکسل فائل امپورٹ کریں">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+<span>امپورٹ</span>
+</button>
+<input accept=".xlsx, .xls" id="excelFileInput" onchange="handleExcelImport(event)" style="display:none" type="file"/>
+<button class="btn btn-primary btn-sm" onclick="exportToExcel()" title="کیلیبری فونٹ خوبصورت ایکسل ایکسپورٹ">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+<span>ایکسل</span>
+</button>
+<button class="btn btn-accent btn-sm" onclick="openPrintCenterModal()" title="پرنٹ سنٹر (گزٹ، DMC، پوزیشن ہولڈرز، سلپس)">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
+<span>پرنٹس</span>
+</button>
+</div>
+</div>
+<nav class="desktop-nav">
+<button class="desktop-tab-btn active" onclick="switchMainTab('table', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
       جدول نتائج (شیٹ)
     </button>
-    <button class="desktop-tab-btn" onclick="switchMainTab('cards', this)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+<button class="desktop-tab-btn" onclick="switchMainTab('cards', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="14" rx="2" width="20" x="2" y="7"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
       موبائل کارڈز
     </button>
-    <button class="desktop-tab-btn" onclick="switchMainTab('quick', this)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+<button class="desktop-tab-btn" onclick="switchMainTab('quick', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
       کوئیک انٹری (Quick Entry)
     </button>
-    <button class="desktop-tab-btn" onclick="switchMainTab('dmc', this)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+<button class="desktop-tab-btn" onclick="switchMainTab('dmc', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line></svg>
       کشف الدرجات (DMC)
     </button>
-    <button class="desktop-tab-btn" onclick="switchMainTab('printcenter', this)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+<button class="desktop-tab-btn" onclick="switchMainTab('printcenter', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
       پرنٹ سنٹر
     </button>
-    <button class="desktop-tab-btn" onclick="switchMainTab('stats', this)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+<button class="desktop-tab-btn" onclick="switchMainTab('stats', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg>
       شماریات و چارٹس
     </button>
-    <button class="desktop-tab-btn" onclick="switchMainTab('settings', this)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+<button class="desktop-tab-btn" onclick="switchMainTab('settings', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       ترتیبات
     </button>
-  </nav>
+</nav>
 </header>
-
 <main class="app-content">
-  <div class="stats-container">
-    <div class="stat-card">
-      <span class="stat-label">کل طلبہ / طالبات</span>
-      <div class="stat-val-row">
-        <span class="stat-val" id="statTotalStudents">0</span>
-      </div>
-      <span class="stat-sub" id="statAppeared">حاضر: 0</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">کامیاب طالبات</span>
-      <div class="stat-val-row">
-        <span class="stat-val" style="color:var(--success)" id="statPassed">0</span>
-      </div>
-      <span class="stat-sub" id="statPassPercent">0% شرح کامیابی</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">ناکام / راسب</span>
-      <div class="stat-val-row">
-        <span class="stat-val" style="color:var(--danger)" id="statFailed">0</span>
-      </div>
-      <span class="stat-sub" id="statAbsent">غیر حاضر: 0</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">پہلی پوزیشن</span>
-      <div class="stat-val-row">
-        <span class="stat-val" style="color:var(--accent)" id="statTopMarks">0</span>
-      </div>
-      <span class="stat-sub" id="statTopStudent">-</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-label">اوسط نمبرات</span>
-      <div class="stat-val-row">
-        <span class="stat-val" id="statAverage">0</span>
-      </div>
-      <span class="stat-sub" id="statTotalMarksSum">کل نمبر: 0</span>
-    </div>
-  </div>
-
-  <div class="chip-filters-bar">
-    <button class="filter-chip active" data-filter="all" onclick="setFilterChip('all', this)">
+<div class="stats-container">
+<div class="stat-card">
+<span class="stat-label">کل طلبہ / طالبات</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statTotalStudents">0</span>
+</div>
+<span class="stat-sub" id="statAppeared">حاضر: 0</span>
+</div>
+<div class="stat-card">
+<span class="stat-label">کامیاب طالبات</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statPassed" style="color:var(--success)">0</span>
+</div>
+<span class="stat-sub" id="statPassPercent">0% شرح کامیابی</span>
+</div>
+<div class="stat-card">
+<span class="stat-label">ناکام / راسب</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statFailed" style="color:var(--danger)">0</span>
+</div>
+<span class="stat-sub" id="statAbsent">غیر حاضر: 0</span>
+</div>
+<div class="stat-card">
+<span class="stat-label">پہلی پوزیشن</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statTopMarks" style="color:var(--accent)">0</span>
+</div>
+<span class="stat-sub" id="statTopStudent">-</span>
+</div>
+<div class="stat-card">
+<span class="stat-label">اوسط نمبرات</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statAverage">0</span>
+</div>
+<span class="stat-sub" id="statTotalMarksSum">کل نمبر: 0</span>
+</div>
+</div>
+<div class="chip-filters-bar">
+<button class="filter-chip active" data-filter="all" onclick="setFilterChip('all', this)">
       تمام طالبات
     </button>
-    <button class="filter-chip" data-filter="top3" onclick="setFilterChip('top3', this)">
+<button class="filter-chip" data-filter="top3" onclick="setFilterChip('top3', this)">
       🏆 ٹاپ ۳ پوزیشن
     </button>
-    <button class="filter-chip" data-filter="ممتاز" onclick="setFilterChip('ممتاز', this)">
+<button class="filter-chip" data-filter="ممتاز" onclick="setFilterChip('ممتاز', this)">
       🌟 ممتاز
     </button>
-    <button class="filter-chip" data-filter="جید جدا" onclick="setFilterChip('جید جدا', this)">
+<button class="filter-chip" data-filter="جید جدا" onclick="setFilterChip('جید جدا', this)">
       📘 جید جدا
     </button>
-    <button class="filter-chip" data-filter="جید" onclick="setFilterChip('جید', this)">
+<button class="filter-chip" data-filter="جید" onclick="setFilterChip('جید', this)">
       📙 جید
     </button>
-    <button class="filter-chip" data-filter="مقبول" onclick="setFilterChip('مقبول', this)">
+<button class="filter-chip" data-filter="مقبول" onclick="setFilterChip('مقبول', this)">
       📗 مقبول
     </button>
-    <button class="filter-chip" data-filter="passed" onclick="setFilterChip('passed', this)">
+<button class="filter-chip" data-filter="passed" onclick="setFilterChip('passed', this)">
       ✓ تمام کامیاب
     </button>
-    <button class="filter-chip" data-filter="failed" onclick="setFilterChip('failed', this)">
+<button class="filter-chip" data-filter="failed" onclick="setFilterChip('failed', this)">
       ✕ راسب (ناکام)
     </button>
-    <button class="filter-chip" data-filter="absent" onclick="setFilterChip('absent', this)">
+<button class="filter-chip" data-filter="absent" onclick="setFilterChip('absent', this)">
       ⏳ غیر حاضر
     </button>
-  </div>
-
-  <div class="search-toolbar">
-    <div class="search-box-native">
-      <input type="text" id="searchInput" class="search-input-native" placeholder="تلاش کریں: نام، ولدیت، رول نمبر، رجسٹریشن یا فون نمبر..." oninput="handleSearchInput(this.value)">
-      <svg class="search-icon-pos" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <button id="searchClearBtn" class="search-clear-btn" onclick="clearSearch()">&times;</button>
-    </div>
-
-    <div class="toolbar-actions">
-      <select id="sortSelect" class="select-native btn-sm" onchange="handleSortChange(this.value)">
-        <option value="roll_asc">رول نمبر (1 ➔ 100)</option>
-        <option value="rank_asc">پوزیشن (اول ➔ آخر)</option>
-        <option value="marks_desc">مجموعہ نمبر (زیادہ ➔ کم)</option>
-        <option value="name_asc">اسم الطالبۃ (الف ➔ ے)</option>
-      </select>
-
-      <button class="btn btn-primary btn-sm" onclick="openStudentModal()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        <span>نیا اندراج</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="bulk-actions-strip no-print">
-    <span style="font-weight:700; color:var(--primary-dark);">اجتماعی اختیارات:</span>
-    <button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('present')">سب کو حاضر کریں</button>
-    <button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('absent')">سب کو غائب کریں</button>
-    <button class="btn btn-secondary btn-sm" onclick="downloadBlankExcelTemplate()">خالی ایکسل ٹیمپلیٹ</button>
-    <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); switchTabDirect('dmc')">سب کے DMC پرنٹ کریں</button>
-  </div>
-
-  <div id="pane-table" class="tab-pane active">
-    <div class="table-wrapper">
-      <div class="table-scroll-container">
-        <table class="result-table" id="mainResultTable">
-          <thead>
-            <tr id="tableHeaderRow"></tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <div id="pane-cards" class="tab-pane">
-    <div class="cards-list" id="cardsGrid"></div>
-  </div>
-
-  <div id="pane-quick" class="tab-pane">
-    <div class="quick-entry-card" id="quickEntryContainer"></div>
-  </div>
-
-  <div id="pane-dmc" class="tab-pane">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
-      <div style="display:flex; gap:8px; align-items:center;">
-        <label style="font-weight:700; font-size:13px;">طالب علم منتخب کریں:</label>
-        <select id="dmcStudentSelect" class="select-native" onchange="renderSingleDMC(this.value)"></select>
-      </div>
-      <div style="display:flex; gap:8px;">
-        <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs()">سب طلبہ کے کشف دکھائیں</button>
-        <button class="btn btn-primary btn-sm" onclick="printActiveDMC()">پرنٹ کریں (Print)</button>
-      </div>
-    </div>
-    <div id="dmcContainer"></div>
-  </div>
-
-  <div id="pane-printcenter" class="tab-pane">
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📑 امتحانی گزٹ (Gazette Broadsheet)</h3>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">پوری کلاس کا باضابطہ نتیجہ گزٹ A4 لینڈ اسکیپ پرنٹ مع چار باضابطہ دستخط۔</p>
-        <button class="btn btn-primary btn-sm" onclick="printGazette()">گزٹ پرنٹ کریں</button>
-      </div>
-
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">🏆 فہرست نمایاں پوزیشن ہولڈرز (Merit List)</h3>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">سالانہ جلسہ تقسیم انعامات و اسناد کے لیے اول، دوم، سوم کی خصوصی میرٹ شیٹ۔</p>
-        <button class="btn btn-accent btn-sm" onclick="printMeritList()">پوزیشن لسٹ پرنٹ کریں</button>
-      </div>
-
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📜 کشف الدرجات (DMC / Sanad)</h3>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">دوہرے اسلامی بارڈر، فیصد، پوزیشن اور گریڈ کے ساتھ سند برائے طالبات۔</p>
-        <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); window.print()">تمام طالبات کے DMC پرنٹ کریں</button>
-      </div>
-
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📋 مضمون وار ایوارڈ لسٹ برائے ممتحن</h3>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحان کے دوران پرچہ چیک کرنے والے ممتحن کے لیے خصوصی دستخطی ایوارڈ شیٹ۔</p>
-        <div style="display:flex; gap:6px; align-items:center;">
-          <select id="awardListSubjectSelect" class="select-native btn-sm"></select>
-          <button class="btn btn-secondary btn-sm" onclick="printAwardSheet()">پرنٹ ایوارڈ لسٹ</button>
-        </div>
-      </div>
-
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">🎫 امتحانی داخلہ کارڈ / رول نمبر سلپ</h3>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانی ہال میں بیٹھنے کے لیے طالبات کے رول نمبر سلپ مع مضامین و ہدایات۔</p>
-        <button class="btn btn-secondary btn-sm" onclick="printRollNumberSlips()">رول نمبر سلپس پرنٹ کریں</button>
-      </div>
-
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--danger); margin-bottom:6px;">⚠️ فہرست راسب طالبات (Supplementary List)</h3>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانِ ضمنی (سپلیمنٹری امتحان) کی تیاری کے لیے فیل طالبات کی مضمون وار فہرست۔</p>
-        <button class="btn btn-secondary btn-sm" style="color:var(--danger);" onclick="printFailureList()">راسب لسٹ پرنٹ کریں</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="pane-stats" class="tab-pane">
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap:16px;">
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">نمایاں پوزیشن ہولڈرز (Top Achievers)</h3>
-        <div id="topRankersList" style="display:flex; flex-direction:column; gap:8px;"></div>
-      </div>
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">تقدیر و درجات کا تناسب (Grade Breakdown)</h3>
-        <div id="gradeBreakdownList" style="display:flex; flex-direction:column; gap:8px;"></div>
-      </div>
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">مضمون وار اوسط نمبرات (Subject Averages)</h3>
-        <div id="subjectAveragesList" style="display:flex; flex-direction:column; gap:8px;"></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="pane-settings" class="tab-pane">
-    <div style="max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:16px;">
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">ادارہ، امتحان و تعلیمی سیشن کی ترتیبات</h3>
-        <div class="form-group-native" style="margin-bottom:10px;">
-          <label class="form-label-native">جامعہ / مدرسہ کا مکمل نام:</label>
-          <input type="text" id="settingInstName" class="form-input-native" onchange="saveGeneralSettings()">
-        </div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
-          <div class="form-group-native">
-            <label class="form-label-native">امتحان کی قسم:</label>
-            <select id="settingExamType" class="select-native" onchange="saveGeneralSettings()">
-              <option value="ششماہی امتحان">ششماہی امتحان</option>
-              <option value="سالانہ امتحان">سالانہ امتحان</option>
-              <option value="سہ ماہی امتحان">سہ ماہی امتحان</option>
-              <option value="ماہانہ ٹیسٹ">ماہانہ ٹیسٹ</option>
-            </select>
-          </div>
-          <div class="form-group-native">
-            <label class="form-label-native">تعلیمی سال / سیشن:</label>
-            <input type="text" id="settingSessionYear" class="form-input-native" value="۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء" onchange="saveGeneralSettings()">
-          </div>
-        </div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
-          <div class="form-group-native">
-            <label class="form-label-native">پوزیشن کا فارمیٹ:</label>
-            <select id="settingRankFormat" class="select-native" onchange="saveGeneralSettings()">
-              <option value="urdu">اول، دوم، سوم، 4...</option>
-              <option value="english">1st, 2nd, 3rd, 4...</option>
-            </select>
-          </div>
-          <div class="form-group-native">
-            <label class="form-label-native">پاسنگ فیصد (Passing %):</label>
-            <input type="number" id="settingPassThreshold" class="form-input-native" min="33" max="60" value="40" onchange="saveGeneralSettings()">
-          </div>
-        </div>
-      </div>
-
-      <div class="native-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">مضامین اور ان کے کل و پاس نمبرات</h3>
-          <button class="btn btn-primary btn-sm" onclick="addSubjectPrompt()">+ نیا مضمون</button>
-        </div>
-        <div id="settingsSubjectList" style="display:flex; flex-direction:column; gap:8px;"></div>
-      </div>
-
-      <div class="native-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <div>
-            <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام امتحانات کے سیشنز (Exam Sessions)</h3>
-            <p style="font-size:12px; color:var(--text-muted); margin:0;">امتحانات کے سیشنز شامل کریں، نام بدلیں یا حذف کریں</p>
-          </div>
-          <button type="button" class="btn btn-primary btn-sm" onclick="openAddExamModal()">+ نیا امتحان</button>
-        </div>
-        <div id="settingsExamList" style="display:flex; flex-direction:column; gap:8px;"></div>
-      </div>
-
-      <div class="native-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <div>
-            <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام درجات (کلاسز) کی مکمل فہرست (Classes Management)</h3>
-            <p style="font-size:12px; color:var(--text-muted); margin:0;">نئے درجات شامل کریں، نام تبدیل کریں یا درجات کو حذف کریں</p>
-          </div>
-          <button type="button" class="btn btn-primary btn-sm" onclick="openAddClassModal()">+ نیا درجہ</button>
-        </div>
-        <div id="settingsClassList" style="display:flex; flex-direction:column; gap:8px;"></div>
-      </div>
-
-      <div class="native-card">
-        <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">بیک اپ، امپورٹ و بحالی (Backup & Restore)</h3>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn btn-secondary" onclick="downloadJsonBackup()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+</div>
+<div class="search-toolbar">
+<div class="search-box-native">
+<input class="search-input-native" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="تلاش کریں: نام، ولدیت، رول نمبر، رجسٹریشن یا فون نمبر..." type="text"/>
+<svg class="search-icon-pos" fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+<button class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()">×</button>
+</div>
+<div class="toolbar-actions">
+<select class="select-native btn-sm" id="sortSelect" onchange="handleSortChange(this.value)">
+<option value="roll_asc">رول نمبر (1 ➔ 100)</option>
+<option value="rank_asc">پوزیشن (اول ➔ آخر)</option>
+<option value="marks_desc">مجموعہ نمبر (زیادہ ➔ کم)</option>
+<option value="name_asc">اسم الطالبۃ (الف ➔ ے)</option>
+</select>
+<button class="btn btn-primary btn-sm" onclick="openStudentModal()">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="15"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+<span>نیا اندراج</span>
+</button>
+</div>
+</div>
+<div class="bulk-actions-strip no-print">
+<span style="font-weight:700; color:var(--primary-dark);">اجتماعی اختیارات:</span>
+<button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('present')">سب کو حاضر کریں</button>
+<button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('absent')">سب کو غائب کریں</button>
+<button class="btn btn-secondary btn-sm" onclick="downloadBlankExcelTemplate()">خالی ایکسل ٹیمپلیٹ</button>
+<button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); switchTabDirect('dmc')">سب کے DMC پرنٹ کریں</button>
+</div>
+<div class="tab-pane active" id="pane-table">
+<div class="table-wrapper">
+<div class="table-scroll-container">
+<table class="result-table" id="mainResultTable">
+<thead>
+<tr id="tableHeaderRow"></tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="pane-cards">
+<div class="cards-list" id="cardsGrid"></div>
+</div>
+<div class="tab-pane" id="pane-quick">
+<div class="quick-entry-card" id="quickEntryContainer"></div>
+</div>
+<div class="tab-pane" id="pane-dmc">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+<div style="display:flex; gap:8px; align-items:center;">
+<label style="font-weight:700; font-size:13px;">طالب علم منتخب کریں:</label>
+<select class="select-native" id="dmcStudentSelect" onchange="renderSingleDMC(this.value)"></select>
+</div>
+<div style="display:flex; gap:8px;">
+<button class="btn btn-secondary btn-sm" onclick="renderAllDMCs()">سب طلبہ کے کشف دکھائیں</button>
+<button class="btn btn-primary btn-sm" onclick="printActiveDMC()">پرنٹ کریں (Print)</button>
+</div>
+</div>
+<div id="dmcContainer"></div>
+</div>
+<div class="tab-pane" id="pane-printcenter">
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📑 امتحانی گزٹ (Gazette Broadsheet)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">پوری کلاس کا باضابطہ نتیجہ گزٹ A4 لینڈ اسکیپ پرنٹ مع چار باضابطہ دستخط۔</p>
+<button class="btn btn-primary btn-sm" onclick="printGazette()">گزٹ پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">🏆 فہرست نمایاں پوزیشن ہولڈرز (Merit List)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">سالانہ جلسہ تقسیم انعامات و اسناد کے لیے اول، دوم، سوم کی خصوصی میرٹ شیٹ۔</p>
+<button class="btn btn-accent btn-sm" onclick="printMeritList()">پوزیشن لسٹ پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📜 کشف الدرجات (DMC / Sanad)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">دوہرے اسلامی بارڈر، فیصد، پوزیشن اور گریڈ کے ساتھ سند برائے طالبات۔</p>
+<button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); window.print()">تمام طالبات کے DMC پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📋 مضمون وار ایوارڈ لسٹ برائے ممتحن</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحان کے دوران پرچہ چیک کرنے والے ممتحن کے لیے خصوصی دستخطی ایوارڈ شیٹ۔</p>
+<div style="display:flex; gap:6px; align-items:center;">
+<select class="select-native btn-sm" id="awardListSubjectSelect"></select>
+<button class="btn btn-secondary btn-sm" onclick="printAwardSheet()">پرنٹ ایوارڈ لسٹ</button>
+</div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">🎫 امتحانی داخلہ کارڈ / رول نمبر سلپ</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانی ہال میں بیٹھنے کے لیے طالبات کے رول نمبر سلپ مع مضامین و ہدایات۔</p>
+<button class="btn btn-secondary btn-sm" onclick="printRollNumberSlips()">رول نمبر سلپس پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--danger); margin-bottom:6px;">⚠️ فہرست راسب طالبات (Supplementary List)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانِ ضمنی (سپلیمنٹری امتحان) کی تیاری کے لیے فیل طالبات کی مضمون وار فہرست۔</p>
+<button class="btn btn-secondary btn-sm" onclick="printFailureList()" style="color:var(--danger);">راسب لسٹ پرنٹ کریں</button>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="pane-stats">
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap:16px;">
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">نمایاں پوزیشن ہولڈرز (Top Achievers)</h3>
+<div id="topRankersList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">تقدیر و درجات کا تناسب (Grade Breakdown)</h3>
+<div id="gradeBreakdownList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">مضمون وار اوسط نمبرات (Subject Averages)</h3>
+<div id="subjectAveragesList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="pane-settings">
+<div style="max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:16px;">
+<div class="native-card">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+<div>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin:0;">جامعہ / مدرسہ کا پروفائل، لوگو و برانڈنگ</h3>
+<p style="font-size:12px; color:var(--text-muted); margin:0;">اپنے ادارہ کا نام، لوگو، پتہ، فون اور الحاق نمبر سیٹ کریں جو کشف الدرجات (DMC)، گزٹ اور تمام پرنٹس میں خودکار ظاہر ہوگا</p>
+</div>
+<button class="btn btn-primary btn-sm" onclick="saveGeneralSettings()" type="button">پروفائل محفوظ کریں</button>
+</div>
+<div style="display:flex; gap:16px; align-items:center; margin-bottom:14px; padding:12px; background:var(--surface-alt); border-radius:var(--radius-sm); border:1px solid var(--border); flex-wrap:wrap;">
+<div id="settingLogoPreview" style="width:68px; height:68px; border-radius:12px; background:var(--surface); border:2px dashed var(--border); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0;">
+<span style="font-size:28px; color:var(--text-muted);">🏛️</span>
+</div>
+<div style="flex:1; min-width:200px;">
+<strong style="font-size:13.5px; display:block; margin-bottom:2px;">جامعہ کا لوگو / مونوگرام:</strong>
+<span style="font-size:11.5px; color:var(--text-muted); display:block; margin-bottom:8px;">PNG یا JPG تصویر منتخب کریں جو موبائل ایپ، DMC اور تمام پرنٹس پر پرنٹ ہوگی</span>
+<div style="display:flex; gap:8px; flex-wrap:wrap;">
+<button class="btn btn-secondary btn-sm" onclick="triggerLogoUpload()" type="button">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+<span>لوگو تبدیل کریں</span>
+</button>
+<button class="btn btn-secondary btn-sm" onclick="removeLogo()" style="color:var(--danger);" type="button">
+<span>لوگو ہٹائیں</span>
+</button>
+<input accept="image/*" id="settingLogoFileInput" onchange="handleLogoUpload(event)" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="form-group-native">
+<label class="form-label-native">جامعہ / مدرسہ کا مکمل نام:</label>
+<input class="form-input-native" id="settingInstName" onchange="saveGeneralSettings()" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">ذیلی عنوان / شعبہ (Tagline):</label>
+<input class="form-input-native" id="settingInstSubtitle" onchange="saveGeneralSettings()" placeholder="مثلاً للبنات / للبنین / شاخ اول" type="text"/>
+</div>
+</div>
+<div class="form-group-native" style="margin-bottom:10px;">
+<label class="form-label-native">پتہ و مکمل مقام (Address &amp; Location):</label>
+<input class="form-input-native" id="settingInstAddress" onchange="saveGeneralSettings()" placeholder="مثلاً خوڑگئ موسیٰ خیل، تحصیل ڈومیل، ضلع بنوں، خیبر پختونخوا" type="text"/>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="form-group-native">
+<label class="form-label-native">فون نمبر / واٹس ایپ:</label>
+<input class="form-input-native" id="settingInstPhone" onchange="saveGeneralSettings()" placeholder="مثلاً 0336-1593533" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">الحاق / رجسٹریشن نمبر:</label>
+<input class="form-input-native" id="settingInstReg" onchange="saveGeneralSettings()" placeholder="مثلاً الحاق: وفاق المدارس العربیہ" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">مہتمم / ناظم کا عہدہ (دستخط کے لیے):</label>
+<input class="form-input-native" id="settingInstHead" onchange="saveGeneralSettings()" placeholder="مہتمم جامعہ" type="text"/>
+</div>
+</div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">امتحانی ضوابط و تعلیمی سیشن کی ترتیبات</h3>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="form-group-native">
+<label class="form-label-native">امتحان کی قسم:</label>
+<select class="select-native" id="settingExamType" onchange="saveGeneralSettings()">
+<option value="ششماہی امتحان">ششماہی امتحان</option>
+<option value="سالانہ امتحان">سالانہ امتحان</option>
+<option value="سہ ماہی امتحان">سہ ماہی امتحان</option>
+<option value="ماہانہ ٹیسٹ">ماہانہ ٹیسٹ</option>
+</select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">تعلیمی سال / سیشن:</label>
+<input class="form-input-native" id="settingSessionYear" onchange="saveGeneralSettings()" type="text" value="۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء"/>
+</div>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="form-group-native">
+<label class="form-label-native">پوزیشن کا فارمیٹ:</label>
+<select class="select-native" id="settingRankFormat" onchange="saveGeneralSettings()">
+<option value="urdu">اول، دوم، سوم، 4...</option>
+<option value="english">1st, 2nd, 3rd, 4...</option>
+</select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">پاسنگ فیصد (Passing %):</label>
+<input class="form-input-native" id="settingPassThreshold" max="60" min="33" onchange="saveGeneralSettings()" type="number" value="40"/>
+</div>
+</div>
+</div>
+<div class="native-card">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">مضامین اور ان کے کل و پاس نمبرات</h3>
+<button class="btn btn-primary btn-sm" onclick="addSubjectPrompt()">+ نیا مضمون</button>
+</div>
+<div id="settingsSubjectList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+<div>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام امتحانات کے سیشنز (Exam Sessions)</h3>
+<p style="font-size:12px; color:var(--text-muted); margin:0;">امتحانات کے سیشنز شامل کریں، نام بدلیں یا حذف کریں</p>
+</div>
+<button class="btn btn-primary btn-sm" onclick="openAddExamModal()" type="button">+ نیا امتحان</button>
+</div>
+<div id="settingsExamList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+<div>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام درجات (کلاسز) کی مکمل فہرست (Classes Management)</h3>
+<p style="font-size:12px; color:var(--text-muted); margin:0;">نئے درجات شامل کریں، نام تبدیل کریں یا درجات کو حذف کریں</p>
+</div>
+<button class="btn btn-primary btn-sm" onclick="openAddClassModal()" type="button">+ نیا درجہ</button>
+</div>
+<div id="settingsClassList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">بیک اپ، امپورٹ و بحالی (Backup &amp; Restore)</h3>
+<div style="display:flex; gap:10px; flex-wrap:wrap;">
+<button class="btn btn-secondary" onclick="downloadJsonBackup()">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
             ڈیٹا بیک اپ (JSON)
           </button>
-          <button class="btn btn-secondary" onclick="triggerJsonRestore()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+<button class="btn btn-secondary" onclick="triggerJsonRestore()">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
             بیک اپ بحال کریں
           </button>
-          <input type="file" id="jsonRestoreInput" accept=".json" style="display:none" onchange="handleJsonRestore(event)">
-          <button class="btn btn-accent" onclick="resetToSampleData()">نمونہ ڈیٹا پر ری سیٹ</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<input accept=".json" id="jsonRestoreInput" onchange="handleJsonRestore(event)" style="display:none" type="file"/>
+<button class="btn btn-accent" onclick="resetToSampleData()">نمونہ ڈیٹا پر ری سیٹ</button>
+</div>
+</div>
+</div>
+</div>
 </main>
-
 <footer class="app-footer no-print">
-  <div>Created by: <strong>Yasin Ullah</strong> – Bannu Software Solutions</div>
-  <div style="margin-top:4px;">
-    <a href="https://www.yasinbss.com" target="_blank" rel="noopener">www.yasinbss.com</a> | 
-    <a href="https://wa.me/923361593533" target="_blank" rel="noopener">WhatsApp: 03361593533</a>
-  </div>
+<div>Created by: <strong>Yasin Ullah</strong> – Bannu Software Solutions</div>
+<div style="margin-top:4px;">
+<a href="https://www.yasinbss.com" rel="noopener" target="_blank">www.yasinbss.com</a> | 
+    <a href="https://wa.me/923361593533" rel="noopener" target="_blank">WhatsApp: 03361593533</a>
+</div>
 </footer>
-
 <nav class="mobile-bottom-bar">
-  <button class="mobile-nav-item active" data-tab="table" onclick="switchMobileNav('table', this)">
-    <div class="mobile-nav-icon-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-    </div>
-    <span>شیٹ</span>
-  </button>
-  <button class="mobile-nav-item" data-tab="cards" onclick="switchMobileNav('cards', this)">
-    <div class="mobile-nav-icon-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-    </div>
-    <span>کارڈز</span>
-  </button>
-  <button class="mobile-nav-item" data-tab="quick" onclick="switchMobileNav('quick', this)">
-    <div class="mobile-nav-icon-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-    </div>
-    <span>اندراج</span>
-  </button>
-  <button class="mobile-nav-item" data-tab="dmc" onclick="switchMobileNav('dmc', this)">
-    <div class="mobile-nav-icon-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-    </div>
-    <span>کشف</span>
-  </button>
-  <button class="mobile-nav-item" data-tab="printcenter" onclick="switchMobileNav('printcenter', this)">
-    <div class="mobile-nav-icon-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-    </div>
-    <span>پرنٹس</span>
-  </button>
-  <button class="mobile-nav-item" data-tab="settings" onclick="switchMobileNav('settings', this)">
-    <div class="mobile-nav-icon-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    </div>
-    <span>ترتیبات</span>
-  </button>
-</nav>
-
-<button class="fab-native no-print" onclick="openStudentModal()" title="نیا طالب علم شامل کریں">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+<button class="mobile-nav-item active" data-tab="table" onclick="switchMobileNav('table', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+</div>
+<span>شیٹ</span>
 </button>
-
+<button class="mobile-nav-item" data-tab="cards" onclick="switchMobileNav('cards', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><rect height="14" rx="2" width="20" x="2" y="7"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+</div>
+<span>کارڈز</span>
+</button>
+<button class="mobile-nav-item" data-tab="quick" onclick="switchMobileNav('quick', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+</div>
+<span>اندراج</span>
+</button>
+<button class="mobile-nav-item" data-tab="dmc" onclick="switchMobileNav('dmc', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line></svg>
+</div>
+<span>کشف</span>
+</button>
+<button class="mobile-nav-item" data-tab="printcenter" onclick="switchMobileNav('printcenter', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
+</div>
+<span>پرنٹس</span>
+</button>
+<button class="mobile-nav-item" data-tab="settings" onclick="switchMobileNav('settings', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+</div>
+<span>ترتیبات</span>
+</button>
+</nav>
+<button class="fab-native no-print" onclick="openStudentModal()" title="نیا طالب علم شامل کریں">
+<svg fill="none" height="24" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="24"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+</button>
 <div class="modal-backdrop-native" id="classPickerSheet" onclick="closeOnBackdrop(event, 'classPickerSheet')">
-  <div class="modal-sheet">
-    <div class="modal-grabber"></div>
-    <div class="modal-header-native">
-      <h3 class="modal-title-native">درجات (کلاسز) کی فہرست و انتخاب</h3>
-      <button class="modal-close-native" onclick="closeClassPickerSheet()">&times;</button>
-    </div>
-    <div class="modal-body-native" id="classListContainer"></div>
-  </div>
+<div class="modal-sheet">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">درجات (کلاسز) کی فہرست و انتخاب</h3>
+<button class="modal-close-native" onclick="closeClassPickerSheet()">×</button>
 </div>
-
+<div class="modal-body-native" id="classListContainer"></div>
+</div>
+</div>
 <div class="modal-backdrop-native" id="examPickerSheet" onclick="closeOnBackdrop(event, 'examPickerSheet')">
-  <div class="modal-sheet" style="max-width:440px;">
-    <div class="modal-grabber"></div>
-    <div class="modal-header-native">
-      <h3 class="modal-title-native">امتحانات کی فہرست و انتخاب</h3>
-      <button class="modal-close-native" onclick="closeExamPickerSheet()">&times;</button>
-    </div>
-    <div class="modal-body-native" id="examListContainer"></div>
-  </div>
+<div class="modal-sheet" style="max-width:440px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">امتحانات کی فہرست و انتخاب</h3>
+<button class="modal-close-native" onclick="closeExamPickerSheet()">×</button>
 </div>
-
+<div class="modal-body-native" id="examListContainer"></div>
+</div>
+</div>
 <div class="modal-backdrop-native" id="addClassModal" onclick="closeOnBackdrop(event, 'addClassModal')">
-  <div class="modal-sheet" style="max-width:440px;">
-    <div class="modal-grabber"></div>
-    <div class="modal-header-native">
-      <h3 class="modal-title-native">نیا درجہ (کلاس) شامل کریں</h3>
-      <button class="modal-close-native" onclick="closeAddClassModal()">&times;</button>
-    </div>
-    <div class="modal-body-native">
-      <div class="form-group-native" style="margin-bottom:10px;">
-        <label class="form-label-native">درجہ کا نام (مثلاً درجہ اعدادیہ، حفظ القرآن، اول وغیرہ):</label>
-        <input type="text" id="newClassNameInput" class="form-input-native" placeholder="درجہ کا نام لکھیں...">
-      </div>
-      <div class="form-group-native" style="margin-bottom:10px;">
-        <label class="form-label-native">ابتدائی مضامین (کوما کے ساتھ الگ کریں):</label>
-        <input type="text" id="newClassSubjectsInput" class="form-input-native" value="مضمون ۱, مضمون ۲">
-      </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div class="form-group-native">
-          <label class="form-label-native">ہر مضمون کے کل نمبر:</label>
-          <input type="number" id="newClassMaxMarksInput" class="form-input-native" value="100">
-        </div>
-        <div class="form-group-native">
-          <label class="form-label-native">پاسنگ نمبر:</label>
-          <input type="number" id="newClassPassMarksInput" class="form-input-native" value="40">
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer-native">
-      <button type="button" class="btn btn-secondary" onclick="closeAddClassModal()">منسوخ</button>
-      <button type="button" class="btn btn-primary" onclick="submitAddNewClass()">درجہ محفوظ کریں</button>
-    </div>
-  </div>
+<div class="modal-sheet" style="max-width:440px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">نیا درجہ (کلاس) شامل کریں</h3>
+<button class="modal-close-native" onclick="closeAddClassModal()">×</button>
 </div>
-
+<div class="modal-body-native">
+<div class="form-group-native" style="margin-bottom:10px;">
+<label class="form-label-native">درجہ کا نام (مثلاً درجہ اعدادیہ، حفظ القرآن، اول وغیرہ):</label>
+<input class="form-input-native" id="newClassNameInput" placeholder="درجہ کا نام لکھیں..." type="text"/>
+</div>
+<div class="form-group-native" style="margin-bottom:10px;">
+<label class="form-label-native">ابتدائی مضامین (کوما کے ساتھ الگ کریں):</label>
+<input class="form-input-native" id="newClassSubjectsInput" type="text" value="مضمون ۱, مضمون ۲"/>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+<div class="form-group-native">
+<label class="form-label-native">ہر مضمون کے کل نمبر:</label>
+<input class="form-input-native" id="newClassMaxMarksInput" type="number" value="100"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">پاسنگ نمبر:</label>
+<input class="form-input-native" id="newClassPassMarksInput" type="number" value="40"/>
+</div>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeAddClassModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitAddNewClass()" type="button">درجہ محفوظ کریں</button>
+</div>
+</div>
+</div>
 <div class="modal-backdrop-native" id="editClassModal" onclick="closeOnBackdrop(event, 'editClassModal')">
-  <div class="modal-sheet" style="max-width:420px;">
-    <div class="modal-grabber"></div>
-    <div class="modal-header-native">
-      <h3 class="modal-title-native">درجہ کا نام تبدیل کریں</h3>
-      <button class="modal-close-native" onclick="closeEditClassModal()">&times;</button>
-    </div>
-    <div class="modal-body-native">
-      <input type="hidden" id="editClassOldName">
-      <div class="form-group-native">
-        <label class="form-label-native">درجہ کا نیا نام:</label>
-        <input type="text" id="editClassNameInput" class="form-input-native">
-      </div>
-    </div>
-    <div class="modal-footer-native">
-      <button type="button" class="btn btn-secondary" onclick="closeEditClassModal()">منسوخ</button>
-      <button type="button" class="btn btn-primary" onclick="submitEditClassName()">نام تبدیل کریں</button>
-    </div>
-  </div>
+<div class="modal-sheet" style="max-width:420px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">درجہ کا نام تبدیل کریں</h3>
+<button class="modal-close-native" onclick="closeEditClassModal()">×</button>
 </div>
-
+<div class="modal-body-native">
+<input id="editClassOldName" type="hidden"/>
+<div class="form-group-native">
+<label class="form-label-native">درجہ کا نیا نام:</label>
+<input class="form-input-native" id="editClassNameInput" type="text"/>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeEditClassModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitEditClassName()" type="button">نام تبدیل کریں</button>
+</div>
+</div>
+</div>
 <div class="modal-backdrop-native" id="addExamModal" onclick="closeOnBackdrop(event, 'addExamModal')">
-  <div class="modal-sheet" style="max-width:420px;">
-    <div class="modal-grabber"></div>
-    <div class="modal-header-native">
-      <h3 class="modal-title-native">نیا امتحانی سیشن شامل کریں</h3>
-      <button class="modal-close-native" onclick="closeAddExamModal()">&times;</button>
-    </div>
-    <div class="modal-body-native">
-      <div class="form-group-native">
-        <label class="form-label-native">امتحان کا عنوان / نام:</label>
-        <input type="text" id="newExamTitleInput" class="form-input-native" placeholder="مثلاً: امتحان داخلہ، شعبہ حفظ سالانہ امتحان، ماہانہ ٹیسٹ اکتوبر...">
-      </div>
-    </div>
-    <div class="modal-footer-native">
-      <button type="button" class="btn btn-secondary" onclick="closeAddExamModal()">منسوخ</button>
-      <button type="button" class="btn btn-primary" onclick="submitAddNewExam()">امتحان شامل کریں</button>
-    </div>
-  </div>
+<div class="modal-sheet" style="max-width:420px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">نیا امتحانی سیشن شامل کریں</h3>
+<button class="modal-close-native" onclick="closeAddExamModal()">×</button>
 </div>
-
+<div class="modal-body-native">
+<div class="form-group-native">
+<label class="form-label-native">امتحان کا عنوان / نام:</label>
+<input class="form-input-native" id="newExamTitleInput" placeholder="مثلاً: امتحان داخلہ، شعبہ حفظ سالانہ امتحان، ماہانہ ٹیسٹ اکتوبر..." type="text"/>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeAddExamModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitAddNewExam()" type="button">امتحان شامل کریں</button>
+</div>
+</div>
+</div>
 <div class="modal-backdrop-native" id="editExamModal" onclick="closeOnBackdrop(event, 'editExamModal')">
-  <div class="modal-sheet" style="max-width:420px;">
-    <div class="modal-grabber"></div>
-    <div class="modal-header-native">
-      <h3 class="modal-title-native">امتحان کا نام تبدیل کریں</h3>
-      <button class="modal-close-native" onclick="closeEditExamModal()">&times;</button>
-    </div>
-    <div class="modal-body-native">
-      <input type="hidden" id="editExamOldName">
-      <div class="form-group-native">
-        <label class="form-label-native">امتحان کا نیا نام:</label>
-        <input type="text" id="editExamTitleInput" class="form-input-native">
-      </div>
-    </div>
-    <div class="modal-footer-native">
-      <button type="button" class="btn btn-secondary" onclick="closeEditExamModal()">منسوخ</button>
-      <button type="button" class="btn btn-primary" onclick="submitEditExamName()">نام تبدیل کریں</button>
-    </div>
-  </div>
+<div class="modal-sheet" style="max-width:420px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">امتحان کا نام تبدیل کریں</h3>
+<button class="modal-close-native" onclick="closeEditExamModal()">×</button>
 </div>
-
+<div class="modal-body-native">
+<input id="editExamOldName" type="hidden"/>
+<div class="form-group-native">
+<label class="form-label-native">امتحان کا نیا نام:</label>
+<input class="form-input-native" id="editExamTitleInput" type="text"/>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeEditExamModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitEditExamName()" type="button">نام تبدیل کریں</button>
+</div>
+</div>
+</div>
 <div class="modal-backdrop-native" id="studentModal" onclick="closeOnBackdrop(event, 'studentModal')">
-  <div class="modal-sheet">
-    <div class="modal-grabber"></div>
-    <div class="modal-header-native">
-      <h3 class="modal-title-native" id="modalStudentTitle">طالب علم کا اندراج</h3>
-      <button class="modal-close-native" onclick="closeStudentModal()">&times;</button>
-    </div>
-    <div class="modal-body-native">
-      <input type="hidden" id="editStudentIndex">
-      <div style="display:grid; grid-template-columns: 85px 120px 1fr 1fr; gap:8px;">
-        <div class="form-group-native">
-          <label class="form-label-native">رول نمبر</label>
-          <input type="number" id="modalStudentRoll" class="form-input-native" style="text-align:center;">
-        </div>
-        <div class="form-group-native">
-          <label class="form-label-native">رجسٹریشن نمبر</label>
-          <input type="text" id="modalStudentReg" class="form-input-native" placeholder="مثلاً: REG-101">
-        </div>
-        <div class="form-group-native">
-          <label class="form-label-native">اسم الطالبۃ *</label>
-          <input type="text" id="modalStudentName" class="form-input-native" placeholder="طالبہ کا نام">
-        </div>
-        <div class="form-group-native">
-          <label class="form-label-native">اسم الاب</label>
-          <input type="text" id="modalStudentFather" class="form-input-native" placeholder="والد کا نام">
-        </div>
-      </div>
-
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:4px;">
-        <div class="form-group-native">
-          <label class="form-label-native">والد کا فون / واٹس ایپ نمبر</label>
-          <input type="tel" id="modalStudentPhone" class="form-input-native" placeholder="03361234567">
-        </div>
-        <div class="form-group-native">
-          <label class="form-label-native">پتہ / علاقہ</label>
-          <input type="text" id="modalStudentAddress" class="form-input-native" placeholder="علاقہ / گاؤں">
-        </div>
-      </div>
-      
-      <div style="margin-top:6px;">
-        <h4 style="font-size:13px; font-weight:700; margin-bottom:8px; color:var(--primary-dark);">نمبرات مضامین (Subject Marks)</h4>
-        <div id="modalMarksInputs" style="display:flex; flex-direction:column; gap:8px;"></div>
-      </div>
-    </div>
-    <div class="modal-footer-native">
-      <button class="btn btn-secondary" onclick="closeStudentModal()">منسوخ</button>
-      <button class="btn btn-primary" onclick="saveStudentModal()">محفوظ کریں</button>
-    </div>
-  </div>
+<div class="modal-sheet">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native" id="modalStudentTitle">طالب علم کا اندراج</h3>
+<button class="modal-close-native" onclick="closeStudentModal()">×</button>
 </div>
-
+<div class="modal-body-native">
+<input id="editStudentIndex" type="hidden"/>
+<div style="display:grid; grid-template-columns: 85px 120px 1fr 1fr; gap:8px;">
+<div class="form-group-native">
+<label class="form-label-native">رول نمبر</label>
+<input class="form-input-native" id="modalStudentRoll" style="text-align:center;" type="number"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">رجسٹریشن نمبر</label>
+<input class="form-input-native" id="modalStudentReg" placeholder="مثلاً: REG-101" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">اسم الطالبۃ *</label>
+<input class="form-input-native" id="modalStudentName" placeholder="طالبہ کا نام" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">اسم الاب</label>
+<input class="form-input-native" id="modalStudentFather" placeholder="والد کا نام" type="text"/>
+</div>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:4px;">
+<div class="form-group-native">
+<label class="form-label-native">والد کا فون / واٹس ایپ نمبر</label>
+<input class="form-input-native" id="modalStudentPhone" placeholder="03361234567" type="tel"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">پتہ / علاقہ</label>
+<input class="form-input-native" id="modalStudentAddress" placeholder="علاقہ / گاؤں" type="text"/>
+</div>
+</div>
+<div style="margin-top:6px;">
+<h4 style="font-size:13px; font-weight:700; margin-bottom:8px; color:var(--primary-dark);">نمبرات مضامین (Subject Marks)</h4>
+<div id="modalMarksInputs" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeStudentModal()">منسوخ</button>
+<button class="btn btn-primary" onclick="saveStudentModal()">محفوظ کریں</button>
+</div>
+</div>
+</div>
 <div class="modal-backdrop-native" id="confirmDialog" onclick="closeOnBackdrop(event, 'confirmDialog')">
-  <div class="modal-sheet" style="max-width:420px;">
-    <div class="modal-grabber"></div>
-    <div class="modal-header-native">
-      <h3 class="modal-title-native" id="confirmDialogTitle">تصدیق درکار ہے</h3>
-      <button class="modal-close-native" onclick="closeConfirmDialog()">&times;</button>
-    </div>
-    <div class="modal-body-native">
-      <p id="confirmDialogMessage" style="font-size:14px; color:var(--text);"></p>
-    </div>
-    <div class="modal-footer-native">
-      <button class="btn btn-secondary" onclick="closeConfirmDialog()">منسوخ</button>
-      <button class="btn btn-accent" id="confirmDialogActionBtn">تصدیق کریں</button>
-    </div>
-  </div>
+<div class="modal-sheet" style="max-width:420px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native" id="confirmDialogTitle">تصدیق درکار ہے</h3>
+<button class="modal-close-native" onclick="closeConfirmDialog()">×</button>
 </div>
-
+<div class="modal-body-native">
+<p id="confirmDialogMessage" style="font-size:14px; color:var(--text);"></p>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeConfirmDialog()">منسوخ</button>
+<button class="btn btn-accent" id="confirmDialogActionBtn">تصدیق کریں</button>
+</div>
+</div>
+</div>
 <div class="print-section" id="printGazetteView">
-  <div style="text-align:center; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #0f766e;">
-    <p style="font-size:13pt; margin-bottom:1px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-    <h1 style="font-size:18pt; font-weight:bold; margin-bottom:2px; color:#0f766e;" id="printInstitutionName">جامعہ فاطمۃ الزہرا للبنات خوڑگئ موسیٰ خیل ڈومیل بنوں</h1>
-    <h2 style="font-size:13.5pt; margin-bottom:2px;" id="printExamTitle">نتیجہ برائے ششماہی امتحان</h2>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px; font-size:10.5pt; font-weight:bold;">
-      <span id="printClassName">درجہ: متوسطہ اول</span>
-      <span id="printMetaStats">کل طالبات: 0 | حاضر: 0 | کامیاب: 0 | شرح کامیابی: 0%</span>
-      <span id="printDate">تاریخ: </span>
-    </div>
-  </div>
-
-  <table class="gazette-table" id="printGazetteTable">
-    <thead>
-      <tr id="printTableHeaderRow"></tr>
-    </thead>
-    <tbody id="printTableBody"></tbody>
-  </table>
-
-  <div style="display:flex; justify-content:space-between; margin-top:36px; padding:0 20px; font-size:11pt; font-weight:bold;">
-    <div>دستخط ممتحن: _______________</div>
-    <div>دستخط نگران امتحان: _______________</div>
-    <div>دستخط ناظم امتحانات: _______________</div>
-    <div>دستخط و مہر مہتمم جامعہ: _______________</div>
-  </div>
+<div style="text-align:center; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #0f766e;">
+<p style="font-size:13pt; margin-bottom:1px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+<div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:3px;">
+<div id="printGazetteLogo"></div>
+<div>
+<h1 id="printInstitutionName" style="font-size:18pt; font-weight:bold; margin:0; color:#0f766e;">جامعہ فاطمۃ الزہرا للبنات</h1>
+<div id="printInstitutionSub" style="font-size:10.5pt; color:#475569; font-weight:bold;"></div>
 </div>
-
+</div>
+<div id="printInstitutionMeta" style="font-size:9pt; color:#64748b; margin-bottom:4px;"></div>
+<h2 id="printExamTitle" style="font-size:13.5pt; margin-bottom:2px;">نتیجہ برائے ششماہی امتحان</h2>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px; font-size:10.5pt; font-weight:bold;">
+<span id="printClassName">درجہ: متوسطہ اول</span>
+<span id="printMetaStats">کل طالبات: 0 | حاضر: 0 | کامیاب: 0 | شرح کامیابی: 0%</span>
+<span id="printDate">تاریخ: </span>
+</div>
+</div>
+<table class="gazette-table" id="printGazetteTable">
+<thead>
+<tr id="printTableHeaderRow"></tr>
+</thead>
+<tbody id="printTableBody"></tbody>
+</table>
+<div style="display:flex; justify-content:space-between; margin-top:36px; padding:0 20px; font-size:11pt; font-weight:bold;">
+<div>دستخط ممتحن: _______________</div>
+<div>دستخط نگران امتحان: _______________</div>
+<div>دستخط ناظم امتحانات: _______________</div>
+<div id="printGazetteHeadSign">دستخط و مہر مہتمم جامعہ: _______________</div>
+</div>
+</div>
 <div class="print-section" id="printMeritListView"></div>
 <div class="print-section" id="printAwardSheetView"></div>
 <div class="print-section" id="printRollSlipsView"></div>
 <div class="print-section" id="printFailureListView"></div>
-
 <script>
 const CLASS_SUBJECT_DEFAULTS = {
   'متوسطہ اول': ['اردو پہلی', 'اردو قاعدہ'],
@@ -1971,7 +1985,13 @@ const SAMPLE_STUDENTS_MUTAWASSITA_1 = [
 ];
 
 let appState = {
-  institution: 'جامعہ فاطمۃ الزہرا للبنات خوڑگئ موسیٰ خیل ڈومیل بنوں',
+  institution: 'جامعہ فاطمۃ الزہرا للبنات',
+  institutionSubtitle: 'للبنات - خوڑگئ موسیٰ خیل ڈومیل بنوں',
+  institutionAddress: 'خوڑگئ موسیٰ خیل، تحصیل ڈومیل، ضلع بنوں، خیبر پختونخوا',
+  institutionPhone: '0336-1593533',
+  institutionReg: 'الحاق: وفاق المدارس العربیہ پاکستان',
+  institutionHead: 'مہتمم جامعہ',
+  institutionLogo: '',
   examTitle: 'ششماہی امتحان',
   sessionYear: '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء',
   rankFormat: 'urdu',
@@ -2213,11 +2233,45 @@ function getFilteredAndSortedStudents() {
 }
 
 function updateHeaderDisplay() {
-  document.getElementById('headerInstitution').innerText = appState.institution;
-  document.getElementById('headerClassText').innerText = 'درجہ: ' + appState.currentClass;
-  document.getElementById('headerExamText').innerText = appState.examTitle;
+  let instTitle = document.getElementById('headerInstitution');
+  if (instTitle) instTitle.innerText = appState.institution;
+  let clsText = document.getElementById('headerClassText');
+  if (clsText) clsText.innerText = 'درجہ: ' + appState.currentClass;
+  let exText = document.getElementById('headerExamText');
+  if (exText) exText.innerText = appState.examTitle;
+
+  let logoContainer = document.getElementById('headerBrandLogo');
+  if (logoContainer) {
+    if (appState.institutionLogo) {
+      logoContainer.innerHTML = `<img src="${appState.institutionLogo}" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">`;
+    } else {
+      let char = (appState.institution || 'ف').trim().charAt(0) || 'ف';
+      logoContainer.innerHTML = `<span>${char}</span>`;
+    }
+  }
+
   let instInput = document.getElementById('settingInstName');
-  if (instInput) instInput.value = appState.institution;
+  if (instInput) instInput.value = appState.institution || '';
+  let subInput = document.getElementById('settingInstSubtitle');
+  if (subInput) subInput.value = appState.institutionSubtitle || '';
+  let addrInput = document.getElementById('settingInstAddress');
+  if (addrInput) addrInput.value = appState.institutionAddress || '';
+  let phoneInput = document.getElementById('settingInstPhone');
+  if (phoneInput) phoneInput.value = appState.institutionPhone || '';
+  let regInput = document.getElementById('settingInstReg');
+  if (regInput) regInput.value = appState.institutionReg || '';
+  let headInput = document.getElementById('settingInstHead');
+  if (headInput) headInput.value = appState.institutionHead || 'مہتمم جامعہ';
+
+  let logoPreview = document.getElementById('settingLogoPreview');
+  if (logoPreview) {
+    if (appState.institutionLogo) {
+      logoPreview.innerHTML = `<img src="${appState.institutionLogo}" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px;">`;
+    } else {
+      logoPreview.innerHTML = `<span style="font-size:28px; color:var(--text-muted);">🏛️</span>`;
+    }
+  }
+
   let examSelect = document.getElementById('settingExamType');
   if (examSelect) {
     let exams = getExamList();
@@ -2516,8 +2570,14 @@ function shareWhatsAppResult(index) {
   let phone = (s.phone || '').replace(/[^0-9]/g, '');
   if (phone.startsWith('0')) phone = '92' + phone.substring(1);
 
-  let text = `السلام علیکم ورحمۃ اللہ وبرکاتہ!%0Aمحترم سرپرست ${s.father || ''}!%0Aطالبہ: *${s.name}*%0Aرول نمبر: *${s.roll}* | درجہ: *${appState.currentClass}*%0Aامتحان: *${appState.examTitle}*%0Aمجموعہ نمبرات: *${s.obtained} / ${cData.totalMarks}*%0Aفیصد: *${s.percentage}%*%0Aپوزیشن: *${s.rank}*%0Aکیفیت و نتیجہ: *${s.grade}*%0Aجامعہ فاطمۃ الزہرا للبنات`;
+  let footerMsg = appState.institution;
+  if (appState.institutionSubtitle) footerMsg += ` (${appState.institutionSubtitle})`;
+  if (appState.institutionPhone) footerMsg += `\n📞 رابطہ: ${appState.institutionPhone}`;
+  if (appState.institutionAddress) footerMsg += `\n📍 ${appState.institutionAddress}`;
 
+  let rawMsg = `السلام علیکم ورحمۃ اللہ وبرکاتہ!\nمحترم سرپرست ${s.father || ''}!\nطالبہ: *${s.name}*\nرول نمبر: *${s.roll}* ${s.reg ? '| رجسٹریشن: *' + s.reg + '*' : ''}\nدرجہ: *${appState.currentClass}*\nامتحان: *${appState.examTitle}* (${appState.sessionYear || ''})\nمجموعہ نمبرات: *${s.obtained} / ${cData.totalMarks}*\nفیصد: *${s.percentage}%*\nپوزیشن: *${s.rank}*\nنتیجہ / کیفیت: *${s.grade}*\n\n🕌 *${footerMsg}*`;
+
+  let text = encodeURIComponent(rawMsg);
   let url = phone ? `https://wa.me/${phone}?text=${text}` : `https://wa.me/?text=${text}`;
   window.open(url, '_blank');
 }
@@ -2789,13 +2849,25 @@ function generateDmcCardHtml(s, cData) {
     `;
   }).join('');
 
+  let metaParts = [];
+  if (appState.institutionAddress) metaParts.push('📍 ' + appState.institutionAddress);
+  if (appState.institutionPhone) metaParts.push('📞 ' + appState.institutionPhone);
+  if (appState.institutionReg) metaParts.push('🏛️ ' + appState.institutionReg);
+
   return `
     <div class="dmc-card print-page-break">
       <div class="dmc-header">
         <p style="font-size:12px; margin-bottom:2px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-        <h2>${appState.institution}</h2>
-        <h3>کشف الدرجات (Detailed Marks Certificate)</h3>
-        <p>${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'}) - درجہ: ${appState.currentClass}</p>
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:3px;">
+          ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:52px; height:52px; object-fit:contain; border-radius:50%; border:1px solid #0f766e;">` : ''}
+          <div>
+            <h2 style="margin:0; font-size:18pt; color:#0f766e;">${appState.institution}</h2>
+            ${appState.institutionSubtitle ? `<div style="font-size:10pt; color:#475569; font-weight:bold;">${appState.institutionSubtitle}</div>` : ''}
+          </div>
+        </div>
+        ${metaParts.length > 0 ? `<div style="font-size:8.5pt; color:#64748b; margin-bottom:4px;">${metaParts.join(' | ')}</div>` : ''}
+        <h3 style="font-size:13pt; margin:4px 0 2px 0;">کشف الدرجات (Detailed Marks Certificate)</h3>
+        <p style="font-size:10pt; margin:0;">${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'}) - درجہ: ${appState.currentClass}</p>
       </div>
 
       <div class="dmc-meta">
@@ -2840,6 +2912,7 @@ function generateDmcCardHtml(s, cData) {
         <div>دستخط ممتحن: ____________</div>
         <div>دستخط نگران: ____________</div>
         <div>دستخط ناظم امتحانات: ____________</div>
+        <div>دستخط و مہر ${appState.institutionHead || 'مہتمم جامعہ'}: ____________</div>
       </div>
     </div>
   `;
@@ -3400,14 +3473,65 @@ function bulkMarkAll(status) {
 }
 
 function saveGeneralSettings() {
-  appState.institution = document.getElementById('settingInstName').value.trim() || 'جامعہ فاطمۃ الزہرا للبنات';
-  appState.examTitle = document.getElementById('settingExamType').value;
-  appState.sessionYear = document.getElementById('settingSessionYear').value.trim() || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
-  appState.rankFormat = document.getElementById('settingRankFormat').value;
-  appState.passThreshold = Number(document.getElementById('settingPassThreshold').value) || 40;
+  let inst = document.getElementById('settingInstName');
+  if (inst) appState.institution = inst.value.trim() || 'جامعہ فاطمۃ الزہرا للبنات';
+  let sub = document.getElementById('settingInstSubtitle');
+  if (sub) appState.institutionSubtitle = sub.value.trim();
+  let addr = document.getElementById('settingInstAddress');
+  if (addr) appState.institutionAddress = addr.value.trim();
+  let phone = document.getElementById('settingInstPhone');
+  if (phone) appState.institutionPhone = phone.value.trim();
+  let reg = document.getElementById('settingInstReg');
+  if (reg) appState.institutionReg = reg.value.trim();
+  let head = document.getElementById('settingInstHead');
+  if (head) appState.institutionHead = head.value.trim() || 'مہتمم جامعہ';
+
+  let exSelect = document.getElementById('settingExamType');
+  if (exSelect) appState.examTitle = exSelect.value;
+  let yr = document.getElementById('settingSessionYear');
+  if (yr) appState.sessionYear = yr.value.trim() || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
+  let rk = document.getElementById('settingRankFormat');
+  if (rk) appState.rankFormat = rk.value;
+  let pass = document.getElementById('settingPassThreshold');
+  if (pass) appState.passThreshold = Number(pass.value) || 40;
+
   updateHeaderDisplay();
   renderApp();
-  showToast('ترتیبات کامیابی سے محفوظ ہو گئیں', 'info');
+  saveToLocalStorage();
+  showToast('جامعہ کا پروفائل اور ترتیبات محفوظ ہو گئیں!', 'info');
+}
+
+function triggerLogoUpload() {
+  document.getElementById('settingLogoFileInput').click();
+}
+
+function handleLogoUpload(event) {
+  let file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) {
+    showToast('تصویر کا سائز 2MB سے کم ہونا چاہیے', 'warning');
+    return;
+  }
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    appState.institutionLogo = e.target.result;
+    updateHeaderDisplay();
+    renderApp();
+    saveToLocalStorage();
+    showToast('جامعہ کا لوگو کامیابی سے تبدیل ہو گیا!', 'info');
+  };
+  reader.readAsDataURL(file);
+  event.target.value = '';
+}
+
+function removeLogo() {
+  openConfirmDialog('لوگو حذف کریں', 'کیا آپ واقعی جامعہ کا لوگو ہٹانا چاہتے ہیں؟', function() {
+    appState.institutionLogo = '';
+    updateHeaderDisplay();
+    renderApp();
+    saveToLocalStorage();
+    showToast('لوگو ہٹا دیا گیا', 'info');
+  });
 }
 
 function addSubjectPrompt() {
@@ -3919,6 +4043,43 @@ function handleExcelImport(event) {
   event.target.value = '';
 }
 
+function buildPrintHeaderHtml(title, accentColor = '#0f766e') {
+  let metaParts = [];
+  if (appState.institutionAddress) metaParts.push('📍 ' + appState.institutionAddress);
+  if (appState.institutionPhone) metaParts.push('📞 ' + appState.institutionPhone);
+  if (appState.institutionReg) metaParts.push('🏛️ ' + appState.institutionReg);
+
+  return `
+    <div style="text-align:center; padding-bottom:10px; border-bottom:2px solid ${accentColor}; margin-bottom:14px;">
+      <p style="font-size:12pt; font-weight:bold; margin-bottom:2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:3px;">
+        ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:48px; height:48px; object-fit:contain; border-radius:50%; border:1px solid ${accentColor};">` : ''}
+        <div>
+          <h1 style="font-size:18pt; font-weight:bold; color:${accentColor}; margin:0;">${appState.institution}</h1>
+          ${appState.institutionSubtitle ? `<div style="font-size:10.5pt; color:#475569; font-weight:bold;">${appState.institutionSubtitle}</div>` : ''}
+        </div>
+      </div>
+      ${metaParts.length > 0 ? `<div style="font-size:9pt; color:#64748b; margin-bottom:4px;">${metaParts.join(' | ')}</div>` : ''}
+      <h2 style="font-size:13.5pt; margin:4px 0 2px 0;">${title}</h2>
+      <div style="display:flex; justify-content:space-between; margin-top:4px; font-size:10.5pt; font-weight:bold;">
+        <span>درجہ: ${appState.currentClass}</span>
+        <span>امتحان: ${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'})</span>
+        <span>تاریخ: ${new Date().toLocaleDateString('ur-PK')}</span>
+      </div>
+    </div>
+  `;
+}
+
+function buildPrintFooterHtml() {
+  return `
+    <div style="display:flex; justify-content:space-between; margin-top:45px; padding:0 25px; font-size:11pt; font-weight:bold;">
+      <div>دستخط ناظمِ امتحانات: _______________</div>
+      <div>دستخط نگرانِ اعلیٰ: _______________</div>
+      <div>دستخط و مہر ${appState.institutionHead || 'مہتمم جامعہ'}: _______________</div>
+    </div>
+  `;
+}
+
 function printGazette() {
   let cData = getCurrentClassData();
   let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
@@ -3928,6 +4089,24 @@ function printGazette() {
   view.style.display = 'block';
 
   document.getElementById('printInstitutionName').innerText = appState.institution;
+  let pSub = document.getElementById('printInstitutionSub');
+  if (pSub) pSub.innerText = appState.institutionSubtitle || '';
+  let pMeta = document.getElementById('printInstitutionMeta');
+  if (pMeta) {
+    let pList = [];
+    if (appState.institutionAddress) pList.push('📍 ' + appState.institutionAddress);
+    if (appState.institutionPhone) pList.push('📞 ' + appState.institutionPhone);
+    if (appState.institutionReg) pList.push('🏛️ ' + appState.institutionReg);
+    pMeta.innerText = pList.join(' | ');
+  }
+  let pLogo = document.getElementById('printGazetteLogo');
+  if (pLogo) {
+    pLogo.innerHTML = appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:48px; height:48px; object-fit:contain; border-radius:50%; border:1px solid #0f766e;">` : '';
+  }
+  let pHeadSign = document.getElementById('printGazetteHeadSign');
+  if (pHeadSign) {
+    pHeadSign.innerText = `دستخط و مہر ${appState.institutionHead || 'مہتمم جامعہ'}: _______________`;
+  }
   document.getElementById('printExamTitle').innerText = appState.examTitle + ' (' + (appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ') + ')';
   document.getElementById('printClassName').innerText = 'درجہ: ' + appState.currentClass;
 
@@ -3989,12 +4168,7 @@ function printMeritList() {
   view.style.display = 'block';
 
   view.innerHTML = `
-    <div style="text-align:center; padding-bottom:12px; border-bottom:2px solid #d97706; margin-bottom:16px;">
-      <p style="font-size:13pt; font-weight:bold; margin-bottom:2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-      <h1 style="font-size:20pt; font-weight:bold; color:#0f766e; margin-bottom:4px;">${appState.institution}</h1>
-      <h2 style="font-size:15pt; color:#d97706;">فہرست نمایاں پوزیشن ہولڈرز - جلسہ تقسیمِ انعامات و اسناد</h2>
-      <p style="font-size:12pt; font-weight:bold; margin-top:4px;">${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'}) - درجہ: ${appState.currentClass}</p>
-    </div>
+    ${buildPrintHeaderHtml('فہرست نمایاں پوزیشن ہولڈرز - جلسہ تقسیمِ انعامات و اسناد', '#d97706')}
 
     <table class="gazette-table">
       <thead>
@@ -4027,11 +4201,7 @@ function printMeritList() {
       </tbody>
     </table>
 
-    <div style="display:flex; justify-content:space-between; margin-top:60px; padding:0 30px; font-size:12pt; font-weight:bold;">
-      <div>دستخط ناظمِ امتحانات: _______________</div>
-      <div>دستخط نگرانِ اعلیٰ: _______________</div>
-      <div>مہر و دستخط مہتمم جامعہ: _______________</div>
-    </div>
+    ${buildPrintFooterHtml()}
   `;
 
   window.print();
@@ -4048,16 +4218,7 @@ function printAwardSheet() {
   view.style.display = 'block';
 
   view.innerHTML = `
-    <div style="text-align:center; padding-bottom:10px; border-bottom:2px solid #0f766e; margin-bottom:14px;">
-      <p style="font-size:13pt; font-weight:bold; margin-bottom:2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-      <h1 style="font-size:18pt; font-weight:bold; color:#0f766e; margin-bottom:2px;">${appState.institution}</h1>
-      <h2 style="font-size:14pt;">مضمون وار ایوارڈ لسٹ برائے ممتحن</h2>
-      <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:11pt; font-weight:bold;">
-        <span>درجہ: ${appState.currentClass}</span>
-        <span>مضمون: ${sub} (کل نمبر: ${max} | پاس: ${minPass})</span>
-        <span>امتحان: ${appState.examTitle}</span>
-      </div>
-    </div>
+    ${buildPrintHeaderHtml(`مضمون وار ایوارڈ لسٹ برائے ممتحن - پرچہ: ${sub} (کل: ${max} | پاس: ${minPass})`, '#0f766e')}
 
     <table class="gazette-table">
       <thead>
@@ -4092,6 +4253,7 @@ function printAwardSheet() {
     <div style="display:flex; justify-content:space-between; margin-top:50px; padding:0 30px; font-size:12pt; font-weight:bold;">
       <div>دستخط ممتحن پرچہ: _______________</div>
       <div>دستخط ناظم امتحانات: _______________</div>
+      <div>دستخط و مہر ${appState.institutionHead || 'مہتمم جامعہ'}: _______________</div>
     </div>
   `;
 
@@ -4110,9 +4272,16 @@ function printRollNumberSlips() {
         <div style="border:2px solid #0f766e; border-radius:8px; padding:12px; background:white; font-size:10.5pt; display:flex; flex-direction:column; justify-content:space-between; min-height:220px;">
           <div style="text-align:center; border-bottom:1px solid #0f766e; padding-bottom:4px; margin-bottom:8px;">
             <p style="font-size:10pt; font-weight:bold; margin-bottom:1px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-            <h3 style="font-size:12pt; color:#0f766e; font-weight:bold;">${appState.institution}</h3>
-            <h4 style="font-size:11pt;">امتحانی داخلہ سلپ (Roll Number Slip)</h4>
-            <p style="font-size:9.5pt; color:#475569;">${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'})</p>
+            <div style="display:flex; justify-content:center; align-items:center; gap:8px;">
+              ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:34px; height:34px; object-fit:contain; border-radius:50%;">` : ''}
+              <div>
+                <h3 style="font-size:12pt; color:#0f766e; font-weight:bold; margin:0;">${appState.institution}</h3>
+                ${appState.institutionSubtitle ? `<span style="font-size:9pt; color:#64748b; font-weight:bold;">${appState.institutionSubtitle}</span>` : ''}
+              </div>
+            </div>
+            ${appState.institutionPhone ? `<div style="font-size:8.5pt; color:#64748b;">📞 ${appState.institutionPhone}</div>` : ''}
+            <h4 style="font-size:11pt; margin:4px 0 0 0;">امتحانی داخلہ سلپ (Roll Number Slip)</h4>
+            <p style="font-size:9.5pt; color:#475569; margin:0;">${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'})</p>
           </div>
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-bottom:8px;">
             <div><strong>رول نمبر:</strong> <span style="font-size:14pt; color:#0f766e; font-weight:bold;">${s.roll}</span></div>
@@ -4146,16 +4315,7 @@ function printFailureList() {
   view.style.display = 'block';
 
   view.innerHTML = `
-    <div style="text-align:center; padding-bottom:10px; border-bottom:2px solid #dc2626; margin-bottom:14px;">
-      <p style="font-size:13pt; font-weight:bold; margin-bottom:2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-      <h1 style="font-size:18pt; font-weight:bold; color:#0f766e;">${appState.institution}</h1>
-      <h2 style="font-size:14pt; color:#dc2626;">فہرست راسب طالبات (برائے امتحانِ ضمنی / سپلیمنٹری)</h2>
-      <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:11pt; font-weight:bold;">
-        <span>درجہ: ${appState.currentClass}</span>
-        <span>امتحان: ${appState.examTitle}</span>
-        <span>تعداد: ${failedStudents.length}</span>
-      </div>
-    </div>
+    ${buildPrintHeaderHtml(`فہرست راسب طالبات (برائے امتحانِ ضمنی / سپلیمنٹری) - تعداد: ${failedStudents.length}`, '#dc2626')}
 
     <table class="gazette-table">
       <thead>
@@ -4191,10 +4351,7 @@ function printFailureList() {
       </tbody>
     </table>
 
-    <div style="display:flex; justify-content:space-between; margin-top:50px; padding:0 30px; font-size:12pt; font-weight:bold;">
-      <div>دستخط ناظم امتحانات: _______________</div>
-      <div>دستخط مہتمم جامعہ: _______________</div>
-    </div>
+    ${buildPrintFooterHtml()}
   `;
 
   window.print();
@@ -4280,6 +4437,5 @@ function resetToSampleData() {
 
 window.addEventListener('DOMContentLoaded', initApp);
 </script>
-
-</body>
+<script src="./pwa-register.js" type="module"></script></body>
 </html>

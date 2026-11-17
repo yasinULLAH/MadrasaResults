@@ -7,11 +7,11 @@ from bs4 import BeautifulSoup
 
 SOURCE_LOGO_PATH = r"logo.png"
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-APP_NAME = "My Web App"
-SHORT_NAME = "WebApp"
-APP_DESCRIPTION = "A description of the web application."
-BACKGROUND_COLOR = "#ffffff"
-THEME_COLOR = "#007bff"
+APP_NAME = "نظام امتحانات و نتائج"
+SHORT_NAME = "MadrasaResults"
+APP_DESCRIPTION = "نظام امتحانات و نتائج - جامعہ فاطمۃ الزہرا للبنات"
+BACKGROUND_COLOR = "#042f2e"
+THEME_COLOR = "#0f766e"
 VERSION = "1.0.9"
 
 def get_file_hash(path):
