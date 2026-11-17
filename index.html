@@ -677,6 +677,12 @@ table.result-table td:last-child {
   border-radius: 4px;
 }
 
+.mark-input-cell.exempt-cell {
+  color: #0369a1;
+  background: #e0f2fe;
+  border-radius: 4px;
+}
+
 .badge-rank {
   display: inline-flex;
   align-items: center;
@@ -856,6 +862,10 @@ table.result-table td:last-child {
 
 .mark-chip-num.fail {
   color: var(--danger);
+}
+
+.mark-chip-num.exempt {
+  color: #0284c7;
 }
 
 .native-card-footer {
@@ -1652,9 +1662,31 @@ footer.app-footer a {
 </div>
 </div>
 <div class="native-card">
-<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">مضامین اور ان کے کل و پاس نمبرات</h3>
-<button class="btn btn-primary btn-sm" onclick="addSubjectPrompt()">+ نیا مضمون</button>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+<div>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin:0;">مضامین، کل نمبر اور پاس مارکس کا انتظام</h3>
+<p style="font-size:11.5px; color:var(--text-muted); margin:2px 0 0 0;">ہر درجہ اور ہر امتحان کے لیے الگ الگ مضامین و نمبرات مقرر کریں</p>
+</div>
+<div style="display:flex; gap:6px; flex-wrap:wrap;">
+<button class="btn btn-primary btn-sm" onclick="addSubjectPrompt()" type="button">+ نیا مضمون</button>
+<button class="btn btn-secondary btn-sm" onclick="applySubjectsToAllExamsOfClass()" title="اسی درجہ کے تمام امتحانات پر یہی مضامین لاگو کریں" type="button">تمام امتحانات پر لاگو</button>
+<button class="btn btn-secondary btn-sm" onclick="openCopySubjectsModal()" title="کسی اور کلاس یا امتحان سے مضامین درآمد کریں" type="button">کاپی کریں</button>
+<button class="btn btn-secondary btn-sm" onclick="resetCurriculumPrompt()" title="معیاری وفاق المدارس نصاب بحال کریں" type="button">ری سیٹ نصاب</button>
+</div>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:10px; background:var(--surface-alt); border-radius:var(--radius-sm); border:1px solid var(--border); margin-bottom:12px;">
+<div>
+<label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">مطلوبہ درجہ (کلاس):</label>
+<select class="select-native" id="settingSubjectClassSelect" onchange="changeSettingSubjectTarget()" style="width:100%; font-size:13px;">
+</select>
+</div>
+<div>
+<label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">مطلوبہ امتحانی سیشن:</label>
+<select class="select-native" id="settingSubjectExamSelect" onchange="changeSettingSubjectTarget()" style="width:100%; font-size:13px;">
+</select>
+</div>
+</div>
+<div id="settingsSubjectSummaryBadge" style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:var(--primary-subtle); border:1px solid var(--primary); border-radius:var(--radius-sm); margin-bottom:10px; font-size:12px; color:var(--primary-dark); font-weight:600;">
 </div>
 <div id="settingsSubjectList" style="display:flex; flex-direction:column; gap:8px;"></div>
 </div>
@@ -1920,6 +1952,33 @@ footer.app-footer a {
 </div>
 </div>
 </div>
+<div class="modal-backdrop-native" id="copySubjectsModal" onclick="closeOnBackdrop(event, 'copySubjectsModal')">
+<div class="modal-sheet" style="max-width:440px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">مضامین درآمد / کاپی کریں</h3>
+<button class="modal-close-native" onclick="closeCopySubjectsModal()">×</button>
+</div>
+<div class="modal-body-native">
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">جس درجہ اور امتحانی سیشن سے مضامین کاپی کرنے ہیں، انہیں منتخب کریں:</p>
+<div class="form-group-native">
+<label class="form-label-native">ماخذ درجہ (Source Class):</label>
+<select class="select-native" id="copySourceClassSelect"></select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">ماخذ امتحانی سیشن (Source Exam):</label>
+<select class="select-native" id="copySourceExamSelect"></select>
+</div>
+<div style="background:var(--primary-subtle); padding:10px; border-radius:var(--radius-sm); border:1px solid var(--primary); font-size:12px; color:var(--primary-dark); margin-top:10px;">
+<strong>ہدف (موجودہ انتخاب):</strong> <span id="copyTargetLabel"></span>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeCopySubjectsModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitCopySubjects()" type="button">کاپی کریں</button>
+</div>
+</div>
+</div>
 <div class="print-section" id="printGazetteView">
 <div style="text-align:center; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #0f766e;">
 <p style="font-size:13pt; margin-bottom:1px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
@@ -2082,6 +2141,8 @@ function initApp() {
   renderApp();
 }
 
+let settingSubjectTarget = { class: null, exam: null };
+
 function initializeClassData(className) {
   let defaultSubs = CLASS_SUBJECT_DEFAULTS[className] || ['مضمون ۱', 'مضمون ۲'];
   let totalMarks = className === 'خاصہ اول' ? 700 : (defaultSubs.length * 100);
@@ -2089,20 +2150,85 @@ function initializeClassData(className) {
   if (className === 'متوسطہ اول') {
     students = JSON.parse(JSON.stringify(SAMPLE_STUDENTS_MUTAWASSITA_1));
   }
+  let maxMap = defaultSubs.reduce((acc, sub) => { acc[sub] = 100; return acc; }, {});
+  let passMap = defaultSubs.reduce((acc, sub) => { acc[sub] = 40; return acc; }, {});
+
+  let exams = getExamList();
+  let examConfigs = {};
+  exams.forEach(ex => {
+    examConfigs[ex] = {
+      subjects: [...defaultSubs],
+      subjectMaxMarks: { ...maxMap },
+      subjectPassMarks: { ...passMap },
+      totalMarks: totalMarks
+    };
+  });
+
+  students.forEach(s => {
+    if (!s.examMarks) s.examMarks = {};
+    if (!s.examMarks[appState.examTitle]) {
+      s.examMarks[appState.examTitle] = s.marks ? { ...s.marks } : {};
+    }
+  });
+
   appState.classesData[className] = {
     subjects: defaultSubs,
-    subjectMaxMarks: defaultSubs.reduce((acc, sub) => { acc[sub] = 100; return acc; }, {}),
-    subjectPassMarks: defaultSubs.reduce((acc, sub) => { acc[sub] = 40; return acc; }, {}),
+    subjectMaxMarks: maxMap,
+    subjectPassMarks: passMap,
     totalMarks: totalMarks,
-    students: students
+    students: students,
+    examConfigs: examConfigs
   };
 }
 
-function getCurrentClassData() {
-  if (!appState.classesData[appState.currentClass]) {
-    initializeClassData(appState.currentClass);
+function getCurrentClassData(className, examTitle) {
+  let cls = className || appState.currentClass || 'متوسطہ اول';
+  let ex = examTitle || appState.examTitle || 'ششماہی امتحان';
+
+  if (!appState.classesData[cls]) {
+    initializeClassData(cls);
   }
-  return appState.classesData[appState.currentClass];
+  let cData = appState.classesData[cls];
+  if (!cData.examConfigs) {
+    cData.examConfigs = {};
+  }
+  if (!cData.examConfigs[ex]) {
+    let baseSubs = (cData.subjects && cData.subjects.length > 0) ? [...cData.subjects] : (CLASS_SUBJECT_DEFAULTS[cls] ? [...CLASS_SUBJECT_DEFAULTS[cls]] : ['مضمون ۱', 'مضمون ۲']);
+    let maxMap = cData.subjectMaxMarks ? { ...cData.subjectMaxMarks } : {};
+    let passMap = cData.subjectPassMarks ? { ...cData.subjectPassMarks } : {};
+    baseSubs.forEach(s => {
+      if (maxMap[s] === undefined) maxMap[s] = 100;
+      if (passMap[s] === undefined) passMap[s] = 40;
+    });
+    let tot = baseSubs.reduce((sum, s) => sum + (maxMap[s] !== undefined ? maxMap[s] : 100), 0);
+    cData.examConfigs[ex] = {
+      subjects: baseSubs,
+      subjectMaxMarks: maxMap,
+      subjectPassMarks: passMap,
+      totalMarks: tot
+    };
+  }
+
+  let currentCfg = cData.examConfigs[ex];
+  cData.subjects = currentCfg.subjects;
+  cData.subjectMaxMarks = currentCfg.subjectMaxMarks;
+  cData.subjectPassMarks = currentCfg.subjectPassMarks;
+  cData.totalMarks = currentCfg.totalMarks;
+
+  if (cData.students && Array.isArray(cData.students)) {
+    cData.students.forEach(s => {
+      if (!s.examMarks) {
+        s.examMarks = {};
+        if (s.marks) s.examMarks[ex] = { ...s.marks };
+      }
+      if (!s.examMarks[ex]) {
+        s.examMarks[ex] = {};
+      }
+      s.marks = s.examMarks[ex];
+    });
+  }
+
+  return cData;
 }
 
 function calculateStudent(student, subjects, totalMarks) {
@@ -2112,11 +2238,18 @@ function calculateStudent(student, subjects, totalMarks) {
   let passThreshold = Number(appState.passThreshold) || 40;
   let failedSubjectsCount = 0;
   let cData = getCurrentClassData();
+  let effectiveTotalMarks = totalMarks;
 
   subjects.forEach(sub => {
     let val = student.marks ? student.marks[sub] : undefined;
-    let minPass = (cData.subjectPassMarks && cData.subjectPassMarks[sub]) ? cData.subjectPassMarks[sub] : 40;
+    let maxForSub = (cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined) ? cData.subjectMaxMarks[sub] : 100;
+    let minPass = (cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined) ? cData.subjectPassMarks[sub] : 40;
     if (val !== undefined && val !== null && val !== '') {
+      let strVal = String(val).trim().toLowerCase();
+      if (strVal === '-' || strVal === 'مستثنیٰ' || strVal === 'مستثنی' || strVal === 'exempt' || strVal === 'na') {
+        effectiveTotalMarks = Math.max(0, effectiveTotalMarks - maxForSub);
+        return;
+      }
       if (typeof val === 'number') {
         obtained += val;
         hasValidMarks = true;
@@ -2128,13 +2261,13 @@ function calculateStudent(student, subjects, totalMarks) {
         hasValidMarks = true;
         allAbsent = false;
         if (n < minPass) failedSubjectsCount++;
-      } else if (String(val).includes('غائب')) {
+      } else if (strVal.includes('غائب')) {
         failedSubjectsCount++;
       }
     }
   });
 
-  let percentage = totalMarks > 0 ? (obtained / totalMarks) * 100 : 0;
+  let percentage = effectiveTotalMarks > 0 ? (obtained / effectiveTotalMarks) * 100 : 0;
   let grade = 'راسب';
   if (allAbsent && !hasValidMarks) {
     grade = 'غیر حاضر';
@@ -2152,6 +2285,7 @@ function calculateStudent(student, subjects, totalMarks) {
 
   return {
     obtained,
+    effectiveTotalMarks,
     percentage: Math.round(percentage * 100) / 100,
     grade,
     isAbsent: allAbsent && !hasValidMarks,
@@ -2421,9 +2555,12 @@ function renderTable(cData, students) {
     let subTds = cData.subjects.map((sub, sIdx) => {
       let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
       let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
-      let isFail = typeof val === 'number' && val < minPass;
+      let strVal = String(val).trim().toLowerCase();
+      let isExempt = strVal === '-' || strVal === 'مستثنیٰ' || strVal === 'مستثنی' || strVal === 'exempt';
+      let isFail = !isExempt && typeof val === 'number' && val < minPass;
+      let cellClass = isExempt ? 'exempt-cell' : (isFail ? 'fail-cell' : '');
       return `<td>
-        <input type="text" class="mark-input-cell ${isFail ? 'fail-cell' : ''}" value="${val}" 
+        <input type="text" class="mark-input-cell ${cellClass}" value="${val}" 
           data-orig-index="${s.originalIndex}" data-subject="${sub}" data-row="${idx}" data-col="${sIdx}"
           onkeydown="handleTableKeyNav(event, ${idx}, ${sIdx})"
           onchange="updateStudentMarkInline(${s.originalIndex}, '${sub}', this.value)"
@@ -2439,7 +2576,7 @@ function renderTable(cData, students) {
         <td style="text-align:right; color:var(--text-muted);">${s.father || '-'}</td>
         ${subTds}
         <td style="font-weight:700; font-size:14px; background:var(--primary-subtle); color:var(--primary-dark);">${s.obtained}</td>
-        <td style="color:var(--text-muted);">${cData.totalMarks}</td>
+        <td style="color:var(--text-muted);">${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks}</td>
         <td style="font-weight:700;">${s.isAbsent ? '-' : s.percentage + '%'}</td>
         <td><span class="badge-rank ${rankBadgeClass}">${s.rank}</span></td>
         <td><span class="grade-badge ${getGradeClass(s.grade)}">${s.grade}</span></td>
@@ -2478,14 +2615,19 @@ function updateStudentMarkInline(originalIndex, subject, value) {
   let student = cData.students[originalIndex];
   if (!student) return;
   if (!student.marks) student.marks = {};
+  if (!student.examMarks) student.examMarks = {};
+  if (!student.examMarks[appState.examTitle]) student.examMarks[appState.examTitle] = {};
 
   let trimmed = String(value || '').trim();
   if (trimmed === '' || trimmed === null) {
     delete student.marks[subject];
+    delete student.examMarks[appState.examTitle][subject];
   } else if (!isNaN(Number(trimmed))) {
     student.marks[subject] = Number(trimmed);
+    student.examMarks[appState.examTitle][subject] = Number(trimmed);
   } else {
     student.marks[subject] = trimmed;
+    student.examMarks[appState.examTitle][subject] = trimmed;
   }
 
   saveToLocalStorage();
@@ -2510,8 +2652,13 @@ function renderCards(cData, students) {
       let v = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '-';
       let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
       let numClass = '';
-      if (typeof v === 'number') {
+      let strV = String(v).trim().toLowerCase();
+      if (strV === '-' || strV === 'مستثنیٰ' || strV === 'مستثنی' || strV === 'exempt') {
+        numClass = 'exempt';
+      } else if (typeof v === 'number') {
         numClass = v >= minPass ? 'pass' : 'fail';
+      } else if (!isNaN(Number(v))) {
+        numClass = Number(v) >= minPass ? 'pass' : 'fail';
       }
       return `
         <div class="mark-chip-item">
@@ -2545,7 +2692,7 @@ function renderCards(cData, students) {
           <div class="footer-stats-badge">
             <span style="color:var(--text-muted); font-size:12px;">مجموعہ:</span>
             <strong style="color:var(--primary); font-size:15px;">${s.obtained}</strong>
-            <span style="color:var(--text-muted); font-size:12px;">/ ${cData.totalMarks} (${s.percentage}%)</span>
+            <span style="color:var(--text-muted); font-size:12px;">/ ${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks} (${s.percentage}%)</span>
           </div>
           <div class="footer-actions-cluster">
             <button class="btn-whatsapp" onclick="shareWhatsAppResult(${s.originalIndex})">
@@ -2609,6 +2756,7 @@ function renderQuickEntry(cData) {
         <div style="display:flex; align-items:center; gap:8px;">
           <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', ${max})">${max}</button>
           <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', 'غائب')">غائب</button>
+          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', 'مستثنیٰ')">مستثنیٰ</button>
           <input type="text" id="quick_input_${sub}" class="quick-entry-input" value="${val}"
             onchange="updateStudentMarkInline(${appState.quickEntryIndex}, '${sub}', this.value); renderQuickEntry(getCurrentClassData());">
         </div>
@@ -2633,7 +2781,7 @@ function renderQuickEntry(cData) {
     <div style="display:flex; justify-content:space-between; align-items:center; background:var(--primary-subtle); padding:10px 14px; border-radius:var(--radius-sm);">
       <div>
         <span style="font-size:12px; color:var(--text-muted);">مجموعہ نمبرات:</span>
-        <strong style="font-size:16px; color:var(--primary-dark); margin-right:4px;">${calc.obtained} / ${cData.totalMarks}</strong>
+        <strong style="font-size:16px; color:var(--primary-dark); margin-right:4px;">${calc.obtained} / ${calc.effectiveTotalMarks !== undefined ? calc.effectiveTotalMarks : cData.totalMarks}</strong>
       </div>
       <div>
         <span style="font-size:12px; color:var(--text-muted);">فیصد:</span>
@@ -2681,12 +2829,41 @@ function prevQuickStudent() {
   }
 }
 
-function renderSettingsTab(cData) {
+function changeSettingSubjectTarget() {
+  let subClassSelect = document.getElementById('settingSubjectClassSelect');
+  let subExamSelect = document.getElementById('settingSubjectExamSelect');
+  if (subClassSelect) settingSubjectTarget.class = subClassSelect.value;
+  if (subExamSelect) settingSubjectTarget.exam = subExamSelect.value;
+  renderSettingsSubjectList();
+}
+
+function renderSettingsSubjectList() {
+  let classes = getClassList();
+  let exams = getExamList();
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  if (!classes.includes(cls)) cls = classes[0];
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  if (!exams.includes(ex)) ex = exams[0];
+
+  let cData = getCurrentClassData(cls, ex);
+
+  let badge = document.getElementById('settingsSubjectSummaryBadge');
+  if (badge) {
+    badge.innerHTML = `
+      <span>درجہ: <strong>${cls}</strong> | امتحان: <strong>${ex}</strong></span>
+      <span>مضامین: <strong>${cData.subjects.length}</strong> | کل نمبر: <strong>${cData.totalMarks}</strong></span>
+    `;
+  }
+
   let subList = document.getElementById('settingsSubjectList');
   if (subList) {
+    if (cData.subjects.length === 0) {
+      subList.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:16px;">اس درجہ و امتحان کے لیے کوئی مضمون مقرر نہیں۔ نیا مضمون شامل کریں۔</div>`;
+      return;
+    }
     subList.innerHTML = cData.subjects.map((sub, idx) => {
-      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
-      let pass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
+      let pass = cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined ? cData.subjectPassMarks[sub] : 40;
       return `
         <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); flex-wrap:wrap; gap:8px;">
           <span style="font-weight:700; font-size:13.5px;">${idx + 1}. ${sub}</span>
@@ -2712,16 +2889,36 @@ function renderSettingsTab(cData) {
       `;
     }).join('');
   }
+}
+
+function renderSettingsTab(cData) {
+  let subClassSelect = document.getElementById('settingSubjectClassSelect');
+  let subExamSelect = document.getElementById('settingSubjectExamSelect');
+  let classes = getClassList();
+  let exams = getExamList();
+
+  if (subClassSelect) {
+    let activeCls = settingSubjectTarget.class || appState.currentClass;
+    if (!classes.includes(activeCls)) activeCls = classes[0];
+    settingSubjectTarget.class = activeCls;
+    subClassSelect.innerHTML = classes.map(c => `<option value="${c}" ${c === activeCls ? 'selected' : ''}>${c}</option>`).join('');
+  }
+  if (subExamSelect) {
+    let activeEx = settingSubjectTarget.exam || appState.examTitle;
+    if (!exams.includes(activeEx)) activeEx = exams[0];
+    settingSubjectTarget.exam = activeEx;
+    subExamSelect.innerHTML = exams.map(e => `<option value="${e}" ${e === activeEx ? 'selected' : ''}>${e}</option>`).join('');
+  }
+
+  renderSettingsSubjectList();
 
   let examSelect = document.getElementById('settingExamType');
   if (examSelect) {
-    let exams = getExamList();
     examSelect.innerHTML = exams.map(ex => `<option value="${ex}" ${ex === appState.examTitle ? 'selected' : ''}>${ex}</option>`).join('');
   }
 
   let examListElem = document.getElementById('settingsExamList');
   if (examListElem) {
-    let exams = getExamList();
     examListElem.innerHTML = exams.map(ex => {
       let isCurrent = ex === appState.examTitle;
       return `
@@ -2748,12 +2945,12 @@ function renderSettingsTab(cData) {
 
   let classListElem = document.getElementById('settingsClassList');
   if (classListElem) {
-    let classes = getClassList();
     classListElem.innerHTML = classes.map(cls => {
       let isCurrent = cls === appState.currentClass;
       let cd = appState.classesData[cls];
       let sCount = cd && cd.students ? cd.students.length : 0;
-      let subCount = cd && cd.subjects ? cd.subjects.length : (CLASS_SUBJECT_DEFAULTS[cls] ? CLASS_SUBJECT_DEFAULTS[cls].length : 0);
+      let ex = settingSubjectTarget.exam || appState.examTitle;
+      let subCount = (cd && cd.examConfigs && cd.examConfigs[ex]) ? cd.examConfigs[ex].subjects.length : ((cd && cd.subjects) ? cd.subjects.length : (CLASS_SUBJECT_DEFAULTS[cls] ? CLASS_SUBJECT_DEFAULTS[cls].length : 0));
       return `
         <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border-radius:var(--radius-sm); border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
           <div>
@@ -2781,22 +2978,144 @@ function renderSettingsTab(cData) {
 }
 
 function updateSubjectMaxMark(sub, val) {
-  let cData = getCurrentClassData();
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let cData = getCurrentClassData(cls, ex);
   let n = Number(val) || 100;
   if (!cData.subjectMaxMarks) cData.subjectMaxMarks = {};
   cData.subjectMaxMarks[sub] = n;
-  cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] || 100), 0);
+  cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] !== undefined ? cData.subjectMaxMarks[s] : 100), 0);
+  if (cData.examConfigs && cData.examConfigs[ex]) {
+    cData.examConfigs[ex].subjectMaxMarks[sub] = n;
+    cData.examConfigs[ex].totalMarks = cData.totalMarks;
+  }
+  saveToLocalStorage();
   renderApp();
-  showToast(`مضمون "${sub}" کے کل نمبر ${n} ہو گئے`, 'info');
+  showToast(`درجہ "${cls}" (${ex}) میں مضمون "${sub}" کے کل نمبر ${n} ہو گئے`, 'info');
 }
 
 function updateSubjectPassMark(sub, val) {
-  let cData = getCurrentClassData();
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let cData = getCurrentClassData(cls, ex);
   let n = Number(val) || 40;
   if (!cData.subjectPassMarks) cData.subjectPassMarks = {};
   cData.subjectPassMarks[sub] = n;
+  if (cData.examConfigs && cData.examConfigs[ex]) {
+    cData.examConfigs[ex].subjectPassMarks[sub] = n;
+  }
+  saveToLocalStorage();
   renderApp();
-  showToast(`مضمون "${sub}" کے پاس مارکس ${n} ہو گئے`, 'info');
+  showToast(`درجہ "${cls}" (${ex}) میں مضمون "${sub}" کے پاس مارکس ${n} ہو گئے`, 'info');
+}
+
+function applySubjectsToAllExamsOfClass() {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let cData = getCurrentClassData(cls, ex);
+  openConfirmDialog(
+    'تمام امتحانات پر لاگو کریں',
+    `کیا آپ درجہ "${cls}" کے امتحان "${ex}" کے مضامین اسی درجہ کے تمام امتحانات پر بھی یکساں لاگو کرنا چاہتے ہیں؟`,
+    function() {
+      let exams = getExamList();
+      if (!cData.examConfigs) cData.examConfigs = {};
+      exams.forEach(otherEx => {
+        cData.examConfigs[otherEx] = {
+          subjects: [...cData.subjects],
+          subjectMaxMarks: { ...cData.subjectMaxMarks },
+          subjectPassMarks: { ...cData.subjectPassMarks },
+          totalMarks: cData.totalMarks
+        };
+      });
+      cData.subjects = [...cData.subjects];
+      saveToLocalStorage();
+      renderApp();
+      showToast(`درجہ "${cls}" کے تمام امتحانات پر مضامین یکساں لاگو ہو گئے`, 'info');
+    }
+  );
+}
+
+function resetCurriculumPrompt() {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let defSubs = CLASS_SUBJECT_DEFAULTS[cls] || ['مضمون ۱', 'مضمون ۲'];
+  openConfirmDialog(
+    'معیاری نصاب بحال کریں',
+    `کیا آپ درجہ "${cls}" برائے "${ex}" کے لیے وفاق المدارس کا بنیادی نصاب (${defSubs.join(', ')}) بحال کرنا چاہتے ہیں؟`,
+    function() {
+      let cData = getCurrentClassData(cls, ex);
+      cData.subjects = [...defSubs];
+      cData.subjectMaxMarks = defSubs.reduce((acc, s) => { acc[s] = 100; return acc; }, {});
+      cData.subjectPassMarks = defSubs.reduce((acc, s) => { acc[s] = 40; return acc; }, {});
+      cData.totalMarks = cls === 'خاصہ اول' ? 700 : (defSubs.length * 100);
+      if (cData.examConfigs && cData.examConfigs[ex]) {
+        cData.examConfigs[ex].subjects = [...cData.subjects];
+        cData.examConfigs[ex].subjectMaxMarks = { ...cData.subjectMaxMarks };
+        cData.examConfigs[ex].subjectPassMarks = { ...cData.subjectPassMarks };
+        cData.examConfigs[ex].totalMarks = cData.totalMarks;
+      }
+      saveToLocalStorage();
+      renderApp();
+      showToast(`درجہ "${cls}" (${ex}) کا معیاری نصاب بحال ہو گیا`, 'info');
+    }
+  );
+}
+
+function openCopySubjectsModal() {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let srcClassSelect = document.getElementById('copySourceClassSelect');
+  let srcExamSelect = document.getElementById('copySourceExamSelect');
+  let classes = getClassList();
+  let exams = getExamList();
+
+  if (srcClassSelect) {
+    srcClassSelect.innerHTML = classes.map(c => `<option value="${c}" ${c === cls ? 'selected' : ''}>${c}</option>`).join('');
+  }
+  if (srcExamSelect) {
+    srcExamSelect.innerHTML = exams.map(e => `<option value="${e}" ${e === ex ? 'selected' : ''}>${e}</option>`).join('');
+  }
+  let targetLabel = document.getElementById('copyTargetLabel');
+  if (targetLabel) {
+    targetLabel.innerText = `${cls} — ${ex}`;
+  }
+  document.getElementById('copySubjectsModal').classList.add('open');
+}
+
+function closeCopySubjectsModal() {
+  document.getElementById('copySubjectsModal').classList.remove('open');
+}
+
+function submitCopySubjects() {
+  let srcCls = document.getElementById('copySourceClassSelect').value;
+  let srcEx = document.getElementById('copySourceExamSelect').value;
+  let destCls = settingSubjectTarget.class || appState.currentClass;
+  let destEx = settingSubjectTarget.exam || appState.examTitle;
+
+  if (srcCls === destCls && srcEx === destEx) {
+    showToast('ماخذ اور ہدف ایک ہی ہیں', 'warning');
+    return;
+  }
+
+  let srcCData = getCurrentClassData(srcCls, srcEx);
+  let destCData = getCurrentClassData(destCls, destEx);
+
+  destCData.subjects = [...srcCData.subjects];
+  destCData.subjectMaxMarks = { ...srcCData.subjectMaxMarks };
+  destCData.subjectPassMarks = { ...srcCData.subjectPassMarks };
+  destCData.totalMarks = srcCData.totalMarks;
+
+  if (destCData.examConfigs && destCData.examConfigs[destEx]) {
+    destCData.examConfigs[destEx].subjects = [...destCData.subjects];
+    destCData.examConfigs[destEx].subjectMaxMarks = { ...destCData.subjectMaxMarks };
+    destCData.examConfigs[destEx].subjectPassMarks = { ...destCData.subjectPassMarks };
+    destCData.examConfigs[destEx].totalMarks = destCData.totalMarks;
+  }
+
+  closeCopySubjectsModal();
+  saveToLocalStorage();
+  renderApp();
+  showToast(`مضامین "${srcCls} (${srcEx})" سے کاپی ہو کر "${destCls} (${destEx})" میں لاگو ہو گئے`, 'info');
 }
 
 function renderDmcTab(cData) {
@@ -2834,9 +3153,11 @@ function showStudentDMC(index) {
 function generateDmcCardHtml(s, cData) {
   let subRows = cData.subjects.map((sub, i) => {
     let mark = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '-';
-    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
-    let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
-    let status = (typeof mark === 'number' && mark >= minPass) ? '<span style="color:var(--success); font-weight:bold;">کامیاب</span>' : '<span style="color:var(--danger); font-weight:bold;">راسب</span>';
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
+    let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined ? cData.subjectPassMarks[sub] : 40;
+    let strMark = String(mark).trim().toLowerCase();
+    let isExempt = strMark === '-' || strMark === 'مستثنیٰ' || strMark === 'مستثنی' || strMark === 'exempt';
+    let status = isExempt ? '<span style="color:#0284c7; font-weight:bold;">مستثنیٰ</span>' : ((typeof mark === 'number' && mark >= minPass) ? '<span style="color:var(--success); font-weight:bold;">کامیاب</span>' : '<span style="color:var(--danger); font-weight:bold;">راسب</span>');
     return `
       <tr>
         <td>${i + 1}</td>
@@ -2894,7 +3215,7 @@ function generateDmcCardHtml(s, cData) {
           ${subRows}
           <tr style="background:#f8fafc; font-weight:700;">
             <td colspan="2" style="text-align:right;">میزان (مجموعہ نمبرات)</td>
-            <td>${cData.totalMarks}</td>
+            <td>${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks}</td>
             <td>-</td>
             <td style="color:#0f766e; font-size:15px;">${s.obtained}</td>
             <td>${s.percentage}%</td>
@@ -2950,6 +3271,7 @@ function openStudentModal(editIndex = null) {
           <div style="display:flex; gap:6px; flex:1;">
             <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="${val}">
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'">مستثنیٰ</button>
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'">${max}</button>
           </div>
         </div>
@@ -2967,13 +3289,14 @@ function openStudentModal(editIndex = null) {
     addressInput.value = '';
 
     marksContainer.innerHTML = cData.subjects.map(sub => {
-      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
       return `
         <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
           <label style="font-size:13px; font-weight:600; min-width:120px;">${sub} (${max}):</label>
           <div style="display:flex; gap:6px; flex:1;">
             <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="">
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'">مستثنیٰ</button>
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'">${max}</button>
           </div>
         </div>
@@ -3016,14 +3339,19 @@ function saveStudentModal() {
   });
 
   if (editIndex !== '') {
-    cData.students[Number(editIndex)] = { roll, reg, name, father, phone, address, marks };
+    let idx = Number(editIndex);
+    let existing = cData.students[idx] || {};
+    if (!existing.examMarks) existing.examMarks = {};
+    existing.examMarks[appState.examTitle] = marks;
+    cData.students[idx] = { ...existing, roll, reg, name, father, phone, address, marks, examMarks: existing.examMarks };
     showToast('طالب علم کا ڈیٹا اپ ڈیٹ ہو گیا', 'info');
   } else {
-    cData.students.push({ roll, reg, name, father, phone, address, marks });
+    cData.students.push({ roll, reg, name, father, phone, address, marks, examMarks: { [appState.examTitle]: marks } });
     showToast('نیا طالب علم کامیابی سے شامل کر لیا گیا', 'info');
   }
 
   closeStudentModal();
+  saveToLocalStorage();
   renderApp();
 }
 
@@ -3096,10 +3424,12 @@ function closeClassPickerSheet() {
 
 function selectClassDirect(cls) {
   appState.currentClass = cls;
+  settingSubjectTarget.class = cls;
   appState.quickEntryIndex = 0;
   closeClassPickerSheet();
   updateHeaderDisplay();
   renderApp();
+  saveToLocalStorage();
   showToast(`درجہ تبدیل ہو گیا: ${cls}`, 'info');
 }
 
@@ -3140,14 +3470,27 @@ function submitAddNewClass() {
 
   classes.push(name);
   appState.classList = classes;
+  let exams = getExamList();
+  let examConfigs = {};
+  exams.forEach(ex => {
+    examConfigs[ex] = {
+      subjects: [...rawSubs],
+      subjectMaxMarks: { ...maxMap },
+      subjectPassMarks: { ...passMap },
+      totalMarks: rawSubs.length * max
+    };
+  });
+
   appState.classesData[name] = {
     subjects: rawSubs,
     subjectMaxMarks: maxMap,
     subjectPassMarks: passMap,
     totalMarks: rawSubs.length * max,
-    students: []
+    students: [],
+    examConfigs: examConfigs
   };
   appState.currentClass = name;
+  settingSubjectTarget.class = name;
   appState.quickEntryIndex = 0;
   closeAddClassModal();
   closeClassPickerSheet();
@@ -3195,6 +3538,9 @@ function submitEditClassName() {
   if (appState.currentClass === oldName) {
     appState.currentClass = newName;
   }
+  if (settingSubjectTarget.class === oldName) {
+    settingSubjectTarget.class = newName;
+  }
   closeEditClassModal();
   updateHeaderDisplay();
   renderApp();
@@ -3223,6 +3569,9 @@ function deleteClassPrompt(cls) {
       }
       if (appState.currentClass === cls) {
         appState.currentClass = appState.classList[0];
+      }
+      if (settingSubjectTarget.class === cls) {
+        settingSubjectTarget.class = appState.currentClass;
       }
       updateHeaderDisplay();
       renderApp();
@@ -3282,9 +3631,11 @@ function closeExamPickerSheet() {
 
 function selectExamDirect(exam) {
   appState.examTitle = exam;
+  settingSubjectTarget.exam = exam;
   closeExamPickerSheet();
   updateHeaderDisplay();
   renderApp();
+  saveToLocalStorage();
   showToast(`امتحان منتخب ہو گیا: ${exam}`, 'info');
 }
 
@@ -3311,6 +3662,35 @@ function submitAddNewExam() {
   exams.push(title);
   appState.examList = exams;
   appState.examTitle = title;
+  settingSubjectTarget.exam = title;
+
+  let classes = getClassList();
+  classes.forEach(cls => {
+    let cd = appState.classesData[cls];
+    if (cd) {
+      if (!cd.examConfigs) cd.examConfigs = {};
+      let baseSubs = (cd.subjects && cd.subjects.length > 0) ? [...cd.subjects] : (CLASS_SUBJECT_DEFAULTS[cls] ? [...CLASS_SUBJECT_DEFAULTS[cls]] : ['مضمون ۱', 'مضمون ۲']);
+      let maxMap = cd.subjectMaxMarks ? { ...cd.subjectMaxMarks } : {};
+      let passMap = cd.subjectPassMarks ? { ...cd.subjectPassMarks } : {};
+      baseSubs.forEach(s => {
+        if (maxMap[s] === undefined) maxMap[s] = 100;
+        if (passMap[s] === undefined) passMap[s] = 40;
+      });
+      cd.examConfigs[title] = {
+        subjects: [...baseSubs],
+        subjectMaxMarks: { ...maxMap },
+        subjectPassMarks: { ...passMap },
+        totalMarks: baseSubs.reduce((sum, s) => sum + (maxMap[s] !== undefined ? maxMap[s] : 100), 0)
+      };
+      if (cd.students) {
+        cd.students.forEach(s => {
+          if (!s.examMarks) s.examMarks = {};
+          s.examMarks[title] = {};
+        });
+      }
+    }
+  });
+
   closeAddExamModal();
   closeExamPickerSheet();
   updateHeaderDisplay();
@@ -3353,6 +3733,29 @@ function submitEditExamName() {
   if (appState.examTitle === oldName) {
     appState.examTitle = newName;
   }
+  if (settingSubjectTarget.exam === oldName) {
+    settingSubjectTarget.exam = newName;
+  }
+
+  let classes = getClassList();
+  classes.forEach(cls => {
+    let cd = appState.classesData[cls];
+    if (cd && cd.examConfigs) {
+      if (cd.examConfigs[oldName]) {
+        cd.examConfigs[newName] = cd.examConfigs[oldName];
+        delete cd.examConfigs[oldName];
+      }
+      if (cd.students) {
+        cd.students.forEach(s => {
+          if (s.examMarks && s.examMarks[oldName]) {
+            s.examMarks[newName] = s.examMarks[oldName];
+            delete s.examMarks[oldName];
+          }
+        });
+      }
+    }
+  });
+
   closeEditExamModal();
   updateHeaderDisplay();
   renderApp();
@@ -3371,12 +3774,29 @@ function deleteExamPrompt(ex) {
   }
   openConfirmDialog(
     'امتحان حذف کریں',
-    `کیا آپ واقعی امتحان "${ex}" کو حذف کرنا چاہتے ہیں؟`,
+    `کیا آپ واقعی امتحان "${ex}" کو حذف کرنا چاہتے ہیں؟ اس امتحان کے تمام درجات میں نمبرات اور مضامین کی ترتیبات بھی خارج ہو جائیں گی۔`,
     function() {
       appState.examList = appState.examList.filter(e => e !== ex);
       if (appState.examTitle === ex) {
         appState.examTitle = appState.examList[0];
       }
+      if (settingSubjectTarget.exam === ex) {
+        settingSubjectTarget.exam = appState.examTitle;
+      }
+
+      let classes = getClassList();
+      classes.forEach(cls => {
+        let cd = appState.classesData[cls];
+        if (cd && cd.examConfigs) {
+          if (cd.examConfigs[ex]) delete cd.examConfigs[ex];
+          if (cd.students) {
+            cd.students.forEach(s => {
+              if (s.examMarks && s.examMarks[ex]) delete s.examMarks[ex];
+            });
+          }
+        }
+      });
+
       updateHeaderDisplay();
       renderApp();
       if (document.getElementById('examPickerSheet').classList.contains('open')) {
@@ -3462,11 +3882,16 @@ function bulkMarkAll(status) {
   openConfirmDialog('اجتماعی کارروائی', msg, function() {
     cData.students.forEach(s => {
       if (!s.marks) s.marks = {};
+      if (!s.examMarks) s.examMarks = {};
+      if (!s.examMarks[appState.examTitle]) s.examMarks[appState.examTitle] = {};
       cData.subjects.forEach(sub => {
-        let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
-        s.marks[sub] = (status === 'present') ? max : 'غائب';
+        let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
+        let v = (status === 'present') ? max : 'غائب';
+        s.marks[sub] = v;
+        s.examMarks[appState.examTitle][sub] = v;
       });
     });
+    saveToLocalStorage();
     renderApp();
     showToast('اجتماعی حاضری اپ ڈیٹ ہو گئی', 'info');
   });
@@ -3535,9 +3960,11 @@ function removeLogo() {
 }
 
 function addSubjectPrompt() {
-  let sub = prompt('نئے مضمون کا نام درج کریں:');
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let sub = prompt(`درجہ "${cls}" برائے "${ex}" کے لیے نئے مضمون کا نام درج کریں:`);
   if (sub && sub.trim()) {
-    let cData = getCurrentClassData();
+    let cData = getCurrentClassData(cls, ex);
     sub = sub.trim();
     if (!cData.subjects.includes(sub)) {
       cData.subjects.push(sub);
@@ -3545,35 +3972,56 @@ function addSubjectPrompt() {
       if (!cData.subjectPassMarks) cData.subjectPassMarks = {};
       cData.subjectMaxMarks[sub] = 100;
       cData.subjectPassMarks[sub] = 40;
-      cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] || 100), 0);
+      cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] !== undefined ? cData.subjectMaxMarks[s] : 100), 0);
+      if (cData.examConfigs && cData.examConfigs[ex]) {
+        cData.examConfigs[ex].subjects = [...cData.subjects];
+        cData.examConfigs[ex].subjectMaxMarks = { ...cData.subjectMaxMarks };
+        cData.examConfigs[ex].subjectPassMarks = { ...cData.subjectPassMarks };
+        cData.examConfigs[ex].totalMarks = cData.totalMarks;
+      }
+      saveToLocalStorage();
       renderApp();
-      showToast(`مضمون "${sub}" شامل ہو گیا`, 'info');
+      showToast(`مضمون "${sub}" درجہ "${cls}" (${ex}) میں شامل ہو گیا`, 'info');
+    } else {
+      showToast('یہ مضمون پہلے سے موجود ہے', 'warning');
     }
   }
 }
 
 function renameSubjectPrompt(oldSub) {
-  let newSub = prompt('مضمون کا نیا نام:', oldSub);
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let newSub = prompt(`مضمون کا نیا نام (درجہ: ${cls} | امتحان: ${ex}):`, oldSub);
   if (newSub && newSub.trim() && newSub.trim() !== oldSub) {
-    let cData = getCurrentClassData();
+    let cData = getCurrentClassData(cls, ex);
     newSub = newSub.trim();
     let idx = cData.subjects.indexOf(oldSub);
     if (idx !== -1) {
       cData.subjects[idx] = newSub;
-      if (cData.subjectMaxMarks && cData.subjectMaxMarks[oldSub]) {
+      if (cData.subjectMaxMarks && cData.subjectMaxMarks[oldSub] !== undefined) {
         cData.subjectMaxMarks[newSub] = cData.subjectMaxMarks[oldSub];
         delete cData.subjectMaxMarks[oldSub];
       }
-      if (cData.subjectPassMarks && cData.subjectPassMarks[oldSub]) {
+      if (cData.subjectPassMarks && cData.subjectPassMarks[oldSub] !== undefined) {
         cData.subjectPassMarks[newSub] = cData.subjectPassMarks[oldSub];
         delete cData.subjectPassMarks[oldSub];
       }
+      if (cData.examConfigs && cData.examConfigs[ex]) {
+        cData.examConfigs[ex].subjects = [...cData.subjects];
+        cData.examConfigs[ex].subjectMaxMarks = { ...cData.subjectMaxMarks };
+        cData.examConfigs[ex].subjectPassMarks = { ...cData.subjectPassMarks };
+      }
       cData.students.forEach(s => {
-        if (s.marks && s.marks[oldSub] !== undefined) {
+        if (s.examMarks && s.examMarks[ex] && s.examMarks[ex][oldSub] !== undefined) {
+          s.examMarks[ex][newSub] = s.examMarks[ex][oldSub];
+          delete s.examMarks[ex][oldSub];
+        }
+        if (s.marks && s.marks[oldSub] !== undefined && ex === appState.examTitle && cls === appState.currentClass) {
           s.marks[newSub] = s.marks[oldSub];
           delete s.marks[oldSub];
         }
       });
+      saveToLocalStorage();
       renderApp();
       showToast(`مضمون "${oldSub}" تبدیل ہو کر "${newSub}" ہو گیا`, 'info');
     }
@@ -3581,20 +4029,32 @@ function renameSubjectPrompt(oldSub) {
 }
 
 function deleteSubjectPrompt(sub) {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
   openConfirmDialog(
     'مضمون حذف کریں',
-    `کیا آپ واقعی مضمون "${sub}" کو حذف کرنا چاہتے ہیں؟ اس مضمون کے تمام نمبرات بھی حذف ہو جائیں گے۔`,
+    `کیا آپ واقعی درجہ "${cls}" (${ex}) سے مضمون "${sub}" کو حذف کرنا چاہتے ہیں؟ اس امتحان میں اس مضمون کے نمبرات بھی خارج ہو جائیں گے۔`,
     function() {
-      let cData = getCurrentClassData();
+      let cData = getCurrentClassData(cls, ex);
       cData.subjects = cData.subjects.filter(s => s !== sub);
       if (cData.subjectMaxMarks) delete cData.subjectMaxMarks[sub];
       if (cData.subjectPassMarks) delete cData.subjectPassMarks[sub];
-      cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks && cData.subjectMaxMarks[s] ? cData.subjectMaxMarks[s] : 100), 0);
+      cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks && cData.subjectMaxMarks[s] !== undefined ? cData.subjectMaxMarks[s] : 100), 0);
+      if (cData.examConfigs && cData.examConfigs[ex]) {
+        cData.examConfigs[ex].subjects = [...cData.subjects];
+        cData.examConfigs[ex].subjectMaxMarks = { ...cData.subjectMaxMarks };
+        cData.examConfigs[ex].subjectPassMarks = { ...cData.subjectPassMarks };
+        cData.examConfigs[ex].totalMarks = cData.totalMarks;
+      }
       cData.students.forEach(s => {
-        if (s.marks && s.marks[sub] !== undefined) {
+        if (s.examMarks && s.examMarks[ex] && s.examMarks[ex][sub] !== undefined) {
+          delete s.examMarks[ex][sub];
+        }
+        if (s.marks && s.marks[sub] !== undefined && ex === appState.examTitle && cls === appState.currentClass) {
           delete s.marks[sub];
         }
       });
+      saveToLocalStorage();
       renderApp();
       showToast(`مضمون "${sub}" حذف ہو گیا`, 'info');
     }
@@ -3763,15 +4223,17 @@ function exportToExcel() {
 
     cData.subjects.forEach(sub => {
       let markVal = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
-      let isNum = typeof markVal === 'number' || (!isNaN(Number(markVal)) && markVal !== '');
-      let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
-      let isFail = isNum && Number(markVal) < minPass;
+      let strMark = String(markVal).trim().toLowerCase();
+      let isExempt = strMark === '-' || strMark === 'مستثنیٰ' || strMark === 'مستثنی' || strMark === 'exempt';
+      let isNum = !isExempt && (typeof markVal === 'number' || (!isNaN(Number(markVal)) && markVal !== ''));
+      let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined ? cData.subjectPassMarks[sub] : 40;
+      let isFail = !isExempt && isNum && Number(markVal) < minPass;
       ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
         t: isNum ? 'n' : 's',
         v: isNum ? Number(markVal) : String(markVal),
         s: {
-          font: { name: 'Calibri', sz: 11, bold: isNum && Number(markVal) >= 70, color: isFail ? { rgb: 'DC2626' } : undefined },
-          fill: { fgColor: { rgb: isFail ? 'FEE2E2' : rowBg } },
+          font: { name: 'Calibri', sz: 11, bold: isNum && Number(markVal) >= 70, color: isFail ? { rgb: 'DC2626' } : (isExempt ? { rgb: '0369A1' } : undefined) },
+          fill: { fgColor: { rgb: isFail ? 'FEE2E2' : (isExempt ? 'E0F2FE' : rowBg) } },
           alignment: { horizontal: 'center', vertical: 'center' },
           border: thinBorder
         }
@@ -3787,7 +4249,7 @@ function exportToExcel() {
 
     ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
       t: 'n',
-      v: cData.totalMarks,
+      v: s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks,
       s: { font: { name: 'Calibri', sz: 11, color: { rgb: '64748B' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
     };
 
@@ -4374,6 +4836,36 @@ function loadFromLocalStorage() {
     if (saved) {
       let parsed = JSON.parse(saved);
       appState = { ...appState, ...parsed };
+      if (appState.classesData) {
+        let exams = getExamList();
+        Object.keys(appState.classesData).forEach(cls => {
+          let cd = appState.classesData[cls];
+          if (cd) {
+            if (!cd.examConfigs) cd.examConfigs = {};
+            let baseSubs = (cd.subjects && cd.subjects.length > 0) ? [...cd.subjects] : (CLASS_SUBJECT_DEFAULTS[cls] ? [...CLASS_SUBJECT_DEFAULTS[cls]] : ['مضمون ۱', 'مضمون ۲']);
+            let maxMap = cd.subjectMaxMarks ? { ...cd.subjectMaxMarks } : {};
+            let passMap = cd.subjectPassMarks ? { ...cd.subjectPassMarks } : {};
+            exams.forEach(ex => {
+              if (!cd.examConfigs[ex]) {
+                cd.examConfigs[ex] = {
+                  subjects: [...baseSubs],
+                  subjectMaxMarks: { ...maxMap },
+                  subjectPassMarks: { ...passMap },
+                  totalMarks: cd.totalMarks || (baseSubs.length * 100)
+                };
+              }
+            });
+            if (cd.students) {
+              cd.students.forEach(s => {
+                if (!s.examMarks) {
+                  s.examMarks = {};
+                  if (s.marks) s.examMarks[appState.examTitle || 'ششماہی امتحان'] = { ...s.marks };
+                }
+              });
+            }
+          }
+        });
+      }
     }
   } catch (e) {}
 }
@@ -4402,6 +4894,35 @@ function handleJsonRestore(event) {
       let data = JSON.parse(e.target.result);
       if (data && data.classesData) {
         appState = data;
+        let exams = getExamList();
+        Object.keys(appState.classesData).forEach(cls => {
+          let cd = appState.classesData[cls];
+          if (cd) {
+            if (!cd.examConfigs) cd.examConfigs = {};
+            let baseSubs = (cd.subjects && cd.subjects.length > 0) ? [...cd.subjects] : (CLASS_SUBJECT_DEFAULTS[cls] ? [...CLASS_SUBJECT_DEFAULTS[cls]] : ['مضمون ۱', 'مضمون ۲']);
+            let maxMap = cd.subjectMaxMarks ? { ...cd.subjectMaxMarks } : {};
+            let passMap = cd.subjectPassMarks ? { ...cd.subjectPassMarks } : {};
+            exams.forEach(ex => {
+              if (!cd.examConfigs[ex]) {
+                cd.examConfigs[ex] = {
+                  subjects: [...baseSubs],
+                  subjectMaxMarks: { ...maxMap },
+                  subjectPassMarks: { ...passMap },
+                  totalMarks: cd.totalMarks || (baseSubs.length * 100)
+                };
+              }
+            });
+            if (cd.students) {
+              cd.students.forEach(s => {
+                if (!s.examMarks) {
+                  s.examMarks = {};
+                  if (s.marks) s.examMarks[appState.examTitle || 'ششماہی امتحان'] = { ...s.marks };
+                }
+              });
+            }
+          }
+        });
+        saveToLocalStorage();
         updateHeaderDisplay();
         renderApp();
         showToast('مکمل ڈیٹا کامیابی سے بحال کر دیا گیا!', 'info');

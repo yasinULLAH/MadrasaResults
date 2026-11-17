@@ -61,15 +61,15 @@ if (workbox) {
     },
     {
         "url": "client readme.md",
-        "revision": "30d8b655ed6235a2e06a308cc96abdd2"
+        "revision": "beadbe6730a46d0811f252dfa2fb95b5"
     },
     {
         "url": "FEATURES_REPORT.md",
-        "revision": "52462fddbf2ad0b8bca46ea3b42e6c53"
+        "revision": "b23e966b3b49f8054ff48f7a0a748be8"
     },
     {
         "url": "index.html",
-        "revision": "e022564f01bfbd3e1e34a5f44f477edb"
+        "revision": "e491659d7b711f08747bdf50c2ae40b5"
     },
     {
         "url": "logo.png",
@@ -85,7 +85,7 @@ if (workbox) {
     },
     {
         "url": "offline.html",
-        "revision": "e44c2a14d302044a1563011533ecb34c"
+        "revision": "ad17d01f02bb01615fbc0509f5aee82a"
     },
     {
         "url": "package.json",
@@ -97,11 +97,11 @@ if (workbox) {
     },
     {
         "url": "README.md",
-        "revision": "b4e3d8f3b22d4c9b26d59cebf3d75db5"
+        "revision": "a5e3cbb6d52cd54daaea26b8772fba3b"
     },
     {
         "url": "sw.js",
-        "revision": "1b3fbfb6b86bd04581add2872aa478a5"
+        "revision": "88e8427f06cb3185fef7a873aef35bbf"
     },
     {
         "url": "xlsx.full.min.js",
