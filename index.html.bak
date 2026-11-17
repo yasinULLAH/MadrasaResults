@@ -1294,10 +1294,16 @@ footer.app-footer a {
     max-width: 100% !important;
   }
   .print-section {
+    display: none !important;
+  }
+  .print-section.active-print {
     display: block !important;
   }
   .tab-pane {
     display: none !important;
+  }
+  #pane-dmc.active-print {
+    display: block !important;
   }
   @page {
     size: A4 landscape;
@@ -1507,7 +1513,7 @@ footer.app-footer a {
 <div class="quick-entry-card" id="quickEntryContainer"></div>
 </div>
 <div class="tab-pane" id="pane-dmc">
-<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+<div class="no-print" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
 <div style="display:flex; gap:8px; align-items:center;">
 <label style="font-weight:700; font-size:13px;">طالب علم منتخب کریں:</label>
 <select class="select-native" id="dmcStudentSelect" onchange="renderSingleDMC(this.value)"></select>
@@ -1534,7 +1540,7 @@ footer.app-footer a {
 <div class="native-card">
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📜 کشف الدرجات (DMC / Sanad)</h3>
 <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">دوہرے اسلامی بارڈر، فیصد، پوزیشن اور گریڈ کے ساتھ سند برائے طالبات۔</p>
-<button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); window.print()">تمام طالبات کے DMC پرنٹ کریں</button>
+<button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); printActiveDMC()">تمام طالبات کے DMC پرنٹ کریں</button>
 </div>
 <div class="native-card">
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📋 مضمون وار ایوارڈ لسٹ برائے ممتحن</h3>
@@ -2448,7 +2454,8 @@ function renderStats(cData) {
   if (nonAbsent.length > 0) {
     let sortedByMarks = [...nonAbsent].sort((a, b) => b.obtained - a.obtained);
     topMarks = sortedByMarks[0].obtained;
-    topStudent = sortedByMarks[0].name + ' (' + sortedByMarks[0].rank + ')';
+    let topHolders = sortedByMarks.filter(s => s.obtained === topMarks);
+    topStudent = topHolders.map(s => s.name).join('، ') + ' (' + sortedByMarks[0].rank + ')';
   }
 
   let totalObtainedSum = nonAbsent.reduce((acc, s) => acc + s.obtained, 0);
@@ -2633,8 +2640,10 @@ function updateStudentMarkInline(originalIndex, subject, value) {
   saveToLocalStorage();
   let students = getFilteredAndSortedStudents();
   renderStats(cData);
+  renderTable(cData, students);
   renderCards(cData, students);
   renderQuickEntry(cData);
+  renderDmcTab(cData);
 }
 
 function renderCards(cData, students) {
@@ -3812,6 +3821,19 @@ function openPrintCenterModal() {
   switchTabDirect('printcenter');
 }
 
+function updateTopControlsVisibility(tabId) {
+  let statsEl = document.querySelector('.stats-container');
+  let chipsEl = document.querySelector('.chip-filters-bar');
+  let searchEl = document.querySelector('.search-toolbar');
+  let bulkEl = document.querySelector('.bulk-actions-strip');
+  let isListTab = (tabId === 'table' || tabId === 'cards');
+  let showStats = (isListTab || tabId === 'stats');
+  if (statsEl) statsEl.style.display = showStats ? '' : 'none';
+  if (chipsEl) chipsEl.style.display = isListTab ? '' : 'none';
+  if (searchEl) searchEl.style.display = isListTab ? '' : 'none';
+  if (bulkEl) bulkEl.style.display = isListTab ? '' : 'none';
+}
+
 function switchMainTab(tabId, btn) {
   appState.activeTab = tabId;
   document.querySelectorAll('.desktop-tab-btn').forEach(b => b.classList.remove('active'));
@@ -3824,6 +3846,7 @@ function switchMainTab(tabId, btn) {
 
   let targetPane = document.getElementById('pane-' + tabId);
   if (targetPane) targetPane.classList.add('active');
+  updateTopControlsVisibility(tabId);
 }
 
 function switchMobileNav(tabId, btn) {
@@ -3838,6 +3861,7 @@ function switchMobileNav(tabId, btn) {
 
   let targetPane = document.getElementById('pane-' + tabId);
   if (targetPane) targetPane.classList.add('active');
+  updateTopControlsVisibility(tabId);
 }
 
 function switchTabDirect(tabId) {
@@ -4485,15 +4509,31 @@ function handleExcelImport(event) {
         getClassList().push(matchedClass);
       }
 
+      let maxMap = subjects.reduce((acc, sub) => { acc[sub] = 100; return acc; }, {});
+      let passMap = subjects.reduce((acc, sub) => { acc[sub] = 40; return acc; }, {});
+      let totMarks = matchedClass === 'خاصہ اول' ? 700 : (subjects.length * 100);
+      let existingConfigs = (appState.classesData[matchedClass] && appState.classesData[matchedClass].examConfigs) ? appState.classesData[matchedClass].examConfigs : {};
+      existingConfigs[appState.examTitle] = {
+        subjects: [...subjects],
+        subjectMaxMarks: { ...maxMap },
+        subjectPassMarks: { ...passMap },
+        totalMarks: totMarks
+      };
+      importedStudents.forEach(st => {
+        st.examMarks = { [appState.examTitle]: { ...st.marks } };
+      });
+
       appState.classesData[matchedClass] = {
         subjects: subjects,
-        subjectMaxMarks: subjects.reduce((acc, sub) => { acc[sub] = 100; return acc; }, {}),
-        subjectPassMarks: subjects.reduce((acc, sub) => { acc[sub] = 40; return acc; }, {}),
-        totalMarks: matchedClass === 'خاصہ اول' ? 700 : (subjects.length * 100),
-        students: importedStudents
+        subjectMaxMarks: maxMap,
+        subjectPassMarks: passMap,
+        totalMarks: totMarks,
+        students: importedStudents,
+        examConfigs: existingConfigs
       };
 
       appState.currentClass = matchedClass;
+      settingSubjectTarget.class = matchedClass;
       updateHeaderDisplay();
       renderApp();
       showToast(`فائل سے ${importedStudents.length} طالبات کا ڈیٹا کامیابی سے امپورٹ ہو گیا!`, 'info');
@@ -4542,14 +4582,30 @@ function buildPrintFooterHtml() {
   `;
 }
 
+function activatePrintSection(sectionId) {
+  document.querySelectorAll('.print-section').forEach(el => {
+    el.classList.remove('active-print');
+    el.style.display = 'none';
+  });
+  let dmcPane = document.getElementById('pane-dmc');
+  if (dmcPane) dmcPane.classList.remove('active-print');
+  if (sectionId === 'pane-dmc') {
+    if (dmcPane) dmcPane.classList.add('active-print');
+    return dmcPane;
+  }
+  let view = document.getElementById(sectionId);
+  if (view) {
+    view.classList.add('active-print');
+    view.style.display = 'block';
+  }
+  return view;
+}
+
 function printGazette() {
   let cData = getCurrentClassData();
   let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
 
-  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
-  let view = document.getElementById('printGazetteView');
-  view.style.display = 'block';
-
+  let view = activatePrintSection('printGazetteView');
   document.getElementById('printInstitutionName').innerText = appState.institution;
   let pSub = document.getElementById('printInstitutionSub');
   if (pSub) pSub.innerText = appState.institutionSubtitle || '';
@@ -4625,9 +4681,7 @@ function printMeritList() {
   let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
   let topAchievers = computed.filter(s => !s.isAbsent && s.rankNum <= 3).sort((a, b) => a.rankNum - b.rankNum);
 
-  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
-  let view = document.getElementById('printMeritListView');
-  view.style.display = 'block';
+  let view = activatePrintSection('printMeritListView');
 
   view.innerHTML = `
     ${buildPrintHeaderHtml('فہرست نمایاں پوزیشن ہولڈرز - جلسہ تقسیمِ انعامات و اسناد', '#d97706')}
@@ -4675,9 +4729,7 @@ function printAwardSheet() {
   let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
   let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
 
-  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
-  let view = document.getElementById('printAwardSheetView');
-  view.style.display = 'block';
+  let view = activatePrintSection('printAwardSheetView');
 
   view.innerHTML = `
     ${buildPrintHeaderHtml(`مضمون وار ایوارڈ لسٹ برائے ممتحن - پرچہ: ${sub} (کل: ${max} | پاس: ${minPass})`, '#0f766e')}
@@ -4724,9 +4776,7 @@ function printAwardSheet() {
 
 function printRollNumberSlips() {
   let cData = getCurrentClassData();
-  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
-  let view = document.getElementById('printRollSlipsView');
-  view.style.display = 'block';
+  let view = activatePrintSection('printRollSlipsView');
 
   view.innerHTML = `
     <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px;">
@@ -4772,9 +4822,7 @@ function printFailureList() {
   let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
   let failedStudents = computed.filter(s => !s.isAbsent && s.grade === 'راسب');
 
-  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
-  let view = document.getElementById('printFailureListView');
-  view.style.display = 'block';
+  let view = activatePrintSection('printFailureListView');
 
   view.innerHTML = `
     ${buildPrintHeaderHtml(`فہرست راسب طالبات (برائے امتحانِ ضمنی / سپلیمنٹری) - تعداد: ${failedStudents.length}`, '#dc2626')}
@@ -4820,7 +4868,7 @@ function printFailureList() {
 }
 
 function printActiveDMC() {
-  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  activatePrintSection('pane-dmc');
   window.print();
 }
 

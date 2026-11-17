@@ -70,11 +70,11 @@ if (workbox) {
     },
     {
         "url": "index.html",
-        "revision": "728299b3c5e7a8a762767c4911a2bf35"
+        "revision": "573649b4c71042b898d83777f7f04a82"
     },
     {
         "url": "index.html.bak",
-        "revision": "e491659d7b711f08747bdf50c2ae40b5"
+        "revision": "728299b3c5e7a8a762767c4911a2bf35"
     },
     {
         "url": "logo.png",
@@ -98,7 +98,7 @@ if (workbox) {
     },
     {
         "url": "pwa-register.js",
-        "revision": "30562e4c2a2a3e07efc7cf94128baa1e"
+        "revision": "3ec872e4f752840ad8f85922ff6cebe7"
     },
     {
         "url": "README.md",
@@ -106,7 +106,7 @@ if (workbox) {
     },
     {
         "url": "sw.js",
-        "revision": "7bbbd06195ca1d6538e97402464bbc38"
+        "revision": "a7c5f25dbe38f8380c12cc570f7b7305"
     },
     {
         "url": "xlsx.full.min.js",

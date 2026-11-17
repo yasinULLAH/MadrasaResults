@@ -49,6 +49,11 @@ if (typeof XLSX === 'undefined') {
   font-family: 'Calibri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Nastaliq Urdu', Tahoma, Arial, sans-serif;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -73,75 +78,118 @@ header.app-bar {
   z-index: 40;
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(8px);
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .top-bar {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 10px 16px;
+  padding: 8px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .top-bar {
+    padding: 10px 16px;
+    gap: 10px;
+  }
 }
 
 .brand-wrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   user-select: none;
+  min-width: 0;
+  flex: 1;
 }
 
 .brand-icon {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #ffffff;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
-  box-shadow: 0 4px 8px rgba(13, 148, 136, 0.25);
+  box-shadow: 0 3px 6px rgba(13, 148, 136, 0.22);
   flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
 }
 
 .brand-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 0;
+  flex: 1;
 }
 
 .brand-title {
-  font-size: 15.5px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--text);
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .brand-title {
+    font-size: 15.5px;
+  }
 }
 
 .brand-chips-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 3px;
-  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 .brand-subtitle-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12px;
+  gap: 3px;
+  font-size: 10.5px;
   font-weight: 600;
   color: var(--primary);
   background: var(--primary-subtle);
   border: 1px solid var(--primary-light);
   border-radius: 9999px;
-  padding: 2px 9px;
+  padding: 1px 7px;
   cursor: pointer;
   transition: all 0.15s;
+  white-space: nowrap;
+  max-width: 135px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .brand-subtitle-btn {
+    font-size: 12px;
+    padding: 2px 9px;
+    max-width: none;
+  }
 }
 
 .brand-subtitle-btn:active {
@@ -151,21 +199,45 @@ header.app-bar {
 .exam-badge-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 11.5px;
+  gap: 3px;
+  font-size: 10.5px;
   font-weight: 600;
   color: var(--accent);
   background: var(--accent-light);
   border: 1px solid #fde68a;
   border-radius: 9999px;
-  padding: 2px 8px;
+  padding: 1px 7px;
   cursor: pointer;
+  white-space: nowrap;
+  max-width: 115px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .exam-badge-btn {
+    font-size: 11.5px;
+    padding: 2px 8px;
+    max-width: none;
+  }
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 520px) {
+  .header-actions .btn-sm {
+    padding: 6px 8px;
+    font-size: 11px;
+    gap: 3px;
+  }
+  .header-actions .btn-sm span {
+    display: none;
+  }
 }
 
 .btn {
@@ -297,17 +369,25 @@ nav.mobile-bottom-bar {
   bottom: 0;
   left: 0;
   right: 0;
-  height: calc(64px + var(--safe-bottom));
+  height: calc(62px + var(--safe-bottom));
   padding-bottom: var(--safe-bottom);
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(226, 232, 240, 0.85);
+  border-top: 1px solid rgba(226, 232, 240, 0.9);
   display: flex;
   align-items: center;
   justify-content: space-around;
   z-index: 50;
   box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+  will-change: transform, opacity;
+}
+
+nav.mobile-bottom-bar.nav-hidden {
+  transform: translateY(105%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (min-width: 820px) {
@@ -340,7 +420,7 @@ nav.mobile-bottom-bar {
 
 .mobile-nav-icon-box {
   width: 30px;
-  height: 25px;
+  height: 24px;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -361,8 +441,10 @@ main.app-content {
   flex: 1;
   max-width: 1440px;
   width: 100%;
+  min-width: 0;
   margin: 0 auto;
-  padding: 12px 10px;
+  padding: 8px 8px;
+  overflow-x: hidden;
 }
 
 @media (min-width: 768px) {
@@ -373,14 +455,23 @@ main.app-content {
 
 .stats-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-bottom: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 639px) {
+  .stats-container .stat-card:nth-child(4),
+  .stats-container .stat-card:nth-child(5) {
+    grid-column: span 1;
+  }
 }
 
 @media (min-width: 640px) {
   .stats-container {
     grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
   }
 }
 
@@ -395,15 +486,24 @@ main.app-content {
 .stat-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  padding: 7px 9px;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 4px;
+  gap: 2px;
   position: relative;
   overflow: hidden;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .stat-card {
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    gap: 4px;
+  }
 }
 
 .stat-card::after {
@@ -411,45 +511,70 @@ main.app-content {
   position: absolute;
   top: 0;
   right: 0;
-  width: 4px;
+  width: 3px;
   height: 100%;
   background: var(--primary);
-  border-radius: 4px 0 0 4px;
+  border-radius: 3px 0 0 3px;
 }
 
 .stat-label {
-  font-size: 11.5px;
+  font-size: 10px;
   color: var(--text-muted);
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .stat-label {
+    font-size: 11.5px;
+  }
 }
 
 .stat-val-row {
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 4px;
 }
 
 .stat-val {
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text);
   line-height: 1.1;
 }
 
+@media (min-width: 768px) {
+  .stat-val {
+    font-size: 22px;
+  }
+}
+
 .stat-sub {
-  font-size: 11px;
+  font-size: 9.5px;
   color: var(--primary);
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .stat-sub {
+    font-size: 11px;
+  }
 }
 
 .chip-filters-bar {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
   overflow-x: auto;
-  padding: 2px 2px 10px 2px;
+  padding: 2px 2px 8px 2px;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 
 .chip-filters-bar::-webkit-scrollbar {
@@ -460,9 +585,9 @@ main.app-content {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 9999px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -471,6 +596,14 @@ main.app-content {
   white-space: nowrap;
   transition: all 0.15s;
   box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .filter-chip {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
 }
 
 .filter-chip:active {
@@ -487,33 +620,50 @@ main.app-content {
 .search-toolbar {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 768px) {
+  .search-toolbar {
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
 }
 
 .search-box-native {
   position: relative;
-  flex: 1;
-  min-width: 220px;
+  flex: 1 1 180px;
+  min-width: 0;
 }
 
 .search-input-native {
   width: 100%;
-  padding: 9px 36px 9px 32px;
+  padding: 7px 32px 7px 28px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: 13.5px;
+  border-radius: var(--radius-xs);
+  font-size: 12.5px;
   background: var(--surface-alt);
   color: var(--text);
   outline: none;
   transition: all 0.2s;
+}
+
+@media (min-width: 768px) {
+  .search-input-native {
+    padding: 9px 36px 9px 32px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+  }
 }
 
 .search-input-native:focus {
@@ -524,7 +674,7 @@ main.app-content {
 
 .search-icon-pos {
   position: absolute;
-  right: 11px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
@@ -533,7 +683,7 @@ main.app-content {
 
 .search-clear-btn {
   position: absolute;
-  left: 9px;
+  left: 8px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -548,19 +698,38 @@ main.app-content {
   display: flex;
   align-items: center;
   gap: 6px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .toolbar-actions {
+    width: auto;
+    justify-content: flex-end;
+  }
 }
 
 .select-native {
   background: var(--surface-alt);
   border: 1px solid var(--border);
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 13px;
+  padding: 7px 10px;
+  border-radius: var(--radius-xs);
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
   cursor: pointer;
   outline: none;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .select-native {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+  }
 }
 
 .select-native:focus {
@@ -571,18 +740,26 @@ main.app-content {
 .bulk-actions-strip {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: 6px;
+  padding: 6px 10px;
   background: var(--primary-subtle);
   border: 1px dashed var(--primary);
-  border-radius: var(--radius-sm);
-  margin-bottom: 12px;
+  border-radius: var(--radius-xs);
+  margin-bottom: 8px;
   overflow-x: auto;
-  font-size: 12.5px;
+  scrollbar-width: none;
+  font-size: 11.5px;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.bulk-actions-strip::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-pane {
   display: none;
+  max-width: 100%;
 }
 
 .tab-pane.active {
@@ -592,9 +769,10 @@ main.app-content {
 .table-wrapper {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
+  max-width: 100%;
 }
 
 .table-scroll-container {
@@ -622,6 +800,22 @@ table.result-table th {
   color: var(--text);
   border-left: 1px solid var(--border);
   font-size: 12px;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+table.result-table th.th-sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+table.result-table th.th-sortable:hover {
+  background: #e2e8f0;
+  color: var(--primary-dark);
+}
+
+table.result-table th.th-sort-active {
+  background: var(--primary-light);
+  color: var(--primary-dark);
 }
 
 table.result-table th:last-child {
@@ -736,12 +930,13 @@ table.result-table td:last-child {
 .cards-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 @media (min-width: 640px) {
   .cards-list {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 }
 
@@ -755,43 +950,49 @@ table.result-table td:last-child {
 .native-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px 15px;
+  border-radius: var(--radius-sm);
+  padding: 12px;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   gap: 10px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  min-width: 0;
+  max-width: 100%;
 }
 
-.native-card:active {
-  transform: scale(0.985);
+@media (min-width: 768px) {
+  .native-card {
+    border-radius: var(--radius);
+    padding: 14px 15px;
+  }
 }
 
 .native-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
 }
 
 .avatar-info-cluster {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 
 .student-avatar {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: linear-gradient(135deg, #ccfbf1, #99f6e4);
   color: var(--primary-dark);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   box-shadow: var(--shadow-sm);
   flex-shrink: 0;
@@ -800,17 +1001,18 @@ table.result-table td:last-child {
 .student-details {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .student-name-text {
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
   color: var(--text);
   line-height: 1.25;
 }
 
 .student-sub-text {
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--text-muted);
 }
 
@@ -819,15 +1021,16 @@ table.result-table td:last-child {
   flex-direction: column;
   align-items: flex-end;
   gap: 4px;
+  flex-shrink: 0;
 }
 
 .marks-chips-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 6px;
   background: var(--surface-alt);
-  padding: 8px 10px;
-  border-radius: var(--radius-sm);
+  padding: 8px;
+  border-radius: var(--radius-xs);
 }
 
 .mark-chip-item {
@@ -839,6 +1042,7 @@ table.result-table td:last-child {
   background: var(--surface);
   border-radius: var(--radius-xs);
   border: 1px solid var(--border);
+  min-width: 0;
 }
 
 .mark-chip-sub {
@@ -882,13 +1086,14 @@ table.result-table td:last-child {
   display: flex;
   align-items: baseline;
   gap: 4px;
-  font-size: 12.5px;
+  font-size: 12px;
 }
 
 .footer-actions-cluster {
   display: flex;
   align-items: center;
   gap: 5px;
+  flex-wrap: wrap;
 }
 
 .btn-whatsapp {
@@ -902,6 +1107,8 @@ table.result-table td:last-child {
   align-items: center;
   gap: 4px;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
 }
 
 .btn-whatsapp:active {
@@ -913,40 +1120,50 @@ table.result-table td:last-child {
   margin: 0 auto;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 20px;
+  border-radius: var(--radius-sm);
+  padding: 12px;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .quick-entry-card {
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    gap: 16px;
+  }
 }
 
 .quick-entry-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 12px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--border);
+  gap: 6px;
 }
 
 .quick-entry-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 9px 12px;
+  gap: 8px;
+  padding: 8px 10px;
   background: var(--surface-alt);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
+  flex-wrap: wrap;
 }
 
 .quick-entry-input {
-  width: 78px;
-  padding: 8px;
+  width: 68px;
+  padding: 6px;
   text-align: center;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   border: 2px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   outline: none;
   background: var(--surface);
 }
@@ -957,8 +1174,8 @@ table.result-table td:last-child {
 }
 
 .quick-preset-btn {
-  padding: 6px 10px;
-  font-size: 12px;
+  padding: 5px 8px;
+  font-size: 11.5px;
   font-weight: 600;
   border-radius: var(--radius-xs);
   border: 1px solid var(--border);
@@ -998,8 +1215,8 @@ table.result-table td:last-child {
   background: var(--surface);
   width: 100%;
   max-width: 620px;
-  border-radius: 24px 24px 0 0;
-  max-height: 88vh;
+  border-radius: 20px 20px 0 0;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1040,7 +1257,7 @@ table.result-table td:last-child {
 }
 
 .modal-header-native {
-  padding: 14px 18px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -1048,7 +1265,7 @@ table.result-table td:last-child {
 }
 
 .modal-title-native {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text);
 }
@@ -1068,7 +1285,7 @@ table.result-table td:last-child {
 }
 
 .modal-body-native {
-  padding: 16px 18px;
+  padding: 14px 16px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -1079,6 +1296,7 @@ table.result-table td:last-child {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  min-width: 0;
 }
 
 .form-label-native {
@@ -1088,10 +1306,11 @@ table.result-table td:last-child {
 }
 
 .form-input-native {
-  padding: 9px 12px;
+  width: 100%;
+  padding: 8px 10px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: 14px;
+  border-radius: var(--radius-xs);
+  font-size: 13.5px;
   color: var(--text);
   outline: none;
   background: var(--surface);
@@ -1104,12 +1323,42 @@ table.result-table td:last-child {
 }
 
 .modal-footer-native {
-  padding: 14px 18px;
+  padding: 12px 16px;
   border-top: 1px solid var(--border);
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   background: var(--surface-alt);
+}
+
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.responsive-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+@media (min-width: 600px) {
+  .responsive-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .responsive-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .responsive-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .toast-container-native {
@@ -1122,14 +1371,15 @@ table.result-table td:last-child {
   flex-direction: column;
   gap: 8px;
   pointer-events: none;
+  max-width: 92vw;
 }
 
 .toast-native {
   background: rgba(15, 23, 42, 0.95);
   color: #ffffff;
-  padding: 10px 18px;
+  padding: 9px 16px;
   border-radius: 9999px;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   box-shadow: var(--shadow-lg);
   display: flex;
@@ -1146,10 +1396,10 @@ table.result-table td:last-child {
 
 .fab-native {
   position: fixed;
-  bottom: calc(76px + var(--safe-bottom));
-  left: 20px;
-  width: 54px;
-  height: 54px;
+  bottom: calc(74px + var(--safe-bottom));
+  left: 16px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #ffffff;
@@ -1158,10 +1408,14 @@ table.result-table td:last-child {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 24px;
   cursor: pointer;
   z-index: 35;
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fab-native.nav-hidden {
+  transform: translateY(calc(58px + var(--safe-bottom)));
 }
 
 .fab-native:active {
@@ -1171,6 +1425,8 @@ table.result-table td:last-child {
 @media (min-width: 820px) {
   .fab-native {
     bottom: 24px;
+    width: 54px;
+    height: 54px;
   }
 }
 
@@ -1178,12 +1434,19 @@ table.result-table td:last-child {
   background: #ffffff;
   border: 2px solid #0f766e;
   border-radius: 12px;
-  padding: 24px;
+  padding: 14px;
   max-width: 680px;
-  margin: 0 auto 24px auto;
+  margin: 0 auto 20px auto;
   box-shadow: var(--shadow);
   color: #0f172a;
   position: relative;
+  overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+  .dmc-card {
+    padding: 24px;
+  }
 }
 
 .dmc-card::before {
@@ -1197,51 +1460,51 @@ table.result-table td:last-child {
 
 .dmc-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .dmc-header h2 {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 800;
   color: #0f766e;
   margin-bottom: 3px;
 }
 
 .dmc-header h3 {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: #334155;
   margin-bottom: 2px;
 }
 
 .dmc-header p {
-  font-size: 13px;
+  font-size: 12.5px;
   color: #64748b;
 }
 
 .dmc-meta {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
-  padding: 10px 14px;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
   background: #f8fafc;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
-  font-size: 13.5px;
+  font-size: 12.5px;
 }
 
 .dmc-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12.5px;
 }
 
 .dmc-table th, .dmc-table td {
   border: 1px solid #cbd5e1;
-  padding: 8px;
+  padding: 6px;
 }
 
 .dmc-table th {
@@ -1252,9 +1515,11 @@ table.result-table td:last-child {
 .dmc-footer {
   display: flex;
   justify-content: space-between;
-  margin-top: 36px;
-  padding: 0 10px;
-  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 0 6px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -1292,6 +1557,7 @@ footer.app-footer a {
     padding: 0 !important;
     margin: 0 !important;
     max-width: 100% !important;
+    overflow: visible !important;
   }
   .print-section {
     display: none !important;
@@ -1514,11 +1780,11 @@ footer.app-footer a {
 </div>
 <div class="tab-pane" id="pane-dmc">
 <div class="no-print" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
-<div style="display:flex; gap:8px; align-items:center;">
+<div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
 <label style="font-weight:700; font-size:13px;">طالب علم منتخب کریں:</label>
 <select class="select-native" id="dmcStudentSelect" onchange="renderSingleDMC(this.value)"></select>
 </div>
-<div style="display:flex; gap:8px;">
+<div style="display:flex; gap:8px; flex-wrap:wrap;">
 <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs()">سب طلبہ کے کشف دکھائیں</button>
 <button class="btn btn-primary btn-sm" onclick="printActiveDMC()">پرنٹ کریں (Print)</button>
 </div>
@@ -1607,7 +1873,7 @@ footer.app-footer a {
 </div>
 </div>
 </div>
-<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="responsive-grid-2" style="margin-bottom:10px;">
 <div class="form-group-native">
 <label class="form-label-native">جامعہ / مدرسہ کا مکمل نام:</label>
 <input class="form-input-native" id="settingInstName" onchange="saveGeneralSettings()" type="text"/>
@@ -1621,7 +1887,7 @@ footer.app-footer a {
 <label class="form-label-native">پتہ و مکمل مقام (Address &amp; Location):</label>
 <input class="form-input-native" id="settingInstAddress" onchange="saveGeneralSettings()" placeholder="مثلاً خوڑگئ موسیٰ خیل، تحصیل ڈومیل، ضلع بنوں، خیبر پختونخوا" type="text"/>
 </div>
-<div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="responsive-grid-3" style="margin-bottom:10px;">
 <div class="form-group-native">
 <label class="form-label-native">فون نمبر / واٹس ایپ:</label>
 <input class="form-input-native" id="settingInstPhone" onchange="saveGeneralSettings()" placeholder="مثلاً 0336-1593533" type="text"/>
@@ -1637,10 +1903,19 @@ footer.app-footer a {
 </div>
 </div>
 <div class="native-card">
-<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">امتحانی ضوابط و تعلیمی سیشن کی ترتیبات</h3>
-<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+<div>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin:0;">امتحانی ضوابط، تقدیر (Gradation) و پوزیشن کی ترتیبات</h3>
+<p style="font-size:11.5px; color:var(--text-muted); margin:2px 0 0 0;">ہر درجہ اور ہر امتحان کے لیے الگ الگ تقدیر (گریڈز)، پاسنگ فیصد اور پوزیشن کا معیار مقرر کریں</p>
+</div>
+<div style="display:flex; gap:6px; flex-wrap:wrap;">
+<button class="btn btn-secondary btn-sm" onclick="applyGradingToAllExamsOfClass()" type="button">اسی درجہ کے تمام امتحانات پر لاگو</button>
+<button class="btn btn-secondary btn-sm" onclick="applyGradingToAllClasses()" type="button">تمام درجات پر لاگو</button>
+</div>
+</div>
+<div class="responsive-grid-2" style="margin-bottom:10px;">
 <div class="form-group-native">
-<label class="form-label-native">امتحان کی قسم:</label>
+<label class="form-label-native">فعال امتحان کی قسم:</label>
 <select class="select-native" id="settingExamType" onchange="saveGeneralSettings()">
 <option value="ششماہی امتحان">ششماہی امتحان</option>
 <option value="سالانہ امتحان">سالانہ امتحان</option>
@@ -1653,17 +1928,45 @@ footer.app-footer a {
 <input class="form-input-native" id="settingSessionYear" onchange="saveGeneralSettings()" type="text" value="۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء"/>
 </div>
 </div>
-<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div id="gradingTargetInfoLabel" style="background:var(--primary-subtle); border:1px solid var(--primary-light); padding:8px 10px; border-radius:var(--radius-xs); font-size:12px; color:var(--primary-dark); margin-bottom:10px; font-weight:600;"></div>
+<div class="responsive-grid-3" style="margin-bottom:10px;">
 <div class="form-group-native">
-<label class="form-label-native">پوزیشن کا فارمیٹ:</label>
-<select class="select-native" id="settingRankFormat" onchange="saveGeneralSettings()">
+<label class="form-label-native">پوزیشن کا فارمیٹ (اس درجہ و امتحان کے لیے):</label>
+<select class="select-native" id="settingRankFormat" onchange="saveClassExamGradingSettings()">
 <option value="urdu">اول، دوم، سوم، 4...</option>
-<option value="english">1st, 2nd, 3rd, 4...</option>
+<option value="urdu_full">اول، دوم، سوم، چہارم تا دہم...</option>
+<option value="english">1st, 2nd, 3rd, 4th...</option>
+<option value="numeric">1, 2, 3, 4...</option>
 </select>
 </div>
 <div class="form-group-native">
-<label class="form-label-native">پاسنگ فیصد (Passing %):</label>
-<input class="form-input-native" id="settingPassThreshold" max="60" min="33" onchange="saveGeneralSettings()" type="number" value="40"/>
+<label class="form-label-native">پوزیشن کی اہلیت:</label>
+<select class="select-native" id="settingRankEligibility" onchange="saveClassExamGradingSettings()">
+<option value="all_present">تمام حاضر طالبات</option>
+<option value="passed_only">صرف کامیاب طالبات (راسب پوزیشن سے خارج)</option>
+</select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">مجموعی پاسنگ فیصد (Passing %):</label>
+<input class="form-input-native" id="settingPassThreshold" max="90" min="10" onchange="saveClassExamGradingSettings()" type="number" value="40"/>
+</div>
+</div>
+<div class="responsive-grid-4">
+<div class="form-group-native">
+<label class="form-label-native">ممتاز کم از کم فیصد (%):</label>
+<input class="form-input-native" id="settingGradeMumtaz" max="100" min="50" onchange="saveClassExamGradingSettings()" type="number" value="80"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">جید جداً کم از کم فیصد (%):</label>
+<input class="form-input-native" id="settingGradeJayyidJiddan" max="99" min="40" onchange="saveClassExamGradingSettings()" type="number" value="70"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">جید کم از کم فیصد (%):</label>
+<input class="form-input-native" id="settingGradeJayyid" max="95" min="30" onchange="saveClassExamGradingSettings()" type="number" value="60"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">مقبول کم از کم فیصد (%):</label>
+<input class="form-input-native" id="settingGradeMaqbool" max="90" min="10" onchange="saveClassExamGradingSettings()" type="number" value="40"/>
 </div>
 </div>
 </div>
@@ -1903,7 +2206,7 @@ footer.app-footer a {
 </div>
 <div class="modal-body-native">
 <input id="editStudentIndex" type="hidden"/>
-<div style="display:grid; grid-template-columns: 85px 120px 1fr 1fr; gap:8px;">
+<div class="responsive-grid-4">
 <div class="form-group-native">
 <label class="form-label-native">رول نمبر</label>
 <input class="form-input-native" id="modalStudentRoll" style="text-align:center;" type="number"/>
@@ -2130,6 +2433,20 @@ function closeOnBackdrop(e, modalId) {
   }
 }
 
+const URDU_ORDINALS = ['اول', 'دوم', 'سوم', 'چہارم', 'پنجم', 'ششم', 'ہفتم', 'ہشتم', 'نہم', 'دہم'];
+
+function getDefaultGradingConfig() {
+  return {
+    rankFormat: appState.rankFormat || 'urdu',
+    rankEligibility: 'all_present',
+    passThreshold: Number(appState.passThreshold) || 40,
+    mumtaz: 80,
+    jayyidJiddan: 70,
+    jayyid: 60,
+    maqbool: Number(appState.passThreshold) || 40
+  };
+}
+
 function initApp() {
   loadFromLocalStorage();
   getClassList();
@@ -2145,6 +2462,8 @@ function initApp() {
   }
   updateHeaderDisplay();
   renderApp();
+  updateTopControlsVisibility(appState.activeTab || 'table');
+  initMobileNavScrollHide();
 }
 
 let settingSubjectTarget = { class: null, exam: null };
@@ -2166,7 +2485,8 @@ function initializeClassData(className) {
       subjects: [...defaultSubs],
       subjectMaxMarks: { ...maxMap },
       subjectPassMarks: { ...passMap },
-      totalMarks: totalMarks
+      totalMarks: totalMarks,
+      gradingConfig: getDefaultGradingConfig()
     };
   });
 
@@ -2182,6 +2502,7 @@ function initializeClassData(className) {
     subjectMaxMarks: maxMap,
     subjectPassMarks: passMap,
     totalMarks: totalMarks,
+    gradingConfig: getDefaultGradingConfig(),
     students: students,
     examConfigs: examConfigs
   };
@@ -2211,15 +2532,20 @@ function getCurrentClassData(className, examTitle) {
       subjects: baseSubs,
       subjectMaxMarks: maxMap,
       subjectPassMarks: passMap,
-      totalMarks: tot
+      totalMarks: tot,
+      gradingConfig: cData.gradingConfig ? { ...cData.gradingConfig } : getDefaultGradingConfig()
     };
   }
 
   let currentCfg = cData.examConfigs[ex];
+  if (!currentCfg.gradingConfig) {
+    currentCfg.gradingConfig = cData.gradingConfig ? { ...cData.gradingConfig } : getDefaultGradingConfig();
+  }
   cData.subjects = currentCfg.subjects;
   cData.subjectMaxMarks = currentCfg.subjectMaxMarks;
   cData.subjectPassMarks = currentCfg.subjectPassMarks;
   cData.totalMarks = currentCfg.totalMarks;
+  cData.gradingConfig = currentCfg.gradingConfig;
 
   if (cData.students && Array.isArray(cData.students)) {
     cData.students.forEach(s => {
@@ -2237,13 +2563,37 @@ function getCurrentClassData(className, examTitle) {
   return cData;
 }
 
-function calculateStudent(student, subjects, totalMarks) {
+function formatRankValue(r, fmt) {
+  if (fmt === 'urdu') {
+    if (r === 1) return 'اول';
+    if (r === 2) return 'دوم';
+    if (r === 3) return 'سوم';
+    return String(r);
+  } else if (fmt === 'urdu_full') {
+    if (r >= 1 && r <= URDU_ORDINALS.length) return URDU_ORDINALS[r - 1];
+    return String(r);
+  } else if (fmt === 'english') {
+    let j = r % 10, k = r % 100;
+    if (j === 1 && k !== 11) return r + 'st';
+    if (j === 2 && k !== 12) return r + 'nd';
+    if (j === 3 && k !== 13) return r + 'rd';
+    return r + 'th';
+  }
+  return String(r);
+}
+
+function calculateStudent(student, subjects, totalMarks, cDataOverride) {
   let obtained = 0;
   let hasValidMarks = false;
   let allAbsent = true;
-  let passThreshold = Number(appState.passThreshold) || 40;
+  let cData = cDataOverride || getCurrentClassData();
+  let gCfg = (cData && cData.gradingConfig) ? cData.gradingConfig : getDefaultGradingConfig();
+  let passThreshold = Number(gCfg.passThreshold) || 40;
+  let mumtazMin = Number(gCfg.mumtaz) || 80;
+  let jayyidJiddanMin = Number(gCfg.jayyidJiddan) || 70;
+  let jayyidMin = Number(gCfg.jayyid) || 60;
+  let maqboolMin = Number(gCfg.maqbool !== undefined ? gCfg.maqbool : passThreshold) || passThreshold;
   let failedSubjectsCount = 0;
-  let cData = getCurrentClassData();
   let effectiveTotalMarks = totalMarks;
 
   subjects.forEach(sub => {
@@ -2277,13 +2627,13 @@ function calculateStudent(student, subjects, totalMarks) {
   let grade = 'راسب';
   if (allAbsent && !hasValidMarks) {
     grade = 'غیر حاضر';
-  } else if (percentage >= 80 && failedSubjectsCount === 0) {
+  } else if (percentage >= mumtazMin && percentage >= passThreshold && failedSubjectsCount === 0) {
     grade = 'ممتاز';
-  } else if (percentage >= 70 && failedSubjectsCount === 0) {
+  } else if (percentage >= jayyidJiddanMin && percentage >= passThreshold && failedSubjectsCount === 0) {
     grade = 'جید جدا';
-  } else if (percentage >= 60 && failedSubjectsCount === 0) {
+  } else if (percentage >= jayyidMin && percentage >= passThreshold && failedSubjectsCount === 0) {
     grade = 'جید';
-  } else if (percentage >= passThreshold && failedSubjectsCount === 0) {
+  } else if (percentage >= maqboolMin && percentage >= passThreshold && failedSubjectsCount === 0) {
     grade = 'مقبول';
   } else {
     grade = 'راسب';
@@ -2299,42 +2649,73 @@ function calculateStudent(student, subjects, totalMarks) {
   };
 }
 
-function calculateAllRanks(students, subjects, totalMarks) {
+function calculateAllRanks(students, subjects, totalMarks, cDataOverride) {
+  let cData = cDataOverride || getCurrentClassData();
+  let gCfg = (cData && cData.gradingConfig) ? cData.gradingConfig : getDefaultGradingConfig();
+  let rankFmt = gCfg.rankFormat || appState.rankFormat || 'urdu';
+  let passedOnly = gCfg.rankEligibility === 'passed_only';
+
   let computed = students.map((s, idx) => {
-    let calc = calculateStudent(s, subjects, totalMarks);
+    let calc = calculateStudent(s, subjects, totalMarks, cData);
     return { ...s, ...calc, originalIndex: idx };
   });
 
-  let validForRank = computed.filter(s => !s.isAbsent).sort((a, b) => b.obtained - a.obtained);
+  let validForRank = computed.filter(s => !s.isAbsent && (!passedOnly || s.grade !== 'راسب')).sort((a, b) => b.obtained - a.obtained);
 
   computed.forEach(s => {
     if (s.isAbsent) {
       s.rank = '-';
       s.rankNum = 9999;
+    } else if (passedOnly && s.grade === 'راسب') {
+      s.rank = '-';
+      s.rankNum = 9998;
     } else {
       let betterCount = validForRank.filter(other => other.obtained > s.obtained).length;
       let r = betterCount + 1;
       s.rankNum = r;
-      if (appState.rankFormat === 'urdu') {
-        if (r === 1) s.rank = 'اول';
-        else if (r === 2) s.rank = 'دوم';
-        else if (r === 3) s.rank = 'سوم';
-        else s.rank = String(r);
-      } else {
-        if (r === 1) s.rank = '1st';
-        else if (r === 2) s.rank = '2nd';
-        else if (r === 3) s.rank = '3rd';
-        else s.rank = String(r);
-      }
+      s.rank = formatRankValue(r, rankFmt);
     }
   });
 
   return computed;
 }
 
+function toggleTableSort(field) {
+  let cur = appState.sortOption || 'roll_asc';
+  if (field === 'roll') {
+    appState.sortOption = (cur === 'roll_asc') ? 'roll_desc' : 'roll_asc';
+  } else if (field === 'name') {
+    appState.sortOption = (cur === 'name_asc') ? 'name_desc' : 'name_asc';
+  } else if (field === 'father') {
+    appState.sortOption = (cur === 'father_asc') ? 'father_desc' : 'father_asc';
+  } else if (field === 'marks') {
+    appState.sortOption = (cur === 'marks_desc') ? 'marks_asc' : 'marks_desc';
+  } else if (field === 'total') {
+    appState.sortOption = (cur === 'total_desc') ? 'total_asc' : 'total_desc';
+  } else if (field === 'pct') {
+    appState.sortOption = (cur === 'pct_desc') ? 'pct_asc' : 'pct_desc';
+  } else if (field === 'rank') {
+    appState.sortOption = (cur === 'rank_asc') ? 'rank_desc' : 'rank_asc';
+  } else if (field === 'grade') {
+    appState.sortOption = (cur === 'grade_asc') ? 'grade_desc' : 'grade_asc';
+  } else if (field.startsWith('sub:')) {
+    let descKey = field + ':desc';
+    let ascKey = field + ':asc';
+    appState.sortOption = (cur === descKey) ? ascKey : descKey;
+  }
+  let sortSelect = document.getElementById('sortSelect');
+  if (sortSelect && ['roll_asc', 'rank_asc', 'marks_desc', 'name_asc'].includes(appState.sortOption)) {
+    sortSelect.value = appState.sortOption;
+  }
+  let cData = getCurrentClassData();
+  let students = getFilteredAndSortedStudents();
+  renderTable(cData, students);
+  renderCards(cData, students);
+}
+
 function getFilteredAndSortedStudents() {
   let cData = getCurrentClassData();
-  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
 
   let q = (appState.searchQuery || '').trim().toLowerCase();
   if (q) {
@@ -2359,17 +2740,81 @@ function getFilteredAndSortedStudents() {
     computed = computed.filter(s => s.grade === appState.filterOption);
   }
 
-  if (appState.sortOption === 'roll_asc') {
+  let sortOpt = appState.sortOption || 'roll_asc';
+  const gradeOrder = { 'ممتاز': 1, 'جید جدا': 2, 'جید': 3, 'مقبول': 4, 'راسب': 5, 'غیر حاضر': 6 };
+
+  if (sortOpt === 'roll_asc') {
     computed.sort((a, b) => (Number(a.roll) || 0) - (Number(b.roll) || 0));
-  } else if (appState.sortOption === 'rank_asc') {
+  } else if (sortOpt === 'roll_desc') {
+    computed.sort((a, b) => (Number(b.roll) || 0) - (Number(a.roll) || 0));
+  } else if (sortOpt === 'rank_asc') {
     computed.sort((a, b) => a.rankNum - b.rankNum);
-  } else if (appState.sortOption === 'marks_desc') {
+  } else if (sortOpt === 'rank_desc') {
+    computed.sort((a, b) => b.rankNum - a.rankNum);
+  } else if (sortOpt === 'marks_desc') {
     computed.sort((a, b) => b.obtained - a.obtained);
-  } else if (appState.sortOption === 'name_asc') {
-    computed.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+  } else if (sortOpt === 'marks_asc') {
+    computed.sort((a, b) => a.obtained - b.obtained);
+  } else if (sortOpt === 'total_desc') {
+    computed.sort((a, b) => (b.effectiveTotalMarks || 0) - (a.effectiveTotalMarks || 0));
+  } else if (sortOpt === 'total_asc') {
+    computed.sort((a, b) => (a.effectiveTotalMarks || 0) - (b.effectiveTotalMarks || 0));
+  } else if (sortOpt === 'pct_desc') {
+    computed.sort((a, b) => b.percentage - a.percentage);
+  } else if (sortOpt === 'pct_asc') {
+    computed.sort((a, b) => a.percentage - b.percentage);
+  } else if (sortOpt === 'name_asc') {
+    computed.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'ur'));
+  } else if (sortOpt === 'name_desc') {
+    computed.sort((a, b) => (b.name || '').localeCompare(a.name || '', 'ur'));
+  } else if (sortOpt === 'father_asc') {
+    computed.sort((a, b) => (a.father || '').localeCompare(b.father || '', 'ur'));
+  } else if (sortOpt === 'father_desc') {
+    computed.sort((a, b) => (b.father || '').localeCompare(a.father || '', 'ur'));
+  } else if (sortOpt === 'grade_asc') {
+    computed.sort((a, b) => (gradeOrder[a.grade] || 99) - (gradeOrder[b.grade] || 99));
+  } else if (sortOpt === 'grade_desc') {
+    computed.sort((a, b) => (gradeOrder[b.grade] || 99) - (gradeOrder[a.grade] || 99));
+  } else if (sortOpt.startsWith('sub:')) {
+    let parts = sortOpt.split(':');
+    let dir = parts.pop();
+    let subName = parts.slice(1).join(':');
+    let getSubVal = (st) => {
+      let v = st.marks ? st.marks[subName] : undefined;
+      if (typeof v === 'number') return v;
+      if (v !== '' && v !== null && v !== undefined && !isNaN(Number(v))) return Number(v);
+      return -1;
+    };
+    computed.sort((a, b) => dir === 'asc' ? getSubVal(a) - getSubVal(b) : getSubVal(b) - getSubVal(a));
   }
 
   return computed;
+}
+
+function syncGradingInputsFromTarget() {
+  let cls = (settingSubjectTarget && settingSubjectTarget.class) ? settingSubjectTarget.class : appState.currentClass;
+  let ex = (settingSubjectTarget && settingSubjectTarget.exam) ? settingSubjectTarget.exam : appState.examTitle;
+  let cData = getCurrentClassData(cls, ex);
+  let gCfg = cData.gradingConfig || getDefaultGradingConfig();
+
+  let infoLbl = document.getElementById('gradingTargetInfoLabel');
+  if (infoLbl) {
+    infoLbl.innerText = `تقدیر و پوزیشن کی ترتیبات برائے درجہ: ${cls} | امتحان: ${ex}`;
+  }
+  let rf = document.getElementById('settingRankFormat');
+  if (rf) rf.value = gCfg.rankFormat || 'urdu';
+  let re = document.getElementById('settingRankEligibility');
+  if (re) re.value = gCfg.rankEligibility || 'all_present';
+  let pt = document.getElementById('settingPassThreshold');
+  if (pt) pt.value = gCfg.passThreshold !== undefined ? gCfg.passThreshold : 40;
+  let gm = document.getElementById('settingGradeMumtaz');
+  if (gm) gm.value = gCfg.mumtaz !== undefined ? gCfg.mumtaz : 80;
+  let gjj = document.getElementById('settingGradeJayyidJiddan');
+  if (gjj) gjj.value = gCfg.jayyidJiddan !== undefined ? gCfg.jayyidJiddan : 70;
+  let gj = document.getElementById('settingGradeJayyid');
+  if (gj) gj.value = gCfg.jayyid !== undefined ? gCfg.jayyid : 60;
+  let gmq = document.getElementById('settingGradeMaqbool');
+  if (gmq) gmq.value = gCfg.maqbool !== undefined ? gCfg.maqbool : 40;
 }
 
 function updateHeaderDisplay() {
@@ -2383,7 +2828,7 @@ function updateHeaderDisplay() {
   let logoContainer = document.getElementById('headerBrandLogo');
   if (logoContainer) {
     if (appState.institutionLogo) {
-      logoContainer.innerHTML = `<img src="${appState.institutionLogo}" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">`;
+      logoContainer.innerHTML = `<img src="${appState.institutionLogo}" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">`;
     } else {
       let char = (appState.institution || 'ف').trim().charAt(0) || 'ف';
       logoContainer.innerHTML = `<span>${char}</span>`;
@@ -2420,10 +2865,7 @@ function updateHeaderDisplay() {
   }
   let sessionInput = document.getElementById('settingSessionYear');
   if (sessionInput) sessionInput.value = appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
-  let rankSelect = document.getElementById('settingRankFormat');
-  if (rankSelect) rankSelect.value = appState.rankFormat;
-  let passInput = document.getElementById('settingPassThreshold');
-  if (passInput) passInput.value = appState.passThreshold || 40;
+  syncGradingInputsFromTarget();
 }
 
 function renderApp() {
@@ -2440,7 +2882,7 @@ function renderApp() {
 }
 
 function renderStats(cData) {
-  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
   let total = computed.length;
   let absent = computed.filter(s => s.isAbsent).length;
   let appeared = total - absent;
@@ -2450,14 +2892,15 @@ function renderStats(cData) {
 
   let topMarks = 0;
   let topStudent = '-';
-  let nonAbsent = computed.filter(s => !s.isAbsent);
-  if (nonAbsent.length > 0) {
-    let sortedByMarks = [...nonAbsent].sort((a, b) => b.obtained - a.obtained);
+  let rankedStudents = computed.filter(s => !s.isAbsent && s.rankNum < 9000);
+  if (rankedStudents.length > 0) {
+    let sortedByMarks = [...rankedStudents].sort((a, b) => b.obtained - a.obtained);
     topMarks = sortedByMarks[0].obtained;
     let topHolders = sortedByMarks.filter(s => s.obtained === topMarks);
     topStudent = topHolders.map(s => s.name).join('، ') + ' (' + sortedByMarks[0].rank + ')';
   }
 
+  let nonAbsent = computed.filter(s => !s.isAbsent);
   let totalObtainedSum = nonAbsent.reduce((acc, s) => acc + s.obtained, 0);
   let avgMarks = appeared > 0 ? Math.round(totalObtainedSum / appeared) : 0;
 
@@ -2473,7 +2916,7 @@ function renderStats(cData) {
   document.getElementById('statTotalMarksSum').innerText = 'کل نمبر: ' + cData.totalMarks;
 
   let rankersList = document.getElementById('topRankersList');
-  let top3 = nonAbsent.filter(s => s.rankNum <= 3).sort((a, b) => a.rankNum - b.rankNum);
+  let top3 = rankedStudents.filter(s => s.rankNum <= 3).sort((a, b) => a.rankNum - b.rankNum);
   if (top3.length === 0) {
     rankersList.innerHTML = '<p style="color:var(--text-muted); font-size:12.5px;">کوئی طالب علم موجود نہیں۔</p>';
   } else {
@@ -2484,7 +2927,7 @@ function renderStats(cData) {
           <span style="font-weight:700;">${s.name}</span>
           <span style="color:var(--text-muted); font-size:11.5px;">ولد ${s.father || '-'}</span>
         </div>
-        <span style="font-weight:700; color:var(--primary);">${s.obtained} / ${cData.totalMarks} (${s.percentage}%)</span>
+        <span style="font-weight:700; color:var(--primary);">${s.obtained} / ${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks} (${s.percentage}%)</span>
       </div>
     `).join('');
   }
@@ -2532,22 +2975,27 @@ function getGradeClass(grade) {
 
 function renderTable(cData, students) {
   let thead = document.getElementById('tableHeaderRow');
+  let sOpt = appState.sortOption || 'roll_asc';
+  let isSort = (prefix) => sOpt.startsWith(prefix) ? 'th-sort-active' : '';
+
   let subsHeaders = cData.subjects.map(sub => {
     let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
-    return `<th>${sub}<br><span style="font-size:10px; color:var(--text-muted); font-weight:normal;">(${max})</span></th>`;
+    let activeSubClass = sOpt.startsWith('sub:' + sub + ':') ? 'th-sort-active' : '';
+    let safeSub = sub.replace(/'/g, "\\'");
+    return `<th class="th-sortable ${activeSubClass}" onclick="toggleTableSort('sub:${safeSub}')">${sub}<br><span style="font-size:10px; color:var(--text-muted); font-weight:normal;">(${max})</span></th>`;
   }).join('');
 
   thead.innerHTML = `
-    <th style="width:35px;">#</th>
-    <th style="width:50px;">رول</th>
-    <th style="min-width:130px; text-align:right;">اسم الطالبۃ</th>
-    <th style="min-width:130px; text-align:right;">اسم الاب</th>
+    <th style="width:35px;" class="th-sortable ${isSort('roll_')}" onclick="toggleTableSort('roll')">#</th>
+    <th style="width:50px;" class="th-sortable ${isSort('roll_')}" onclick="toggleTableSort('roll')">رول</th>
+    <th style="min-width:130px; text-align:right;" class="th-sortable ${isSort('name_')}" onclick="toggleTableSort('name')">اسم الطالبۃ</th>
+    <th style="min-width:130px; text-align:right;" class="th-sortable ${isSort('father_')}" onclick="toggleTableSort('father')">اسم الاب</th>
     ${subsHeaders}
-    <th style="width:75px; background:var(--primary-subtle); color:var(--primary-dark);">مجموعہ</th>
-    <th style="width:65px;">کل نمبر</th>
-    <th style="width:65px;">فیصد٪</th>
-    <th style="width:70px;">پوزیشن</th>
-    <th style="width:75px;">تقدیر</th>
+    <th style="width:75px; background:var(--primary-subtle); color:var(--primary-dark);" class="th-sortable ${isSort('marks_')}" onclick="toggleTableSort('marks')">مجموعہ</th>
+    <th style="width:65px;" class="th-sortable ${isSort('total_')}" onclick="toggleTableSort('total')">کل نمبر</th>
+    <th style="width:65px;" class="th-sortable ${isSort('pct_')}" onclick="toggleTableSort('pct')">فیصد٪</th>
+    <th style="width:70px;" class="th-sortable ${isSort('rank_')}" onclick="toggleTableSort('rank')">پوزیشن</th>
+    <th style="width:75px;" class="th-sortable ${isSort('grade_')}" onclick="toggleTableSort('grade')">تقدیر</th>
     <th style="width:90px;" class="no-print">عمل</th>
   `;
 
@@ -2844,6 +3292,7 @@ function changeSettingSubjectTarget() {
   if (subClassSelect) settingSubjectTarget.class = subClassSelect.value;
   if (subExamSelect) settingSubjectTarget.exam = subExamSelect.value;
   renderSettingsSubjectList();
+  syncGradingInputsFromTarget();
 }
 
 function renderSettingsSubjectList() {
@@ -2876,7 +3325,7 @@ function renderSettingsSubjectList() {
       return `
         <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); flex-wrap:wrap; gap:8px;">
           <span style="font-weight:700; font-size:13.5px;">${idx + 1}. ${sub}</span>
-          <div style="display:flex; gap:8px; align-items:center;">
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
             <div style="display:flex; align-items:center; gap:4px; font-size:12px;">
               <span>کل:</span>
               <input type="number" value="${max}" style="width:55px; text-align:center; padding:3px; border-radius:4px; border:1px solid var(--border);"
@@ -2920,6 +3369,7 @@ function renderSettingsTab(cData) {
   }
 
   renderSettingsSubjectList();
+  syncGradingInputsFromTarget();
 
   let examSelect = document.getElementById('settingExamType');
   if (examSelect) {
@@ -2931,7 +3381,7 @@ function renderSettingsTab(cData) {
     examListElem.innerHTML = exams.map(ex => {
       let isCurrent = ex === appState.examTitle;
       return `
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border-radius:var(--radius-sm); border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border-radius:var(--radius-sm); border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px; flex-wrap:wrap;">
           <div style="display:flex; align-items:center; gap:8px;">
             <strong style="font-size:13.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${ex}</strong>
             ${isCurrent ? '<span class="status-badge status-pass" style="font-size:10px; padding:1px 6px;">فعال</span>' : ''}
@@ -2961,7 +3411,7 @@ function renderSettingsTab(cData) {
       let ex = settingSubjectTarget.exam || appState.examTitle;
       let subCount = (cd && cd.examConfigs && cd.examConfigs[ex]) ? cd.examConfigs[ex].subjects.length : ((cd && cd.subjects) ? cd.subjects.length : (CLASS_SUBJECT_DEFAULTS[cls] ? CLASS_SUBJECT_DEFAULTS[cls].length : 0));
       return `
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border-radius:var(--radius-sm); border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border-radius:var(--radius-sm); border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px; flex-wrap:wrap;">
           <div>
             <div style="display:flex; align-items:center; gap:8px;">
               <strong style="font-size:13.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${cls}</strong>
@@ -3029,11 +3479,13 @@ function applySubjectsToAllExamsOfClass() {
       let exams = getExamList();
       if (!cData.examConfigs) cData.examConfigs = {};
       exams.forEach(otherEx => {
+        let existingGrading = (cData.examConfigs[otherEx] && cData.examConfigs[otherEx].gradingConfig) ? cData.examConfigs[otherEx].gradingConfig : { ...(cData.gradingConfig || getDefaultGradingConfig()) };
         cData.examConfigs[otherEx] = {
           subjects: [...cData.subjects],
           subjectMaxMarks: { ...cData.subjectMaxMarks },
           subjectPassMarks: { ...cData.subjectPassMarks },
-          totalMarks: cData.totalMarks
+          totalMarks: cData.totalMarks,
+          gradingConfig: existingGrading
         };
       });
       cData.subjects = [...cData.subjects];
@@ -3140,7 +3592,7 @@ function renderDmcTab(cData) {
 
 function renderSingleDMC(index) {
   let cData = getCurrentClassData();
-  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
   let s = computed[index];
   if (!s) return;
   document.getElementById('dmcContainer').innerHTML = generateDmcCardHtml(s, cData);
@@ -3148,7 +3600,7 @@ function renderSingleDMC(index) {
 
 function renderAllDMCs() {
   let cData = getCurrentClassData();
-  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
   document.getElementById('dmcContainer').innerHTML = computed.map(s => generateDmcCardHtml(s, cData)).join('');
   showToast('تمام طلبہ کے کشف الدرجات تیار ہیں', 'info');
 }
@@ -3232,7 +3684,7 @@ function generateDmcCardHtml(s, cData) {
         </tbody>
       </table>
 
-      <div style="display:flex; justify-content:space-between; align-items:center; background:#f0fdfa; padding:10px 14px; border-radius:6px; font-size:13px; font-weight:700;">
+      <div style="display:flex; justify-content:space-between; align-items:center; background:#f0fdfa; padding:10px 14px; border-radius:6px; font-size:13px; font-weight:700; flex-wrap:wrap; gap:8px;">
         <div>نتیجہ / کیفیت: <span class="grade-badge ${getGradeClass(s.grade)}">${s.grade}</span></div>
         <div>فیصد: ${s.percentage}%</div>
         <div>پوزیشن: ${s.rank}</div>
@@ -3275,9 +3727,9 @@ function openStudentModal(editIndex = null) {
       let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
       let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
       return `
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
-          <label style="font-size:13px; font-weight:600; min-width:120px;">${sub} (${max}):</label>
-          <div style="display:flex; gap:6px; flex:1;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+          <label style="font-size:13px; font-weight:600; min-width:110px;">${sub} (${max}):</label>
+          <div style="display:flex; gap:5px; flex:1; min-width:180px;">
             <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="${val}">
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'">مستثنیٰ</button>
@@ -3300,9 +3752,9 @@ function openStudentModal(editIndex = null) {
     marksContainer.innerHTML = cData.subjects.map(sub => {
       let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
       return `
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
-          <label style="font-size:13px; font-weight:600; min-width:120px;">${sub} (${max}):</label>
-          <div style="display:flex; gap:6px; flex:1;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+          <label style="font-size:13px; font-weight:600; min-width:110px;">${sub} (${max}):</label>
+          <div style="display:flex; gap:5px; flex:1; min-width:180px;">
             <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="">
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
             <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'">مستثنیٰ</button>
@@ -3486,7 +3938,8 @@ function submitAddNewClass() {
       subjects: [...rawSubs],
       subjectMaxMarks: { ...maxMap },
       subjectPassMarks: { ...passMap },
-      totalMarks: rawSubs.length * max
+      totalMarks: rawSubs.length * max,
+      gradingConfig: getDefaultGradingConfig()
     };
   });
 
@@ -3495,6 +3948,7 @@ function submitAddNewClass() {
     subjectMaxMarks: maxMap,
     subjectPassMarks: passMap,
     totalMarks: rawSubs.length * max,
+    gradingConfig: getDefaultGradingConfig(),
     students: [],
     examConfigs: examConfigs
   };
@@ -3689,7 +4143,8 @@ function submitAddNewExam() {
         subjects: [...baseSubs],
         subjectMaxMarks: { ...maxMap },
         subjectPassMarks: { ...passMap },
-        totalMarks: baseSubs.reduce((sum, s) => sum + (maxMap[s] !== undefined ? maxMap[s] : 100), 0)
+        totalMarks: baseSubs.reduce((sum, s) => sum + (maxMap[s] !== undefined ? maxMap[s] : 100), 0),
+        gradingConfig: cd.gradingConfig ? { ...cd.gradingConfig } : getDefaultGradingConfig()
       };
       if (cd.students) {
         cd.students.forEach(s => {
@@ -3827,8 +4282,7 @@ function updateTopControlsVisibility(tabId) {
   let searchEl = document.querySelector('.search-toolbar');
   let bulkEl = document.querySelector('.bulk-actions-strip');
   let isListTab = (tabId === 'table' || tabId === 'cards');
-  let showStats = (isListTab || tabId === 'stats');
-  if (statsEl) statsEl.style.display = showStats ? '' : 'none';
+  if (statsEl) statsEl.style.display = isListTab ? '' : 'none';
   if (chipsEl) chipsEl.style.display = isListTab ? '' : 'none';
   if (searchEl) searchEl.style.display = isListTab ? '' : 'none';
   if (bulkEl) bulkEl.style.display = isListTab ? '' : 'none';
@@ -3921,6 +4375,82 @@ function bulkMarkAll(status) {
   });
 }
 
+function readGradingInputsObject() {
+  let rf = document.getElementById('settingRankFormat');
+  let re = document.getElementById('settingRankEligibility');
+  let pt = document.getElementById('settingPassThreshold');
+  let gm = document.getElementById('settingGradeMumtaz');
+  let gjj = document.getElementById('settingGradeJayyidJiddan');
+  let gj = document.getElementById('settingGradeJayyid');
+  let gmq = document.getElementById('settingGradeMaqbool');
+  let passVal = Number(pt ? pt.value : 40) || 40;
+  return {
+    rankFormat: rf ? rf.value : 'urdu',
+    rankEligibility: re ? re.value : 'all_present',
+    passThreshold: passVal,
+    mumtaz: Number(gm ? gm.value : 80) || 80,
+    jayyidJiddan: Number(gjj ? gjj.value : 70) || 70,
+    jayyid: Number(gj ? gj.value : 60) || 60,
+    maqbool: Number(gmq ? gmq.value : passVal) || passVal
+  };
+}
+
+function saveClassExamGradingSettings() {
+  let cls = (settingSubjectTarget && settingSubjectTarget.class) ? settingSubjectTarget.class : appState.currentClass;
+  let ex = (settingSubjectTarget && settingSubjectTarget.exam) ? settingSubjectTarget.exam : appState.examTitle;
+  let cData = getCurrentClassData(cls, ex);
+  let newCfg = readGradingInputsObject();
+  cData.gradingConfig = { ...newCfg };
+  if (cData.examConfigs && cData.examConfigs[ex]) {
+    cData.examConfigs[ex].gradingConfig = { ...newCfg };
+  }
+  appState.rankFormat = newCfg.rankFormat;
+  appState.passThreshold = newCfg.passThreshold;
+  saveToLocalStorage();
+  renderApp();
+  showToast(`درجہ "${cls}" (${ex}) کے لیے تقدیر و پوزیشن کی ترتیبات محفوظ ہو گئیں`, 'info');
+}
+
+function applyGradingToAllExamsOfClass() {
+  let cls = (settingSubjectTarget && settingSubjectTarget.class) ? settingSubjectTarget.class : appState.currentClass;
+  let newCfg = readGradingInputsObject();
+  let cData = getCurrentClassData(cls, appState.examTitle);
+  cData.gradingConfig = { ...newCfg };
+  let exams = getExamList();
+  exams.forEach(ex => {
+    let cfg = getCurrentClassData(cls, ex);
+    cfg.gradingConfig = { ...newCfg };
+    if (cfg.examConfigs && cfg.examConfigs[ex]) {
+      cfg.examConfigs[ex].gradingConfig = { ...newCfg };
+    }
+  });
+  saveToLocalStorage();
+  renderApp();
+  showToast(`درجہ "${cls}" کے تمام امتحانات پر تقدیر و پوزیشن کا معیار لاگو ہو گیا`, 'info');
+}
+
+function applyGradingToAllClasses() {
+  let newCfg = readGradingInputsObject();
+  appState.rankFormat = newCfg.rankFormat;
+  appState.passThreshold = newCfg.passThreshold;
+  let classes = getClassList();
+  let exams = getExamList();
+  classes.forEach(cls => {
+    let cData = getCurrentClassData(cls, appState.examTitle);
+    cData.gradingConfig = { ...newCfg };
+    exams.forEach(ex => {
+      let cfg = getCurrentClassData(cls, ex);
+      cfg.gradingConfig = { ...newCfg };
+      if (cfg.examConfigs && cfg.examConfigs[ex]) {
+        cfg.examConfigs[ex].gradingConfig = { ...newCfg };
+      }
+    });
+  });
+  saveToLocalStorage();
+  renderApp();
+  showToast('تمام درجات اور امتحانات پر تقدیر و پوزیشن کا معیار لاگو ہو گیا', 'info');
+}
+
 function saveGeneralSettings() {
   let inst = document.getElementById('settingInstName');
   if (inst) appState.institution = inst.value.trim() || 'جامعہ فاطمۃ الزہرا للبنات';
@@ -3936,13 +4466,12 @@ function saveGeneralSettings() {
   if (head) appState.institutionHead = head.value.trim() || 'مہتمم جامعہ';
 
   let exSelect = document.getElementById('settingExamType');
-  if (exSelect) appState.examTitle = exSelect.value;
+  if (exSelect) {
+    appState.examTitle = exSelect.value;
+    settingSubjectTarget.exam = exSelect.value;
+  }
   let yr = document.getElementById('settingSessionYear');
   if (yr) appState.sessionYear = yr.value.trim() || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
-  let rk = document.getElementById('settingRankFormat');
-  if (rk) appState.rankFormat = rk.value;
-  let pass = document.getElementById('settingPassThreshold');
-  if (pass) appState.passThreshold = Number(pass.value) || 40;
 
   updateHeaderDisplay();
   renderApp();
@@ -4513,11 +5042,13 @@ function handleExcelImport(event) {
       let passMap = subjects.reduce((acc, sub) => { acc[sub] = 40; return acc; }, {});
       let totMarks = matchedClass === 'خاصہ اول' ? 700 : (subjects.length * 100);
       let existingConfigs = (appState.classesData[matchedClass] && appState.classesData[matchedClass].examConfigs) ? appState.classesData[matchedClass].examConfigs : {};
+      let existingGrading = (existingConfigs[appState.examTitle] && existingConfigs[appState.examTitle].gradingConfig) ? existingConfigs[appState.examTitle].gradingConfig : getDefaultGradingConfig();
       existingConfigs[appState.examTitle] = {
         subjects: [...subjects],
         subjectMaxMarks: { ...maxMap },
         subjectPassMarks: { ...passMap },
-        totalMarks: totMarks
+        totalMarks: totMarks,
+        gradingConfig: existingGrading
       };
       importedStudents.forEach(st => {
         st.examMarks = { [appState.examTitle]: { ...st.marks } };
@@ -4528,6 +5059,7 @@ function handleExcelImport(event) {
         subjectMaxMarks: maxMap,
         subjectPassMarks: passMap,
         totalMarks: totMarks,
+        gradingConfig: existingGrading,
         students: importedStudents,
         examConfigs: existingConfigs
       };
@@ -4603,9 +5135,10 @@ function activatePrintSection(sectionId) {
 
 function printGazette() {
   let cData = getCurrentClassData();
-  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
 
   let view = activatePrintSection('printGazetteView');
+
   document.getElementById('printInstitutionName').innerText = appState.institution;
   let pSub = document.getElementById('printInstitutionSub');
   if (pSub) pSub.innerText = appState.institutionSubtitle || '';
@@ -4665,7 +5198,7 @@ function printGazette() {
         <td style="text-align:right;">${s.father || '-'}</td>
         ${subTds}
         <td style="font-weight:bold; color:#0f766e;">${s.obtained}</td>
-        <td>${cData.totalMarks}</td>
+        <td>${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks}</td>
         <td>${s.isAbsent ? '-' : s.percentage + '%'}</td>
         <td><strong>${s.rank}</strong></td>
         <td>${s.grade}</td>
@@ -4678,7 +5211,7 @@ function printGazette() {
 
 function printMeritList() {
   let cData = getCurrentClassData();
-  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
   let topAchievers = computed.filter(s => !s.isAbsent && s.rankNum <= 3).sort((a, b) => a.rankNum - b.rankNum);
 
   let view = activatePrintSection('printMeritListView');
@@ -4709,7 +5242,7 @@ function printMeritList() {
             <td style="text-align:right; font-weight:bold;">${s.name}</td>
             <td style="text-align:right;">${s.father || '-'}</td>
             <td><strong style="color:#0f766e;">${s.obtained}</strong></td>
-            <td>${cData.totalMarks}</td>
+            <td>${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks}</td>
             <td><strong>${s.percentage}%</strong></td>
             <td><strong>${s.grade}</strong></td>
           </tr>
@@ -4819,7 +5352,7 @@ function printRollNumberSlips() {
 
 function printFailureList() {
   let cData = getCurrentClassData();
-  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
   let failedStudents = computed.filter(s => !s.isAbsent && s.grade === 'راسب');
 
   let view = activatePrintSection('printFailureListView');
@@ -4853,7 +5386,7 @@ function printFailureList() {
               <td style="text-align:right; font-weight:bold;">${s.name}</td>
               <td style="text-align:right;">${s.father || '-'}</td>
               <td style="color:#dc2626; font-weight:bold;">${failedSubs.join('، ') || 'مجموعی فیصد'}</td>
-              <td>${s.obtained} / ${cData.totalMarks}</td>
+              <td>${s.obtained} / ${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks}</td>
               <td>${s.percentage}%</td>
             </tr>
           `;
@@ -4870,6 +5403,33 @@ function printFailureList() {
 function printActiveDMC() {
   activatePrintSection('pane-dmc');
   window.print();
+}
+
+function initMobileNavScrollHide() {
+  let lastScrollY = window.scrollY || 0;
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        let currentScrollY = window.scrollY || 0;
+        let delta = currentScrollY - lastScrollY;
+        let bottomBar = document.querySelector('nav.mobile-bottom-bar');
+        let fab = document.querySelector('.fab-native');
+        if (bottomBar) {
+          if (delta > 7 && currentScrollY > 60) {
+            bottomBar.classList.add('nav-hidden');
+            if (fab) fab.classList.add('nav-hidden');
+          } else if (delta < -5 || currentScrollY <= 40) {
+            bottomBar.classList.remove('nav-hidden');
+            if (fab) fab.classList.remove('nav-hidden');
+          }
+        }
+        lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 }
 
 function saveToLocalStorage() {
