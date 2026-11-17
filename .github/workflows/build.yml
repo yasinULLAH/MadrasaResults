@@ -84,3 +84,48 @@ jobs:
           name: MadrasaResults-Windows-Portable-EXE
           path: dist/*.exe
           retention-days: 30
+
+  create-release:
+    name: Publish GitHub Release
+    needs: [build-apk, build-windows-exe]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: write
+    steps:
+      - name: Download Android APK Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: MadrasaResults-Android-APK
+          path: release-assets
+
+      - name: Download Windows Portable EXE Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: MadrasaResults-Windows-Portable-EXE
+          path: release-assets
+
+      - name: Publish Release Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: "Madrasa Results v1.0.0 — Production Release"
+          body: |
+            ## Madrasa Examination & Result Management System
+            ### جامعہ و مدارس امتحانی نظام و نتائج
+
+            Downloadable standalone offline binaries:
+            - **Android APK**: `MadrasaResults-Offline.apk`
+            - **Windows Portable EXE**: Standalone Portable Executable (runs without installation)
+
+            ### Features Included
+            - Complete CRUD for Classes (درجات)
+            - Complete CRUD for Exam Sessions (امتحانات)
+            - Calibri styled Excel exports
+            - 6 Professional Print Center templates
+            - WhatsApp result sharing
+            - Offline LocalStorage and JSON Backup/Restore
+          files: |
+            release-assets/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

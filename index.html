@@ -1632,6 +1632,28 @@ footer.app-footer a {
       </div>
 
       <div class="native-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div>
+            <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام امتحانات کے سیشنز (Exam Sessions)</h3>
+            <p style="font-size:12px; color:var(--text-muted); margin:0;">امتحانات کے سیشنز شامل کریں، نام بدلیں یا حذف کریں</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="openAddExamModal()">+ نیا امتحان</button>
+        </div>
+        <div id="settingsExamList" style="display:flex; flex-direction:column; gap:8px;"></div>
+      </div>
+
+      <div class="native-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div>
+            <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام درجات (کلاسز) کی مکمل فہرست (Classes Management)</h3>
+            <p style="font-size:12px; color:var(--text-muted); margin:0;">نئے درجات شامل کریں، نام تبدیل کریں یا درجات کو حذف کریں</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="openAddClassModal()">+ نیا درجہ</button>
+        </div>
+        <div id="settingsClassList" style="display:flex; flex-direction:column; gap:8px;"></div>
+      </div>
+
+      <div class="native-card">
         <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">بیک اپ، امپورٹ و بحالی (Backup & Restore)</h3>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
           <button class="btn btn-secondary" onclick="downloadJsonBackup()">
@@ -1705,7 +1727,7 @@ footer.app-footer a {
   <div class="modal-sheet">
     <div class="modal-grabber"></div>
     <div class="modal-header-native">
-      <h3 class="modal-title-native">درجہ (کلاس) منتخب کریں</h3>
+      <h3 class="modal-title-native">درجات (کلاسز) کی فہرست و انتخاب</h3>
       <button class="modal-close-native" onclick="closeClassPickerSheet()">&times;</button>
     </div>
     <div class="modal-body-native" id="classListContainer"></div>
@@ -1716,28 +1738,105 @@ footer.app-footer a {
   <div class="modal-sheet" style="max-width:440px;">
     <div class="modal-grabber"></div>
     <div class="modal-header-native">
-      <h3 class="modal-title-native">امتحان کی قسم منتخب کریں</h3>
+      <h3 class="modal-title-native">امتحانات کی فہرست و انتخاب</h3>
       <button class="modal-close-native" onclick="closeExamPickerSheet()">&times;</button>
     </div>
+    <div class="modal-body-native" id="examListContainer"></div>
+  </div>
+</div>
+
+<div class="modal-backdrop-native" id="addClassModal" onclick="closeOnBackdrop(event, 'addClassModal')">
+  <div class="modal-sheet" style="max-width:440px;">
+    <div class="modal-grabber"></div>
+    <div class="modal-header-native">
+      <h3 class="modal-title-native">نیا درجہ (کلاس) شامل کریں</h3>
+      <button class="modal-close-native" onclick="closeAddClassModal()">&times;</button>
+    </div>
     <div class="modal-body-native">
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <button class="btn btn-secondary" style="justify-content:space-between; padding:12px;" onclick="selectExamDirect('ششماہی امتحان')">
-          <span>ششماہی امتحان (Mid-Term)</span>
-          <span style="color:var(--primary); font-weight:bold;">انتخاب</span>
-        </button>
-        <button class="btn btn-secondary" style="justify-content:space-between; padding:12px;" onclick="selectExamDirect('سالانہ امتحان')">
-          <span>سالانہ امتحان (Annual Exam)</span>
-          <span style="color:var(--primary); font-weight:bold;">انتخاب</span>
-        </button>
-        <button class="btn btn-secondary" style="justify-content:space-between; padding:12px;" onclick="selectExamDirect('سہ ماہی امتحان')">
-          <span>سہ ماہی امتحان (Quarterly)</span>
-          <span style="color:var(--primary); font-weight:bold;">انتخاب</span>
-        </button>
-        <button class="btn btn-secondary" style="justify-content:space-between; padding:12px;" onclick="selectExamDirect('ماہانہ ٹیسٹ')">
-          <span>ماہانہ ٹیسٹ (Monthly Test)</span>
-          <span style="color:var(--primary); font-weight:bold;">انتخاب</span>
-        </button>
+      <div class="form-group-native" style="margin-bottom:10px;">
+        <label class="form-label-native">درجہ کا نام (مثلاً درجہ اعدادیہ، حفظ القرآن، اول وغیرہ):</label>
+        <input type="text" id="newClassNameInput" class="form-input-native" placeholder="درجہ کا نام لکھیں...">
       </div>
+      <div class="form-group-native" style="margin-bottom:10px;">
+        <label class="form-label-native">ابتدائی مضامین (کوما کے ساتھ الگ کریں):</label>
+        <input type="text" id="newClassSubjectsInput" class="form-input-native" value="مضمون ۱, مضمون ۲">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="form-group-native">
+          <label class="form-label-native">ہر مضمون کے کل نمبر:</label>
+          <input type="number" id="newClassMaxMarksInput" class="form-input-native" value="100">
+        </div>
+        <div class="form-group-native">
+          <label class="form-label-native">پاسنگ نمبر:</label>
+          <input type="number" id="newClassPassMarksInput" class="form-input-native" value="40">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer-native">
+      <button type="button" class="btn btn-secondary" onclick="closeAddClassModal()">منسوخ</button>
+      <button type="button" class="btn btn-primary" onclick="submitAddNewClass()">درجہ محفوظ کریں</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop-native" id="editClassModal" onclick="closeOnBackdrop(event, 'editClassModal')">
+  <div class="modal-sheet" style="max-width:420px;">
+    <div class="modal-grabber"></div>
+    <div class="modal-header-native">
+      <h3 class="modal-title-native">درجہ کا نام تبدیل کریں</h3>
+      <button class="modal-close-native" onclick="closeEditClassModal()">&times;</button>
+    </div>
+    <div class="modal-body-native">
+      <input type="hidden" id="editClassOldName">
+      <div class="form-group-native">
+        <label class="form-label-native">درجہ کا نیا نام:</label>
+        <input type="text" id="editClassNameInput" class="form-input-native">
+      </div>
+    </div>
+    <div class="modal-footer-native">
+      <button type="button" class="btn btn-secondary" onclick="closeEditClassModal()">منسوخ</button>
+      <button type="button" class="btn btn-primary" onclick="submitEditClassName()">نام تبدیل کریں</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop-native" id="addExamModal" onclick="closeOnBackdrop(event, 'addExamModal')">
+  <div class="modal-sheet" style="max-width:420px;">
+    <div class="modal-grabber"></div>
+    <div class="modal-header-native">
+      <h3 class="modal-title-native">نیا امتحانی سیشن شامل کریں</h3>
+      <button class="modal-close-native" onclick="closeAddExamModal()">&times;</button>
+    </div>
+    <div class="modal-body-native">
+      <div class="form-group-native">
+        <label class="form-label-native">امتحان کا عنوان / نام:</label>
+        <input type="text" id="newExamTitleInput" class="form-input-native" placeholder="مثلاً: امتحان داخلہ، شعبہ حفظ سالانہ امتحان، ماہانہ ٹیسٹ اکتوبر...">
+      </div>
+    </div>
+    <div class="modal-footer-native">
+      <button type="button" class="btn btn-secondary" onclick="closeAddExamModal()">منسوخ</button>
+      <button type="button" class="btn btn-primary" onclick="submitAddNewExam()">امتحان شامل کریں</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop-native" id="editExamModal" onclick="closeOnBackdrop(event, 'editExamModal')">
+  <div class="modal-sheet" style="max-width:420px;">
+    <div class="modal-grabber"></div>
+    <div class="modal-header-native">
+      <h3 class="modal-title-native">امتحان کا نام تبدیل کریں</h3>
+      <button class="modal-close-native" onclick="closeEditExamModal()">&times;</button>
+    </div>
+    <div class="modal-body-native">
+      <input type="hidden" id="editExamOldName">
+      <div class="form-group-native">
+        <label class="form-label-native">امتحان کا نیا نام:</label>
+        <input type="text" id="editExamTitleInput" class="form-input-native">
+      </div>
+    </div>
+    <div class="modal-footer-native">
+      <button type="button" class="btn btn-secondary" onclick="closeEditExamModal()">منسوخ</button>
+      <button type="button" class="btn btn-primary" onclick="submitEditExamName()">نام تبدیل کریں</button>
     </div>
   </div>
 </div>
@@ -1883,8 +1982,27 @@ let appState = {
   sortOption: 'roll_asc',
   activeTab: 'table',
   quickEntryIndex: 0,
+  classList: ['متوسطہ اول', 'متوسطہ دوم', 'عامہ اول', 'عامہ دوم', 'خاصہ اول', 'خاصہ دوم', 'عالیہ اول', 'عالیہ دوم', 'عالمیہ اول', 'عالمیہ دوم', 'تجوید للعالمات', 'درجہ ثانیہ'],
+  examList: ['ششماہی امتحان', 'سالانہ امتحان', 'سہ ماہی امتحان', 'ماہانہ ٹیسٹ'],
   classesData: {}
 };
+
+function getClassList() {
+  if (!appState.classList || !Array.isArray(appState.classList) || appState.classList.length === 0) {
+    let defs = Object.keys(CLASS_SUBJECT_DEFAULTS);
+    let fromData = Object.keys(appState.classesData || {});
+    let merged = Array.from(new Set([...defs, ...fromData]));
+    appState.classList = merged.length > 0 ? merged : ['متوسطہ اول'];
+  }
+  return appState.classList;
+}
+
+function getExamList() {
+  if (!appState.examList || !Array.isArray(appState.examList) || appState.examList.length === 0) {
+    appState.examList = ['ششماہی امتحان', 'سالانہ امتحان', 'سہ ماہی امتحان', 'ماہانہ ٹیسٹ'];
+  }
+  return appState.examList;
+}
 
 let confirmDialogCallback = null;
 
@@ -1929,6 +2047,14 @@ function closeOnBackdrop(e, modalId) {
 
 function initApp() {
   loadFromLocalStorage();
+  getClassList();
+  getExamList();
+  if (!appState.currentClass || !appState.classList.includes(appState.currentClass)) {
+    appState.currentClass = appState.classList[0] || 'متوسطہ اول';
+  }
+  if (!appState.examTitle || !appState.examList.includes(appState.examTitle)) {
+    appState.examTitle = appState.examList[0] || 'ششماہی امتحان';
+  }
   if (!appState.classesData[appState.currentClass]) {
     initializeClassData(appState.currentClass);
   }
@@ -2090,11 +2216,20 @@ function updateHeaderDisplay() {
   document.getElementById('headerInstitution').innerText = appState.institution;
   document.getElementById('headerClassText').innerText = 'درجہ: ' + appState.currentClass;
   document.getElementById('headerExamText').innerText = appState.examTitle;
-  document.getElementById('settingInstName').value = appState.institution;
-  document.getElementById('settingExamType').value = appState.examTitle;
-  document.getElementById('settingSessionYear').value = appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
-  document.getElementById('settingRankFormat').value = appState.rankFormat;
-  document.getElementById('settingPassThreshold').value = appState.passThreshold || 40;
+  let instInput = document.getElementById('settingInstName');
+  if (instInput) instInput.value = appState.institution;
+  let examSelect = document.getElementById('settingExamType');
+  if (examSelect) {
+    let exams = getExamList();
+    examSelect.innerHTML = exams.map(ex => `<option value="${ex}" ${ex === appState.examTitle ? 'selected' : ''}>${ex}</option>`).join('');
+    examSelect.value = appState.examTitle;
+  }
+  let sessionInput = document.getElementById('settingSessionYear');
+  if (sessionInput) sessionInput.value = appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
+  let rankSelect = document.getElementById('settingRankFormat');
+  if (rankSelect) rankSelect.value = appState.rankFormat;
+  let passInput = document.getElementById('settingPassThreshold');
+  if (passInput) passInput.value = appState.passThreshold || 40;
 }
 
 function renderApp() {
@@ -2487,34 +2622,102 @@ function prevQuickStudent() {
 }
 
 function renderSettingsTab(cData) {
-  let list = document.getElementById('settingsSubjectList');
-  list.innerHTML = cData.subjects.map((sub, idx) => {
-    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
-    let pass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
-    return `
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); flex-wrap:wrap; gap:8px;">
-        <span style="font-weight:700; font-size:13.5px;">${idx + 1}. ${sub}</span>
-        <div style="display:flex; gap:8px; align-items:center;">
-          <div style="display:flex; align-items:center; gap:4px; font-size:12px;">
-            <span>کل:</span>
-            <input type="number" value="${max}" style="width:55px; text-align:center; padding:3px; border-radius:4px; border:1px solid var(--border);"
-              onchange="updateSubjectMaxMark('${sub}', this.value)">
+  let subList = document.getElementById('settingsSubjectList');
+  if (subList) {
+    subList.innerHTML = cData.subjects.map((sub, idx) => {
+      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+      let pass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); flex-wrap:wrap; gap:8px;">
+          <span style="font-weight:700; font-size:13.5px;">${idx + 1}. ${sub}</span>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div style="display:flex; align-items:center; gap:4px; font-size:12px;">
+              <span>کل:</span>
+              <input type="number" value="${max}" style="width:55px; text-align:center; padding:3px; border-radius:4px; border:1px solid var(--border);"
+                onchange="updateSubjectMaxMark('${sub}', this.value)">
+            </div>
+            <div style="display:flex; align-items:center; gap:4px; font-size:12px;">
+              <span>پاس:</span>
+              <input type="number" value="${pass}" style="width:50px; text-align:center; padding:3px; border-radius:4px; border:1px solid var(--border);"
+                onchange="updateSubjectPassMark('${sub}', this.value)">
+            </div>
+            <button class="btn-icon-round" style="width:30px; height:30px;" onclick="renameSubjectPrompt('${sub}')" title="نام بدلیں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+            <button class="btn-icon-round" style="width:30px; height:30px; color:var(--danger);" onclick="deleteSubjectPrompt('${sub}')" title="حذف کریں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
           </div>
-          <div style="display:flex; align-items:center; gap:4px; font-size:12px;">
-            <span>پاس:</span>
-            <input type="number" value="${pass}" style="width:50px; text-align:center; padding:3px; border-radius:4px; border:1px solid var(--border);"
-              onchange="updateSubjectPassMark('${sub}', this.value)">
-          </div>
-          <button class="btn-icon-round" style="width:30px; height:30px;" onclick="renameSubjectPrompt('${sub}')" title="نام بدلیں">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          </button>
-          <button class="btn-icon-round" style="width:30px; height:30px; color:var(--danger);" onclick="deleteSubjectPrompt('${sub}')" title="حذف کریں">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </button>
         </div>
-      </div>
-    `;
-  }).join('');
+      `;
+    }).join('');
+  }
+
+  let examSelect = document.getElementById('settingExamType');
+  if (examSelect) {
+    let exams = getExamList();
+    examSelect.innerHTML = exams.map(ex => `<option value="${ex}" ${ex === appState.examTitle ? 'selected' : ''}>${ex}</option>`).join('');
+  }
+
+  let examListElem = document.getElementById('settingsExamList');
+  if (examListElem) {
+    let exams = getExamList();
+    examListElem.innerHTML = exams.map(ex => {
+      let isCurrent = ex === appState.examTitle;
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border-radius:var(--radius-sm); border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <strong style="font-size:13.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${ex}</strong>
+            ${isCurrent ? '<span class="status-badge status-pass" style="font-size:10px; padding:1px 6px;">فعال</span>' : ''}
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <button type="button" class="btn-icon-round" style="width:30px; height:30px;" onclick="openEditExamModal('${ex}')" title="امتحان کا نام بدلیں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+            <button type="button" class="btn-icon-round" style="width:30px; height:30px; color:var(--danger);" onclick="deleteExamPrompt('${ex}')" title="امتحان حذف کریں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button type="button" class="btn btn-sm ${isCurrent ? 'btn-primary' : 'btn-secondary'}" style="padding:3px 8px; font-size:11.5px;" onclick="selectExamDirect('${ex}')">
+              ${isCurrent ? 'منتخب شدہ' : 'منتخب کریں'}
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  let classListElem = document.getElementById('settingsClassList');
+  if (classListElem) {
+    let classes = getClassList();
+    classListElem.innerHTML = classes.map(cls => {
+      let isCurrent = cls === appState.currentClass;
+      let cd = appState.classesData[cls];
+      let sCount = cd && cd.students ? cd.students.length : 0;
+      let subCount = cd && cd.subjects ? cd.subjects.length : (CLASS_SUBJECT_DEFAULTS[cls] ? CLASS_SUBJECT_DEFAULTS[cls].length : 0);
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border-radius:var(--radius-sm); border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <strong style="font-size:13.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${cls}</strong>
+              ${isCurrent ? '<span class="status-badge status-pass" style="font-size:10px; padding:1px 6px;">فعال</span>' : ''}
+            </div>
+            <span style="font-size:11.5px; color:var(--text-muted); display:block; margin-top:2px;">طالبات: ${sCount} | مضامین: ${subCount}</span>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <button type="button" class="btn-icon-round" style="width:30px; height:30px;" onclick="openEditClassModal('${cls}')" title="درجہ کا نام بدلیں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+            <button type="button" class="btn-icon-round" style="width:30px; height:30px; color:var(--danger);" onclick="deleteClassPrompt('${cls}')" title="درجہ حذف کریں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button type="button" class="btn btn-sm ${isCurrent ? 'btn-primary' : 'btn-secondary'}" style="padding:3px 8px; font-size:11.5px;" onclick="selectClassDirect('${cls}')">
+              ${isCurrent ? 'منتخب شدہ' : 'منتخب کریں'}
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
 }
 
 function updateSubjectMaxMark(sub, val) {
@@ -2771,21 +2974,46 @@ function deleteStudent(index) {
 
 function openClassPickerSheet() {
   let container = document.getElementById('classListContainer');
-  let classes = Object.keys(CLASS_SUBJECT_DEFAULTS);
-  container.innerHTML = classes.map(cls => {
-    let isCurrent = cls === appState.currentClass;
-    let count = appState.classesData[cls] ? appState.classesData[cls].students.length : 0;
-    return `
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-radius:12px; cursor:pointer; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'};"
-        onclick="selectClassDirect('${cls}')">
-        <div>
-          <strong style="font-size:14.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${cls}</strong>
-          <span style="font-size:12px; color:var(--text-muted); display:block;">تعداد طالبات: ${count}</span>
-        </div>
-        ${isCurrent ? '<span style="color:var(--primary); font-weight:bold; font-size:18px;">✓</span>' : '<span style="color:var(--text-muted); font-size:13px;">منتخب کریں</span>'}
-      </div>
-    `;
-  }).join('');
+  let classes = getClassList();
+  container.innerHTML = `
+    <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-size:13px; color:var(--text-muted);">کل درجات: <strong>${classes.length}</strong></span>
+      <button type="button" class="btn btn-primary btn-sm" onclick="openAddClassModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>نیا درجہ شامل کریں</span>
+      </button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      ${classes.map(cls => {
+        let isCurrent = cls === appState.currentClass;
+        let cData = appState.classesData[cls];
+        let count = cData && cData.students ? cData.students.length : 0;
+        let subCount = cData && cData.subjects ? cData.subjects.length : (CLASS_SUBJECT_DEFAULTS[cls] ? CLASS_SUBJECT_DEFAULTS[cls].length : 0);
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-radius:12px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+            <div style="flex:1; cursor:pointer;" onclick="selectClassDirect('${cls}')">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <strong style="font-size:14.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${cls}</strong>
+                ${isCurrent ? '<span class="status-badge status-pass" style="font-size:10px; padding:1px 6px;">فعال</span>' : ''}
+              </div>
+              <span style="font-size:12px; color:var(--text-muted); display:block; margin-top:2px;">طالبات: ${count} | مضامین: ${subCount}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <button type="button" class="btn-icon-round" style="width:32px; height:32px;" onclick="event.stopPropagation(); openEditClassModal('${cls}')" title="درجہ کا نام بدلیں">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <button type="button" class="btn-icon-round" style="width:32px; height:32px; color:var(--danger);" onclick="event.stopPropagation(); deleteClassPrompt('${cls}')" title="درجہ حذف کریں">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm ${isCurrent ? 'btn-primary' : 'btn-secondary'}" style="padding:4px 10px; font-size:12px;" onclick="selectClassDirect('${cls}')">
+                ${isCurrent ? 'فعال' : 'منتخب'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
   document.getElementById('classPickerSheet').classList.add('open');
 }
 
@@ -2802,7 +3030,176 @@ function selectClassDirect(cls) {
   showToast(`درجہ تبدیل ہو گیا: ${cls}`, 'info');
 }
 
+function openAddClassModal() {
+  document.getElementById('newClassNameInput').value = '';
+  document.getElementById('newClassSubjectsInput').value = 'مضمون ۱, مضمون ۲';
+  document.getElementById('newClassMaxMarksInput').value = 100;
+  document.getElementById('newClassPassMarksInput').value = 40;
+  document.getElementById('addClassModal').classList.add('open');
+}
+
+function closeAddClassModal() {
+  document.getElementById('addClassModal').classList.remove('open');
+}
+
+function submitAddNewClass() {
+  let name = document.getElementById('newClassNameInput').value.trim();
+  if (!name) {
+    showToast('براہ کرم درجہ کا نام درج کریں', 'error');
+    return;
+  }
+  let classes = getClassList();
+  if (classes.includes(name)) {
+    showToast('یہ درجہ پہلے سے موجود ہے', 'warning');
+    return;
+  }
+  let rawSubs = document.getElementById('newClassSubjectsInput').value.split(/[,،]/).map(s => s.trim()).filter(s => s.length > 0);
+  if (rawSubs.length === 0) rawSubs = ['مضمون ۱', 'مضمون ۲'];
+  let max = Number(document.getElementById('newClassMaxMarksInput').value) || 100;
+  let pass = Number(document.getElementById('newClassPassMarksInput').value) || 40;
+
+  let maxMap = {};
+  let passMap = {};
+  rawSubs.forEach(s => {
+    maxMap[s] = max;
+    passMap[s] = pass;
+  });
+
+  classes.push(name);
+  appState.classList = classes;
+  appState.classesData[name] = {
+    subjects: rawSubs,
+    subjectMaxMarks: maxMap,
+    subjectPassMarks: passMap,
+    totalMarks: rawSubs.length * max,
+    students: []
+  };
+  appState.currentClass = name;
+  appState.quickEntryIndex = 0;
+  closeAddClassModal();
+  closeClassPickerSheet();
+  updateHeaderDisplay();
+  renderApp();
+  saveToLocalStorage();
+  showToast(`نیا درجہ "${name}" کامیابی سے شامل ہو گیا!`, 'info');
+}
+
+function openEditClassModal(cls) {
+  document.getElementById('editClassOldName').value = cls;
+  document.getElementById('editClassNameInput').value = cls;
+  document.getElementById('editClassModal').classList.add('open');
+}
+
+function closeEditClassModal() {
+  document.getElementById('editClassModal').classList.remove('open');
+}
+
+function submitEditClassName() {
+  let oldName = document.getElementById('editClassOldName').value.trim();
+  let newName = document.getElementById('editClassNameInput').value.trim();
+  if (!newName) {
+    showToast('درجہ کا نام خالی نہیں ہو سکتا', 'error');
+    return;
+  }
+  if (newName === oldName) {
+    closeEditClassModal();
+    return;
+  }
+  let list = getClassList();
+  if (list.includes(newName)) {
+    showToast('اس نام کا درجہ پہلے سے موجود ہے', 'warning');
+    return;
+  }
+  let idx = list.indexOf(oldName);
+  if (idx !== -1) list[idx] = newName;
+  else list.push(newName);
+  appState.classList = list;
+
+  if (appState.classesData[oldName]) {
+    appState.classesData[newName] = appState.classesData[oldName];
+    delete appState.classesData[oldName];
+  }
+  if (appState.currentClass === oldName) {
+    appState.currentClass = newName;
+  }
+  closeEditClassModal();
+  updateHeaderDisplay();
+  renderApp();
+  if (document.getElementById('classPickerSheet').classList.contains('open')) {
+    openClassPickerSheet();
+  }
+  saveToLocalStorage();
+  showToast(`درجہ کا نام "${newName}" پر تبدیل کر دیا گیا`, 'info');
+}
+
+function deleteClassPrompt(cls) {
+  let list = getClassList();
+  if (list.length <= 1) {
+    showToast('کم از کم ایک درجہ کا ہونا ضروری ہے۔ آپ آخری درجہ کو حذف نہیں کر سکتے۔', 'warning');
+    return;
+  }
+  let cData = appState.classesData[cls];
+  let count = cData && cData.students ? cData.students.length : 0;
+  openConfirmDialog(
+    'درجہ حذف کریں',
+    `کیا آپ واقعی درجہ "${cls}" اور اس میں موجود تمام ${count} طالبات کا ڈیٹا حذف کرنا چاہتے ہیں؟`,
+    function() {
+      appState.classList = appState.classList.filter(c => c !== cls);
+      if (appState.classesData[cls]) {
+        delete appState.classesData[cls];
+      }
+      if (appState.currentClass === cls) {
+        appState.currentClass = appState.classList[0];
+      }
+      updateHeaderDisplay();
+      renderApp();
+      if (document.getElementById('classPickerSheet').classList.contains('open')) {
+        openClassPickerSheet();
+      }
+      saveToLocalStorage();
+      showToast(`درجہ "${cls}" کامیابی سے حذف ہو گیا`, 'info');
+    }
+  );
+}
+
 function openExamPickerSheet() {
+  let container = document.getElementById('examListContainer');
+  let exams = getExamList();
+  container.innerHTML = `
+    <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-size:13px; color:var(--text-muted);">کل امتحانی سیشنز: <strong>${exams.length}</strong></span>
+      <button type="button" class="btn btn-primary btn-sm" onclick="openAddExamModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>نیا امتحان</span>
+      </button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      ${exams.map(ex => {
+        let isCurrent = ex === appState.examTitle;
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-radius:12px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+            <div style="flex:1; cursor:pointer;" onclick="selectExamDirect('${ex}')">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <strong style="font-size:14.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${ex}</strong>
+                ${isCurrent ? '<span class="status-badge status-pass" style="font-size:10px; padding:1px 6px;">فعال</span>' : ''}
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <button type="button" class="btn-icon-round" style="width:32px; height:32px;" onclick="event.stopPropagation(); openEditExamModal('${ex}')" title="امتحان کا نام بدلیں">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <button type="button" class="btn-icon-round" style="width:32px; height:32px; color:var(--danger);" onclick="event.stopPropagation(); deleteExamPrompt('${ex}')" title="امتحان حذف کریں">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm ${isCurrent ? 'btn-primary' : 'btn-secondary'}" style="padding:4px 10px; font-size:12px;" onclick="selectExamDirect('${ex}')">
+                ${isCurrent ? 'فعال' : 'منتخب'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
   document.getElementById('examPickerSheet').classList.add('open');
 }
 
@@ -2816,6 +3213,106 @@ function selectExamDirect(exam) {
   updateHeaderDisplay();
   renderApp();
   showToast(`امتحان منتخب ہو گیا: ${exam}`, 'info');
+}
+
+function openAddExamModal() {
+  document.getElementById('newExamTitleInput').value = '';
+  document.getElementById('addExamModal').classList.add('open');
+}
+
+function closeAddExamModal() {
+  document.getElementById('addExamModal').classList.remove('open');
+}
+
+function submitAddNewExam() {
+  let title = document.getElementById('newExamTitleInput').value.trim();
+  if (!title) {
+    showToast('براہ کرم امتحان کا عنوان درج کریں', 'error');
+    return;
+  }
+  let exams = getExamList();
+  if (exams.includes(title)) {
+    showToast('یہ امتحان پہلے سے موجود ہے', 'warning');
+    return;
+  }
+  exams.push(title);
+  appState.examList = exams;
+  appState.examTitle = title;
+  closeAddExamModal();
+  closeExamPickerSheet();
+  updateHeaderDisplay();
+  renderApp();
+  saveToLocalStorage();
+  showToast(`نیا امتحان "${title}" کامیابی سے شامل ہو گیا!`, 'info');
+}
+
+function openEditExamModal(ex) {
+  document.getElementById('editExamOldName').value = ex;
+  document.getElementById('editExamTitleInput').value = ex;
+  document.getElementById('editExamModal').classList.add('open');
+}
+
+function closeEditExamModal() {
+  document.getElementById('editExamModal').classList.remove('open');
+}
+
+function submitEditExamName() {
+  let oldName = document.getElementById('editExamOldName').value.trim();
+  let newName = document.getElementById('editExamTitleInput').value.trim();
+  if (!newName) {
+    showToast('امتحان کا نام خالی نہیں ہو سکتا', 'error');
+    return;
+  }
+  if (newName === oldName) {
+    closeEditExamModal();
+    return;
+  }
+  let list = getExamList();
+  if (list.includes(newName)) {
+    showToast('اس نام کا امتحان پہلے سے موجود ہے', 'warning');
+    return;
+  }
+  let idx = list.indexOf(oldName);
+  if (idx !== -1) list[idx] = newName;
+  else list.push(newName);
+  appState.examList = list;
+
+  if (appState.examTitle === oldName) {
+    appState.examTitle = newName;
+  }
+  closeEditExamModal();
+  updateHeaderDisplay();
+  renderApp();
+  if (document.getElementById('examPickerSheet').classList.contains('open')) {
+    openExamPickerSheet();
+  }
+  saveToLocalStorage();
+  showToast(`امتحان کا نام "${newName}" پر تبدیل کر دیا گیا`, 'info');
+}
+
+function deleteExamPrompt(ex) {
+  let list = getExamList();
+  if (list.length <= 1) {
+    showToast('کم از کم ایک امتحان کا ہونا لازمی ہے۔ آپ آخری امتحان کو حذف نہیں کر سکتے۔', 'warning');
+    return;
+  }
+  openConfirmDialog(
+    'امتحان حذف کریں',
+    `کیا آپ واقعی امتحان "${ex}" کو حذف کرنا چاہتے ہیں؟`,
+    function() {
+      appState.examList = appState.examList.filter(e => e !== ex);
+      if (appState.examTitle === ex) {
+        appState.examTitle = appState.examList[0];
+      }
+      updateHeaderDisplay();
+      renderApp();
+      if (document.getElementById('examPickerSheet').classList.contains('open')) {
+        openExamPickerSheet();
+      }
+      saveToLocalStorage();
+      showToast(`امتحان "${ex}" کامیابی سے حذف ہو گیا`, 'info');
+    }
+  );
 }
 
 function openPrintCenterModal() {
@@ -3306,7 +3803,7 @@ function handleExcelImport(event) {
       let data = new Uint8Array(e.target.result);
       let wb = XLSX.read(data, { type: 'array' });
       let sheetName = wb.SheetNames[0];
-      let matchedClsSheet = wb.SheetNames.find(s => Object.keys(CLASS_SUBJECT_DEFAULTS).some(k => s.includes(k)));
+      let matchedClsSheet = wb.SheetNames.find(s => getClassList().some(k => s.includes(k)));
       if (matchedClsSheet) sheetName = matchedClsSheet;
 
       let ws = wb.Sheets[sheetName];
@@ -3397,7 +3894,10 @@ function handleExcelImport(event) {
       }
 
       let baseName = file.name.replace(/\.[^/.]+$/, '').trim();
-      let matchedClass = Object.keys(CLASS_SUBJECT_DEFAULTS).find(c => baseName.includes(c) || sheetName.includes(c)) || appState.currentClass;
+      let matchedClass = getClassList().find(c => baseName.includes(c) || sheetName.includes(c)) || appState.currentClass;
+      if (!getClassList().includes(matchedClass)) {
+        getClassList().push(matchedClass);
+      }
 
       appState.classesData[matchedClass] = {
         subjects: subjects,
@@ -3766,6 +4266,10 @@ function resetToSampleData() {
     function() {
       localStorage.removeItem('madrasa_exam_state');
       appState.classesData = {};
+      appState.classList = Object.keys(CLASS_SUBJECT_DEFAULTS);
+      appState.examList = ['ششماہی امتحان', 'سالانہ امتحان', 'سہ ماہی امتحان', 'ماہانہ ٹیسٹ'];
+      appState.currentClass = 'متوسطہ اول';
+      appState.examTitle = 'ششماہی امتحان';
       initializeClassData(appState.currentClass);
       updateHeaderDisplay();
       renderApp();
