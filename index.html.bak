@@ -1,0 +1,4962 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ur">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>نظام امتحانات و نتائج - جامعہ فاطمۃ الزہرا للبنات</title>
+<script src="xlsx.full.min.js"></script>
+<script>
+if (typeof XLSX === 'undefined') {
+  document.write('<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"><\/script>');
+}
+</script>
+<style>
+:root {
+  --primary: #0d9488;
+  --primary-dark: #0f766e;
+  --primary-light: #ccfbf1;
+  --primary-subtle: #f0fdfa;
+  --accent: #d97706;
+  --accent-light: #fef3c7;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --border: #e2e8f0;
+  --border-focus: #0d9488;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --success: #16a34a;
+  --success-bg: #dcfce7;
+  --danger: #dc2626;
+  --danger-bg: #fee2e2;
+  --warning: #ca8a04;
+  --warning-bg: #fef9c3;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Calibri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Nastaliq Urdu', Tahoma, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.45;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(74px + var(--safe-bottom));
+}
+
+@media (min-width: 820px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+header.app-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
+}
+
+.top-bar {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: 0 4px 8px rgba(13, 148, 136, 0.25);
+  flex-shrink: 0;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.brand-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  flex-wrap: wrap;
+}
+
+.brand-subtitle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-subtle);
+  border: 1px solid var(--primary-light);
+  border-radius: 9999px;
+  padding: 2px 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.brand-subtitle-btn:active {
+  transform: scale(0.96);
+}
+
+.exam-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid #fde68a;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s, background-color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(13, 148, 136, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--surface-alt);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.btn-accent:hover {
+  background: #b45309;
+}
+
+.btn-success {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.btn-sm {
+  padding: 6px 11px;
+  font-size: 12px;
+  border-radius: var(--radius-xs);
+}
+
+.btn-icon-round {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-icon-round:active {
+  transform: scale(0.92);
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+nav.desktop-nav {
+  display: none;
+  gap: 4px;
+  padding: 0 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+@media (min-width: 820px) {
+  nav.desktop-nav {
+    display: flex;
+  }
+}
+
+.desktop-tab-btn {
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.desktop-tab-btn:hover {
+  color: var(--primary);
+}
+
+.desktop-tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: 700;
+}
+
+nav.mobile-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(64px + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(226, 232, 240, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 50;
+  box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 820px) {
+  nav.mobile-bottom-bar {
+    display: none !important;
+  }
+}
+
+.mobile-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 5px 0;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.mobile-nav-item:active {
+  transform: scale(0.92);
+}
+
+.mobile-nav-icon-box {
+  width: 30px;
+  height: 25px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.18s;
+}
+
+.mobile-nav-item.active {
+  color: var(--primary-dark);
+}
+
+.mobile-nav-item.active .mobile-nav-icon-box {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+main.app-content {
+  flex: 1;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px 10px;
+}
+
+@media (min-width: 768px) {
+  main.app-content {
+    padding: 18px 20px;
+  }
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 640px) {
+  .stats-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .stats-container {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px 0 0 4px;
+}
+
+.stat-label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.stat-val-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.stat-val {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.stat-sub {
+  font-size: 11px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.chip-filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 2px 2px 10px 2px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chip-filters-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-chip:active {
+  transform: scale(0.95);
+}
+
+.filter-chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(13, 148, 136, 0.3);
+}
+
+.search-toolbar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.search-box-native {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+}
+
+.search-input-native {
+  width: 100%;
+  padding: 9px 36px 9px 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  background: var(--surface-alt);
+  color: var(--text);
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-input-native:focus {
+  border-color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.search-icon-pos {
+  position: absolute;
+  right: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-clear-btn {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 3px;
+  display: none;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.select-native {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  outline: none;
+}
+
+.select-native:focus {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+.bulk-actions-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--primary-subtle);
+  border: 1px dashed var(--primary);
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+  overflow-x: auto;
+  font-size: 12.5px;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+.table-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.table-scroll-container {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+table.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+table.result-table thead {
+  background: #f1f5f9;
+  border-bottom: 2px solid var(--border);
+}
+
+table.result-table th {
+  padding: 10px 11px;
+  font-weight: 700;
+  color: var(--text);
+  border-left: 1px solid var(--border);
+  font-size: 12px;
+}
+
+table.result-table th:last-child {
+  border-left: none;
+}
+
+table.result-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.15s;
+}
+
+table.result-table tbody tr:hover {
+  background-color: var(--primary-subtle);
+}
+
+table.result-table td {
+  padding: 7px 9px;
+  border-left: 1px solid var(--border);
+  color: var(--text);
+}
+
+table.result-table td:last-child {
+  border-left: none;
+}
+
+.mark-input-cell {
+  width: 56px;
+  text-align: center;
+  padding: 4px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 700;
+  outline: none;
+  transition: all 0.15s;
+}
+
+.mark-input-cell:hover {
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+.mark-input-cell:focus {
+  border-color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.mark-input-cell.fail-cell {
+  color: var(--danger);
+  background: #fee2e2;
+  border-radius: 4px;
+}
+
+.mark-input-cell.exempt-cell {
+  color: #0369a1;
+  background: #e0f2fe;
+  border-radius: 4px;
+}
+
+.badge-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 11.5px;
+}
+
+.rank-1 {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+  box-shadow: 0 1px 3px rgba(217, 119, 6, 0.15);
+}
+
+.rank-2 {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.rank-3 {
+  background: #ffedd5;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+
+.rank-other {
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}
+
+.grade-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.grade-mumtaz { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+.grade-jayyid-jiddan { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+.grade-jayyid { background: #fef9c3; color: #a16207; border: 1px solid #fef08a; }
+.grade-maqbool { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
+.grade-rasib { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+.grade-ghayab { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+.cards-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .cards-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+}
+
+.native-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 15px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.native-card:active {
+  transform: scale(0.985);
+}
+
+.native-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.avatar-info-cluster {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ccfbf1, #99f6e4);
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.student-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-name-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.student-sub-text {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.card-badges-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.marks-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 6px;
+  background: var(--surface-alt);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.mark-chip-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4px 6px;
+  background: var(--surface);
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+}
+
+.mark-chip-sub {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.mark-chip-num {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.mark-chip-num.pass {
+  color: var(--success);
+}
+
+.mark-chip-num.fail {
+  color: var(--danger);
+}
+
+.mark-chip-num.exempt {
+  color: #0284c7;
+}
+
+.native-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.footer-stats-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 12.5px;
+}
+
+.footer-actions-cluster {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: white;
+  border-radius: var(--radius-xs);
+  padding: 5px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.btn-whatsapp:active {
+  transform: scale(0.95);
+}
+
+.quick-entry-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quick-entry-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.quick-entry-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 12px;
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+}
+
+.quick-entry-input {
+  width: 78px;
+  padding: 8px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: var(--surface);
+}
+
+.quick-entry-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.quick-preset-btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.quick-preset-btn:active {
+  background: #e2e8f0;
+}
+
+.modal-backdrop-native {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity 0.2s;
+}
+
+@media (min-width: 768px) {
+  .modal-backdrop-native {
+    align-items: center;
+    padding: 20px;
+  }
+}
+
+.modal-backdrop-native.open {
+  display: flex;
+}
+
+.modal-sheet {
+  background: var(--surface);
+  width: 100%;
+  max-width: 620px;
+  border-radius: 24px 24px 0 0;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: slideUpSheet 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 768px) {
+  .modal-sheet {
+    border-radius: var(--radius);
+    max-height: 90vh;
+    animation: fadeInModal 0.2s ease-out;
+  }
+}
+
+@keyframes slideUpSheet {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-grabber {
+  width: 44px;
+  height: 5px;
+  background: #cbd5e1;
+  border-radius: 9999px;
+  margin: 10px auto 4px auto;
+}
+
+@media (min-width: 768px) {
+  .modal-grabber {
+    display: none;
+  }
+}
+
+.modal-header-native {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title-native {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.modal-close-native {
+  background: var(--surface-alt);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.modal-body-native {
+  padding: 16px 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group-native {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-label-native {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.form-input-native {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  background: var(--surface);
+  transition: all 0.2s;
+}
+
+.form-input-native:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.modal-footer-native {
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background: var(--surface-alt);
+}
+
+.toast-container-native {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast-native {
+  background: rgba(15, 23, 42, 0.95);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: toastFade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+@keyframes toastFade {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fab-native {
+  position: fixed;
+  bottom: calc(76px + var(--safe-bottom));
+  left: 20px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 8px 16px rgba(13, 148, 136, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 35;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fab-native:active {
+  transform: scale(0.92);
+}
+
+@media (min-width: 820px) {
+  .fab-native {
+    bottom: 24px;
+  }
+}
+
+.dmc-card {
+  background: #ffffff;
+  border: 2px solid #0f766e;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 680px;
+  margin: 0 auto 24px auto;
+  box-shadow: var(--shadow);
+  color: #0f172a;
+  position: relative;
+}
+
+.dmc-card::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px dashed #0d9488;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.dmc-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dmc-header h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: #0f766e;
+  margin-bottom: 3px;
+}
+
+.dmc-header h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 2px;
+}
+
+.dmc-header p {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.dmc-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 13.5px;
+}
+
+.dmc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.dmc-table th, .dmc-table td {
+  border: 1px solid #cbd5e1;
+  padding: 8px;
+}
+
+.dmc-table th {
+  background: #f1f5f9;
+  font-weight: 700;
+}
+
+.dmc-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 36px;
+  padding: 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+footer.app-footer {
+  margin-top: 30px;
+  padding: 20px 16px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+footer.app-footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.print-section {
+  display: none;
+}
+
+@media print {
+  header.app-bar, nav.desktop-nav, nav.mobile-bottom-bar, .search-toolbar, .stats-container, .fab-native, .no-print, .modal-backdrop-native, .chip-filters-bar, footer.app-footer, .toast-container-native, .bulk-actions-strip {
+    display: none !important;
+  }
+  * {
+    font-family: 'Calibri', 'Segoe UI', Tahoma, Arial, sans-serif !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body, main.app-content {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+  .print-section {
+    display: block !important;
+  }
+  .tab-pane {
+    display: none !important;
+  }
+  @page {
+    size: A4 landscape;
+    margin: 8mm 6mm;
+  }
+  table.gazette-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5pt;
+    text-align: center;
+  }
+  table.gazette-table th, table.gazette-table td {
+    border: 1px solid #334155;
+    padding: 5px 4px;
+    font-family: 'Calibri', sans-serif !important;
+  }
+  table.gazette-table th {
+    background: #e2e8f0 !important;
+    font-weight: bold;
+  }
+  .gazette-tr-even {
+    background: #f8fafc !important;
+  }
+  .print-page-break {
+    page-break-after: always;
+    break-after: page;
+  }
+}
+</style>
+<link href="manifest.json" rel="manifest"/><link href="favicon.ico" rel="icon" type="image/x-icon"/></head>
+<body>
+<div class="toast-container-native" id="toastContainer"></div>
+<header class="app-bar">
+<div class="top-bar">
+<div class="brand-wrapper" onclick="openClassPickerSheet()">
+<div class="brand-icon" id="headerBrandLogo">ف</div>
+<div class="brand-info">
+<h1 class="brand-title" id="headerInstitution">جامعہ فاطمۃ الزہرا للبنات</h1>
+<div class="brand-chips-row">
+<button class="brand-subtitle-btn" id="headerClassBadge" type="button">
+<span id="headerClassText">درجہ: متوسطہ اول</span>
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="12"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<button class="exam-badge-btn" onclick="event.stopPropagation(); openExamPickerSheet()" type="button">
+<span id="headerExamText">ششماہی امتحان</span>
+<svg fill="none" height="11" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="11"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+</div>
+</div>
+</div>
+<div class="header-actions">
+<button class="btn btn-secondary btn-sm" onclick="triggerImport()" title="ایکسل فائل امپورٹ کریں">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+<span>امپورٹ</span>
+</button>
+<input accept=".xlsx, .xls" id="excelFileInput" onchange="handleExcelImport(event)" style="display:none" type="file"/>
+<button class="btn btn-primary btn-sm" onclick="exportToExcel()" title="کیلیبری فونٹ خوبصورت ایکسل ایکسپورٹ">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+<span>ایکسل</span>
+</button>
+<button class="btn btn-accent btn-sm" onclick="openPrintCenterModal()" title="پرنٹ سنٹر (گزٹ، DMC، پوزیشن ہولڈرز، سلپس)">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
+<span>پرنٹس</span>
+</button>
+</div>
+</div>
+<nav class="desktop-nav">
+<button class="desktop-tab-btn active" onclick="switchMainTab('table', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+      جدول نتائج (شیٹ)
+    </button>
+<button class="desktop-tab-btn" onclick="switchMainTab('cards', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="14" rx="2" width="20" x="2" y="7"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+      موبائل کارڈز
+    </button>
+<button class="desktop-tab-btn" onclick="switchMainTab('quick', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+      کوئیک انٹری (Quick Entry)
+    </button>
+<button class="desktop-tab-btn" onclick="switchMainTab('dmc', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line></svg>
+      کشف الدرجات (DMC)
+    </button>
+<button class="desktop-tab-btn" onclick="switchMainTab('printcenter', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
+      پرنٹ سنٹر
+    </button>
+<button class="desktop-tab-btn" onclick="switchMainTab('stats', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg>
+      شماریات و چارٹس
+    </button>
+<button class="desktop-tab-btn" onclick="switchMainTab('settings', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      ترتیبات
+    </button>
+</nav>
+</header>
+<main class="app-content">
+<div class="stats-container">
+<div class="stat-card">
+<span class="stat-label">کل طلبہ / طالبات</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statTotalStudents">0</span>
+</div>
+<span class="stat-sub" id="statAppeared">حاضر: 0</span>
+</div>
+<div class="stat-card">
+<span class="stat-label">کامیاب طالبات</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statPassed" style="color:var(--success)">0</span>
+</div>
+<span class="stat-sub" id="statPassPercent">0% شرح کامیابی</span>
+</div>
+<div class="stat-card">
+<span class="stat-label">ناکام / راسب</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statFailed" style="color:var(--danger)">0</span>
+</div>
+<span class="stat-sub" id="statAbsent">غیر حاضر: 0</span>
+</div>
+<div class="stat-card">
+<span class="stat-label">پہلی پوزیشن</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statTopMarks" style="color:var(--accent)">0</span>
+</div>
+<span class="stat-sub" id="statTopStudent">-</span>
+</div>
+<div class="stat-card">
+<span class="stat-label">اوسط نمبرات</span>
+<div class="stat-val-row">
+<span class="stat-val" id="statAverage">0</span>
+</div>
+<span class="stat-sub" id="statTotalMarksSum">کل نمبر: 0</span>
+</div>
+</div>
+<div class="chip-filters-bar">
+<button class="filter-chip active" data-filter="all" onclick="setFilterChip('all', this)">
+      تمام طالبات
+    </button>
+<button class="filter-chip" data-filter="top3" onclick="setFilterChip('top3', this)">
+      🏆 ٹاپ ۳ پوزیشن
+    </button>
+<button class="filter-chip" data-filter="ممتاز" onclick="setFilterChip('ممتاز', this)">
+      🌟 ممتاز
+    </button>
+<button class="filter-chip" data-filter="جید جدا" onclick="setFilterChip('جید جدا', this)">
+      📘 جید جدا
+    </button>
+<button class="filter-chip" data-filter="جید" onclick="setFilterChip('جید', this)">
+      📙 جید
+    </button>
+<button class="filter-chip" data-filter="مقبول" onclick="setFilterChip('مقبول', this)">
+      📗 مقبول
+    </button>
+<button class="filter-chip" data-filter="passed" onclick="setFilterChip('passed', this)">
+      ✓ تمام کامیاب
+    </button>
+<button class="filter-chip" data-filter="failed" onclick="setFilterChip('failed', this)">
+      ✕ راسب (ناکام)
+    </button>
+<button class="filter-chip" data-filter="absent" onclick="setFilterChip('absent', this)">
+      ⏳ غیر حاضر
+    </button>
+</div>
+<div class="search-toolbar">
+<div class="search-box-native">
+<input class="search-input-native" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="تلاش کریں: نام، ولدیت، رول نمبر، رجسٹریشن یا فون نمبر..." type="text"/>
+<svg class="search-icon-pos" fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+<button class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()">×</button>
+</div>
+<div class="toolbar-actions">
+<select class="select-native btn-sm" id="sortSelect" onchange="handleSortChange(this.value)">
+<option value="roll_asc">رول نمبر (1 ➔ 100)</option>
+<option value="rank_asc">پوزیشن (اول ➔ آخر)</option>
+<option value="marks_desc">مجموعہ نمبر (زیادہ ➔ کم)</option>
+<option value="name_asc">اسم الطالبۃ (الف ➔ ے)</option>
+</select>
+<button class="btn btn-primary btn-sm" onclick="openStudentModal()">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="15"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+<span>نیا اندراج</span>
+</button>
+</div>
+</div>
+<div class="bulk-actions-strip no-print">
+<span style="font-weight:700; color:var(--primary-dark);">اجتماعی اختیارات:</span>
+<button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('present')">سب کو حاضر کریں</button>
+<button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('absent')">سب کو غائب کریں</button>
+<button class="btn btn-secondary btn-sm" onclick="downloadBlankExcelTemplate()">خالی ایکسل ٹیمپلیٹ</button>
+<button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); switchTabDirect('dmc')">سب کے DMC پرنٹ کریں</button>
+</div>
+<div class="tab-pane active" id="pane-table">
+<div class="table-wrapper">
+<div class="table-scroll-container">
+<table class="result-table" id="mainResultTable">
+<thead>
+<tr id="tableHeaderRow"></tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="pane-cards">
+<div class="cards-list" id="cardsGrid"></div>
+</div>
+<div class="tab-pane" id="pane-quick">
+<div class="quick-entry-card" id="quickEntryContainer"></div>
+</div>
+<div class="tab-pane" id="pane-dmc">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+<div style="display:flex; gap:8px; align-items:center;">
+<label style="font-weight:700; font-size:13px;">طالب علم منتخب کریں:</label>
+<select class="select-native" id="dmcStudentSelect" onchange="renderSingleDMC(this.value)"></select>
+</div>
+<div style="display:flex; gap:8px;">
+<button class="btn btn-secondary btn-sm" onclick="renderAllDMCs()">سب طلبہ کے کشف دکھائیں</button>
+<button class="btn btn-primary btn-sm" onclick="printActiveDMC()">پرنٹ کریں (Print)</button>
+</div>
+</div>
+<div id="dmcContainer"></div>
+</div>
+<div class="tab-pane" id="pane-printcenter">
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📑 امتحانی گزٹ (Gazette Broadsheet)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">پوری کلاس کا باضابطہ نتیجہ گزٹ A4 لینڈ اسکیپ پرنٹ مع چار باضابطہ دستخط۔</p>
+<button class="btn btn-primary btn-sm" onclick="printGazette()">گزٹ پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">🏆 فہرست نمایاں پوزیشن ہولڈرز (Merit List)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">سالانہ جلسہ تقسیم انعامات و اسناد کے لیے اول، دوم، سوم کی خصوصی میرٹ شیٹ۔</p>
+<button class="btn btn-accent btn-sm" onclick="printMeritList()">پوزیشن لسٹ پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📜 کشف الدرجات (DMC / Sanad)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">دوہرے اسلامی بارڈر، فیصد، پوزیشن اور گریڈ کے ساتھ سند برائے طالبات۔</p>
+<button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); window.print()">تمام طالبات کے DMC پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📋 مضمون وار ایوارڈ لسٹ برائے ممتحن</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحان کے دوران پرچہ چیک کرنے والے ممتحن کے لیے خصوصی دستخطی ایوارڈ شیٹ۔</p>
+<div style="display:flex; gap:6px; align-items:center;">
+<select class="select-native btn-sm" id="awardListSubjectSelect"></select>
+<button class="btn btn-secondary btn-sm" onclick="printAwardSheet()">پرنٹ ایوارڈ لسٹ</button>
+</div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">🎫 امتحانی داخلہ کارڈ / رول نمبر سلپ</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانی ہال میں بیٹھنے کے لیے طالبات کے رول نمبر سلپ مع مضامین و ہدایات۔</p>
+<button class="btn btn-secondary btn-sm" onclick="printRollNumberSlips()">رول نمبر سلپس پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--danger); margin-bottom:6px;">⚠️ فہرست راسب طالبات (Supplementary List)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانِ ضمنی (سپلیمنٹری امتحان) کی تیاری کے لیے فیل طالبات کی مضمون وار فہرست۔</p>
+<button class="btn btn-secondary btn-sm" onclick="printFailureList()" style="color:var(--danger);">راسب لسٹ پرنٹ کریں</button>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="pane-stats">
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap:16px;">
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">نمایاں پوزیشن ہولڈرز (Top Achievers)</h3>
+<div id="topRankersList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">تقدیر و درجات کا تناسب (Grade Breakdown)</h3>
+<div id="gradeBreakdownList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">مضمون وار اوسط نمبرات (Subject Averages)</h3>
+<div id="subjectAveragesList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="pane-settings">
+<div style="max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:16px;">
+<div class="native-card">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+<div>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin:0;">جامعہ / مدرسہ کا پروفائل، لوگو و برانڈنگ</h3>
+<p style="font-size:12px; color:var(--text-muted); margin:0;">اپنے ادارہ کا نام، لوگو، پتہ، فون اور الحاق نمبر سیٹ کریں جو کشف الدرجات (DMC)، گزٹ اور تمام پرنٹس میں خودکار ظاہر ہوگا</p>
+</div>
+<button class="btn btn-primary btn-sm" onclick="saveGeneralSettings()" type="button">پروفائل محفوظ کریں</button>
+</div>
+<div style="display:flex; gap:16px; align-items:center; margin-bottom:14px; padding:12px; background:var(--surface-alt); border-radius:var(--radius-sm); border:1px solid var(--border); flex-wrap:wrap;">
+<div id="settingLogoPreview" style="width:68px; height:68px; border-radius:12px; background:var(--surface); border:2px dashed var(--border); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0;">
+<span style="font-size:28px; color:var(--text-muted);">🏛️</span>
+</div>
+<div style="flex:1; min-width:200px;">
+<strong style="font-size:13.5px; display:block; margin-bottom:2px;">جامعہ کا لوگو / مونوگرام:</strong>
+<span style="font-size:11.5px; color:var(--text-muted); display:block; margin-bottom:8px;">PNG یا JPG تصویر منتخب کریں جو موبائل ایپ، DMC اور تمام پرنٹس پر پرنٹ ہوگی</span>
+<div style="display:flex; gap:8px; flex-wrap:wrap;">
+<button class="btn btn-secondary btn-sm" onclick="triggerLogoUpload()" type="button">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+<span>لوگو تبدیل کریں</span>
+</button>
+<button class="btn btn-secondary btn-sm" onclick="removeLogo()" style="color:var(--danger);" type="button">
+<span>لوگو ہٹائیں</span>
+</button>
+<input accept="image/*" id="settingLogoFileInput" onchange="handleLogoUpload(event)" style="display:none" type="file"/>
+</div>
+</div>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="form-group-native">
+<label class="form-label-native">جامعہ / مدرسہ کا مکمل نام:</label>
+<input class="form-input-native" id="settingInstName" onchange="saveGeneralSettings()" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">ذیلی عنوان / شعبہ (Tagline):</label>
+<input class="form-input-native" id="settingInstSubtitle" onchange="saveGeneralSettings()" placeholder="مثلاً للبنات / للبنین / شاخ اول" type="text"/>
+</div>
+</div>
+<div class="form-group-native" style="margin-bottom:10px;">
+<label class="form-label-native">پتہ و مکمل مقام (Address &amp; Location):</label>
+<input class="form-input-native" id="settingInstAddress" onchange="saveGeneralSettings()" placeholder="مثلاً خوڑگئ موسیٰ خیل، تحصیل ڈومیل، ضلع بنوں، خیبر پختونخوا" type="text"/>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="form-group-native">
+<label class="form-label-native">فون نمبر / واٹس ایپ:</label>
+<input class="form-input-native" id="settingInstPhone" onchange="saveGeneralSettings()" placeholder="مثلاً 0336-1593533" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">الحاق / رجسٹریشن نمبر:</label>
+<input class="form-input-native" id="settingInstReg" onchange="saveGeneralSettings()" placeholder="مثلاً الحاق: وفاق المدارس العربیہ" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">مہتمم / ناظم کا عہدہ (دستخط کے لیے):</label>
+<input class="form-input-native" id="settingInstHead" onchange="saveGeneralSettings()" placeholder="مہتمم جامعہ" type="text"/>
+</div>
+</div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">امتحانی ضوابط و تعلیمی سیشن کی ترتیبات</h3>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="form-group-native">
+<label class="form-label-native">امتحان کی قسم:</label>
+<select class="select-native" id="settingExamType" onchange="saveGeneralSettings()">
+<option value="ششماہی امتحان">ششماہی امتحان</option>
+<option value="سالانہ امتحان">سالانہ امتحان</option>
+<option value="سہ ماہی امتحان">سہ ماہی امتحان</option>
+<option value="ماہانہ ٹیسٹ">ماہانہ ٹیسٹ</option>
+</select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">تعلیمی سال / سیشن:</label>
+<input class="form-input-native" id="settingSessionYear" onchange="saveGeneralSettings()" type="text" value="۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء"/>
+</div>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+<div class="form-group-native">
+<label class="form-label-native">پوزیشن کا فارمیٹ:</label>
+<select class="select-native" id="settingRankFormat" onchange="saveGeneralSettings()">
+<option value="urdu">اول، دوم، سوم، 4...</option>
+<option value="english">1st, 2nd, 3rd, 4...</option>
+</select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">پاسنگ فیصد (Passing %):</label>
+<input class="form-input-native" id="settingPassThreshold" max="60" min="33" onchange="saveGeneralSettings()" type="number" value="40"/>
+</div>
+</div>
+</div>
+<div class="native-card">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+<div>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin:0;">مضامین، کل نمبر اور پاس مارکس کا انتظام</h3>
+<p style="font-size:11.5px; color:var(--text-muted); margin:2px 0 0 0;">ہر درجہ اور ہر امتحان کے لیے الگ الگ مضامین و نمبرات مقرر کریں</p>
+</div>
+<div style="display:flex; gap:6px; flex-wrap:wrap;">
+<button class="btn btn-primary btn-sm" onclick="addSubjectPrompt()" type="button">+ نیا مضمون</button>
+<button class="btn btn-secondary btn-sm" onclick="applySubjectsToAllExamsOfClass()" title="اسی درجہ کے تمام امتحانات پر یہی مضامین لاگو کریں" type="button">تمام امتحانات پر لاگو</button>
+<button class="btn btn-secondary btn-sm" onclick="openCopySubjectsModal()" title="کسی اور کلاس یا امتحان سے مضامین درآمد کریں" type="button">کاپی کریں</button>
+<button class="btn btn-secondary btn-sm" onclick="resetCurriculumPrompt()" title="معیاری وفاق المدارس نصاب بحال کریں" type="button">ری سیٹ نصاب</button>
+</div>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:10px; background:var(--surface-alt); border-radius:var(--radius-sm); border:1px solid var(--border); margin-bottom:12px;">
+<div>
+<label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">مطلوبہ درجہ (کلاس):</label>
+<select class="select-native" id="settingSubjectClassSelect" onchange="changeSettingSubjectTarget()" style="width:100%; font-size:13px;">
+</select>
+</div>
+<div>
+<label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">مطلوبہ امتحانی سیشن:</label>
+<select class="select-native" id="settingSubjectExamSelect" onchange="changeSettingSubjectTarget()" style="width:100%; font-size:13px;">
+</select>
+</div>
+</div>
+<div id="settingsSubjectSummaryBadge" style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:var(--primary-subtle); border:1px solid var(--primary); border-radius:var(--radius-sm); margin-bottom:10px; font-size:12px; color:var(--primary-dark); font-weight:600;">
+</div>
+<div id="settingsSubjectList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+<div>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام امتحانات کے سیشنز (Exam Sessions)</h3>
+<p style="font-size:12px; color:var(--text-muted); margin:0;">امتحانات کے سیشنز شامل کریں، نام بدلیں یا حذف کریں</p>
+</div>
+<button class="btn btn-primary btn-sm" onclick="openAddExamModal()" type="button">+ نیا امتحان</button>
+</div>
+<div id="settingsExamList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+<div>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام درجات (کلاسز) کی مکمل فہرست (Classes Management)</h3>
+<p style="font-size:12px; color:var(--text-muted); margin:0;">نئے درجات شامل کریں، نام تبدیل کریں یا درجات کو حذف کریں</p>
+</div>
+<button class="btn btn-primary btn-sm" onclick="openAddClassModal()" type="button">+ نیا درجہ</button>
+</div>
+<div id="settingsClassList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">بیک اپ، امپورٹ و بحالی (Backup &amp; Restore)</h3>
+<div style="display:flex; gap:10px; flex-wrap:wrap;">
+<button class="btn btn-secondary" onclick="downloadJsonBackup()">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+            ڈیٹا بیک اپ (JSON)
+          </button>
+<button class="btn btn-secondary" onclick="triggerJsonRestore()">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+            بیک اپ بحال کریں
+          </button>
+<input accept=".json" id="jsonRestoreInput" onchange="handleJsonRestore(event)" style="display:none" type="file"/>
+<button class="btn btn-accent" onclick="resetToSampleData()">نمونہ ڈیٹا پر ری سیٹ</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="app-footer no-print">
+<div>Created by: <strong>Yasin Ullah</strong> – Bannu Software Solutions</div>
+<div style="margin-top:4px;">
+<a href="https://www.yasinbss.com" rel="noopener" target="_blank">www.yasinbss.com</a> | 
+    <a href="https://wa.me/923361593533" rel="noopener" target="_blank">WhatsApp: 03361593533</a>
+</div>
+</footer>
+<nav class="mobile-bottom-bar">
+<button class="mobile-nav-item active" data-tab="table" onclick="switchMobileNav('table', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+</div>
+<span>شیٹ</span>
+</button>
+<button class="mobile-nav-item" data-tab="cards" onclick="switchMobileNav('cards', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><rect height="14" rx="2" width="20" x="2" y="7"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+</div>
+<span>کارڈز</span>
+</button>
+<button class="mobile-nav-item" data-tab="quick" onclick="switchMobileNav('quick', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+</div>
+<span>اندراج</span>
+</button>
+<button class="mobile-nav-item" data-tab="dmc" onclick="switchMobileNav('dmc', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line></svg>
+</div>
+<span>کشف</span>
+</button>
+<button class="mobile-nav-item" data-tab="printcenter" onclick="switchMobileNav('printcenter', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
+</div>
+<span>پرنٹس</span>
+</button>
+<button class="mobile-nav-item" data-tab="settings" onclick="switchMobileNav('settings', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+</div>
+<span>ترتیبات</span>
+</button>
+</nav>
+<button class="fab-native no-print" onclick="openStudentModal()" title="نیا طالب علم شامل کریں">
+<svg fill="none" height="24" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="24"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+</button>
+<div class="modal-backdrop-native" id="classPickerSheet" onclick="closeOnBackdrop(event, 'classPickerSheet')">
+<div class="modal-sheet">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">درجات (کلاسز) کی فہرست و انتخاب</h3>
+<button class="modal-close-native" onclick="closeClassPickerSheet()">×</button>
+</div>
+<div class="modal-body-native" id="classListContainer"></div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="examPickerSheet" onclick="closeOnBackdrop(event, 'examPickerSheet')">
+<div class="modal-sheet" style="max-width:440px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">امتحانات کی فہرست و انتخاب</h3>
+<button class="modal-close-native" onclick="closeExamPickerSheet()">×</button>
+</div>
+<div class="modal-body-native" id="examListContainer"></div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="addClassModal" onclick="closeOnBackdrop(event, 'addClassModal')">
+<div class="modal-sheet" style="max-width:440px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">نیا درجہ (کلاس) شامل کریں</h3>
+<button class="modal-close-native" onclick="closeAddClassModal()">×</button>
+</div>
+<div class="modal-body-native">
+<div class="form-group-native" style="margin-bottom:10px;">
+<label class="form-label-native">درجہ کا نام (مثلاً درجہ اعدادیہ، حفظ القرآن، اول وغیرہ):</label>
+<input class="form-input-native" id="newClassNameInput" placeholder="درجہ کا نام لکھیں..." type="text"/>
+</div>
+<div class="form-group-native" style="margin-bottom:10px;">
+<label class="form-label-native">ابتدائی مضامین (کوما کے ساتھ الگ کریں):</label>
+<input class="form-input-native" id="newClassSubjectsInput" type="text" value="مضمون ۱, مضمون ۲"/>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+<div class="form-group-native">
+<label class="form-label-native">ہر مضمون کے کل نمبر:</label>
+<input class="form-input-native" id="newClassMaxMarksInput" type="number" value="100"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">پاسنگ نمبر:</label>
+<input class="form-input-native" id="newClassPassMarksInput" type="number" value="40"/>
+</div>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeAddClassModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitAddNewClass()" type="button">درجہ محفوظ کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="editClassModal" onclick="closeOnBackdrop(event, 'editClassModal')">
+<div class="modal-sheet" style="max-width:420px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">درجہ کا نام تبدیل کریں</h3>
+<button class="modal-close-native" onclick="closeEditClassModal()">×</button>
+</div>
+<div class="modal-body-native">
+<input id="editClassOldName" type="hidden"/>
+<div class="form-group-native">
+<label class="form-label-native">درجہ کا نیا نام:</label>
+<input class="form-input-native" id="editClassNameInput" type="text"/>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeEditClassModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitEditClassName()" type="button">نام تبدیل کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="addExamModal" onclick="closeOnBackdrop(event, 'addExamModal')">
+<div class="modal-sheet" style="max-width:420px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">نیا امتحانی سیشن شامل کریں</h3>
+<button class="modal-close-native" onclick="closeAddExamModal()">×</button>
+</div>
+<div class="modal-body-native">
+<div class="form-group-native">
+<label class="form-label-native">امتحان کا عنوان / نام:</label>
+<input class="form-input-native" id="newExamTitleInput" placeholder="مثلاً: امتحان داخلہ، شعبہ حفظ سالانہ امتحان، ماہانہ ٹیسٹ اکتوبر..." type="text"/>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeAddExamModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitAddNewExam()" type="button">امتحان شامل کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="editExamModal" onclick="closeOnBackdrop(event, 'editExamModal')">
+<div class="modal-sheet" style="max-width:420px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">امتحان کا نام تبدیل کریں</h3>
+<button class="modal-close-native" onclick="closeEditExamModal()">×</button>
+</div>
+<div class="modal-body-native">
+<input id="editExamOldName" type="hidden"/>
+<div class="form-group-native">
+<label class="form-label-native">امتحان کا نیا نام:</label>
+<input class="form-input-native" id="editExamTitleInput" type="text"/>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeEditExamModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitEditExamName()" type="button">نام تبدیل کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="studentModal" onclick="closeOnBackdrop(event, 'studentModal')">
+<div class="modal-sheet">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native" id="modalStudentTitle">طالب علم کا اندراج</h3>
+<button class="modal-close-native" onclick="closeStudentModal()">×</button>
+</div>
+<div class="modal-body-native">
+<input id="editStudentIndex" type="hidden"/>
+<div style="display:grid; grid-template-columns: 85px 120px 1fr 1fr; gap:8px;">
+<div class="form-group-native">
+<label class="form-label-native">رول نمبر</label>
+<input class="form-input-native" id="modalStudentRoll" style="text-align:center;" type="number"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">رجسٹریشن نمبر</label>
+<input class="form-input-native" id="modalStudentReg" placeholder="مثلاً: REG-101" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">اسم الطالبۃ *</label>
+<input class="form-input-native" id="modalStudentName" placeholder="طالبہ کا نام" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">اسم الاب</label>
+<input class="form-input-native" id="modalStudentFather" placeholder="والد کا نام" type="text"/>
+</div>
+</div>
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:4px;">
+<div class="form-group-native">
+<label class="form-label-native">والد کا فون / واٹس ایپ نمبر</label>
+<input class="form-input-native" id="modalStudentPhone" placeholder="03361234567" type="tel"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">پتہ / علاقہ</label>
+<input class="form-input-native" id="modalStudentAddress" placeholder="علاقہ / گاؤں" type="text"/>
+</div>
+</div>
+<div style="margin-top:6px;">
+<h4 style="font-size:13px; font-weight:700; margin-bottom:8px; color:var(--primary-dark);">نمبرات مضامین (Subject Marks)</h4>
+<div id="modalMarksInputs" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeStudentModal()">منسوخ</button>
+<button class="btn btn-primary" onclick="saveStudentModal()">محفوظ کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="confirmDialog" onclick="closeOnBackdrop(event, 'confirmDialog')">
+<div class="modal-sheet" style="max-width:420px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native" id="confirmDialogTitle">تصدیق درکار ہے</h3>
+<button class="modal-close-native" onclick="closeConfirmDialog()">×</button>
+</div>
+<div class="modal-body-native">
+<p id="confirmDialogMessage" style="font-size:14px; color:var(--text);"></p>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeConfirmDialog()">منسوخ</button>
+<button class="btn btn-accent" id="confirmDialogActionBtn">تصدیق کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="copySubjectsModal" onclick="closeOnBackdrop(event, 'copySubjectsModal')">
+<div class="modal-sheet" style="max-width:440px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">مضامین درآمد / کاپی کریں</h3>
+<button class="modal-close-native" onclick="closeCopySubjectsModal()">×</button>
+</div>
+<div class="modal-body-native">
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">جس درجہ اور امتحانی سیشن سے مضامین کاپی کرنے ہیں، انہیں منتخب کریں:</p>
+<div class="form-group-native">
+<label class="form-label-native">ماخذ درجہ (Source Class):</label>
+<select class="select-native" id="copySourceClassSelect"></select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">ماخذ امتحانی سیشن (Source Exam):</label>
+<select class="select-native" id="copySourceExamSelect"></select>
+</div>
+<div style="background:var(--primary-subtle); padding:10px; border-radius:var(--radius-sm); border:1px solid var(--primary); font-size:12px; color:var(--primary-dark); margin-top:10px;">
+<strong>ہدف (موجودہ انتخاب):</strong> <span id="copyTargetLabel"></span>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeCopySubjectsModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitCopySubjects()" type="button">کاپی کریں</button>
+</div>
+</div>
+</div>
+<div class="print-section" id="printGazetteView">
+<div style="text-align:center; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #0f766e;">
+<p style="font-size:13pt; margin-bottom:1px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+<div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:3px;">
+<div id="printGazetteLogo"></div>
+<div>
+<h1 id="printInstitutionName" style="font-size:18pt; font-weight:bold; margin:0; color:#0f766e;">جامعہ فاطمۃ الزہرا للبنات</h1>
+<div id="printInstitutionSub" style="font-size:10.5pt; color:#475569; font-weight:bold;"></div>
+</div>
+</div>
+<div id="printInstitutionMeta" style="font-size:9pt; color:#64748b; margin-bottom:4px;"></div>
+<h2 id="printExamTitle" style="font-size:13.5pt; margin-bottom:2px;">نتیجہ برائے ششماہی امتحان</h2>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px; font-size:10.5pt; font-weight:bold;">
+<span id="printClassName">درجہ: متوسطہ اول</span>
+<span id="printMetaStats">کل طالبات: 0 | حاضر: 0 | کامیاب: 0 | شرح کامیابی: 0%</span>
+<span id="printDate">تاریخ: </span>
+</div>
+</div>
+<table class="gazette-table" id="printGazetteTable">
+<thead>
+<tr id="printTableHeaderRow"></tr>
+</thead>
+<tbody id="printTableBody"></tbody>
+</table>
+<div style="display:flex; justify-content:space-between; margin-top:36px; padding:0 20px; font-size:11pt; font-weight:bold;">
+<div>دستخط ممتحن: _______________</div>
+<div>دستخط نگران امتحان: _______________</div>
+<div>دستخط ناظم امتحانات: _______________</div>
+<div id="printGazetteHeadSign">دستخط و مہر مہتمم جامعہ: _______________</div>
+</div>
+</div>
+<div class="print-section" id="printMeritListView"></div>
+<div class="print-section" id="printAwardSheetView"></div>
+<div class="print-section" id="printRollSlipsView"></div>
+<div class="print-section" id="printFailureListView"></div>
+<script>
+const CLASS_SUBJECT_DEFAULTS = {
+  'متوسطہ اول': ['اردو پہلی', 'اردو قاعدہ'],
+  'متوسطہ دوم': ['اردو دوسری', 'اردو تیسری', 'تعلیم الاسلام'],
+  'عامہ اول': ['مختصر اسلامی نصاب', 'اردو چوتھی', 'فضائل اعمال', 'عادت کو عبادت'],
+  'عامہ دوم': ['بہشتی زیور دوم', 'بہشتی زیور اول', 'تاریخ اسلام', 'علم النحو', 'میزان'],
+  'خاصہ اول': ['تجوید', 'نحو', 'صرف', 'طریقۃ العصریہ', 'حدیث', 'تفسیر'],
+  'خاصہ دوم': ['منطق', 'نحو', 'صرف', 'فقہ', 'اصول الشاشی', 'تفسیر'],
+  'عالیہ اول': ['بلاغہ', 'مختارات', 'نورالانوار', 'قدوری بیوع', 'حدیث', 'تفسیر'],
+  'عالیہ دوم': ['تربیت اولاد', 'مشکوٰۃ اول', 'مشکوٰۃ ثانی', 'ہدایہ اول', 'شرح عقائد', 'ترجمہ'],
+  'عالمیہ اول': ['ہدایہ ثانی', 'مصطلح الحدیث', 'طحاوی', 'ابوداؤد اول', 'ترمذی ثانی', 'جلالین'],
+  'عالمیہ دوم': ['ابوداؤد ثانی', 'ترمذی اول', 'مسلم ثانی', 'مسلم اول', 'بخاری ثانی', 'بخاری اول'],
+  'تجوید للعالمات': ['حدر', 'مشق', 'مقدمۃ الجزری', 'تفہیم الوقوف', 'علوم القراءت', 'معلم التجوید'],
+  'درجہ ثانیہ': ['منطق', 'نحو', 'صرف', 'فقہ', 'حدیث', 'تفسیر']
+};
+
+const SAMPLE_STUDENTS_MUTAWASSITA_1 = [
+  { roll: 1, reg: 'REG-101', name: 'افرائم', father: 'انصار اللہ', phone: '03361593533', marks: {'اردو پہلی': 60, 'اردو قاعدہ': 70} },
+  { roll: 2, reg: 'REG-102', name: 'فلحیام', father: 'زین اللہ', phone: '03339712345', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
+  { roll: 3, reg: 'REG-103', name: 'زینب', father: 'میرشاہ باز', phone: '03459876543', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
+  { roll: 4, reg: 'REG-104', name: 'عائشہ', father: 'مانور حمن', phone: '03125678901', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
+  { roll: 5, reg: 'REG-105', name: 'حورین', father: 'غنی الرحمن', phone: '03001234567', marks: {'اردو پہلی': 70, 'اردو قاعدہ': 80} },
+  { roll: 6, reg: 'REG-106', name: 'بی بی آمنہ', father: 'زاردئیپ', phone: '03461234567', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
+  { roll: 7, reg: 'REG-107', name: 'فرشتہ', father: 'شاہین', phone: '03211234567', marks: {'اردو پہلی': 30, 'اردو قاعدہ': 40} },
+  { roll: 8, reg: 'REG-108', name: 'ہاجرہ', father: 'لال شہان', phone: '03351234567', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 60} },
+  { roll: 9, reg: 'REG-109', name: 'ایمان', father: 'محمد عمران', phone: '03321234567', marks: {'اردو پہلی': 50, 'اردو قاعدہ': 40} },
+  { roll: 10, reg: 'REG-110', name: 'مدینہ', father: 'شمس الرحمن', phone: '03341234567', marks: {'اردو پہلی': 'غائب', 'اردو قاعدہ': 'غائب'} }
+];
+
+let appState = {
+  institution: 'جامعہ فاطمۃ الزہرا للبنات',
+  institutionSubtitle: 'للبنات - خوڑگئ موسیٰ خیل ڈومیل بنوں',
+  institutionAddress: 'خوڑگئ موسیٰ خیل، تحصیل ڈومیل، ضلع بنوں، خیبر پختونخوا',
+  institutionPhone: '0336-1593533',
+  institutionReg: 'الحاق: وفاق المدارس العربیہ پاکستان',
+  institutionHead: 'مہتمم جامعہ',
+  institutionLogo: '',
+  examTitle: 'ششماہی امتحان',
+  sessionYear: '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء',
+  rankFormat: 'urdu',
+  passThreshold: 40,
+  currentClass: 'متوسطہ اول',
+  searchQuery: '',
+  filterOption: 'all',
+  sortOption: 'roll_asc',
+  activeTab: 'table',
+  quickEntryIndex: 0,
+  classList: ['متوسطہ اول', 'متوسطہ دوم', 'عامہ اول', 'عامہ دوم', 'خاصہ اول', 'خاصہ دوم', 'عالیہ اول', 'عالیہ دوم', 'عالمیہ اول', 'عالمیہ دوم', 'تجوید للعالمات', 'درجہ ثانیہ'],
+  examList: ['ششماہی امتحان', 'سالانہ امتحان', 'سہ ماہی امتحان', 'ماہانہ ٹیسٹ'],
+  classesData: {}
+};
+
+function getClassList() {
+  if (!appState.classList || !Array.isArray(appState.classList) || appState.classList.length === 0) {
+    let defs = Object.keys(CLASS_SUBJECT_DEFAULTS);
+    let fromData = Object.keys(appState.classesData || {});
+    let merged = Array.from(new Set([...defs, ...fromData]));
+    appState.classList = merged.length > 0 ? merged : ['متوسطہ اول'];
+  }
+  return appState.classList;
+}
+
+function getExamList() {
+  if (!appState.examList || !Array.isArray(appState.examList) || appState.examList.length === 0) {
+    appState.examList = ['ششماہی امتحان', 'سالانہ امتحان', 'سہ ماہی امتحان', 'ماہانہ ٹیسٹ'];
+  }
+  return appState.examList;
+}
+
+let confirmDialogCallback = null;
+
+function showToast(message, type = 'info') {
+  let container = document.getElementById('toastContainer');
+  let toast = document.createElement('div');
+  toast.className = 'toast-native';
+  let icon = '✓';
+  if (type === 'error') icon = '✕';
+  else if (type === 'warning') icon = '⚠';
+  toast.innerHTML = `<span style="font-weight:bold; font-size:16px;">${icon}</span><span>${message}</span>`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-10px)';
+    toast.style.transition = 'all 0.25s';
+    setTimeout(() => toast.remove(), 250);
+  }, 2600);
+}
+
+function openConfirmDialog(title, message, onConfirm) {
+  document.getElementById('confirmDialogTitle').innerText = title;
+  document.getElementById('confirmDialogMessage').innerText = message;
+  confirmDialogCallback = onConfirm;
+  document.getElementById('confirmDialogActionBtn').onclick = function() {
+    closeConfirmDialog();
+    if (confirmDialogCallback) confirmDialogCallback();
+  };
+  document.getElementById('confirmDialog').classList.add('open');
+}
+
+function closeConfirmDialog() {
+  document.getElementById('confirmDialog').classList.remove('open');
+  confirmDialogCallback = null;
+}
+
+function closeOnBackdrop(e, modalId) {
+  if (e.target.id === modalId) {
+    document.getElementById(modalId).classList.remove('open');
+  }
+}
+
+function initApp() {
+  loadFromLocalStorage();
+  getClassList();
+  getExamList();
+  if (!appState.currentClass || !appState.classList.includes(appState.currentClass)) {
+    appState.currentClass = appState.classList[0] || 'متوسطہ اول';
+  }
+  if (!appState.examTitle || !appState.examList.includes(appState.examTitle)) {
+    appState.examTitle = appState.examList[0] || 'ششماہی امتحان';
+  }
+  if (!appState.classesData[appState.currentClass]) {
+    initializeClassData(appState.currentClass);
+  }
+  updateHeaderDisplay();
+  renderApp();
+}
+
+let settingSubjectTarget = { class: null, exam: null };
+
+function initializeClassData(className) {
+  let defaultSubs = CLASS_SUBJECT_DEFAULTS[className] || ['مضمون ۱', 'مضمون ۲'];
+  let totalMarks = className === 'خاصہ اول' ? 700 : (defaultSubs.length * 100);
+  let students = [];
+  if (className === 'متوسطہ اول') {
+    students = JSON.parse(JSON.stringify(SAMPLE_STUDENTS_MUTAWASSITA_1));
+  }
+  let maxMap = defaultSubs.reduce((acc, sub) => { acc[sub] = 100; return acc; }, {});
+  let passMap = defaultSubs.reduce((acc, sub) => { acc[sub] = 40; return acc; }, {});
+
+  let exams = getExamList();
+  let examConfigs = {};
+  exams.forEach(ex => {
+    examConfigs[ex] = {
+      subjects: [...defaultSubs],
+      subjectMaxMarks: { ...maxMap },
+      subjectPassMarks: { ...passMap },
+      totalMarks: totalMarks
+    };
+  });
+
+  students.forEach(s => {
+    if (!s.examMarks) s.examMarks = {};
+    if (!s.examMarks[appState.examTitle]) {
+      s.examMarks[appState.examTitle] = s.marks ? { ...s.marks } : {};
+    }
+  });
+
+  appState.classesData[className] = {
+    subjects: defaultSubs,
+    subjectMaxMarks: maxMap,
+    subjectPassMarks: passMap,
+    totalMarks: totalMarks,
+    students: students,
+    examConfigs: examConfigs
+  };
+}
+
+function getCurrentClassData(className, examTitle) {
+  let cls = className || appState.currentClass || 'متوسطہ اول';
+  let ex = examTitle || appState.examTitle || 'ششماہی امتحان';
+
+  if (!appState.classesData[cls]) {
+    initializeClassData(cls);
+  }
+  let cData = appState.classesData[cls];
+  if (!cData.examConfigs) {
+    cData.examConfigs = {};
+  }
+  if (!cData.examConfigs[ex]) {
+    let baseSubs = (cData.subjects && cData.subjects.length > 0) ? [...cData.subjects] : (CLASS_SUBJECT_DEFAULTS[cls] ? [...CLASS_SUBJECT_DEFAULTS[cls]] : ['مضمون ۱', 'مضمون ۲']);
+    let maxMap = cData.subjectMaxMarks ? { ...cData.subjectMaxMarks } : {};
+    let passMap = cData.subjectPassMarks ? { ...cData.subjectPassMarks } : {};
+    baseSubs.forEach(s => {
+      if (maxMap[s] === undefined) maxMap[s] = 100;
+      if (passMap[s] === undefined) passMap[s] = 40;
+    });
+    let tot = baseSubs.reduce((sum, s) => sum + (maxMap[s] !== undefined ? maxMap[s] : 100), 0);
+    cData.examConfigs[ex] = {
+      subjects: baseSubs,
+      subjectMaxMarks: maxMap,
+      subjectPassMarks: passMap,
+      totalMarks: tot
+    };
+  }
+
+  let currentCfg = cData.examConfigs[ex];
+  cData.subjects = currentCfg.subjects;
+  cData.subjectMaxMarks = currentCfg.subjectMaxMarks;
+  cData.subjectPassMarks = currentCfg.subjectPassMarks;
+  cData.totalMarks = currentCfg.totalMarks;
+
+  if (cData.students && Array.isArray(cData.students)) {
+    cData.students.forEach(s => {
+      if (!s.examMarks) {
+        s.examMarks = {};
+        if (s.marks) s.examMarks[ex] = { ...s.marks };
+      }
+      if (!s.examMarks[ex]) {
+        s.examMarks[ex] = {};
+      }
+      s.marks = s.examMarks[ex];
+    });
+  }
+
+  return cData;
+}
+
+function calculateStudent(student, subjects, totalMarks) {
+  let obtained = 0;
+  let hasValidMarks = false;
+  let allAbsent = true;
+  let passThreshold = Number(appState.passThreshold) || 40;
+  let failedSubjectsCount = 0;
+  let cData = getCurrentClassData();
+  let effectiveTotalMarks = totalMarks;
+
+  subjects.forEach(sub => {
+    let val = student.marks ? student.marks[sub] : undefined;
+    let maxForSub = (cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined) ? cData.subjectMaxMarks[sub] : 100;
+    let minPass = (cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined) ? cData.subjectPassMarks[sub] : 40;
+    if (val !== undefined && val !== null && val !== '') {
+      let strVal = String(val).trim().toLowerCase();
+      if (strVal === '-' || strVal === 'مستثنیٰ' || strVal === 'مستثنی' || strVal === 'exempt' || strVal === 'na') {
+        effectiveTotalMarks = Math.max(0, effectiveTotalMarks - maxForSub);
+        return;
+      }
+      if (typeof val === 'number') {
+        obtained += val;
+        hasValidMarks = true;
+        allAbsent = false;
+        if (val < minPass) failedSubjectsCount++;
+      } else if (!isNaN(Number(val))) {
+        let n = Number(val);
+        obtained += n;
+        hasValidMarks = true;
+        allAbsent = false;
+        if (n < minPass) failedSubjectsCount++;
+      } else if (strVal.includes('غائب')) {
+        failedSubjectsCount++;
+      }
+    }
+  });
+
+  let percentage = effectiveTotalMarks > 0 ? (obtained / effectiveTotalMarks) * 100 : 0;
+  let grade = 'راسب';
+  if (allAbsent && !hasValidMarks) {
+    grade = 'غیر حاضر';
+  } else if (percentage >= 80 && failedSubjectsCount === 0) {
+    grade = 'ممتاز';
+  } else if (percentage >= 70 && failedSubjectsCount === 0) {
+    grade = 'جید جدا';
+  } else if (percentage >= 60 && failedSubjectsCount === 0) {
+    grade = 'جید';
+  } else if (percentage >= passThreshold && failedSubjectsCount === 0) {
+    grade = 'مقبول';
+  } else {
+    grade = 'راسب';
+  }
+
+  return {
+    obtained,
+    effectiveTotalMarks,
+    percentage: Math.round(percentage * 100) / 100,
+    grade,
+    isAbsent: allAbsent && !hasValidMarks,
+    failedSubjectsCount
+  };
+}
+
+function calculateAllRanks(students, subjects, totalMarks) {
+  let computed = students.map((s, idx) => {
+    let calc = calculateStudent(s, subjects, totalMarks);
+    return { ...s, ...calc, originalIndex: idx };
+  });
+
+  let validForRank = computed.filter(s => !s.isAbsent).sort((a, b) => b.obtained - a.obtained);
+
+  computed.forEach(s => {
+    if (s.isAbsent) {
+      s.rank = '-';
+      s.rankNum = 9999;
+    } else {
+      let betterCount = validForRank.filter(other => other.obtained > s.obtained).length;
+      let r = betterCount + 1;
+      s.rankNum = r;
+      if (appState.rankFormat === 'urdu') {
+        if (r === 1) s.rank = 'اول';
+        else if (r === 2) s.rank = 'دوم';
+        else if (r === 3) s.rank = 'سوم';
+        else s.rank = String(r);
+      } else {
+        if (r === 1) s.rank = '1st';
+        else if (r === 2) s.rank = '2nd';
+        else if (r === 3) s.rank = '3rd';
+        else s.rank = String(r);
+      }
+    }
+  });
+
+  return computed;
+}
+
+function getFilteredAndSortedStudents() {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+
+  let q = (appState.searchQuery || '').trim().toLowerCase();
+  if (q) {
+    computed = computed.filter(s => 
+      (s.name && s.name.toLowerCase().includes(q)) ||
+      (s.father && s.father.toLowerCase().includes(q)) ||
+      (s.reg && s.reg.toLowerCase().includes(q)) ||
+      (s.phone && s.phone.includes(q)) ||
+      (String(s.roll).includes(q))
+    );
+  }
+
+  if (appState.filterOption === 'top3') {
+    computed = computed.filter(s => s.rankNum <= 3 && !s.isAbsent);
+  } else if (appState.filterOption === 'passed') {
+    computed = computed.filter(s => s.grade !== 'راسب' && !s.isAbsent);
+  } else if (appState.filterOption === 'failed') {
+    computed = computed.filter(s => s.grade === 'راسب' && !s.isAbsent);
+  } else if (appState.filterOption === 'absent') {
+    computed = computed.filter(s => s.isAbsent);
+  } else if (['ممتاز', 'جید جدا', 'جید', 'مقبول'].includes(appState.filterOption)) {
+    computed = computed.filter(s => s.grade === appState.filterOption);
+  }
+
+  if (appState.sortOption === 'roll_asc') {
+    computed.sort((a, b) => (Number(a.roll) || 0) - (Number(b.roll) || 0));
+  } else if (appState.sortOption === 'rank_asc') {
+    computed.sort((a, b) => a.rankNum - b.rankNum);
+  } else if (appState.sortOption === 'marks_desc') {
+    computed.sort((a, b) => b.obtained - a.obtained);
+  } else if (appState.sortOption === 'name_asc') {
+    computed.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+  }
+
+  return computed;
+}
+
+function updateHeaderDisplay() {
+  let instTitle = document.getElementById('headerInstitution');
+  if (instTitle) instTitle.innerText = appState.institution;
+  let clsText = document.getElementById('headerClassText');
+  if (clsText) clsText.innerText = 'درجہ: ' + appState.currentClass;
+  let exText = document.getElementById('headerExamText');
+  if (exText) exText.innerText = appState.examTitle;
+
+  let logoContainer = document.getElementById('headerBrandLogo');
+  if (logoContainer) {
+    if (appState.institutionLogo) {
+      logoContainer.innerHTML = `<img src="${appState.institutionLogo}" style="width:100%; height:100%; object-fit:cover; border-radius:12px;">`;
+    } else {
+      let char = (appState.institution || 'ف').trim().charAt(0) || 'ف';
+      logoContainer.innerHTML = `<span>${char}</span>`;
+    }
+  }
+
+  let instInput = document.getElementById('settingInstName');
+  if (instInput) instInput.value = appState.institution || '';
+  let subInput = document.getElementById('settingInstSubtitle');
+  if (subInput) subInput.value = appState.institutionSubtitle || '';
+  let addrInput = document.getElementById('settingInstAddress');
+  if (addrInput) addrInput.value = appState.institutionAddress || '';
+  let phoneInput = document.getElementById('settingInstPhone');
+  if (phoneInput) phoneInput.value = appState.institutionPhone || '';
+  let regInput = document.getElementById('settingInstReg');
+  if (regInput) regInput.value = appState.institutionReg || '';
+  let headInput = document.getElementById('settingInstHead');
+  if (headInput) headInput.value = appState.institutionHead || 'مہتمم جامعہ';
+
+  let logoPreview = document.getElementById('settingLogoPreview');
+  if (logoPreview) {
+    if (appState.institutionLogo) {
+      logoPreview.innerHTML = `<img src="${appState.institutionLogo}" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px;">`;
+    } else {
+      logoPreview.innerHTML = `<span style="font-size:28px; color:var(--text-muted);">🏛️</span>`;
+    }
+  }
+
+  let examSelect = document.getElementById('settingExamType');
+  if (examSelect) {
+    let exams = getExamList();
+    examSelect.innerHTML = exams.map(ex => `<option value="${ex}" ${ex === appState.examTitle ? 'selected' : ''}>${ex}</option>`).join('');
+    examSelect.value = appState.examTitle;
+  }
+  let sessionInput = document.getElementById('settingSessionYear');
+  if (sessionInput) sessionInput.value = appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
+  let rankSelect = document.getElementById('settingRankFormat');
+  if (rankSelect) rankSelect.value = appState.rankFormat;
+  let passInput = document.getElementById('settingPassThreshold');
+  if (passInput) passInput.value = appState.passThreshold || 40;
+}
+
+function renderApp() {
+  let cData = getCurrentClassData();
+  let students = getFilteredAndSortedStudents();
+  renderStats(cData);
+  renderTable(cData, students);
+  renderCards(cData, students);
+  renderQuickEntry(cData);
+  renderSettingsTab(cData);
+  renderDmcTab(cData);
+  renderAwardSheetSubjectOptions(cData);
+  saveToLocalStorage();
+}
+
+function renderStats(cData) {
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let total = computed.length;
+  let absent = computed.filter(s => s.isAbsent).length;
+  let appeared = total - absent;
+  let passed = computed.filter(s => !s.isAbsent && s.grade !== 'راسب').length;
+  let failed = appeared - passed;
+  let passPercent = appeared > 0 ? Math.round((passed / appeared) * 100) : 0;
+
+  let topMarks = 0;
+  let topStudent = '-';
+  let nonAbsent = computed.filter(s => !s.isAbsent);
+  if (nonAbsent.length > 0) {
+    let sortedByMarks = [...nonAbsent].sort((a, b) => b.obtained - a.obtained);
+    topMarks = sortedByMarks[0].obtained;
+    topStudent = sortedByMarks[0].name + ' (' + sortedByMarks[0].rank + ')';
+  }
+
+  let totalObtainedSum = nonAbsent.reduce((acc, s) => acc + s.obtained, 0);
+  let avgMarks = appeared > 0 ? Math.round(totalObtainedSum / appeared) : 0;
+
+  document.getElementById('statTotalStudents').innerText = total;
+  document.getElementById('statAppeared').innerText = 'حاضر: ' + appeared;
+  document.getElementById('statPassed').innerText = passed;
+  document.getElementById('statPassPercent').innerText = passPercent + '% شرح کامیابی';
+  document.getElementById('statFailed').innerText = failed;
+  document.getElementById('statAbsent').innerText = 'غیر حاضر: ' + absent;
+  document.getElementById('statTopMarks').innerText = topMarks;
+  document.getElementById('statTopStudent').innerText = topStudent;
+  document.getElementById('statAverage').innerText = avgMarks;
+  document.getElementById('statTotalMarksSum').innerText = 'کل نمبر: ' + cData.totalMarks;
+
+  let rankersList = document.getElementById('topRankersList');
+  let top3 = nonAbsent.filter(s => s.rankNum <= 3).sort((a, b) => a.rankNum - b.rankNum);
+  if (top3.length === 0) {
+    rankersList.innerHTML = '<p style="color:var(--text-muted); font-size:12.5px;">کوئی طالب علم موجود نہیں۔</p>';
+  } else {
+    rankersList.innerHTML = top3.map(s => `
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:7px 10px; background:var(--surface-alt); border-radius:8px; font-size:13px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="badge-rank rank-${s.rankNum <= 3 ? s.rankNum : 'other'}">${s.rank}</span>
+          <span style="font-weight:700;">${s.name}</span>
+          <span style="color:var(--text-muted); font-size:11.5px;">ولد ${s.father || '-'}</span>
+        </div>
+        <span style="font-weight:700; color:var(--primary);">${s.obtained} / ${cData.totalMarks} (${s.percentage}%)</span>
+      </div>
+    `).join('');
+  }
+
+  let grades = { 'ممتاز': 0, 'جید جدا': 0, 'جید': 0, 'مقبول': 0, 'راسب': 0 };
+  nonAbsent.forEach(s => {
+    if (grades[s.grade] !== undefined) grades[s.grade]++;
+  });
+  let gradeList = document.getElementById('gradeBreakdownList');
+  gradeList.innerHTML = Object.entries(grades).map(([g, cnt]) => `
+    <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">
+      <span class="grade-badge ${getGradeClass(g)}">${g}</span>
+      <span style="font-weight:700;">${cnt} طالبات (${appeared > 0 ? Math.round((cnt/appeared)*100) : 0}%)</span>
+    </div>
+  `).join('');
+
+  let subAveragesList = document.getElementById('subjectAveragesList');
+  subAveragesList.innerHTML = cData.subjects.map(sub => {
+    let subSum = 0;
+    let subCount = 0;
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+    cData.students.forEach(s => {
+      let v = s.marks ? s.marks[sub] : undefined;
+      if (typeof v === 'number') { subSum += v; subCount++; }
+      else if (!isNaN(Number(v)) && v !== '' && v !== null && v !== undefined) { subSum += Number(v); subCount++; }
+    });
+    let subAvg = subCount > 0 ? Math.round(subSum / subCount) : 0;
+    return `
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">
+        <span style="font-weight:600;">${sub}</span>
+        <span style="font-weight:700; color:var(--primary);">${subAvg} / ${max}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function getGradeClass(grade) {
+  if (grade === 'ممتاز') return 'grade-mumtaz';
+  if (grade === 'جید جدا') return 'grade-jayyid-jiddan';
+  if (grade === 'جید') return 'grade-jayyid';
+  if (grade === 'مقبول') return 'grade-maqbool';
+  if (grade === 'غیر حاضر') return 'grade-ghayab';
+  return 'grade-rasib';
+}
+
+function renderTable(cData, students) {
+  let thead = document.getElementById('tableHeaderRow');
+  let subsHeaders = cData.subjects.map(sub => {
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+    return `<th>${sub}<br><span style="font-size:10px; color:var(--text-muted); font-weight:normal;">(${max})</span></th>`;
+  }).join('');
+
+  thead.innerHTML = `
+    <th style="width:35px;">#</th>
+    <th style="width:50px;">رول</th>
+    <th style="min-width:130px; text-align:right;">اسم الطالبۃ</th>
+    <th style="min-width:130px; text-align:right;">اسم الاب</th>
+    ${subsHeaders}
+    <th style="width:75px; background:var(--primary-subtle); color:var(--primary-dark);">مجموعہ</th>
+    <th style="width:65px;">کل نمبر</th>
+    <th style="width:65px;">فیصد٪</th>
+    <th style="width:70px;">پوزیشن</th>
+    <th style="width:75px;">تقدیر</th>
+    <th style="width:90px;" class="no-print">عمل</th>
+  `;
+
+  let tbody = document.getElementById('tableBody');
+  if (students.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="${cData.subjects.length + 10}" style="padding:28px; color:var(--text-muted); font-size:14px;">کوئی طالب علم موجود نہیں۔ نیا اندراج کریں۔</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = students.map((s, idx) => {
+    let rankBadgeClass = s.rankNum === 1 ? 'rank-1' : (s.rankNum === 2 ? 'rank-2' : (s.rankNum === 3 ? 'rank-3' : 'rank-other'));
+    let subTds = cData.subjects.map((sub, sIdx) => {
+      let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+      let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+      let strVal = String(val).trim().toLowerCase();
+      let isExempt = strVal === '-' || strVal === 'مستثنیٰ' || strVal === 'مستثنی' || strVal === 'exempt';
+      let isFail = !isExempt && typeof val === 'number' && val < minPass;
+      let cellClass = isExempt ? 'exempt-cell' : (isFail ? 'fail-cell' : '');
+      return `<td>
+        <input type="text" class="mark-input-cell ${cellClass}" value="${val}" 
+          data-orig-index="${s.originalIndex}" data-subject="${sub}" data-row="${idx}" data-col="${sIdx}"
+          onkeydown="handleTableKeyNav(event, ${idx}, ${sIdx})"
+          onchange="updateStudentMarkInline(${s.originalIndex}, '${sub}', this.value)"
+          onfocus="this.select()">
+      </td>`;
+    }).join('');
+
+    return `
+      <tr id="row_student_${s.originalIndex}">
+        <td>${idx + 1}</td>
+        <td><strong>${s.roll || idx + 1}</strong></td>
+        <td style="text-align:right; font-weight:700;">${s.name || '-'}</td>
+        <td style="text-align:right; color:var(--text-muted);">${s.father || '-'}</td>
+        ${subTds}
+        <td style="font-weight:700; font-size:14px; background:var(--primary-subtle); color:var(--primary-dark);">${s.obtained}</td>
+        <td style="color:var(--text-muted);">${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks}</td>
+        <td style="font-weight:700;">${s.isAbsent ? '-' : s.percentage + '%'}</td>
+        <td><span class="badge-rank ${rankBadgeClass}">${s.rank}</span></td>
+        <td><span class="grade-badge ${getGradeClass(s.grade)}">${s.grade}</span></td>
+        <td class="no-print">
+          <div style="display:flex; justify-content:center; gap:4px;">
+            <button class="btn-whatsapp" onclick="shareWhatsAppResult(${s.originalIndex})" title="واٹس ایپ پر نتیجہ بھیجیں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+            </button>
+            <button class="btn-icon-round" style="width:28px; height:28px;" onclick="editStudent(${s.originalIndex})" title="ترمیم">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+            <button class="btn-icon-round" style="width:28px; height:28px; color:var(--danger);" onclick="deleteStudent(${s.originalIndex})" title="حذف">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function handleTableKeyNav(e, rowIdx, colIdx) {
+  if (e.key === 'Enter' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    let next = document.querySelector(`input[data-row="${rowIdx + 1}"][data-col="${colIdx}"]`);
+    if (next) next.focus();
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    let prev = document.querySelector(`input[data-row="${rowIdx - 1}"][data-col="${colIdx}"]`);
+    if (prev) prev.focus();
+  }
+}
+
+function updateStudentMarkInline(originalIndex, subject, value) {
+  let cData = getCurrentClassData();
+  let student = cData.students[originalIndex];
+  if (!student) return;
+  if (!student.marks) student.marks = {};
+  if (!student.examMarks) student.examMarks = {};
+  if (!student.examMarks[appState.examTitle]) student.examMarks[appState.examTitle] = {};
+
+  let trimmed = String(value || '').trim();
+  if (trimmed === '' || trimmed === null) {
+    delete student.marks[subject];
+    delete student.examMarks[appState.examTitle][subject];
+  } else if (!isNaN(Number(trimmed))) {
+    student.marks[subject] = Number(trimmed);
+    student.examMarks[appState.examTitle][subject] = Number(trimmed);
+  } else {
+    student.marks[subject] = trimmed;
+    student.examMarks[appState.examTitle][subject] = trimmed;
+  }
+
+  saveToLocalStorage();
+  let students = getFilteredAndSortedStudents();
+  renderStats(cData);
+  renderCards(cData, students);
+  renderQuickEntry(cData);
+}
+
+function renderCards(cData, students) {
+  let grid = document.getElementById('cardsGrid');
+  if (students.length === 0) {
+    grid.innerHTML = '<p style="color:var(--text-muted); padding:24px; text-align:center;">کوئی طالب علم موجود نہیں۔</p>';
+    return;
+  }
+
+  grid.innerHTML = students.map(s => {
+    let rankBadgeClass = s.rankNum === 1 ? 'rank-1' : (s.rankNum === 2 ? 'rank-2' : (s.rankNum === 3 ? 'rank-3' : 'rank-other'));
+    let initial = (s.name && s.name.trim().length > 0) ? s.name.trim().charAt(0) : 'ط';
+    
+    let marksHtml = cData.subjects.map(sub => {
+      let v = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '-';
+      let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+      let numClass = '';
+      let strV = String(v).trim().toLowerCase();
+      if (strV === '-' || strV === 'مستثنیٰ' || strV === 'مستثنی' || strV === 'exempt') {
+        numClass = 'exempt';
+      } else if (typeof v === 'number') {
+        numClass = v >= minPass ? 'pass' : 'fail';
+      } else if (!isNaN(Number(v))) {
+        numClass = Number(v) >= minPass ? 'pass' : 'fail';
+      }
+      return `
+        <div class="mark-chip-item">
+          <span class="mark-chip-sub">${sub}</span>
+          <span class="mark-chip-num ${numClass}">${v}</span>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="native-card">
+        <div class="native-card-header">
+          <div class="avatar-info-cluster">
+            <div class="student-avatar">${initial}</div>
+            <div class="student-details">
+              <span class="student-name-text">${s.name || '-'}</span>
+              <span class="student-sub-text">رول نمبر: <strong>${s.roll}</strong> ${s.reg ? '| ' + s.reg : ''} | ولد: ${s.father || '-'}</span>
+            </div>
+          </div>
+          <div class="card-badges-cluster">
+            <span class="badge-rank ${rankBadgeClass}">${s.rank}</span>
+            <span class="grade-badge ${getGradeClass(s.grade)}">${s.grade}</span>
+          </div>
+        </div>
+
+        <div class="marks-chips-grid">
+          ${marksHtml}
+        </div>
+
+        <div class="native-card-footer">
+          <div class="footer-stats-badge">
+            <span style="color:var(--text-muted); font-size:12px;">مجموعہ:</span>
+            <strong style="color:var(--primary); font-size:15px;">${s.obtained}</strong>
+            <span style="color:var(--text-muted); font-size:12px;">/ ${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks} (${s.percentage}%)</span>
+          </div>
+          <div class="footer-actions-cluster">
+            <button class="btn-whatsapp" onclick="shareWhatsAppResult(${s.originalIndex})">
+              <span>واٹس ایپ</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="showStudentDMC(${s.originalIndex})">DMC</button>
+            <button class="btn btn-secondary btn-sm" onclick="editStudent(${s.originalIndex})">ترمیم</button>
+            <button class="btn btn-secondary btn-sm" style="color:var(--danger);" onclick="deleteStudent(${s.originalIndex})">حذف</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function shareWhatsAppResult(index) {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let s = computed[index];
+  if (!s) return;
+
+  let phone = (s.phone || '').replace(/[^0-9]/g, '');
+  if (phone.startsWith('0')) phone = '92' + phone.substring(1);
+
+  let footerMsg = appState.institution;
+  if (appState.institutionSubtitle) footerMsg += ` (${appState.institutionSubtitle})`;
+  if (appState.institutionPhone) footerMsg += `\n📞 رابطہ: ${appState.institutionPhone}`;
+  if (appState.institutionAddress) footerMsg += `\n📍 ${appState.institutionAddress}`;
+
+  let rawMsg = `السلام علیکم ورحمۃ اللہ وبرکاتہ!\nمحترم سرپرست ${s.father || ''}!\nطالبہ: *${s.name}*\nرول نمبر: *${s.roll}* ${s.reg ? '| رجسٹریشن: *' + s.reg + '*' : ''}\nدرجہ: *${appState.currentClass}*\nامتحان: *${appState.examTitle}* (${appState.sessionYear || ''})\nمجموعہ نمبرات: *${s.obtained} / ${cData.totalMarks}*\nفیصد: *${s.percentage}%*\nپوزیشن: *${s.rank}*\nنتیجہ / کیفیت: *${s.grade}*\n\n🕌 *${footerMsg}*`;
+
+  let text = encodeURIComponent(rawMsg);
+  let url = phone ? `https://wa.me/${phone}?text=${text}` : `https://wa.me/?text=${text}`;
+  window.open(url, '_blank');
+}
+
+function renderQuickEntry(cData) {
+  let container = document.getElementById('quickEntryContainer');
+  let students = cData.students;
+  if (students.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">پہلے طالب علم کا اندراج کریں۔</p>';
+    return;
+  }
+
+  if (appState.quickEntryIndex >= students.length) {
+    appState.quickEntryIndex = 0;
+  }
+
+  let s = students[appState.quickEntryIndex];
+  let calc = calculateStudent(s, cData.subjects, cData.totalMarks);
+
+  let subjectsInputs = cData.subjects.map(sub => {
+    let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+    return `
+      <div class="quick-entry-row">
+        <div>
+          <strong style="font-size:14px;">${sub}</strong>
+          <span style="color:var(--text-muted); font-size:11px; display:block;">کل نمبر: ${max}</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', ${max})">${max}</button>
+          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', 'غائب')">غائب</button>
+          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', 'مستثنیٰ')">مستثنیٰ</button>
+          <input type="text" id="quick_input_${sub}" class="quick-entry-input" value="${val}"
+            onchange="updateStudentMarkInline(${appState.quickEntryIndex}, '${sub}', this.value); renderQuickEntry(getCurrentClassData());">
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="quick-entry-nav">
+      <button class="btn btn-secondary btn-sm" onclick="prevQuickStudent()" ${appState.quickEntryIndex === 0 ? 'disabled' : ''}>
+        ← پچھلا طالب علم
+      </button>
+      <div style="text-align:center;">
+        <span style="font-size:12px; color:var(--text-muted);">طالب علم ${appState.quickEntryIndex + 1} از ${students.length}</span>
+        <h3 style="font-size:16px; font-weight:700;">${s.name} (${s.roll})</h3>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="nextQuickStudent()">
+        اگلا طالب علم →
+      </button>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; background:var(--primary-subtle); padding:10px 14px; border-radius:var(--radius-sm);">
+      <div>
+        <span style="font-size:12px; color:var(--text-muted);">مجموعہ نمبرات:</span>
+        <strong style="font-size:16px; color:var(--primary-dark); margin-right:4px;">${calc.obtained} / ${calc.effectiveTotalMarks !== undefined ? calc.effectiveTotalMarks : cData.totalMarks}</strong>
+      </div>
+      <div>
+        <span style="font-size:12px; color:var(--text-muted);">فیصد:</span>
+        <strong style="font-size:16px; color:var(--primary-dark); margin-right:4px;">${calc.percentage}%</strong>
+      </div>
+      <div>
+        <span class="grade-badge ${getGradeClass(calc.grade)}">${calc.grade}</span>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      ${subjectsInputs}
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin-top:10px;">
+      <button class="btn btn-secondary" onclick="openStudentModal(${appState.quickEntryIndex})">مکمل تفصیلات میں ترمیم</button>
+      <button class="btn btn-primary" onclick="nextQuickStudent()">محفوظ کریں اور اگلا</button>
+    </div>
+  `;
+}
+
+function setQuickInputVal(sub, val) {
+  let inp = document.getElementById('quick_input_' + sub);
+  if (inp) {
+    inp.value = val;
+    updateStudentMarkInline(appState.quickEntryIndex, sub, val);
+    renderQuickEntry(getCurrentClassData());
+  }
+}
+
+function nextQuickStudent() {
+  let cData = getCurrentClassData();
+  if (appState.quickEntryIndex < cData.students.length - 1) {
+    appState.quickEntryIndex++;
+  } else {
+    appState.quickEntryIndex = 0;
+  }
+  renderQuickEntry(cData);
+}
+
+function prevQuickStudent() {
+  if (appState.quickEntryIndex > 0) {
+    appState.quickEntryIndex--;
+    renderQuickEntry(getCurrentClassData());
+  }
+}
+
+function changeSettingSubjectTarget() {
+  let subClassSelect = document.getElementById('settingSubjectClassSelect');
+  let subExamSelect = document.getElementById('settingSubjectExamSelect');
+  if (subClassSelect) settingSubjectTarget.class = subClassSelect.value;
+  if (subExamSelect) settingSubjectTarget.exam = subExamSelect.value;
+  renderSettingsSubjectList();
+}
+
+function renderSettingsSubjectList() {
+  let classes = getClassList();
+  let exams = getExamList();
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  if (!classes.includes(cls)) cls = classes[0];
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  if (!exams.includes(ex)) ex = exams[0];
+
+  let cData = getCurrentClassData(cls, ex);
+
+  let badge = document.getElementById('settingsSubjectSummaryBadge');
+  if (badge) {
+    badge.innerHTML = `
+      <span>درجہ: <strong>${cls}</strong> | امتحان: <strong>${ex}</strong></span>
+      <span>مضامین: <strong>${cData.subjects.length}</strong> | کل نمبر: <strong>${cData.totalMarks}</strong></span>
+    `;
+  }
+
+  let subList = document.getElementById('settingsSubjectList');
+  if (subList) {
+    if (cData.subjects.length === 0) {
+      subList.innerHTML = `<div style="text-align:center; color:var(--text-muted); padding:16px;">اس درجہ و امتحان کے لیے کوئی مضمون مقرر نہیں۔ نیا مضمون شامل کریں۔</div>`;
+      return;
+    }
+    subList.innerHTML = cData.subjects.map((sub, idx) => {
+      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
+      let pass = cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined ? cData.subjectPassMarks[sub] : 40;
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); flex-wrap:wrap; gap:8px;">
+          <span style="font-weight:700; font-size:13.5px;">${idx + 1}. ${sub}</span>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div style="display:flex; align-items:center; gap:4px; font-size:12px;">
+              <span>کل:</span>
+              <input type="number" value="${max}" style="width:55px; text-align:center; padding:3px; border-radius:4px; border:1px solid var(--border);"
+                onchange="updateSubjectMaxMark('${sub}', this.value)">
+            </div>
+            <div style="display:flex; align-items:center; gap:4px; font-size:12px;">
+              <span>پاس:</span>
+              <input type="number" value="${pass}" style="width:50px; text-align:center; padding:3px; border-radius:4px; border:1px solid var(--border);"
+                onchange="updateSubjectPassMark('${sub}', this.value)">
+            </div>
+            <button class="btn-icon-round" style="width:30px; height:30px;" onclick="renameSubjectPrompt('${sub}')" title="نام بدلیں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+            <button class="btn-icon-round" style="width:30px; height:30px; color:var(--danger);" onclick="deleteSubjectPrompt('${sub}')" title="حذف کریں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+function renderSettingsTab(cData) {
+  let subClassSelect = document.getElementById('settingSubjectClassSelect');
+  let subExamSelect = document.getElementById('settingSubjectExamSelect');
+  let classes = getClassList();
+  let exams = getExamList();
+
+  if (subClassSelect) {
+    let activeCls = settingSubjectTarget.class || appState.currentClass;
+    if (!classes.includes(activeCls)) activeCls = classes[0];
+    settingSubjectTarget.class = activeCls;
+    subClassSelect.innerHTML = classes.map(c => `<option value="${c}" ${c === activeCls ? 'selected' : ''}>${c}</option>`).join('');
+  }
+  if (subExamSelect) {
+    let activeEx = settingSubjectTarget.exam || appState.examTitle;
+    if (!exams.includes(activeEx)) activeEx = exams[0];
+    settingSubjectTarget.exam = activeEx;
+    subExamSelect.innerHTML = exams.map(e => `<option value="${e}" ${e === activeEx ? 'selected' : ''}>${e}</option>`).join('');
+  }
+
+  renderSettingsSubjectList();
+
+  let examSelect = document.getElementById('settingExamType');
+  if (examSelect) {
+    examSelect.innerHTML = exams.map(ex => `<option value="${ex}" ${ex === appState.examTitle ? 'selected' : ''}>${ex}</option>`).join('');
+  }
+
+  let examListElem = document.getElementById('settingsExamList');
+  if (examListElem) {
+    examListElem.innerHTML = exams.map(ex => {
+      let isCurrent = ex === appState.examTitle;
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border-radius:var(--radius-sm); border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <strong style="font-size:13.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${ex}</strong>
+            ${isCurrent ? '<span class="status-badge status-pass" style="font-size:10px; padding:1px 6px;">فعال</span>' : ''}
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <button type="button" class="btn-icon-round" style="width:30px; height:30px;" onclick="openEditExamModal('${ex}')" title="امتحان کا نام بدلیں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+            <button type="button" class="btn-icon-round" style="width:30px; height:30px; color:var(--danger);" onclick="deleteExamPrompt('${ex}')" title="امتحان حذف کریں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button type="button" class="btn btn-sm ${isCurrent ? 'btn-primary' : 'btn-secondary'}" style="padding:3px 8px; font-size:11.5px;" onclick="selectExamDirect('${ex}')">
+              ${isCurrent ? 'منتخب شدہ' : 'منتخب کریں'}
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  let classListElem = document.getElementById('settingsClassList');
+  if (classListElem) {
+    classListElem.innerHTML = classes.map(cls => {
+      let isCurrent = cls === appState.currentClass;
+      let cd = appState.classesData[cls];
+      let sCount = cd && cd.students ? cd.students.length : 0;
+      let ex = settingSubjectTarget.exam || appState.examTitle;
+      let subCount = (cd && cd.examConfigs && cd.examConfigs[ex]) ? cd.examConfigs[ex].subjects.length : ((cd && cd.subjects) ? cd.subjects.length : (CLASS_SUBJECT_DEFAULTS[cls] ? CLASS_SUBJECT_DEFAULTS[cls].length : 0));
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border-radius:var(--radius-sm); border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <strong style="font-size:13.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${cls}</strong>
+              ${isCurrent ? '<span class="status-badge status-pass" style="font-size:10px; padding:1px 6px;">فعال</span>' : ''}
+            </div>
+            <span style="font-size:11.5px; color:var(--text-muted); display:block; margin-top:2px;">طالبات: ${sCount} | مضامین: ${subCount}</span>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <button type="button" class="btn-icon-round" style="width:30px; height:30px;" onclick="openEditClassModal('${cls}')" title="درجہ کا نام بدلیں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </button>
+            <button type="button" class="btn-icon-round" style="width:30px; height:30px; color:var(--danger);" onclick="deleteClassPrompt('${cls}')" title="درجہ حذف کریں">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <button type="button" class="btn btn-sm ${isCurrent ? 'btn-primary' : 'btn-secondary'}" style="padding:3px 8px; font-size:11.5px;" onclick="selectClassDirect('${cls}')">
+              ${isCurrent ? 'منتخب شدہ' : 'منتخب کریں'}
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+function updateSubjectMaxMark(sub, val) {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let cData = getCurrentClassData(cls, ex);
+  let n = Number(val) || 100;
+  if (!cData.subjectMaxMarks) cData.subjectMaxMarks = {};
+  cData.subjectMaxMarks[sub] = n;
+  cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] !== undefined ? cData.subjectMaxMarks[s] : 100), 0);
+  if (cData.examConfigs && cData.examConfigs[ex]) {
+    cData.examConfigs[ex].subjectMaxMarks[sub] = n;
+    cData.examConfigs[ex].totalMarks = cData.totalMarks;
+  }
+  saveToLocalStorage();
+  renderApp();
+  showToast(`درجہ "${cls}" (${ex}) میں مضمون "${sub}" کے کل نمبر ${n} ہو گئے`, 'info');
+}
+
+function updateSubjectPassMark(sub, val) {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let cData = getCurrentClassData(cls, ex);
+  let n = Number(val) || 40;
+  if (!cData.subjectPassMarks) cData.subjectPassMarks = {};
+  cData.subjectPassMarks[sub] = n;
+  if (cData.examConfigs && cData.examConfigs[ex]) {
+    cData.examConfigs[ex].subjectPassMarks[sub] = n;
+  }
+  saveToLocalStorage();
+  renderApp();
+  showToast(`درجہ "${cls}" (${ex}) میں مضمون "${sub}" کے پاس مارکس ${n} ہو گئے`, 'info');
+}
+
+function applySubjectsToAllExamsOfClass() {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let cData = getCurrentClassData(cls, ex);
+  openConfirmDialog(
+    'تمام امتحانات پر لاگو کریں',
+    `کیا آپ درجہ "${cls}" کے امتحان "${ex}" کے مضامین اسی درجہ کے تمام امتحانات پر بھی یکساں لاگو کرنا چاہتے ہیں؟`,
+    function() {
+      let exams = getExamList();
+      if (!cData.examConfigs) cData.examConfigs = {};
+      exams.forEach(otherEx => {
+        cData.examConfigs[otherEx] = {
+          subjects: [...cData.subjects],
+          subjectMaxMarks: { ...cData.subjectMaxMarks },
+          subjectPassMarks: { ...cData.subjectPassMarks },
+          totalMarks: cData.totalMarks
+        };
+      });
+      cData.subjects = [...cData.subjects];
+      saveToLocalStorage();
+      renderApp();
+      showToast(`درجہ "${cls}" کے تمام امتحانات پر مضامین یکساں لاگو ہو گئے`, 'info');
+    }
+  );
+}
+
+function resetCurriculumPrompt() {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let defSubs = CLASS_SUBJECT_DEFAULTS[cls] || ['مضمون ۱', 'مضمون ۲'];
+  openConfirmDialog(
+    'معیاری نصاب بحال کریں',
+    `کیا آپ درجہ "${cls}" برائے "${ex}" کے لیے وفاق المدارس کا بنیادی نصاب (${defSubs.join(', ')}) بحال کرنا چاہتے ہیں؟`,
+    function() {
+      let cData = getCurrentClassData(cls, ex);
+      cData.subjects = [...defSubs];
+      cData.subjectMaxMarks = defSubs.reduce((acc, s) => { acc[s] = 100; return acc; }, {});
+      cData.subjectPassMarks = defSubs.reduce((acc, s) => { acc[s] = 40; return acc; }, {});
+      cData.totalMarks = cls === 'خاصہ اول' ? 700 : (defSubs.length * 100);
+      if (cData.examConfigs && cData.examConfigs[ex]) {
+        cData.examConfigs[ex].subjects = [...cData.subjects];
+        cData.examConfigs[ex].subjectMaxMarks = { ...cData.subjectMaxMarks };
+        cData.examConfigs[ex].subjectPassMarks = { ...cData.subjectPassMarks };
+        cData.examConfigs[ex].totalMarks = cData.totalMarks;
+      }
+      saveToLocalStorage();
+      renderApp();
+      showToast(`درجہ "${cls}" (${ex}) کا معیاری نصاب بحال ہو گیا`, 'info');
+    }
+  );
+}
+
+function openCopySubjectsModal() {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let srcClassSelect = document.getElementById('copySourceClassSelect');
+  let srcExamSelect = document.getElementById('copySourceExamSelect');
+  let classes = getClassList();
+  let exams = getExamList();
+
+  if (srcClassSelect) {
+    srcClassSelect.innerHTML = classes.map(c => `<option value="${c}" ${c === cls ? 'selected' : ''}>${c}</option>`).join('');
+  }
+  if (srcExamSelect) {
+    srcExamSelect.innerHTML = exams.map(e => `<option value="${e}" ${e === ex ? 'selected' : ''}>${e}</option>`).join('');
+  }
+  let targetLabel = document.getElementById('copyTargetLabel');
+  if (targetLabel) {
+    targetLabel.innerText = `${cls} — ${ex}`;
+  }
+  document.getElementById('copySubjectsModal').classList.add('open');
+}
+
+function closeCopySubjectsModal() {
+  document.getElementById('copySubjectsModal').classList.remove('open');
+}
+
+function submitCopySubjects() {
+  let srcCls = document.getElementById('copySourceClassSelect').value;
+  let srcEx = document.getElementById('copySourceExamSelect').value;
+  let destCls = settingSubjectTarget.class || appState.currentClass;
+  let destEx = settingSubjectTarget.exam || appState.examTitle;
+
+  if (srcCls === destCls && srcEx === destEx) {
+    showToast('ماخذ اور ہدف ایک ہی ہیں', 'warning');
+    return;
+  }
+
+  let srcCData = getCurrentClassData(srcCls, srcEx);
+  let destCData = getCurrentClassData(destCls, destEx);
+
+  destCData.subjects = [...srcCData.subjects];
+  destCData.subjectMaxMarks = { ...srcCData.subjectMaxMarks };
+  destCData.subjectPassMarks = { ...srcCData.subjectPassMarks };
+  destCData.totalMarks = srcCData.totalMarks;
+
+  if (destCData.examConfigs && destCData.examConfigs[destEx]) {
+    destCData.examConfigs[destEx].subjects = [...destCData.subjects];
+    destCData.examConfigs[destEx].subjectMaxMarks = { ...destCData.subjectMaxMarks };
+    destCData.examConfigs[destEx].subjectPassMarks = { ...destCData.subjectPassMarks };
+    destCData.examConfigs[destEx].totalMarks = destCData.totalMarks;
+  }
+
+  closeCopySubjectsModal();
+  saveToLocalStorage();
+  renderApp();
+  showToast(`مضامین "${srcCls} (${srcEx})" سے کاپی ہو کر "${destCls} (${destEx})" میں لاگو ہو گئے`, 'info');
+}
+
+function renderDmcTab(cData) {
+  let select = document.getElementById('dmcStudentSelect');
+  let students = cData.students;
+  select.innerHTML = students.map((s, idx) => `<option value="${idx}">${s.roll} - ${s.name} ولد ${s.father || ''}</option>`).join('');
+  if (students.length > 0) {
+    renderSingleDMC(0);
+  } else {
+    document.getElementById('dmcContainer').innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">کوئی طالب علم موجود نہیں۔</p>';
+  }
+}
+
+function renderSingleDMC(index) {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let s = computed[index];
+  if (!s) return;
+  document.getElementById('dmcContainer').innerHTML = generateDmcCardHtml(s, cData);
+}
+
+function renderAllDMCs() {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  document.getElementById('dmcContainer').innerHTML = computed.map(s => generateDmcCardHtml(s, cData)).join('');
+  showToast('تمام طلبہ کے کشف الدرجات تیار ہیں', 'info');
+}
+
+function showStudentDMC(index) {
+  switchTabDirect('dmc');
+  document.getElementById('dmcStudentSelect').value = index;
+  renderSingleDMC(index);
+}
+
+function generateDmcCardHtml(s, cData) {
+  let subRows = cData.subjects.map((sub, i) => {
+    let mark = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '-';
+    let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
+    let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined ? cData.subjectPassMarks[sub] : 40;
+    let strMark = String(mark).trim().toLowerCase();
+    let isExempt = strMark === '-' || strMark === 'مستثنیٰ' || strMark === 'مستثنی' || strMark === 'exempt';
+    let status = isExempt ? '<span style="color:#0284c7; font-weight:bold;">مستثنیٰ</span>' : ((typeof mark === 'number' && mark >= minPass) ? '<span style="color:var(--success); font-weight:bold;">کامیاب</span>' : '<span style="color:var(--danger); font-weight:bold;">راسب</span>');
+    return `
+      <tr>
+        <td>${i + 1}</td>
+        <td style="text-align:right; font-weight:700;">${sub}</td>
+        <td>${max}</td>
+        <td>${minPass}</td>
+        <td style="font-weight:700;">${mark}</td>
+        <td>${status}</td>
+      </tr>
+    `;
+  }).join('');
+
+  let metaParts = [];
+  if (appState.institutionAddress) metaParts.push('📍 ' + appState.institutionAddress);
+  if (appState.institutionPhone) metaParts.push('📞 ' + appState.institutionPhone);
+  if (appState.institutionReg) metaParts.push('🏛️ ' + appState.institutionReg);
+
+  return `
+    <div class="dmc-card print-page-break">
+      <div class="dmc-header">
+        <p style="font-size:12px; margin-bottom:2px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:3px;">
+          ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:52px; height:52px; object-fit:contain; border-radius:50%; border:1px solid #0f766e;">` : ''}
+          <div>
+            <h2 style="margin:0; font-size:18pt; color:#0f766e;">${appState.institution}</h2>
+            ${appState.institutionSubtitle ? `<div style="font-size:10pt; color:#475569; font-weight:bold;">${appState.institutionSubtitle}</div>` : ''}
+          </div>
+        </div>
+        ${metaParts.length > 0 ? `<div style="font-size:8.5pt; color:#64748b; margin-bottom:4px;">${metaParts.join(' | ')}</div>` : ''}
+        <h3 style="font-size:13pt; margin:4px 0 2px 0;">کشف الدرجات (Detailed Marks Certificate)</h3>
+        <p style="font-size:10pt; margin:0;">${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'}) - درجہ: ${appState.currentClass}</p>
+      </div>
+
+      <div class="dmc-meta">
+        <div><strong>رول نمبر:</strong> ${s.roll}</div>
+        <div><strong>رجسٹریشن نمبر:</strong> ${s.reg || '-'}</div>
+        <div><strong>اسم الطالبۃ:</strong> ${s.name}</div>
+        <div><strong>اسم الاب:</strong> ${s.father || '-'}</div>
+        <div><strong>پوزیشن:</strong> <strong style="color:var(--accent); font-size:14px;">${s.rank}</strong></div>
+        <div><strong>تاریخ اجراء:</strong> ${new Date().toLocaleDateString('ur-PK')}</div>
+      </div>
+
+      <table class="dmc-table">
+        <thead>
+          <tr>
+            <th style="width:35px;">شمار</th>
+            <th style="text-align:right;">مضمون</th>
+            <th>کل نمبر</th>
+            <th>پاس مارکس</th>
+            <th>حاصل کردہ نمبر</th>
+            <th>کیفیت</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${subRows}
+          <tr style="background:#f8fafc; font-weight:700;">
+            <td colspan="2" style="text-align:right;">میزان (مجموعہ نمبرات)</td>
+            <td>${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks}</td>
+            <td>-</td>
+            <td style="color:#0f766e; font-size:15px;">${s.obtained}</td>
+            <td>${s.percentage}%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; background:#f0fdfa; padding:10px 14px; border-radius:6px; font-size:13px; font-weight:700;">
+        <div>نتیجہ / کیفیت: <span class="grade-badge ${getGradeClass(s.grade)}">${s.grade}</span></div>
+        <div>فیصد: ${s.percentage}%</div>
+        <div>پوزیشن: ${s.rank}</div>
+      </div>
+
+      <div class="dmc-footer">
+        <div>دستخط ممتحن: ____________</div>
+        <div>دستخط نگران: ____________</div>
+        <div>دستخط ناظم امتحانات: ____________</div>
+        <div>دستخط و مہر ${appState.institutionHead || 'مہتمم جامعہ'}: ____________</div>
+      </div>
+    </div>
+  `;
+}
+
+function openStudentModal(editIndex = null) {
+  let cData = getCurrentClassData();
+  let title = document.getElementById('modalStudentTitle');
+  let rollInput = document.getElementById('modalStudentRoll');
+  let regInput = document.getElementById('modalStudentReg');
+  let nameInput = document.getElementById('modalStudentName');
+  let fatherInput = document.getElementById('modalStudentFather');
+  let phoneInput = document.getElementById('modalStudentPhone');
+  let addressInput = document.getElementById('modalStudentAddress');
+  let editInput = document.getElementById('editStudentIndex');
+  let marksContainer = document.getElementById('modalMarksInputs');
+
+  if (editIndex !== null) {
+    title.innerText = 'طالب علم کی ترمیم';
+    let s = cData.students[editIndex];
+    editInput.value = editIndex;
+    rollInput.value = s.roll;
+    regInput.value = s.reg || '';
+    nameInput.value = s.name;
+    fatherInput.value = s.father || '';
+    phoneInput.value = s.phone || '';
+    addressInput.value = s.address || '';
+
+    marksContainer.innerHTML = cData.subjects.map(sub => {
+      let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+      return `
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+          <label style="font-size:13px; font-weight:600; min-width:120px;">${sub} (${max}):</label>
+          <div style="display:flex; gap:6px; flex:1;">
+            <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="${val}">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'">مستثنیٰ</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'">${max}</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } else {
+    title.innerText = 'نیا طالب علم شامل کریں';
+    editInput.value = '';
+    let nextRoll = cData.students.length > 0 ? (Math.max(...cData.students.map(s => Number(s.roll) || 0)) + 1) : 1;
+    rollInput.value = nextRoll;
+    regInput.value = 'REG-' + (100 + nextRoll);
+    nameInput.value = '';
+    fatherInput.value = '';
+    phoneInput.value = '';
+    addressInput.value = '';
+
+    marksContainer.innerHTML = cData.subjects.map(sub => {
+      let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
+      return `
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+          <label style="font-size:13px; font-weight:600; min-width:120px;">${sub} (${max}):</label>
+          <div style="display:flex; gap:6px; flex:1;">
+            <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'">مستثنیٰ</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'">${max}</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  document.getElementById('studentModal').classList.add('open');
+  setTimeout(() => nameInput.focus(), 150);
+}
+
+function closeStudentModal() {
+  document.getElementById('studentModal').classList.remove('open');
+}
+
+function saveStudentModal() {
+  let cData = getCurrentClassData();
+  let editIndex = document.getElementById('editStudentIndex').value;
+  let roll = Number(document.getElementById('modalStudentRoll').value) || (cData.students.length + 1);
+  let reg = document.getElementById('modalStudentReg').value.trim();
+  let name = document.getElementById('modalStudentName').value.trim();
+  let father = document.getElementById('modalStudentFather').value.trim();
+  let phone = document.getElementById('modalStudentPhone').value.trim();
+  let address = document.getElementById('modalStudentAddress').value.trim();
+
+  if (!name) {
+    showToast('براہ کرم طالب علم کا نام درج کریں', 'warning');
+    return;
+  }
+
+  let marks = {};
+  cData.subjects.forEach(sub => {
+    let inp = document.getElementById('modalMark_' + sub);
+    if (inp) {
+      let v = inp.value.trim();
+      if (v !== '') {
+        marks[sub] = !isNaN(Number(v)) ? Number(v) : v;
+      }
+    }
+  });
+
+  if (editIndex !== '') {
+    let idx = Number(editIndex);
+    let existing = cData.students[idx] || {};
+    if (!existing.examMarks) existing.examMarks = {};
+    existing.examMarks[appState.examTitle] = marks;
+    cData.students[idx] = { ...existing, roll, reg, name, father, phone, address, marks, examMarks: existing.examMarks };
+    showToast('طالب علم کا ڈیٹا اپ ڈیٹ ہو گیا', 'info');
+  } else {
+    cData.students.push({ roll, reg, name, father, phone, address, marks, examMarks: { [appState.examTitle]: marks } });
+    showToast('نیا طالب علم کامیابی سے شامل کر لیا گیا', 'info');
+  }
+
+  closeStudentModal();
+  saveToLocalStorage();
+  renderApp();
+}
+
+function editStudent(index) {
+  openStudentModal(index);
+}
+
+function deleteStudent(index) {
+  let cData = getCurrentClassData();
+  let s = cData.students[index];
+  openConfirmDialog(
+    'طالب علم حذف کریں',
+    `کیا آپ واقعی طالبہ "${s.name}" (رول: ${s.roll}) کو حذف کرنا چاہتے ہیں؟ یہ عمل واپس نہیں لیا جا سکتا۔`,
+    function() {
+      cData.students.splice(index, 1);
+      renderApp();
+      showToast('طالب علم کامیابی سے حذف ہو گیا', 'info');
+    }
+  );
+}
+
+function openClassPickerSheet() {
+  let container = document.getElementById('classListContainer');
+  let classes = getClassList();
+  container.innerHTML = `
+    <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-size:13px; color:var(--text-muted);">کل درجات: <strong>${classes.length}</strong></span>
+      <button type="button" class="btn btn-primary btn-sm" onclick="openAddClassModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>نیا درجہ شامل کریں</span>
+      </button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      ${classes.map(cls => {
+        let isCurrent = cls === appState.currentClass;
+        let cData = appState.classesData[cls];
+        let count = cData && cData.students ? cData.students.length : 0;
+        let subCount = cData && cData.subjects ? cData.subjects.length : (CLASS_SUBJECT_DEFAULTS[cls] ? CLASS_SUBJECT_DEFAULTS[cls].length : 0);
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-radius:12px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+            <div style="flex:1; cursor:pointer;" onclick="selectClassDirect('${cls}')">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <strong style="font-size:14.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${cls}</strong>
+                ${isCurrent ? '<span class="status-badge status-pass" style="font-size:10px; padding:1px 6px;">فعال</span>' : ''}
+              </div>
+              <span style="font-size:12px; color:var(--text-muted); display:block; margin-top:2px;">طالبات: ${count} | مضامین: ${subCount}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <button type="button" class="btn-icon-round" style="width:32px; height:32px;" onclick="event.stopPropagation(); openEditClassModal('${cls}')" title="درجہ کا نام بدلیں">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <button type="button" class="btn-icon-round" style="width:32px; height:32px; color:var(--danger);" onclick="event.stopPropagation(); deleteClassPrompt('${cls}')" title="درجہ حذف کریں">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm ${isCurrent ? 'btn-primary' : 'btn-secondary'}" style="padding:4px 10px; font-size:12px;" onclick="selectClassDirect('${cls}')">
+                ${isCurrent ? 'فعال' : 'منتخب'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+  document.getElementById('classPickerSheet').classList.add('open');
+}
+
+function closeClassPickerSheet() {
+  document.getElementById('classPickerSheet').classList.remove('open');
+}
+
+function selectClassDirect(cls) {
+  appState.currentClass = cls;
+  settingSubjectTarget.class = cls;
+  appState.quickEntryIndex = 0;
+  closeClassPickerSheet();
+  updateHeaderDisplay();
+  renderApp();
+  saveToLocalStorage();
+  showToast(`درجہ تبدیل ہو گیا: ${cls}`, 'info');
+}
+
+function openAddClassModal() {
+  document.getElementById('newClassNameInput').value = '';
+  document.getElementById('newClassSubjectsInput').value = 'مضمون ۱, مضمون ۲';
+  document.getElementById('newClassMaxMarksInput').value = 100;
+  document.getElementById('newClassPassMarksInput').value = 40;
+  document.getElementById('addClassModal').classList.add('open');
+}
+
+function closeAddClassModal() {
+  document.getElementById('addClassModal').classList.remove('open');
+}
+
+function submitAddNewClass() {
+  let name = document.getElementById('newClassNameInput').value.trim();
+  if (!name) {
+    showToast('براہ کرم درجہ کا نام درج کریں', 'error');
+    return;
+  }
+  let classes = getClassList();
+  if (classes.includes(name)) {
+    showToast('یہ درجہ پہلے سے موجود ہے', 'warning');
+    return;
+  }
+  let rawSubs = document.getElementById('newClassSubjectsInput').value.split(/[,،]/).map(s => s.trim()).filter(s => s.length > 0);
+  if (rawSubs.length === 0) rawSubs = ['مضمون ۱', 'مضمون ۲'];
+  let max = Number(document.getElementById('newClassMaxMarksInput').value) || 100;
+  let pass = Number(document.getElementById('newClassPassMarksInput').value) || 40;
+
+  let maxMap = {};
+  let passMap = {};
+  rawSubs.forEach(s => {
+    maxMap[s] = max;
+    passMap[s] = pass;
+  });
+
+  classes.push(name);
+  appState.classList = classes;
+  let exams = getExamList();
+  let examConfigs = {};
+  exams.forEach(ex => {
+    examConfigs[ex] = {
+      subjects: [...rawSubs],
+      subjectMaxMarks: { ...maxMap },
+      subjectPassMarks: { ...passMap },
+      totalMarks: rawSubs.length * max
+    };
+  });
+
+  appState.classesData[name] = {
+    subjects: rawSubs,
+    subjectMaxMarks: maxMap,
+    subjectPassMarks: passMap,
+    totalMarks: rawSubs.length * max,
+    students: [],
+    examConfigs: examConfigs
+  };
+  appState.currentClass = name;
+  settingSubjectTarget.class = name;
+  appState.quickEntryIndex = 0;
+  closeAddClassModal();
+  closeClassPickerSheet();
+  updateHeaderDisplay();
+  renderApp();
+  saveToLocalStorage();
+  showToast(`نیا درجہ "${name}" کامیابی سے شامل ہو گیا!`, 'info');
+}
+
+function openEditClassModal(cls) {
+  document.getElementById('editClassOldName').value = cls;
+  document.getElementById('editClassNameInput').value = cls;
+  document.getElementById('editClassModal').classList.add('open');
+}
+
+function closeEditClassModal() {
+  document.getElementById('editClassModal').classList.remove('open');
+}
+
+function submitEditClassName() {
+  let oldName = document.getElementById('editClassOldName').value.trim();
+  let newName = document.getElementById('editClassNameInput').value.trim();
+  if (!newName) {
+    showToast('درجہ کا نام خالی نہیں ہو سکتا', 'error');
+    return;
+  }
+  if (newName === oldName) {
+    closeEditClassModal();
+    return;
+  }
+  let list = getClassList();
+  if (list.includes(newName)) {
+    showToast('اس نام کا درجہ پہلے سے موجود ہے', 'warning');
+    return;
+  }
+  let idx = list.indexOf(oldName);
+  if (idx !== -1) list[idx] = newName;
+  else list.push(newName);
+  appState.classList = list;
+
+  if (appState.classesData[oldName]) {
+    appState.classesData[newName] = appState.classesData[oldName];
+    delete appState.classesData[oldName];
+  }
+  if (appState.currentClass === oldName) {
+    appState.currentClass = newName;
+  }
+  if (settingSubjectTarget.class === oldName) {
+    settingSubjectTarget.class = newName;
+  }
+  closeEditClassModal();
+  updateHeaderDisplay();
+  renderApp();
+  if (document.getElementById('classPickerSheet').classList.contains('open')) {
+    openClassPickerSheet();
+  }
+  saveToLocalStorage();
+  showToast(`درجہ کا نام "${newName}" پر تبدیل کر دیا گیا`, 'info');
+}
+
+function deleteClassPrompt(cls) {
+  let list = getClassList();
+  if (list.length <= 1) {
+    showToast('کم از کم ایک درجہ کا ہونا ضروری ہے۔ آپ آخری درجہ کو حذف نہیں کر سکتے۔', 'warning');
+    return;
+  }
+  let cData = appState.classesData[cls];
+  let count = cData && cData.students ? cData.students.length : 0;
+  openConfirmDialog(
+    'درجہ حذف کریں',
+    `کیا آپ واقعی درجہ "${cls}" اور اس میں موجود تمام ${count} طالبات کا ڈیٹا حذف کرنا چاہتے ہیں؟`,
+    function() {
+      appState.classList = appState.classList.filter(c => c !== cls);
+      if (appState.classesData[cls]) {
+        delete appState.classesData[cls];
+      }
+      if (appState.currentClass === cls) {
+        appState.currentClass = appState.classList[0];
+      }
+      if (settingSubjectTarget.class === cls) {
+        settingSubjectTarget.class = appState.currentClass;
+      }
+      updateHeaderDisplay();
+      renderApp();
+      if (document.getElementById('classPickerSheet').classList.contains('open')) {
+        openClassPickerSheet();
+      }
+      saveToLocalStorage();
+      showToast(`درجہ "${cls}" کامیابی سے حذف ہو گیا`, 'info');
+    }
+  );
+}
+
+function openExamPickerSheet() {
+  let container = document.getElementById('examListContainer');
+  let exams = getExamList();
+  container.innerHTML = `
+    <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-size:13px; color:var(--text-muted);">کل امتحانی سیشنز: <strong>${exams.length}</strong></span>
+      <button type="button" class="btn btn-primary btn-sm" onclick="openAddExamModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>نیا امتحان</span>
+      </button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      ${exams.map(ex => {
+        let isCurrent = ex === appState.examTitle;
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-radius:12px; background:${isCurrent ? 'var(--primary-subtle)' : 'var(--surface-alt)'}; border:1px solid ${isCurrent ? 'var(--primary)' : 'var(--border)'}; gap:8px;">
+            <div style="flex:1; cursor:pointer;" onclick="selectExamDirect('${ex}')">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <strong style="font-size:14.5px; color:${isCurrent ? 'var(--primary-dark)' : 'var(--text)'};">${ex}</strong>
+                ${isCurrent ? '<span class="status-badge status-pass" style="font-size:10px; padding:1px 6px;">فعال</span>' : ''}
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <button type="button" class="btn-icon-round" style="width:32px; height:32px;" onclick="event.stopPropagation(); openEditExamModal('${ex}')" title="امتحان کا نام بدلیں">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <button type="button" class="btn-icon-round" style="width:32px; height:32px; color:var(--danger);" onclick="event.stopPropagation(); deleteExamPrompt('${ex}')" title="امتحان حذف کریں">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm ${isCurrent ? 'btn-primary' : 'btn-secondary'}" style="padding:4px 10px; font-size:12px;" onclick="selectExamDirect('${ex}')">
+                ${isCurrent ? 'فعال' : 'منتخب'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+  document.getElementById('examPickerSheet').classList.add('open');
+}
+
+function closeExamPickerSheet() {
+  document.getElementById('examPickerSheet').classList.remove('open');
+}
+
+function selectExamDirect(exam) {
+  appState.examTitle = exam;
+  settingSubjectTarget.exam = exam;
+  closeExamPickerSheet();
+  updateHeaderDisplay();
+  renderApp();
+  saveToLocalStorage();
+  showToast(`امتحان منتخب ہو گیا: ${exam}`, 'info');
+}
+
+function openAddExamModal() {
+  document.getElementById('newExamTitleInput').value = '';
+  document.getElementById('addExamModal').classList.add('open');
+}
+
+function closeAddExamModal() {
+  document.getElementById('addExamModal').classList.remove('open');
+}
+
+function submitAddNewExam() {
+  let title = document.getElementById('newExamTitleInput').value.trim();
+  if (!title) {
+    showToast('براہ کرم امتحان کا عنوان درج کریں', 'error');
+    return;
+  }
+  let exams = getExamList();
+  if (exams.includes(title)) {
+    showToast('یہ امتحان پہلے سے موجود ہے', 'warning');
+    return;
+  }
+  exams.push(title);
+  appState.examList = exams;
+  appState.examTitle = title;
+  settingSubjectTarget.exam = title;
+
+  let classes = getClassList();
+  classes.forEach(cls => {
+    let cd = appState.classesData[cls];
+    if (cd) {
+      if (!cd.examConfigs) cd.examConfigs = {};
+      let baseSubs = (cd.subjects && cd.subjects.length > 0) ? [...cd.subjects] : (CLASS_SUBJECT_DEFAULTS[cls] ? [...CLASS_SUBJECT_DEFAULTS[cls]] : ['مضمون ۱', 'مضمون ۲']);
+      let maxMap = cd.subjectMaxMarks ? { ...cd.subjectMaxMarks } : {};
+      let passMap = cd.subjectPassMarks ? { ...cd.subjectPassMarks } : {};
+      baseSubs.forEach(s => {
+        if (maxMap[s] === undefined) maxMap[s] = 100;
+        if (passMap[s] === undefined) passMap[s] = 40;
+      });
+      cd.examConfigs[title] = {
+        subjects: [...baseSubs],
+        subjectMaxMarks: { ...maxMap },
+        subjectPassMarks: { ...passMap },
+        totalMarks: baseSubs.reduce((sum, s) => sum + (maxMap[s] !== undefined ? maxMap[s] : 100), 0)
+      };
+      if (cd.students) {
+        cd.students.forEach(s => {
+          if (!s.examMarks) s.examMarks = {};
+          s.examMarks[title] = {};
+        });
+      }
+    }
+  });
+
+  closeAddExamModal();
+  closeExamPickerSheet();
+  updateHeaderDisplay();
+  renderApp();
+  saveToLocalStorage();
+  showToast(`نیا امتحان "${title}" کامیابی سے شامل ہو گیا!`, 'info');
+}
+
+function openEditExamModal(ex) {
+  document.getElementById('editExamOldName').value = ex;
+  document.getElementById('editExamTitleInput').value = ex;
+  document.getElementById('editExamModal').classList.add('open');
+}
+
+function closeEditExamModal() {
+  document.getElementById('editExamModal').classList.remove('open');
+}
+
+function submitEditExamName() {
+  let oldName = document.getElementById('editExamOldName').value.trim();
+  let newName = document.getElementById('editExamTitleInput').value.trim();
+  if (!newName) {
+    showToast('امتحان کا نام خالی نہیں ہو سکتا', 'error');
+    return;
+  }
+  if (newName === oldName) {
+    closeEditExamModal();
+    return;
+  }
+  let list = getExamList();
+  if (list.includes(newName)) {
+    showToast('اس نام کا امتحان پہلے سے موجود ہے', 'warning');
+    return;
+  }
+  let idx = list.indexOf(oldName);
+  if (idx !== -1) list[idx] = newName;
+  else list.push(newName);
+  appState.examList = list;
+
+  if (appState.examTitle === oldName) {
+    appState.examTitle = newName;
+  }
+  if (settingSubjectTarget.exam === oldName) {
+    settingSubjectTarget.exam = newName;
+  }
+
+  let classes = getClassList();
+  classes.forEach(cls => {
+    let cd = appState.classesData[cls];
+    if (cd && cd.examConfigs) {
+      if (cd.examConfigs[oldName]) {
+        cd.examConfigs[newName] = cd.examConfigs[oldName];
+        delete cd.examConfigs[oldName];
+      }
+      if (cd.students) {
+        cd.students.forEach(s => {
+          if (s.examMarks && s.examMarks[oldName]) {
+            s.examMarks[newName] = s.examMarks[oldName];
+            delete s.examMarks[oldName];
+          }
+        });
+      }
+    }
+  });
+
+  closeEditExamModal();
+  updateHeaderDisplay();
+  renderApp();
+  if (document.getElementById('examPickerSheet').classList.contains('open')) {
+    openExamPickerSheet();
+  }
+  saveToLocalStorage();
+  showToast(`امتحان کا نام "${newName}" پر تبدیل کر دیا گیا`, 'info');
+}
+
+function deleteExamPrompt(ex) {
+  let list = getExamList();
+  if (list.length <= 1) {
+    showToast('کم از کم ایک امتحان کا ہونا لازمی ہے۔ آپ آخری امتحان کو حذف نہیں کر سکتے۔', 'warning');
+    return;
+  }
+  openConfirmDialog(
+    'امتحان حذف کریں',
+    `کیا آپ واقعی امتحان "${ex}" کو حذف کرنا چاہتے ہیں؟ اس امتحان کے تمام درجات میں نمبرات اور مضامین کی ترتیبات بھی خارج ہو جائیں گی۔`,
+    function() {
+      appState.examList = appState.examList.filter(e => e !== ex);
+      if (appState.examTitle === ex) {
+        appState.examTitle = appState.examList[0];
+      }
+      if (settingSubjectTarget.exam === ex) {
+        settingSubjectTarget.exam = appState.examTitle;
+      }
+
+      let classes = getClassList();
+      classes.forEach(cls => {
+        let cd = appState.classesData[cls];
+        if (cd && cd.examConfigs) {
+          if (cd.examConfigs[ex]) delete cd.examConfigs[ex];
+          if (cd.students) {
+            cd.students.forEach(s => {
+              if (s.examMarks && s.examMarks[ex]) delete s.examMarks[ex];
+            });
+          }
+        }
+      });
+
+      updateHeaderDisplay();
+      renderApp();
+      if (document.getElementById('examPickerSheet').classList.contains('open')) {
+        openExamPickerSheet();
+      }
+      saveToLocalStorage();
+      showToast(`امتحان "${ex}" کامیابی سے حذف ہو گیا`, 'info');
+    }
+  );
+}
+
+function openPrintCenterModal() {
+  switchTabDirect('printcenter');
+}
+
+function switchMainTab(tabId, btn) {
+  appState.activeTab = tabId;
+  document.querySelectorAll('.desktop-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.mobile-nav-item').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+
+  if (btn) btn.classList.add('active');
+  let mobBtn = document.querySelector(`.mobile-nav-item[data-tab="${tabId}"]`);
+  if (mobBtn) mobBtn.classList.add('active');
+
+  let targetPane = document.getElementById('pane-' + tabId);
+  if (targetPane) targetPane.classList.add('active');
+}
+
+function switchMobileNav(tabId, btn) {
+  appState.activeTab = tabId;
+  document.querySelectorAll('.mobile-nav-item').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.desktop-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+
+  btn.classList.add('active');
+  let deskBtn = Array.from(document.querySelectorAll('.desktop-tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+  if (deskBtn) deskBtn.classList.add('active');
+
+  let targetPane = document.getElementById('pane-' + tabId);
+  if (targetPane) targetPane.classList.add('active');
+}
+
+function switchTabDirect(tabId) {
+  let deskBtn = Array.from(document.querySelectorAll('.desktop-tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+  let mobBtn = document.querySelector(`.mobile-nav-item[data-tab="${tabId}"]`);
+  switchMainTab(tabId, deskBtn || mobBtn);
+}
+
+function handleSearchInput(val) {
+  appState.searchQuery = val;
+  let clearBtn = document.getElementById('searchClearBtn');
+  clearBtn.style.display = val.length > 0 ? 'block' : 'none';
+  let students = getFilteredAndSortedStudents();
+  renderTable(getCurrentClassData(), students);
+  renderCards(getCurrentClassData(), students);
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  handleSearchInput('');
+}
+
+function setFilterChip(filterVal, chipBtn) {
+  appState.filterOption = filterVal;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  chipBtn.classList.add('active');
+  let students = getFilteredAndSortedStudents();
+  renderTable(getCurrentClassData(), students);
+  renderCards(getCurrentClassData(), students);
+}
+
+function handleSortChange(sortVal) {
+  appState.sortOption = sortVal;
+  let students = getFilteredAndSortedStudents();
+  renderTable(getCurrentClassData(), students);
+  renderCards(getCurrentClassData(), students);
+}
+
+function bulkMarkAll(status) {
+  let cData = getCurrentClassData();
+  let msg = status === 'present' ? 'سب کو حاضر (100) کریں؟' : 'سب کو غیر حاضر (غائب) کریں؟';
+  openConfirmDialog('اجتماعی کارروائی', msg, function() {
+    cData.students.forEach(s => {
+      if (!s.marks) s.marks = {};
+      if (!s.examMarks) s.examMarks = {};
+      if (!s.examMarks[appState.examTitle]) s.examMarks[appState.examTitle] = {};
+      cData.subjects.forEach(sub => {
+        let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
+        let v = (status === 'present') ? max : 'غائب';
+        s.marks[sub] = v;
+        s.examMarks[appState.examTitle][sub] = v;
+      });
+    });
+    saveToLocalStorage();
+    renderApp();
+    showToast('اجتماعی حاضری اپ ڈیٹ ہو گئی', 'info');
+  });
+}
+
+function saveGeneralSettings() {
+  let inst = document.getElementById('settingInstName');
+  if (inst) appState.institution = inst.value.trim() || 'جامعہ فاطمۃ الزہرا للبنات';
+  let sub = document.getElementById('settingInstSubtitle');
+  if (sub) appState.institutionSubtitle = sub.value.trim();
+  let addr = document.getElementById('settingInstAddress');
+  if (addr) appState.institutionAddress = addr.value.trim();
+  let phone = document.getElementById('settingInstPhone');
+  if (phone) appState.institutionPhone = phone.value.trim();
+  let reg = document.getElementById('settingInstReg');
+  if (reg) appState.institutionReg = reg.value.trim();
+  let head = document.getElementById('settingInstHead');
+  if (head) appState.institutionHead = head.value.trim() || 'مہتمم جامعہ';
+
+  let exSelect = document.getElementById('settingExamType');
+  if (exSelect) appState.examTitle = exSelect.value;
+  let yr = document.getElementById('settingSessionYear');
+  if (yr) appState.sessionYear = yr.value.trim() || '۱۴۴۶-۱۴۴۷ھ / ۲۰۲۶-۲۰۲۷ء';
+  let rk = document.getElementById('settingRankFormat');
+  if (rk) appState.rankFormat = rk.value;
+  let pass = document.getElementById('settingPassThreshold');
+  if (pass) appState.passThreshold = Number(pass.value) || 40;
+
+  updateHeaderDisplay();
+  renderApp();
+  saveToLocalStorage();
+  showToast('جامعہ کا پروفائل اور ترتیبات محفوظ ہو گئیں!', 'info');
+}
+
+function triggerLogoUpload() {
+  document.getElementById('settingLogoFileInput').click();
+}
+
+function handleLogoUpload(event) {
+  let file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) {
+    showToast('تصویر کا سائز 2MB سے کم ہونا چاہیے', 'warning');
+    return;
+  }
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    appState.institutionLogo = e.target.result;
+    updateHeaderDisplay();
+    renderApp();
+    saveToLocalStorage();
+    showToast('جامعہ کا لوگو کامیابی سے تبدیل ہو گیا!', 'info');
+  };
+  reader.readAsDataURL(file);
+  event.target.value = '';
+}
+
+function removeLogo() {
+  openConfirmDialog('لوگو حذف کریں', 'کیا آپ واقعی جامعہ کا لوگو ہٹانا چاہتے ہیں؟', function() {
+    appState.institutionLogo = '';
+    updateHeaderDisplay();
+    renderApp();
+    saveToLocalStorage();
+    showToast('لوگو ہٹا دیا گیا', 'info');
+  });
+}
+
+function addSubjectPrompt() {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let sub = prompt(`درجہ "${cls}" برائے "${ex}" کے لیے نئے مضمون کا نام درج کریں:`);
+  if (sub && sub.trim()) {
+    let cData = getCurrentClassData(cls, ex);
+    sub = sub.trim();
+    if (!cData.subjects.includes(sub)) {
+      cData.subjects.push(sub);
+      if (!cData.subjectMaxMarks) cData.subjectMaxMarks = {};
+      if (!cData.subjectPassMarks) cData.subjectPassMarks = {};
+      cData.subjectMaxMarks[sub] = 100;
+      cData.subjectPassMarks[sub] = 40;
+      cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] !== undefined ? cData.subjectMaxMarks[s] : 100), 0);
+      if (cData.examConfigs && cData.examConfigs[ex]) {
+        cData.examConfigs[ex].subjects = [...cData.subjects];
+        cData.examConfigs[ex].subjectMaxMarks = { ...cData.subjectMaxMarks };
+        cData.examConfigs[ex].subjectPassMarks = { ...cData.subjectPassMarks };
+        cData.examConfigs[ex].totalMarks = cData.totalMarks;
+      }
+      saveToLocalStorage();
+      renderApp();
+      showToast(`مضمون "${sub}" درجہ "${cls}" (${ex}) میں شامل ہو گیا`, 'info');
+    } else {
+      showToast('یہ مضمون پہلے سے موجود ہے', 'warning');
+    }
+  }
+}
+
+function renameSubjectPrompt(oldSub) {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let newSub = prompt(`مضمون کا نیا نام (درجہ: ${cls} | امتحان: ${ex}):`, oldSub);
+  if (newSub && newSub.trim() && newSub.trim() !== oldSub) {
+    let cData = getCurrentClassData(cls, ex);
+    newSub = newSub.trim();
+    let idx = cData.subjects.indexOf(oldSub);
+    if (idx !== -1) {
+      cData.subjects[idx] = newSub;
+      if (cData.subjectMaxMarks && cData.subjectMaxMarks[oldSub] !== undefined) {
+        cData.subjectMaxMarks[newSub] = cData.subjectMaxMarks[oldSub];
+        delete cData.subjectMaxMarks[oldSub];
+      }
+      if (cData.subjectPassMarks && cData.subjectPassMarks[oldSub] !== undefined) {
+        cData.subjectPassMarks[newSub] = cData.subjectPassMarks[oldSub];
+        delete cData.subjectPassMarks[oldSub];
+      }
+      if (cData.examConfigs && cData.examConfigs[ex]) {
+        cData.examConfigs[ex].subjects = [...cData.subjects];
+        cData.examConfigs[ex].subjectMaxMarks = { ...cData.subjectMaxMarks };
+        cData.examConfigs[ex].subjectPassMarks = { ...cData.subjectPassMarks };
+      }
+      cData.students.forEach(s => {
+        if (s.examMarks && s.examMarks[ex] && s.examMarks[ex][oldSub] !== undefined) {
+          s.examMarks[ex][newSub] = s.examMarks[ex][oldSub];
+          delete s.examMarks[ex][oldSub];
+        }
+        if (s.marks && s.marks[oldSub] !== undefined && ex === appState.examTitle && cls === appState.currentClass) {
+          s.marks[newSub] = s.marks[oldSub];
+          delete s.marks[oldSub];
+        }
+      });
+      saveToLocalStorage();
+      renderApp();
+      showToast(`مضمون "${oldSub}" تبدیل ہو کر "${newSub}" ہو گیا`, 'info');
+    }
+  }
+}
+
+function deleteSubjectPrompt(sub) {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  openConfirmDialog(
+    'مضمون حذف کریں',
+    `کیا آپ واقعی درجہ "${cls}" (${ex}) سے مضمون "${sub}" کو حذف کرنا چاہتے ہیں؟ اس امتحان میں اس مضمون کے نمبرات بھی خارج ہو جائیں گے۔`,
+    function() {
+      let cData = getCurrentClassData(cls, ex);
+      cData.subjects = cData.subjects.filter(s => s !== sub);
+      if (cData.subjectMaxMarks) delete cData.subjectMaxMarks[sub];
+      if (cData.subjectPassMarks) delete cData.subjectPassMarks[sub];
+      cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks && cData.subjectMaxMarks[s] !== undefined ? cData.subjectMaxMarks[s] : 100), 0);
+      if (cData.examConfigs && cData.examConfigs[ex]) {
+        cData.examConfigs[ex].subjects = [...cData.subjects];
+        cData.examConfigs[ex].subjectMaxMarks = { ...cData.subjectMaxMarks };
+        cData.examConfigs[ex].subjectPassMarks = { ...cData.subjectPassMarks };
+        cData.examConfigs[ex].totalMarks = cData.totalMarks;
+      }
+      cData.students.forEach(s => {
+        if (s.examMarks && s.examMarks[ex] && s.examMarks[ex][sub] !== undefined) {
+          delete s.examMarks[ex][sub];
+        }
+        if (s.marks && s.marks[sub] !== undefined && ex === appState.examTitle && cls === appState.currentClass) {
+          delete s.marks[sub];
+        }
+      });
+      saveToLocalStorage();
+      renderApp();
+      showToast(`مضمون "${sub}" حذف ہو گیا`, 'info');
+    }
+  );
+}
+
+function renderAwardSheetSubjectOptions(cData) {
+  let sel = document.getElementById('awardListSubjectSelect');
+  if (sel) {
+    sel.innerHTML = cData.subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+  }
+}
+
+function exportToExcel() {
+  if (typeof XLSX === 'undefined') {
+    showToast('SheetJS لائبریری لوڈ نہیں ہو سکی۔', 'error');
+    return;
+  }
+
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let wb = XLSX.utils.book_new();
+
+  let colsConfig = [
+    { label: 'نمبر شمار', wch: 10 },
+    { label: 'رجسٹریشن', wch: 14 },
+    { label: 'اسم الطالبۃ', wch: 22 },
+    { label: 'اسم الاب', wch: 20 },
+    { label: 'رابطہ فون', wch: 15 },
+    ...cData.subjects.map(sub => ({ label: `${sub} (${cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100})`, wch: 15 })),
+    { label: 'مجموعہ', wch: 13 },
+    { label: 'کل نمبر', wch: 11 },
+    { label: 'فیصد٪', wch: 12 },
+    { label: 'پوزیشن', wch: 12 },
+    { label: 'تقدیر', wch: 14 }
+  ];
+
+  let totalCols = colsConfig.length;
+  let lastColLetter = XLSX.utils.encode_col(totalCols - 1);
+
+  let thinBorder = {
+    top: { style: 'thin', color: { rgb: 'D1D5DB' } },
+    bottom: { style: 'thin', color: { rgb: 'D1D5DB' } },
+    left: { style: 'thin', color: { rgb: 'D1D5DB' } },
+    right: { style: 'thin', color: { rgb: 'D1D5DB' } }
+  };
+
+  let headerBorder = {
+    top: { style: 'medium', color: { rgb: '0F766E' } },
+    bottom: { style: 'medium', color: { rgb: '0F766E' } },
+    left: { style: 'thin', color: { rgb: 'FFFFFF' } },
+    right: { style: 'thin', color: { rgb: 'FFFFFF' } }
+  };
+
+  let ws = {};
+
+  ws['A1'] = {
+    t: 's',
+    v: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+    s: {
+      font: { name: 'Calibri', sz: 12, bold: true, color: { rgb: '0F766E' } },
+      fill: { fgColor: { rgb: 'F0FDFA' } },
+      alignment: { horizontal: 'center', vertical: 'center' }
+    }
+  };
+
+  ws['A2'] = {
+    t: 's',
+    v: `${appState.institution} - ${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'}) - درجہ: ${appState.currentClass}`,
+    s: {
+      font: { name: 'Calibri', sz: 15, bold: true, color: { rgb: 'FFFFFF' } },
+      fill: { fgColor: { rgb: '0F766E' } },
+      alignment: { horizontal: 'center', vertical: 'center' }
+    }
+  };
+
+  let nonAbsent = computed.filter(s => !s.isAbsent);
+  let passedCount = nonAbsent.filter(s => s.grade !== 'راسب').length;
+  let passRate = nonAbsent.length > 0 ? Math.round((passedCount / nonAbsent.length) * 100) : 0;
+
+  ws['A3'] = {
+    t: 's',
+    v: `کل طالبات: ${computed.length}  |  حاضر: ${nonAbsent.length}  |  کامیاب: ${passedCount}  |  شرح کامیابی: ${passRate}%  |  کل نمبر: ${cData.totalMarks}`,
+    s: {
+      font: { name: 'Calibri', sz: 10.5, italic: true, color: { rgb: '334155' } },
+      fill: { fgColor: { rgb: 'F8FAFC' } },
+      alignment: { horizontal: 'center', vertical: 'center' }
+    }
+  };
+
+  colsConfig.forEach((col, cIdx) => {
+    let cellRef = XLSX.utils.encode_cell({ r: 3, c: cIdx });
+    ws[cellRef] = {
+      t: 's',
+      v: col.label,
+      s: {
+        font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: 'FFFFFF' } },
+        fill: { fgColor: { rgb: '0D9488' } },
+        alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
+        border: headerBorder
+      }
+    };
+  });
+
+  let numSubs = cData.subjects.length;
+  let subStartCol = 5;
+  let subEndCol = subStartCol + numSubs - 1;
+  let subStartLetter = XLSX.utils.encode_col(subStartCol);
+  let subEndLetter = XLSX.utils.encode_col(subEndCol);
+  let majColLetter = XLSX.utils.encode_col(subEndCol + 1);
+  let maxColLetter = XLSX.utils.encode_col(subEndCol + 2);
+
+  for (let i = 0; i < computed.length; i++) {
+    let s = computed[i];
+    let rowIdx = 4 + i;
+    let excelRow = rowIdx + 1;
+    let isZebra = (i % 2 === 1);
+    let rowBg = isZebra ? 'F8FAFC' : 'FFFFFF';
+
+    let rankBg = rowBg;
+    let rankColor = '0F172A';
+    if (s.rankNum === 1) { rankBg = 'FEF3C7'; rankColor = 'B45309'; }
+    else if (s.rankNum === 2) { rankBg = 'F1F5F9'; rankColor = '475569'; }
+    else if (s.rankNum === 3) { rankBg = 'FFEDD5'; rankColor = 'C2410C'; }
+
+    let gradeBg = rowBg;
+    let gradeColor = '0F172A';
+    if (s.grade === 'ممتاز') { gradeBg = 'DCFCE7'; gradeColor = '15803D'; }
+    else if (s.grade === 'جید جدا') { gradeBg = 'E0F2FE'; gradeColor = '0369A1'; }
+    else if (s.grade === 'جید') { gradeBg = 'FEF9C3'; gradeColor = 'A16207'; }
+    else if (s.grade === 'مقبول') { gradeBg = 'FFEDD5'; gradeColor = 'C2410C'; }
+    else if (s.grade === 'راسب') { gradeBg = 'FEE2E2'; gradeColor = 'B91C1C'; }
+    else if (s.grade === 'غیر حاضر') { gradeBg = 'F1F5F9'; gradeColor = '64748B'; }
+
+    let cPtr = 0;
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 'n',
+      v: s.roll || (i + 1),
+      s: { font: { name: 'Calibri', sz: 11, bold: true }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 's',
+      v: s.reg || '',
+      s: { font: { name: 'Calibri', sz: 10, color: { rgb: '64748B' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 's',
+      v: s.name || '',
+      s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F172A' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'right' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 's',
+      v: s.father || '',
+      s: { font: { name: 'Calibri', sz: 11, color: { rgb: '475569' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'right' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 's',
+      v: s.phone || '',
+      s: { font: { name: 'Calibri', sz: 10, color: { rgb: '64748B' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
+    };
+
+    cData.subjects.forEach(sub => {
+      let markVal = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+      let strMark = String(markVal).trim().toLowerCase();
+      let isExempt = strMark === '-' || strMark === 'مستثنیٰ' || strMark === 'مستثنی' || strMark === 'exempt';
+      let isNum = !isExempt && (typeof markVal === 'number' || (!isNaN(Number(markVal)) && markVal !== ''));
+      let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined ? cData.subjectPassMarks[sub] : 40;
+      let isFail = !isExempt && isNum && Number(markVal) < minPass;
+      ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+        t: isNum ? 'n' : 's',
+        v: isNum ? Number(markVal) : String(markVal),
+        s: {
+          font: { name: 'Calibri', sz: 11, bold: isNum && Number(markVal) >= 70, color: isFail ? { rgb: 'DC2626' } : (isExempt ? { rgb: '0369A1' } : undefined) },
+          fill: { fgColor: { rgb: isFail ? 'FEE2E2' : (isExempt ? 'E0F2FE' : rowBg) } },
+          alignment: { horizontal: 'center', vertical: 'center' },
+          border: thinBorder
+        }
+      };
+    });
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 'n',
+      f: `SUM(${subStartLetter}${excelRow}:${subEndLetter}${excelRow})`,
+      v: s.obtained,
+      s: { font: { name: 'Calibri', sz: 11.5, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'CCFBF1' } }, alignment: { horizontal: 'center' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 'n',
+      v: s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks,
+      s: { font: { name: 'Calibri', sz: 11, color: { rgb: '64748B' } }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 'n',
+      f: `ROUND(${majColLetter}${excelRow}/${maxColLetter}${excelRow}*100, 2)`,
+      v: s.percentage,
+      s: { font: { name: 'Calibri', sz: 11, bold: true }, fill: { fgColor: { rgb: rowBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 's',
+      v: String(s.rank),
+      s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: rankColor } }, fill: { fgColor: { rgb: rankBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
+    };
+
+    ws[XLSX.utils.encode_cell({ r: rowIdx, c: cPtr++ })] = {
+      t: 's',
+      v: s.grade,
+      s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: gradeColor } }, fill: { fgColor: { rgb: gradeBg } }, alignment: { horizontal: 'center' }, border: thinBorder }
+    };
+  }
+
+  let summaryRowIdx = 4 + computed.length;
+  let doubleBottomBorder = {
+    top: { style: 'thin', color: { rgb: '0F766E' } },
+    bottom: { style: 'double', color: { rgb: '0F766E' } },
+    left: { style: 'thin', color: { rgb: 'CBD5E1' } },
+    right: { style: 'thin', color: { rgb: 'CBD5E1' } }
+  };
+
+  ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: 0 })] = {
+    t: 's',
+    v: 'میزان / اوسط',
+    s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
+  };
+
+  for (let c = 1; c < 5; c++) {
+    ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: c })] = {
+      t: 's',
+      v: '',
+      s: { fill: { fgColor: { rgb: 'E2E8F0' } }, border: doubleBottomBorder }
+    };
+  }
+
+  let startDataExcelRow = 5;
+  let endDataExcelRow = 4 + computed.length;
+
+  for (let sIdx = 0; sIdx < numSubs; sIdx++) {
+    let colLet = XLSX.utils.encode_col(subStartCol + sIdx);
+    ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: subStartCol + sIdx })] = {
+      t: 'n',
+      f: `ROUND(AVERAGE(${colLet}${startDataExcelRow}:${colLet}${endDataExcelRow}), 1)`,
+      s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
+    };
+  }
+
+  ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: subEndCol + 1 })] = {
+    t: 'n',
+    f: `ROUND(AVERAGE(${majColLetter}${startDataExcelRow}:${majColLetter}${endDataExcelRow}), 1)`,
+    s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'CCFBF1' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
+  };
+
+  ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: subEndCol + 2 })] = {
+    t: 'n',
+    v: cData.totalMarks,
+    s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '475569' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
+  };
+
+  let pctColLetter = XLSX.utils.encode_col(subEndCol + 3);
+  ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: subEndCol + 3 })] = {
+    t: 'n',
+    f: `ROUND(AVERAGE(${pctColLetter}${startDataExcelRow}:${pctColLetter}${endDataExcelRow}), 2)`,
+    s: { font: { name: 'Calibri', sz: 11, bold: true, color: { rgb: '0F766E' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
+  };
+
+  for (let c = subEndCol + 4; c < totalCols; c++) {
+    ws[XLSX.utils.encode_cell({ r: summaryRowIdx, c: c })] = {
+      t: 's',
+      v: '-',
+      s: { font: { name: 'Calibri', sz: 11, color: { rgb: '94A3B8' } }, fill: { fgColor: { rgb: 'E2E8F0' } }, alignment: { horizontal: 'center' }, border: doubleBottomBorder }
+    };
+  }
+
+  ws['!merges'] = [
+    { s: { r: 0, c: 0 }, e: { r: 0, c: totalCols - 1 } },
+    { s: { r: 1, c: 0 }, e: { r: 1, c: totalCols - 1 } },
+    { s: { r: 2, c: 0 }, e: { r: 2, c: totalCols - 1 } },
+    { s: { r: summaryRowIdx, c: 0 }, e: { r: summaryRowIdx, c: 4 } }
+  ];
+
+  ws['!cols'] = colsConfig.map(col => ({ wch: col.wch }));
+  ws['!views'] = [{ rightToLeft: true }];
+  ws['!ref'] = `A1:${lastColLetter}${summaryRowIdx + 1}`;
+
+  XLSX.utils.book_append_sheet(wb, ws, appState.currentClass.slice(0, 31));
+
+  let filename = `${appState.currentClass}_${appState.examTitle}.xlsx`;
+  XLSX.writeFile(wb, filename);
+  showToast(`کیلیبری فونٹ میں ایکسل فائل "${filename}" ڈاؤن لوڈ ہو گئی`, 'info');
+}
+
+function downloadBlankExcelTemplate() {
+  if (typeof XLSX === 'undefined') return;
+  let cData = getCurrentClassData();
+  let headers = ['نمبر شمار', 'رجسٹریشن', 'اسم الطالبۃ', 'اسم الاب', 'رابطہ فون', ...cData.subjects];
+  let rows = [
+    [`${appState.institution} - ${appState.currentClass} - خالی ایکسل شیٹ`],
+    headers
+  ];
+  cData.students.forEach((s, i) => {
+    rows.push([s.roll || (i + 1), s.reg || '', s.name || '', s.father || '', s.phone || '', ...cData.subjects.map(() => '')]);
+  });
+  let ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!views'] = [{ rightToLeft: true }];
+  let wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'ٹیمپلیٹ');
+  XLSX.writeFile(wb, `${appState.currentClass}_خالی_ٹیمپلیٹ.xlsx`);
+  showToast('خالی ایکسل ٹیمپلیٹ شیٹ ڈاؤن لوڈ ہو گئی', 'info');
+}
+
+function triggerImport() {
+  document.getElementById('excelFileInput').click();
+}
+
+function handleExcelImport(event) {
+  let file = event.target.files[0];
+  if (!file) return;
+  if (typeof XLSX === 'undefined') {
+    showToast('SheetJS لائبریری لوڈ نہیں ہو سکی۔', 'error');
+    return;
+  }
+
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      let data = new Uint8Array(e.target.result);
+      let wb = XLSX.read(data, { type: 'array' });
+      let sheetName = wb.SheetNames[0];
+      let matchedClsSheet = wb.SheetNames.find(s => getClassList().some(k => s.includes(k)));
+      if (matchedClsSheet) sheetName = matchedClsSheet;
+
+      let ws = wb.Sheets[sheetName];
+      let rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null });
+
+      if (rows.length < 2) {
+        showToast('ایکسل فائل میں درکار ڈیٹا نہیں ملا۔', 'error');
+        return;
+      }
+
+      let headerRowIndex = -1;
+      for (let r = 0; r < Math.min(6, rows.length); r++) {
+        let row = rows[r];
+        if (row && row.some(cell => typeof cell === 'string' && /شمار|رول|طالب|طالبہ|الاب|والد|مجموعہ|roll|name|father/i.test(cell))) {
+          headerRowIndex = r;
+          break;
+        }
+      }
+
+      if (headerRowIndex === -1) headerRowIndex = rows.length > 2 ? 1 : 0;
+      let hRow = rows[headerRowIndex];
+
+      let serialCol = -1;
+      let regCol = -1;
+      let nameCol = -1;
+      let fatherCol = -1;
+      let phoneCol = -1;
+      let majmughaCol = -1;
+
+      hRow.forEach((val, c) => {
+        let str = String(val || '');
+        if (/شمار|رول|roll|sr/i.test(str)) serialCol = c;
+        else if (/رجسٹر|reg/i.test(str)) regCol = c;
+        else if (/طالب|نام|name|student/i.test(str)) nameCol = c;
+        else if (/الاب|والد|father/i.test(str)) fatherCol = c;
+        else if (/فون|رابطہ|موبائل|phone/i.test(str)) phoneCol = c;
+        else if (/مجموعہ|میزان|obtained|total/i.test(str)) majmughaCol = c;
+      });
+
+      if (nameCol === -1) nameCol = 1;
+      if (fatherCol === -1) fatherCol = 2;
+      if (serialCol === -1) serialCol = 0;
+
+      let nonSubPattern = /شمار|رول|رجسٹر|طالب|طالبہ|اسم|الاب|والد|فون|موبائل|رابطہ|مجموعہ|میزان|کل|فیصد|پوزیشن|کیفیت|تقدیر|rank|grade|percent|total|name|father|roll|sr/i;
+
+      let subjectCols = [];
+      hRow.forEach((val, c) => {
+        let str = String(val || '').trim();
+        if (str && c !== serialCol && c !== regCol && c !== nameCol && c !== fatherCol && c !== phoneCol && c !== majmughaCol && !nonSubPattern.test(str)) {
+          let cleanName = str.replace(/\(.*?\)/g, '').trim();
+          subjectCols.push({ index: c, name: cleanName });
+        }
+      });
+
+      let subjects = subjectCols.map(s => s.name);
+      if (subjects.length === 0) {
+        subjects = CLASS_SUBJECT_DEFAULTS[appState.currentClass] || ['مضمون ۱', 'مضمون ۲'];
+      }
+
+      let importedStudents = [];
+      for (let r = headerRowIndex + 1; r < rows.length; r++) {
+        let row = rows[r];
+        if (!row || row.length === 0) continue;
+        let sName = row[nameCol];
+        let sFather = row[fatherCol];
+        let sRoll = row[serialCol];
+        let sReg = regCol !== -1 ? row[regCol] : '';
+        let sPhone = phoneCol !== -1 ? row[phoneCol] : '';
+
+        if ((sName && String(sName).trim() !== '' && !String(sName).includes('میزان') && !String(sName).includes('اوسط')) || (sRoll !== null && sRoll !== undefined && !isNaN(Number(sRoll)))) {
+          let marks = {};
+          subjectCols.forEach(sc => {
+            let mVal = row[sc.index];
+            if (mVal !== null && mVal !== undefined && String(mVal).trim() !== '') {
+              marks[sc.name] = !isNaN(Number(mVal)) ? Number(mVal) : String(mVal).trim();
+            }
+          });
+
+          importedStudents.push({
+            roll: Number(sRoll) || (importedStudents.length + 1),
+            reg: sReg ? String(sReg).trim() : '',
+            name: sName ? String(sName).trim() : '',
+            father: sFather ? String(sFather).trim() : '',
+            phone: sPhone ? String(sPhone).trim() : '',
+            marks: marks
+          });
+        }
+      }
+
+      let baseName = file.name.replace(/\.[^/.]+$/, '').trim();
+      let matchedClass = getClassList().find(c => baseName.includes(c) || sheetName.includes(c)) || appState.currentClass;
+      if (!getClassList().includes(matchedClass)) {
+        getClassList().push(matchedClass);
+      }
+
+      appState.classesData[matchedClass] = {
+        subjects: subjects,
+        subjectMaxMarks: subjects.reduce((acc, sub) => { acc[sub] = 100; return acc; }, {}),
+        subjectPassMarks: subjects.reduce((acc, sub) => { acc[sub] = 40; return acc; }, {}),
+        totalMarks: matchedClass === 'خاصہ اول' ? 700 : (subjects.length * 100),
+        students: importedStudents
+      };
+
+      appState.currentClass = matchedClass;
+      updateHeaderDisplay();
+      renderApp();
+      showToast(`فائل سے ${importedStudents.length} طالبات کا ڈیٹا کامیابی سے امپورٹ ہو گیا!`, 'info');
+    } catch (err) {
+      showToast('ایکسل امپورٹ میں خرابی: ' + err.message, 'error');
+    }
+  };
+  reader.readAsArrayBuffer(file);
+  event.target.value = '';
+}
+
+function buildPrintHeaderHtml(title, accentColor = '#0f766e') {
+  let metaParts = [];
+  if (appState.institutionAddress) metaParts.push('📍 ' + appState.institutionAddress);
+  if (appState.institutionPhone) metaParts.push('📞 ' + appState.institutionPhone);
+  if (appState.institutionReg) metaParts.push('🏛️ ' + appState.institutionReg);
+
+  return `
+    <div style="text-align:center; padding-bottom:10px; border-bottom:2px solid ${accentColor}; margin-bottom:14px;">
+      <p style="font-size:12pt; font-weight:bold; margin-bottom:2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:3px;">
+        ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:48px; height:48px; object-fit:contain; border-radius:50%; border:1px solid ${accentColor};">` : ''}
+        <div>
+          <h1 style="font-size:18pt; font-weight:bold; color:${accentColor}; margin:0;">${appState.institution}</h1>
+          ${appState.institutionSubtitle ? `<div style="font-size:10.5pt; color:#475569; font-weight:bold;">${appState.institutionSubtitle}</div>` : ''}
+        </div>
+      </div>
+      ${metaParts.length > 0 ? `<div style="font-size:9pt; color:#64748b; margin-bottom:4px;">${metaParts.join(' | ')}</div>` : ''}
+      <h2 style="font-size:13.5pt; margin:4px 0 2px 0;">${title}</h2>
+      <div style="display:flex; justify-content:space-between; margin-top:4px; font-size:10.5pt; font-weight:bold;">
+        <span>درجہ: ${appState.currentClass}</span>
+        <span>امتحان: ${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'})</span>
+        <span>تاریخ: ${new Date().toLocaleDateString('ur-PK')}</span>
+      </div>
+    </div>
+  `;
+}
+
+function buildPrintFooterHtml() {
+  return `
+    <div style="display:flex; justify-content:space-between; margin-top:45px; padding:0 25px; font-size:11pt; font-weight:bold;">
+      <div>دستخط ناظمِ امتحانات: _______________</div>
+      <div>دستخط نگرانِ اعلیٰ: _______________</div>
+      <div>دستخط و مہر ${appState.institutionHead || 'مہتمم جامعہ'}: _______________</div>
+    </div>
+  `;
+}
+
+function printGazette() {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printGazetteView');
+  view.style.display = 'block';
+
+  document.getElementById('printInstitutionName').innerText = appState.institution;
+  let pSub = document.getElementById('printInstitutionSub');
+  if (pSub) pSub.innerText = appState.institutionSubtitle || '';
+  let pMeta = document.getElementById('printInstitutionMeta');
+  if (pMeta) {
+    let pList = [];
+    if (appState.institutionAddress) pList.push('📍 ' + appState.institutionAddress);
+    if (appState.institutionPhone) pList.push('📞 ' + appState.institutionPhone);
+    if (appState.institutionReg) pList.push('🏛️ ' + appState.institutionReg);
+    pMeta.innerText = pList.join(' | ');
+  }
+  let pLogo = document.getElementById('printGazetteLogo');
+  if (pLogo) {
+    pLogo.innerHTML = appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:48px; height:48px; object-fit:contain; border-radius:50%; border:1px solid #0f766e;">` : '';
+  }
+  let pHeadSign = document.getElementById('printGazetteHeadSign');
+  if (pHeadSign) {
+    pHeadSign.innerText = `دستخط و مہر ${appState.institutionHead || 'مہتمم جامعہ'}: _______________`;
+  }
+  document.getElementById('printExamTitle').innerText = appState.examTitle + ' (' + (appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ') + ')';
+  document.getElementById('printClassName').innerText = 'درجہ: ' + appState.currentClass;
+
+  let nonAbsent = computed.filter(s => !s.isAbsent);
+  let passedCount = nonAbsent.filter(s => s.grade !== 'راسب').length;
+  let passRate = nonAbsent.length > 0 ? Math.round((passedCount / nonAbsent.length) * 100) : 0;
+  document.getElementById('printMetaStats').innerText = `کل طالبات: ${computed.length} | حاضر: ${nonAbsent.length} | کامیاب: ${passedCount} | شرح کامیابی: ${passRate}%`;
+  document.getElementById('printDate').innerText = 'تاریخ: ' + new Date().toLocaleDateString('ur-PK');
+
+  let thead = document.getElementById('printTableHeaderRow');
+  let subsHeaders = cData.subjects.map(sub => `<th>${sub}</th>`).join('');
+  thead.innerHTML = `
+    <th style="width:30px;">#</th>
+    <th style="width:45px;">رول نمبر</th>
+    <th style="text-align:right;">اسم الطالبۃ</th>
+    <th style="text-align:right;">اسم الاب</th>
+    ${subsHeaders}
+    <th>مجموعہ</th>
+    <th>کل نمبر</th>
+    <th>فیصد٪</th>
+    <th>پوزیشن</th>
+    <th>تقدیر</th>
+  `;
+
+  let tbody = document.getElementById('printTableBody');
+  tbody.innerHTML = computed.map((s, idx) => {
+    let subTds = cData.subjects.map(sub => {
+      let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '-';
+      return `<td>${val}</td>`;
+    }).join('');
+
+    let trClass = (idx % 2 === 1) ? 'gazette-tr-even' : '';
+    return `
+      <tr class="${trClass}">
+        <td>${idx + 1}</td>
+        <td><strong>${s.roll || idx + 1}</strong></td>
+        <td style="text-align:right; font-weight:bold;">${s.name || '-'}</td>
+        <td style="text-align:right;">${s.father || '-'}</td>
+        ${subTds}
+        <td style="font-weight:bold; color:#0f766e;">${s.obtained}</td>
+        <td>${cData.totalMarks}</td>
+        <td>${s.isAbsent ? '-' : s.percentage + '%'}</td>
+        <td><strong>${s.rank}</strong></td>
+        <td>${s.grade}</td>
+      </tr>
+    `;
+  }).join('');
+
+  window.print();
+}
+
+function printMeritList() {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let topAchievers = computed.filter(s => !s.isAbsent && s.rankNum <= 3).sort((a, b) => a.rankNum - b.rankNum);
+
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printMeritListView');
+  view.style.display = 'block';
+
+  view.innerHTML = `
+    ${buildPrintHeaderHtml('فہرست نمایاں پوزیشن ہولڈرز - جلسہ تقسیمِ انعامات و اسناد', '#d97706')}
+
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th>پوزیشن</th>
+          <th>رول نمبر</th>
+          <th>رجسٹریشن نمبر</th>
+          <th style="text-align:right;">اسم الطالبۃ</th>
+          <th style="text-align:right;">اسم الاب</th>
+          <th>حاصل کردہ نمبرات</th>
+          <th>کل نمبرات</th>
+          <th>فیصد</th>
+          <th>تقدیر</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${topAchievers.map(s => `
+          <tr style="font-size:12pt; height:36px;">
+            <td><strong style="color:#d97706; font-size:13pt;">${s.rank}</strong></td>
+            <td><strong>${s.roll}</strong></td>
+            <td>${s.reg || '-'}</td>
+            <td style="text-align:right; font-weight:bold;">${s.name}</td>
+            <td style="text-align:right;">${s.father || '-'}</td>
+            <td><strong style="color:#0f766e;">${s.obtained}</strong></td>
+            <td>${cData.totalMarks}</td>
+            <td><strong>${s.percentage}%</strong></td>
+            <td><strong>${s.grade}</strong></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+
+    ${buildPrintFooterHtml()}
+  `;
+
+  window.print();
+}
+
+function printAwardSheet() {
+  let cData = getCurrentClassData();
+  let sub = document.getElementById('awardListSubjectSelect').value;
+  let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+  let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printAwardSheetView');
+  view.style.display = 'block';
+
+  view.innerHTML = `
+    ${buildPrintHeaderHtml(`مضمون وار ایوارڈ لسٹ برائے ممتحن - پرچہ: ${sub} (کل: ${max} | پاس: ${minPass})`, '#0f766e')}
+
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th style="width:40px;">#</th>
+          <th style="width:60px;">رول نمبر</th>
+          <th style="text-align:right;">اسم الطالبۃ</th>
+          <th style="text-align:right;">اسم الاب</th>
+          <th style="width:120px;">حاصل کردہ نمبر (ہندسوں میں)</th>
+          <th style="width:140px;">حاصل کردہ نمبر (الفاظ میں)</th>
+          <th style="width:90px;">کیفیت</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${cData.students.map((s, idx) => {
+          let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+          return `
+            <tr style="height:30px;">
+              <td>${idx + 1}</td>
+              <td><strong>${s.roll || idx + 1}</strong></td>
+              <td style="text-align:right; font-weight:bold;">${s.name}</td>
+              <td style="text-align:right;">${s.father || '-'}</td>
+              <td><strong>${val}</strong></td>
+              <td></td>
+              <td>${val === 'غائب' ? 'غیر حاضر' : ''}</td>
+            </tr>
+          `;
+        }).join('')}
+      </tbody>
+    </table>
+
+    <div style="display:flex; justify-content:space-between; margin-top:50px; padding:0 30px; font-size:12pt; font-weight:bold;">
+      <div>دستخط ممتحن پرچہ: _______________</div>
+      <div>دستخط ناظم امتحانات: _______________</div>
+      <div>دستخط و مہر ${appState.institutionHead || 'مہتمم جامعہ'}: _______________</div>
+    </div>
+  `;
+
+  window.print();
+}
+
+function printRollNumberSlips() {
+  let cData = getCurrentClassData();
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printRollSlipsView');
+  view.style.display = 'block';
+
+  view.innerHTML = `
+    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px;">
+      ${cData.students.map(s => `
+        <div style="border:2px solid #0f766e; border-radius:8px; padding:12px; background:white; font-size:10.5pt; display:flex; flex-direction:column; justify-content:space-between; min-height:220px;">
+          <div style="text-align:center; border-bottom:1px solid #0f766e; padding-bottom:4px; margin-bottom:8px;">
+            <p style="font-size:10pt; font-weight:bold; margin-bottom:1px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+            <div style="display:flex; justify-content:center; align-items:center; gap:8px;">
+              ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:34px; height:34px; object-fit:contain; border-radius:50%;">` : ''}
+              <div>
+                <h3 style="font-size:12pt; color:#0f766e; font-weight:bold; margin:0;">${appState.institution}</h3>
+                ${appState.institutionSubtitle ? `<span style="font-size:9pt; color:#64748b; font-weight:bold;">${appState.institutionSubtitle}</span>` : ''}
+              </div>
+            </div>
+            ${appState.institutionPhone ? `<div style="font-size:8.5pt; color:#64748b;">📞 ${appState.institutionPhone}</div>` : ''}
+            <h4 style="font-size:11pt; margin:4px 0 0 0;">امتحانی داخلہ سلپ (Roll Number Slip)</h4>
+            <p style="font-size:9.5pt; color:#475569; margin:0;">${appState.examTitle} (${appState.sessionYear || '۱۴۴۶-۱۴۴۷ھ'})</p>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-bottom:8px;">
+            <div><strong>رول نمبر:</strong> <span style="font-size:14pt; color:#0f766e; font-weight:bold;">${s.roll}</span></div>
+            <div><strong>رجسٹریشن:</strong> ${s.reg || '-'}</div>
+            <div><strong>اسم الطالبۃ:</strong> ${s.name}</div>
+            <div><strong>اسم الاب:</strong> ${s.father || '-'}</div>
+            <div style="grid-column: span 2;"><strong>درجہ:</strong> ${appState.currentClass}</div>
+          </div>
+          <div style="font-size:9pt; background:#f8fafc; padding:4px 6px; border-radius:4px; border:1px solid #e2e8f0; margin-bottom:8px;">
+            <strong>مضامین:</strong> ${cData.subjects.join('، ')}
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:9pt; font-weight:bold; border-top:1px dashed #cbd5e1; padding-top:6px;">
+            <span>مہرِ جامعہ: [  ]</span>
+            <span>دستخط ناظم امتحانات: ___________</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  window.print();
+}
+
+function printFailureList() {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks);
+  let failedStudents = computed.filter(s => !s.isAbsent && s.grade === 'راسب');
+
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  let view = document.getElementById('printFailureListView');
+  view.style.display = 'block';
+
+  view.innerHTML = `
+    ${buildPrintHeaderHtml(`فہرست راسب طالبات (برائے امتحانِ ضمنی / سپلیمنٹری) - تعداد: ${failedStudents.length}`, '#dc2626')}
+
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>رول نمبر</th>
+          <th style="text-align:right;">اسم الطالبۃ</th>
+          <th style="text-align:right;">اسم الاب</th>
+          <th>راسب مضامین (ناکام)</th>
+          <th>مجموعہ نمبرات</th>
+          <th>فیصد</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${failedStudents.map((s, idx) => {
+          let failedSubs = cData.subjects.filter(sub => {
+            let m = s.marks ? s.marks[sub] : undefined;
+            let pass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
+            return typeof m === 'number' && m < pass;
+          });
+          return `
+            <tr>
+              <td>${idx + 1}</td>
+              <td><strong>${s.roll}</strong></td>
+              <td style="text-align:right; font-weight:bold;">${s.name}</td>
+              <td style="text-align:right;">${s.father || '-'}</td>
+              <td style="color:#dc2626; font-weight:bold;">${failedSubs.join('، ') || 'مجموعی فیصد'}</td>
+              <td>${s.obtained} / ${cData.totalMarks}</td>
+              <td>${s.percentage}%</td>
+            </tr>
+          `;
+        }).join('')}
+      </tbody>
+    </table>
+
+    ${buildPrintFooterHtml()}
+  `;
+
+  window.print();
+}
+
+function printActiveDMC() {
+  document.querySelectorAll('.print-section').forEach(el => el.style.display = 'none');
+  window.print();
+}
+
+function saveToLocalStorage() {
+  try {
+    localStorage.setItem('madrasa_exam_state', JSON.stringify(appState));
+  } catch (e) {}
+}
+
+function loadFromLocalStorage() {
+  try {
+    let saved = localStorage.getItem('madrasa_exam_state');
+    if (saved) {
+      let parsed = JSON.parse(saved);
+      appState = { ...appState, ...parsed };
+      if (appState.classesData) {
+        let exams = getExamList();
+        Object.keys(appState.classesData).forEach(cls => {
+          let cd = appState.classesData[cls];
+          if (cd) {
+            if (!cd.examConfigs) cd.examConfigs = {};
+            let baseSubs = (cd.subjects && cd.subjects.length > 0) ? [...cd.subjects] : (CLASS_SUBJECT_DEFAULTS[cls] ? [...CLASS_SUBJECT_DEFAULTS[cls]] : ['مضمون ۱', 'مضمون ۲']);
+            let maxMap = cd.subjectMaxMarks ? { ...cd.subjectMaxMarks } : {};
+            let passMap = cd.subjectPassMarks ? { ...cd.subjectPassMarks } : {};
+            exams.forEach(ex => {
+              if (!cd.examConfigs[ex]) {
+                cd.examConfigs[ex] = {
+                  subjects: [...baseSubs],
+                  subjectMaxMarks: { ...maxMap },
+                  subjectPassMarks: { ...passMap },
+                  totalMarks: cd.totalMarks || (baseSubs.length * 100)
+                };
+              }
+            });
+            if (cd.students) {
+              cd.students.forEach(s => {
+                if (!s.examMarks) {
+                  s.examMarks = {};
+                  if (s.marks) s.examMarks[appState.examTitle || 'ششماہی امتحان'] = { ...s.marks };
+                }
+              });
+            }
+          }
+        });
+      }
+    }
+  } catch (e) {}
+}
+
+function downloadJsonBackup() {
+  let blob = new Blob([JSON.stringify(appState, null, 2)], { type: 'application/json' });
+  let url = URL.createObjectURL(blob);
+  let a = document.createElement('a');
+  a.href = url;
+  a.download = `madrasa_exam_backup_${new Date().toISOString().slice(0, 10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('بیک اپ فائل ڈاؤن لوڈ ہو گئی', 'info');
+}
+
+function triggerJsonRestore() {
+  document.getElementById('jsonRestoreInput').click();
+}
+
+function handleJsonRestore(event) {
+  let file = event.target.files[0];
+  if (!file) return;
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      let data = JSON.parse(e.target.result);
+      if (data && data.classesData) {
+        appState = data;
+        let exams = getExamList();
+        Object.keys(appState.classesData).forEach(cls => {
+          let cd = appState.classesData[cls];
+          if (cd) {
+            if (!cd.examConfigs) cd.examConfigs = {};
+            let baseSubs = (cd.subjects && cd.subjects.length > 0) ? [...cd.subjects] : (CLASS_SUBJECT_DEFAULTS[cls] ? [...CLASS_SUBJECT_DEFAULTS[cls]] : ['مضمون ۱', 'مضمون ۲']);
+            let maxMap = cd.subjectMaxMarks ? { ...cd.subjectMaxMarks } : {};
+            let passMap = cd.subjectPassMarks ? { ...cd.subjectPassMarks } : {};
+            exams.forEach(ex => {
+              if (!cd.examConfigs[ex]) {
+                cd.examConfigs[ex] = {
+                  subjects: [...baseSubs],
+                  subjectMaxMarks: { ...maxMap },
+                  subjectPassMarks: { ...passMap },
+                  totalMarks: cd.totalMarks || (baseSubs.length * 100)
+                };
+              }
+            });
+            if (cd.students) {
+              cd.students.forEach(s => {
+                if (!s.examMarks) {
+                  s.examMarks = {};
+                  if (s.marks) s.examMarks[appState.examTitle || 'ششماہی امتحان'] = { ...s.marks };
+                }
+              });
+            }
+          }
+        });
+        saveToLocalStorage();
+        updateHeaderDisplay();
+        renderApp();
+        showToast('مکمل ڈیٹا کامیابی سے بحال کر دیا گیا!', 'info');
+      } else {
+        showToast('غلط یا خراب بیک اپ فائل', 'error');
+      }
+    } catch (err) {
+      showToast('فائل پڑھنے میں خرابی: ' + err.message, 'error');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function resetToSampleData() {
+  openConfirmDialog(
+    'نمونہ ڈیٹا پر ری سیٹ',
+    'کیا آپ واقعی تمام ڈیٹا کو ابتدائی نمونہ ڈیٹا پر ری سیٹ کرنا چاہتے ہیں؟ موجودہ تمام اندراجات ختم ہو جائیں گی۔',
+    function() {
+      localStorage.removeItem('madrasa_exam_state');
+      appState.classesData = {};
+      appState.classList = Object.keys(CLASS_SUBJECT_DEFAULTS);
+      appState.examList = ['ششماہی امتحان', 'سالانہ امتحان', 'سہ ماہی امتحان', 'ماہانہ ٹیسٹ'];
+      appState.currentClass = 'متوسطہ اول';
+      appState.examTitle = 'ششماہی امتحان';
+      initializeClassData(appState.currentClass);
+      updateHeaderDisplay();
+      renderApp();
+      showToast('تمام ڈیٹا ابتدائی حالت پر ری سیٹ ہو گیا', 'info');
+    }
+  );
+}
+
+window.addEventListener('DOMContentLoaded', initApp);
+</script>
+<script src="./pwa-register.js" type="module"></script></body>
+</html>
