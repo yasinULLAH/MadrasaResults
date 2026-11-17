@@ -78,24 +78,37 @@ header.app-bar {
   z-index: 40;
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(8px);
-  max-width: 100vw;
-  overflow: hidden;
+  width: 100%;
 }
 
 .top-bar {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 8px 10px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.top-bar-upper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
   .top-bar {
     padding: 10px 16px;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .top-bar-upper {
+    width: auto;
+    flex: 1;
   }
 }
 
@@ -110,25 +123,26 @@ header.app-bar {
 }
 
 .brand-icon {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #ffffff;
-  border-radius: var(--radius-sm);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  box-shadow: 0 3px 6px rgba(13, 148, 136, 0.22);
+  box-shadow: 0 2px 5px rgba(13, 148, 136, 0.22);
   flex-shrink: 0;
 }
 
 @media (min-width: 768px) {
   .brand-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    font-size: 20px;
   }
 }
 
@@ -141,10 +155,10 @@ header.app-bar {
 }
 
 .brand-title {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text);
-  line-height: 1.2;
+  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -152,74 +166,82 @@ header.app-bar {
 
 @media (min-width: 768px) {
   .brand-title {
-    font-size: 15.5px;
+    font-size: 16px;
   }
 }
 
 .brand-chips-row {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 2px;
-  flex-wrap: nowrap;
-  overflow: hidden;
-}
-
-.brand-subtitle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  font-size: 10.5px;
-  font-weight: 600;
-  color: var(--primary);
-  background: var(--primary-subtle);
-  border: 1px solid var(--primary-light);
-  border-radius: 9999px;
-  padding: 1px 7px;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  max-width: 135px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
-  .brand-subtitle-btn {
-    font-size: 12px;
-    padding: 2px 9px;
-    max-width: none;
+  .brand-chips-row {
+    display: flex;
+    align-items: center;
+    width: auto;
+    gap: 6px;
+    margin-top: 3px;
   }
 }
 
-.brand-subtitle-btn:active {
-  transform: scale(0.96);
-}
-
+.brand-subtitle-btn,
 .exam-badge-btn {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  font-size: 10.5px;
+  justify-content: space-between;
+  gap: 5px;
+  font-size: 11.5px;
   font-weight: 600;
-  color: var(--accent);
-  background: var(--accent-light);
-  border: 1px solid #fde68a;
-  border-radius: 9999px;
-  padding: 1px 7px;
+  border-radius: 8px;
+  padding: 5px 10px;
   cursor: pointer;
+  transition: all 0.15s;
+  min-width: 0;
+  width: 100%;
+}
+
+.brand-subtitle-btn span,
+.exam-badge-btn span {
   white-space: nowrap;
-  max-width: 115px;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.brand-subtitle-btn svg,
+.exam-badge-btn svg {
+  flex-shrink: 0;
+}
+
+.brand-subtitle-btn {
+  color: var(--primary-dark);
+  background: var(--primary-subtle);
+  border: 1px solid var(--primary-light);
+}
+
+.exam-badge-btn {
+  color: #b45309;
+  background: var(--accent-light);
+  border: 1px solid #fde68a;
 }
 
 @media (min-width: 768px) {
+  .brand-subtitle-btn,
   .exam-badge-btn {
-    font-size: 11.5px;
-    padding: 2px 8px;
-    max-width: none;
+    width: auto;
+    justify-content: center;
+    border-radius: 9999px;
+    padding: 2px 10px;
+    font-size: 12px;
   }
+}
+
+.brand-subtitle-btn:active,
+.exam-badge-btn:active {
+  transform: scale(0.97);
 }
 
 .header-actions {
@@ -229,11 +251,13 @@ header.app-bar {
   flex-shrink: 0;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 639px) {
   .header-actions .btn-sm {
-    padding: 6px 8px;
-    font-size: 11px;
-    gap: 3px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 8px;
+    justify-content: center;
   }
   .header-actions .btn-sm span {
     display: none;
@@ -1396,26 +1420,26 @@ table.result-table td:last-child {
 
 .fab-native {
   position: fixed;
-  bottom: calc(74px + var(--safe-bottom));
-  left: 16px;
-  width: 48px;
-  height: 48px;
+  bottom: calc(68px + var(--safe-bottom));
+  left: 14px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #ffffff;
   border: none;
-  box-shadow: 0 8px 16px rgba(13, 148, 136, 0.35);
+  box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 18px;
   cursor: pointer;
   z-index: 35;
-  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
 }
 
 .fab-native.nav-hidden {
-  transform: translateY(calc(58px + var(--safe-bottom)));
+  transform: translateY(calc(54px + var(--safe-bottom)));
 }
 
 .fab-native:active {
@@ -1424,9 +1448,10 @@ table.result-table td:last-child {
 
 @media (min-width: 820px) {
   .fab-native {
-    bottom: 24px;
-    width: 54px;
-    height: 54px;
+    bottom: 20px;
+    left: 20px;
+    width: 42px;
+    height: 42px;
   }
 }
 
@@ -1604,20 +1629,11 @@ footer.app-footer a {
 <div class="toast-container-native" id="toastContainer"></div>
 <header class="app-bar">
 <div class="top-bar">
+<div class="top-bar-upper">
 <div class="brand-wrapper" onclick="openClassPickerSheet()">
 <div class="brand-icon" id="headerBrandLogo">ف</div>
 <div class="brand-info">
 <h1 class="brand-title" id="headerInstitution">جامعہ فاطمۃ الزہرا للبنات</h1>
-<div class="brand-chips-row">
-<button class="brand-subtitle-btn" id="headerClassBadge" type="button">
-<span id="headerClassText">درجہ: متوسطہ اول</span>
-<svg fill="none" height="12" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="12"><polyline points="6 9 12 15 18 9"></polyline></svg>
-</button>
-<button class="exam-badge-btn" onclick="event.stopPropagation(); openExamPickerSheet()" type="button">
-<span id="headerExamText">ششماہی امتحان</span>
-<svg fill="none" height="11" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="11"><polyline points="6 9 12 15 18 9"></polyline></svg>
-</button>
-</div>
 </div>
 </div>
 <div class="header-actions">
@@ -1633,6 +1649,17 @@ footer.app-footer a {
 <button class="btn btn-accent btn-sm" onclick="openPrintCenterModal()" title="پرنٹ سنٹر (گزٹ، DMC، پوزیشن ہولڈرز، سلپس)">
 <svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
 <span>پرنٹس</span>
+</button>
+</div>
+</div>
+<div class="brand-chips-row">
+<button class="brand-subtitle-btn" id="headerClassBadge" onclick="openClassPickerSheet()" type="button">
+<span id="headerClassText">درجہ: متوسطہ اول</span>
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="12"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<button class="exam-badge-btn" onclick="openExamPickerSheet()" type="button">
+<span id="headerExamText">ششماہی امتحان</span>
+<svg fill="none" height="11" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="11"><polyline points="6 9 12 15 18 9"></polyline></svg>
 </button>
 </div>
 </div>
@@ -2083,7 +2110,7 @@ footer.app-footer a {
 </button>
 </nav>
 <button class="fab-native no-print" onclick="openStudentModal()" title="نیا طالب علم شامل کریں">
-<svg fill="none" height="24" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="24"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
 </button>
 <div class="modal-backdrop-native" id="classPickerSheet" onclick="closeOnBackdrop(event, 'classPickerSheet')">
 <div class="modal-sheet">
@@ -4281,11 +4308,13 @@ function updateTopControlsVisibility(tabId) {
   let chipsEl = document.querySelector('.chip-filters-bar');
   let searchEl = document.querySelector('.search-toolbar');
   let bulkEl = document.querySelector('.bulk-actions-strip');
+  let fabEl = document.querySelector('.fab-native');
   let isListTab = (tabId === 'table' || tabId === 'cards');
   if (statsEl) statsEl.style.display = isListTab ? '' : 'none';
   if (chipsEl) chipsEl.style.display = isListTab ? '' : 'none';
   if (searchEl) searchEl.style.display = isListTab ? '' : 'none';
   if (bulkEl) bulkEl.style.display = isListTab ? '' : 'none';
+  if (fabEl) fabEl.style.display = isListTab ? '' : 'none';
 }
 
 function switchMainTab(tabId, btn) {

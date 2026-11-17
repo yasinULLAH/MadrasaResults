@@ -70,11 +70,11 @@ if (workbox) {
     },
     {
         "url": "index.html",
-        "revision": "eafca9a732b1b052c11c93f176204ed4"
+        "revision": "dd1af91fbdb690b77d4a6f9982d10680"
     },
     {
         "url": "index.html.bak",
-        "revision": "7ae8d2cc56f5f6047bd588368ba3ef72"
+        "revision": "eafca9a732b1b052c11c93f176204ed4"
     },
     {
         "url": "logo.png",
@@ -106,7 +106,7 @@ if (workbox) {
     },
     {
         "url": "sw.js",
-        "revision": "9e026a963c1e3e61db3cc6d09f993f5c"
+        "revision": "e65234eb2299609dee7a44d6c56f4103"
     },
     {
         "url": "xlsx.full.min.js",
