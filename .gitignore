@@ -1,0 +1,7 @@
+node_modules/
+dist/
+release-output/
+android/
+.capacitor/
+capacitor.config.json
+test_output*

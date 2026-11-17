@@ -1,0 +1,32 @@
+{
+  "name": "madrasa-results",
+  "version": "1.0.0",
+  "description": "Madrasa Examination and Result Management System",
+  "main": "main.js",
+  "author": "Yasin Ullah (Bannu Software Solutions)",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build:exe": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.yasinbss.madrasaresults",
+    "productName": "Madrasa Results",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "portable",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "portable": {
+      "artifactName": "MadrasaResults-Portable.exe"
+    },
+    "files": [
+      "index.html",
+      "xlsx.full.min.js",
+      "main.js",
+      "package.json"
+    ]
+  }
+}
