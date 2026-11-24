@@ -1,6 +1,6 @@
 {
   "name": "madrasa-results",
-  "version": "1.0.0",
+  "version": "1.0.10",
   "description": "Madrasa Examination and Result Management System",
   "main": "main.js",
   "author": "Yasin Ullah (Bannu Software Solutions)",
@@ -8,6 +8,10 @@
   "scripts": {
     "start": "electron .",
     "build:exe": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "30.0.0",
+    "electron-builder": "24.13.3"
   },
   "build": {
     "appId": "com.yasinbss.madrasaresults",
