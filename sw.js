@@ -3,7 +3,7 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/7.0.0/workbox
 
 if (workbox) {
     console.log(`Workbox is loaded.`);
-    
+
     self.addEventListener('message', (event) => {
       if (event.data && event.data.type === 'SKIP_WAITING') {
         console.log('Service Worker received SKIP_WAITING message, activating now.');
@@ -49,68 +49,28 @@ if (workbox) {
         "revision": "d2416fb5aa204341dc46c1d98f26c274"
     },
     {
-        "url": ".gitattributes",
-        "revision": "05bdb783ee6514c8c072e47680af8ff7"
-    },
-    {
-        "url": ".gitignore",
-        "revision": "d2c5968d33262f56a08751c3b4dad2d8"
-    },
-    {
-        "url": "build pwa make html app offline and installable yasin best working re-run this for updates best for html only.pyw",
-        "revision": "8b06a5e36535c2fdf8cfca963f705e8b"
-    },
-    {
-        "url": "client readme.md",
-        "revision": "ccff46ffb08db98da6a1c6b4169a7f4b"
-    },
-    {
-        "url": "FEATURES_REPORT.md",
-        "revision": "b23e966b3b49f8054ff48f7a0a748be8"
-    },
-    {
         "url": "index.html",
-        "revision": "800780ea063cfb6d783b0183fd59d9c4"
-    },
-    {
-        "url": "index.html.bak",
-        "revision": "384ef42b3c086f6d4f80ba9855c18b7f"
-    },
-    {
-        "url": "logo.png",
-        "revision": "ab0290cafdf74db9c629f6d65fc45bee"
-    },
-    {
-        "url": "main.js",
-        "revision": "12b01f9e13fd2de63e65d89c407bfff7"
+        "revision": "5338dfc57d337e6975acd264f7562790"
     },
     {
         "url": "manifest.json",
-        "revision": "d2633b02fadf7ba89ad64ab595155333"
+        "revision": "8c71c213147da34265e7c446cc0625cc"
     },
     {
         "url": "offline.html",
-        "revision": "ad17d01f02bb01615fbc0509f5aee82a"
-    },
-    {
-        "url": "package.json",
-        "revision": "72378f272bbd80971bba71bac81480f3"
+        "revision": "0d25e460028978e893fcb0fc91bc3fa1"
     },
     {
         "url": "pwa-register.js",
-        "revision": "3ec872e4f752840ad8f85922ff6cebe7"
-    },
-    {
-        "url": "README.md",
-        "revision": "316feeb88a17cd6ba213319d810acd4b"
-    },
-    {
-        "url": "sw.js",
-        "revision": "64a259b7b92b0a5bf7f8fdb45687e446"
+        "revision": "bb5f7f922439f13a69b19d977ad5fcdc"
     },
     {
         "url": "xlsx.full.min.js",
         "revision": "84ff27b197f3b3fedc29a3a627b83c54"
+    },
+    {
+        "url": "logo.png",
+        "revision": "ab0290cafdf74db9c629f6d65fc45bee"
     }
 ]);
 
