@@ -1488,6 +1488,355 @@ footer.app-footer a {
     break-after: page;
   }
 }
+
+/* === ADDITIVE UX & WORKFLOW ENHANCEMENTS === */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.autosave-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #15803d;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  padding: 4px 9px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.autosave-pill.saving {
+  color: #b45309;
+  background: #fef3c7;
+  border-color: #fde68a;
+}
+
+.btn-undo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-undo:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.stat-card.stat-clickable {
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.stat-card.stat-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--primary);
+}
+
+.stat-card.stat-clickable:active {
+  transform: scale(0.98);
+}
+
+.stat-card.stat-active {
+  border-color: var(--primary);
+  background: var(--primary-subtle);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.completion-strip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.completion-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.completion-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--surface-alt);
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  min-width: 90px;
+}
+
+.completion-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), #16a34a);
+  border-radius: 9999px;
+  transition: width 0.35s ease;
+}
+
+.completion-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.chip-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  margin-right: 2px;
+}
+
+.filter-chip.active .chip-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.active-filter-bar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 12px;
+  margin-bottom: 10px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  color: #92400e;
+  flex-wrap: wrap;
+}
+
+.active-filter-bar.visible {
+  display: flex;
+}
+
+/* Sticky table header & improved cell states */
+.table-scroll-container {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+table.result-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background: #f1f5f9;
+  box-shadow: inset 0 -2px 0 var(--border);
+}
+
+table.result-table th.th-sort-active {
+  background: var(--primary-light);
+}
+
+.sort-arrow {
+  display: inline-block;
+  margin-right: 3px;
+  font-size: 10px;
+  color: var(--primary-dark);
+}
+
+.mark-input-cell.empty-cell {
+  border: 1px dashed #cbd5e1;
+  background: #f8fafc;
+}
+
+.mark-input-cell.overmax-cell {
+  color: #b45309;
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+}
+
+.quick-inline-add-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.quick-inline-add-bar input {
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+}
+
+.quick-inline-add-bar input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.table-hint-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border);
+  font-size: 11.5px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.kbd-badge {
+  display: inline-block;
+  padding: 1px 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  background: var(--surface);
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  color: var(--text);
+  font-family: monospace;
+}
+
+.settings-jump-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 2px 8px 2px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+}
+
+.settings-jump-pill {
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.settings-jump-pill:hover {
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  background: var(--primary-subtle);
+}
+
+.stat-bar-track {
+  width: 100%;
+  height: 7px;
+  background: var(--surface-alt);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.modal-live-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--primary-subtle);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  flex-wrap: wrap;
+}
+
+.print-readiness-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+}
+
+.print-count-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: var(--primary-subtle);
+  color: var(--primary-dark);
+  border: 1px solid var(--primary-light);
+  margin-right: 6px;
+}
+
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: var(--surface-alt);
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+}
+
+@media (max-width: 640px) {
+  .autosave-pill {
+    display: none;
+  }
+  .mobile-nav-item {
+    font-size: 9.5px;
+  }
+  .mobile-nav-icon-box {
+    width: 26px;
+    height: 22px;
+  }
+  .table-scroll-container {
+    max-height: 62vh;
+  }
+}
+
+@media print {
+  .completion-strip, .active-filter-bar, .quick-inline-add-bar, .table-hint-bar, .autosave-pill, .settings-jump-bar, .print-readiness-banner {
+    display: none !important;
+  }
+}
+
 </style>
 <link href="manifest.json" rel="manifest"/><link href="favicon.ico" rel="icon" type="image/x-icon"/></head>
 <body>
@@ -1511,6 +1860,15 @@ footer.app-footer a {
 </div>
 </div>
 <div class="header-actions">
+<span class="autosave-pill no-print" id="autoSaveIndicator" title="تمام تبدیلیاں خودکار محفوظ ہو رہی ہیں">✓ محفوظ</span>
+<button class="btn btn-secondary btn-sm btn-undo" disabled="" id="undoActionBtn" onclick="performUndo()" title="آخری تبدیلی واپس کریں (Ctrl+Z)" type="button">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="14"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg>
+<span>واپس</span>
+</button>
+<button class="btn btn-secondary btn-sm" onclick="openShortcutsModal()" title="تیز استعمال کی رہنمائی اور کی بورڈ شارٹ کٹس" type="button">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="15"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
+<span>رہنمائی</span>
+</button>
 <button class="btn btn-secondary btn-sm" onclick="triggerImport()" title="ایکسل فائل امپورٹ کریں">
 <svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
 <span>امپورٹ</span>
@@ -1559,41 +1917,51 @@ footer.app-footer a {
 </header>
 <main class="app-content">
 <div class="stats-container">
-<div class="stat-card">
+<div class="stat-card stat-clickable" data-stat-filter="all" onclick="quickFilterByStat('all')" title="تمام طالبات دیکھنے کے لیے کلک کریں">
 <span class="stat-label">کل طلبہ / طالبات</span>
 <div class="stat-val-row">
 <span class="stat-val" id="statTotalStudents">0</span>
 </div>
 <span class="stat-sub" id="statAppeared">حاضر: 0</span>
 </div>
-<div class="stat-card">
+<div class="stat-card stat-clickable" data-stat-filter="passed" onclick="quickFilterByStat('passed')" title="صرف کامیاب طالبات فلٹر کریں">
 <span class="stat-label">کامیاب طالبات</span>
 <div class="stat-val-row">
 <span class="stat-val" id="statPassed" style="color:var(--success)">0</span>
 </div>
 <span class="stat-sub" id="statPassPercent">0% شرح کامیابی</span>
 </div>
-<div class="stat-card">
+<div class="stat-card stat-clickable" data-stat-filter="failed" onclick="quickFilterByStat('failed')" title="صرف راسب (ناکام) طالبات فلٹر کریں">
 <span class="stat-label">ناکام / راسب</span>
 <div class="stat-val-row">
 <span class="stat-val" id="statFailed" style="color:var(--danger)">0</span>
 </div>
 <span class="stat-sub" id="statAbsent">غیر حاضر: 0</span>
 </div>
-<div class="stat-card">
+<div class="stat-card stat-clickable" data-stat-filter="top3" onclick="quickFilterByStat('top3')" title="ٹاپ ۳ پوزیشن ہولڈرز دیکھیں">
 <span class="stat-label">پہلی پوزیشن</span>
 <div class="stat-val-row">
 <span class="stat-val" id="statTopMarks" style="color:var(--accent)">0</span>
 </div>
 <span class="stat-sub" id="statTopStudent">-</span>
 </div>
-<div class="stat-card">
+<div class="stat-card stat-clickable" onclick="switchTabDirect('stats')" title="مکمل شماریات و مضمون وار چارٹس دیکھیں">
 <span class="stat-label">اوسط نمبرات</span>
 <div class="stat-val-row">
 <span class="stat-val" id="statAverage">0</span>
 </div>
 <span class="stat-sub" id="statTotalMarksSum">کل نمبر: 0</span>
 </div>
+</div>
+<div class="completion-strip no-print" id="completionProgressStrip">
+<div class="completion-progress-wrap">
+<span id="completionProgressLabel" style="font-size:12px; font-weight:700; color:var(--text); white-space:nowrap;">نمبرات کی تکمیل: 0%</span>
+<div class="completion-bar-track">
+<div class="completion-bar-fill" id="completionProgressFill" style="width:0%"></div>
+</div>
+<span id="completionProgressDetail" style="font-size:11.5px; color:var(--text-muted); white-space:nowrap;">0 / 0</span>
+</div>
+<div class="completion-actions" id="completionNextActions"></div>
 </div>
 <div class="chip-filters-bar">
 <button class="filter-chip active" data-filter="all" onclick="setFilterChip('all', this)">
@@ -1623,6 +1991,9 @@ footer.app-footer a {
 <button class="filter-chip" data-filter="absent" onclick="setFilterChip('absent', this)">
       ⏳ غیر حاضر
     </button>
+<button class="filter-chip" data-filter="incomplete" onclick="setFilterChip('incomplete', this)">
+      📝 نامکمل نمبرات
+    </button>
 </div>
 <div class="search-toolbar">
 <div class="search-box-native">
@@ -1643,15 +2014,25 @@ footer.app-footer a {
 </button>
 </div>
 </div>
+<div class="active-filter-bar no-print" id="activeFilterBar">
+<span id="activeFilterText" style="font-weight:700;"></span>
+<button class="btn btn-secondary btn-sm" onclick="resetAllFilters()" type="button">تمام فلٹرز صاف کریں ✕</button>
+</div>
 <div class="bulk-actions-strip no-print">
 <span style="font-weight:700; color:var(--primary-dark);">اجتماعی اختیارات:</span>
 <button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('present')">سب کو حاضر کریں</button>
 <button class="btn btn-secondary btn-sm" onclick="bulkMarkAll('absent')">سب کو غائب کریں</button>
 <button class="btn btn-secondary btn-sm" onclick="downloadBlankExcelTemplate()">خالی ایکسل ٹیمپلیٹ</button>
 <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); switchTabDirect('dmc')">سب کے DMC پرنٹ کریں</button>
+<button class="btn btn-secondary btn-sm" onclick="clearSampleDataStartFresh()" style="color:var(--danger); border-color:#fecaca;" title="تمام طالبات و نمبرات صاف کر کے نئے سرے سے شروع کریں" type="button">🧹 صاف کریں (نیا آغاز)</button>
+<button class="btn btn-secondary btn-sm" onclick="loadSampleDataNow()" title="آزمائشی نمونہ ڈیٹا لوڈ کریں" type="button">📥 نمونہ ڈیٹا لوڈ کریں</button>
 </div>
 <div class="tab-pane active" id="pane-table">
 <div class="table-wrapper">
+<div class="table-hint-bar no-print">
+<span>💡 <strong>تیز اندراج:</strong> خانے میں نمبر لکھ کر <span class="kbd-badge">Enter</span> یا <span class="kbd-badge">↑↓←→</span> سے اگلے خانے میں جائیں | <span class="kbd-badge">g</span> = غائب | <span class="kbd-badge">e</span> = مستثنیٰ</span>
+<span id="tableCountBadge" style="font-weight:700; color:var(--primary-dark);"></span>
+</div>
 <div class="table-scroll-container">
 <table class="result-table" id="mainResultTable">
 <thead>
@@ -1659,6 +2040,14 @@ footer.app-footer a {
 </thead>
 <tbody id="tableBody"></tbody>
 </table>
+</div>
+<div class="quick-inline-add-bar no-print" id="quickInlineAddBar">
+<span style="font-size:12px; font-weight:700; color:var(--primary-dark); white-space:nowrap;">⚡ فوری اندراج:</span>
+<input id="inlineAddRoll" placeholder="رول" style="width:62px; text-align:center;" type="number"/>
+<input id="inlineAddName" onkeydown="if(event.key==='Enter'){event.preventDefault(); submitQuickInlineAdd();}" placeholder="اسم الطالبۃ (لازمی)..." style="flex:1; min-width:130px;" type="text"/>
+<input id="inlineAddFather" onkeydown="if(event.key==='Enter'){event.preventDefault(); submitQuickInlineAdd();}" placeholder="اسم الاب..." style="flex:1; min-width:120px;" type="text"/>
+<input id="inlineAddPhone" onkeydown="if(event.key==='Enter'){event.preventDefault(); submitQuickInlineAdd();}" placeholder="فون نمبر (اختیاری)" style="width:130px;" type="tel"/>
+<button class="btn btn-primary btn-sm" onclick="submitQuickInlineAdd()" type="button">+ فوری شامل کریں</button>
 </div>
 </div>
 </div>
@@ -1669,12 +2058,15 @@ footer.app-footer a {
 <div class="quick-entry-card" id="quickEntryContainer"></div>
 </div>
 <div class="tab-pane" id="pane-dmc">
-<div class="no-print" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
-<div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+<div class="no-print" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px; background:var(--surface); padding:10px 14px; border-radius:var(--radius-sm); border:1px solid var(--border);">
+<div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
 <label style="font-weight:700; font-size:13px;">طالب علم منتخب کریں:</label>
+<button class="btn btn-secondary btn-sm" onclick="stepDmcStudent(-1)" title="پچھلی طالبہ" type="button">← پچھلی</button>
 <select class="select-native" id="dmcStudentSelect" onchange="renderSingleDMC(this.value)"></select>
+<button class="btn btn-secondary btn-sm" onclick="stepDmcStudent(1)" title="اگلی طالبہ" type="button">اگلی →</button>
 </div>
 <div style="display:flex; gap:8px; flex-wrap:wrap;">
+<button class="btn-whatsapp" onclick="shareActiveDmcWhatsApp()" style="padding:6px 11px; font-size:12px;" type="button">واٹس ایپ بھیجیں</button>
 <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs()">سب طلبہ کے کشف دکھائیں</button>
 <button class="btn btn-primary btn-sm" onclick="printActiveDMC()">پرنٹ کریں (Print)</button>
 </div>
@@ -1682,6 +2074,7 @@ footer.app-footer a {
 <div id="dmcContainer"></div>
 </div>
 <div class="tab-pane" id="pane-printcenter">
+<div class="print-readiness-banner no-print" id="printReadinessBanner"></div>
 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
 <div class="native-card">
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📑 امتحانی گزٹ (Gazette Broadsheet)</h3>
@@ -1736,7 +2129,15 @@ footer.app-footer a {
 </div>
 <div class="tab-pane" id="pane-settings">
 <div style="max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:16px;">
-<div class="native-card">
+<div class="settings-jump-bar no-print">
+<button class="settings-jump-pill" onclick="scrollToSettingCard('settingCardProfile')" type="button">🏛️ پروفائل و لوگو</button>
+<button class="settings-jump-pill" onclick="scrollToSettingCard('settingCardGrading')" type="button">🏆 تقدیر و پوزیشن</button>
+<button class="settings-jump-pill" onclick="scrollToSettingCard('settingCardSubjects')" type="button">📚 مضامین</button>
+<button class="settings-jump-pill" onclick="scrollToSettingCard('settingCardExams')" type="button">📝 امتحانات</button>
+<button class="settings-jump-pill" onclick="scrollToSettingCard('settingCardClasses')" type="button">🏫 درجات</button>
+<button class="settings-jump-pill" onclick="scrollToSettingCard('settingCardBackup')" type="button">💾 بیک اپ</button>
+</div>
+<div class="native-card" id="settingCardProfile">
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
 <div>
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin:0;">جامعہ / مدرسہ کا پروفائل، لوگو و برانڈنگ</h3>
@@ -1792,7 +2193,7 @@ footer.app-footer a {
 </div>
 </div>
 </div>
-<div class="native-card">
+<div class="native-card" id="settingCardGrading">
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
 <div>
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin:0;">امتحانی ضوابط، تقدیر (Gradation) و پوزیشن کی ترتیبات</h3>
@@ -1860,7 +2261,7 @@ footer.app-footer a {
 </div>
 </div>
 </div>
-<div class="native-card">
+<div class="native-card" id="settingCardSubjects">
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
 <div>
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin:0;">مضامین، کل نمبر اور پاس مارکس کا انتظام</h3>
@@ -1889,7 +2290,7 @@ footer.app-footer a {
 </div>
 <div id="settingsSubjectList" style="display:flex; flex-direction:column; gap:8px;"></div>
 </div>
-<div class="native-card">
+<div class="native-card" id="settingCardExams">
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
 <div>
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام امتحانات کے سیشنز (Exam Sessions)</h3>
@@ -1899,7 +2300,7 @@ footer.app-footer a {
 </div>
 <div id="settingsExamList" style="display:flex; flex-direction:column; gap:8px;"></div>
 </div>
-<div class="native-card">
+<div class="native-card" id="settingCardClasses">
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
 <div>
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark);">تمام درجات (کلاسز) کی مکمل فہرست (Classes Management)</h3>
@@ -1909,7 +2310,7 @@ footer.app-footer a {
 </div>
 <div id="settingsClassList" style="display:flex; flex-direction:column; gap:8px;"></div>
 </div>
-<div class="native-card">
+<div class="native-card" id="settingCardBackup">
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">بیک اپ، امپورٹ و بحالی (Backup &amp; Restore)</h3>
 <div style="display:flex; gap:10px; flex-wrap:wrap;">
 <button class="btn btn-secondary" onclick="downloadJsonBackup()">
@@ -1921,6 +2322,8 @@ footer.app-footer a {
             بیک اپ بحال کریں
           </button>
 <input accept=".json" id="jsonRestoreInput" onchange="handleJsonRestore(event)" style="display:none" type="file"/>
+<button class="btn btn-secondary" onclick="clearSampleDataStartFresh()" style="color:var(--danger); border-color:#fecaca; background:#fef2f2;" type="button">🧹 ڈیٹا صاف کریں (نئے سرے سے شروع)</button>
+<button class="btn btn-primary" onclick="loadSampleDataNow()" type="button">📥 نمونہ ڈیٹا لوڈ کریں</button>
 <button class="btn btn-accent" onclick="resetToSampleData()">نمونہ ڈیٹا پر ری سیٹ</button>
 </div>
 </div>
@@ -1964,6 +2367,12 @@ footer.app-footer a {
 <svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
 </div>
 <span>پرنٹس</span>
+</button>
+<button class="mobile-nav-item" data-tab="stats" onclick="switchMobileNav('stats', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg>
+</div>
+<span>شماریات</span>
 </button>
 <button class="mobile-nav-item" data-tab="settings" onclick="switchMobileNav('settings', this)">
 <div class="mobile-nav-icon-box">
@@ -2124,6 +2533,11 @@ footer.app-footer a {
 <input class="form-input-native" id="modalStudentAddress" placeholder="علاقہ / گاؤں" type="text"/>
 </div>
 </div>
+<div class="modal-live-preview" id="modalLivePreview">
+<span>مجموعہ: <strong id="modalPreviewObtained" style="color:var(--primary-dark);">0 / 0</strong></span>
+<span>فیصد: <strong id="modalPreviewPercent" style="color:var(--primary-dark);">0%</strong></span>
+<span>تقدیر: <span class="grade-badge grade-ghayab" id="modalPreviewGrade">غیر حاضر</span></span>
+</div>
 <div style="margin-top:6px;">
 <h4 style="font-size:13px; font-weight:700; margin-bottom:8px; color:var(--primary-dark);">نمبرات مضامین (Subject Marks)</h4>
 <div id="modalMarksInputs" style="display:flex; flex-direction:column; gap:8px;"></div>
@@ -2131,7 +2545,8 @@ footer.app-footer a {
 </div>
 <div class="modal-footer-native">
 <button class="btn btn-secondary" onclick="closeStudentModal()">منسوخ</button>
-<button class="btn btn-primary" onclick="saveStudentModal()">محفوظ کریں</button>
+<button class="btn btn-secondary" id="modalSaveAndNewBtn" onclick="saveStudentModal(true)" title="محفوظ کر کے فوراً اگلی نئی طالبہ کا فارم کھولیں" type="button">محفوظ کریں اور نیا شامل کریں</button>
+<button class="btn btn-primary" onclick="saveStudentModal(false)">محفوظ کریں</button>
 </div>
 </div>
 </div>
@@ -2175,6 +2590,56 @@ footer.app-footer a {
 <div class="modal-footer-native">
 <button class="btn btn-secondary" onclick="closeCopySubjectsModal()" type="button">منسوخ</button>
 <button class="btn btn-primary" onclick="submitCopySubjects()" type="button">کاپی کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="subjectInputModal" onclick="closeOnBackdrop(event, 'subjectInputModal')">
+<div class="modal-sheet" style="max-width:420px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native" id="subjectInputModalTitle">نیا مضمون شامل کریں</h3>
+<button class="modal-close-native" onclick="closeSubjectInputModal()">×</button>
+</div>
+<div class="modal-body-native">
+<p id="subjectInputModalSubtitle" style="font-size:12.5px; color:var(--text-muted); margin:0;"></p>
+<div class="form-group-native">
+<label class="form-label-native">مضمون کا نام:</label>
+<input class="form-input-native" id="subjectInputModalField" onkeydown="if(event.key==='Enter'){event.preventDefault(); submitSubjectInputModal();}" placeholder="مثلاً: تفسیر، حدیث، اردو..." type="text"/>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeSubjectInputModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitSubjectInputModal()" type="button">محفوظ کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="shortcutsHelpModal" onclick="closeOnBackdrop(event, 'shortcutsHelpModal')">
+<div class="modal-sheet" style="max-width:520px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">⚡ تیز استعمال کی رہنمائی اور شارٹ کٹس</h3>
+<button class="modal-close-native" onclick="closeShortcutsModal()">×</button>
+</div>
+<div class="modal-body-native">
+<div style="background:var(--primary-subtle); border:1px solid var(--primary-light); padding:10px 12px; border-radius:var(--radius-sm); font-size:12.5px; color:var(--primary-dark);">
+<strong>آسان ۳ مرحلہ طریقہ کار:</strong><br/>
+1. اوپر سے <strong>درجہ</strong> اور <strong>امتحان</strong> منتخب کریں۔<br/>
+2. جدول (شیٹ) یا <strong>کوئیک انٹری</strong> میں نمبرات درج کریں — سب خودکار محفوظ ہوتا ہے۔<br/>
+3. <strong>پرنٹ سنٹر</strong> یا <strong>ایکسل</strong> سے گزٹ، DMC اور میرٹ لسٹ حاصل کریں۔
+</div>
+<div style="display:flex; flex-direction:column; gap:6px;">
+<div class="shortcut-row"><span>تلاش کے خانے پر فوراً جائیں</span><span class="kbd-badge">/</span></div>
+<div class="shortcut-row"><span>نیا طالب علم شامل کریں</span><span class="kbd-badge">Alt + N</span></div>
+<div class="shortcut-row"><span>آخری تبدیلی واپس کریں (Undo)</span><span class="kbd-badge">Ctrl + Z</span></div>
+<div class="shortcut-row"><span>جدول میں اگلی/پچھلی قطار میں جائیں</span><span class="kbd-badge">Enter / ↑ ↓</span></div>
+<div class="shortcut-row"><span>جدول میں اگلے/پچھلے مضمون میں جائیں</span><span class="kbd-badge">← / →</span></div>
+<div class="shortcut-row"><span>فوری غیر حاضر (غائب) لکھیں</span><span class="kbd-badge">g یا a</span></div>
+<div class="shortcut-row"><span>فوری مستثنیٰ لکھیں</span><span class="kbd-badge">e یا -</span></div>
+<div class="shortcut-row"><span>کھلا ہوا باکس بند کریں</span><span class="kbd-badge">Esc</span></div>
+</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-primary" onclick="closeShortcutsModal()" type="button">سمجھ گیا</button>
 </div>
 </div>
 </div>
@@ -2626,6 +3091,11 @@ function getFilteredAndSortedStudents() {
     computed = computed.filter(s => s.grade === 'راسب' && !s.isAbsent);
   } else if (appState.filterOption === 'absent') {
     computed = computed.filter(s => s.isAbsent);
+  } else if (appState.filterOption === 'incomplete') {
+    computed = computed.filter(s => cData.subjects.some(sub => {
+      let v = s.marks ? s.marks[sub] : undefined;
+      return v === undefined || v === null || String(v).trim() === '';
+    }));
   } else if (['ممتاز', 'جید جدا', 'جید', 'مقبول'].includes(appState.filterOption)) {
     computed = computed.filter(s => s.grade === appState.filterOption);
   }
@@ -2826,13 +3296,20 @@ function renderStats(cData) {
   nonAbsent.forEach(s => {
     if (grades[s.grade] !== undefined) grades[s.grade]++;
   });
+  const gradeColors = { 'ممتاز': '#16a34a', 'جید جدا': '#0284c7', 'جید': '#ca8a04', 'مقبول': '#ea580c', 'راسب': '#dc2626' };
   let gradeList = document.getElementById('gradeBreakdownList');
-  gradeList.innerHTML = Object.entries(grades).map(([g, cnt]) => `
-    <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">
-      <span class="grade-badge ${getGradeClass(g)}">${g}</span>
-      <span style="font-weight:700;">${cnt} طالبات (${appeared > 0 ? Math.round((cnt/appeared)*100) : 0}%)</span>
+  gradeList.innerHTML = Object.entries(grades).map(([g, cnt]) => {
+    let pct = appeared > 0 ? Math.round((cnt / appeared) * 100) : 0;
+    return `
+    <div style="font-size:13px; padding:6px 0; border-bottom:1px solid var(--border);">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="grade-badge ${getGradeClass(g)}">${g}</span>
+        <span style="font-weight:700;">${cnt} طالبات (${pct}%)</span>
+      </div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${pct}%; background:${gradeColors[g] || 'var(--primary)'};"></div></div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   let subAveragesList = document.getElementById('subjectAveragesList');
   subAveragesList.innerHTML = cData.subjects.map(sub => {
@@ -2845,13 +3322,19 @@ function renderStats(cData) {
       else if (!isNaN(Number(v)) && v !== '' && v !== null && v !== undefined) { subSum += Number(v); subCount++; }
     });
     let subAvg = subCount > 0 ? Math.round(subSum / subCount) : 0;
+    let subPct = max > 0 ? Math.min(100, Math.round((subAvg / max) * 100)) : 0;
     return `
-      <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; padding:5px 0; border-bottom:1px solid var(--border);">
-        <span style="font-weight:600;">${sub}</span>
-        <span style="font-weight:700; color:var(--primary);">${subAvg} / ${max}</span>
+      <div style="font-size:13px; padding:6px 0; border-bottom:1px solid var(--border);">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:600;">${sub}</span>
+          <span style="font-weight:700; color:var(--primary);">${subAvg} / ${max} (${subPct}%)</span>
+        </div>
+        <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${subPct}%; background:var(--primary);"></div></div>
       </div>
     `;
   }).join('');
+
+  updateUxIndicators(cData, computed);
 }
 
 function getGradeClass(grade) {
@@ -2868,30 +3351,53 @@ function renderTable(cData, students) {
   let sOpt = appState.sortOption || 'roll_asc';
   let isSort = (prefix) => sOpt.startsWith(prefix) ? 'th-sort-active' : '';
 
+  let sortArrow = (prefix) => {
+    if (!sOpt.startsWith(prefix)) return '';
+    return sOpt.endsWith('asc') ? '<span class="sort-arrow">▲</span>' : '<span class="sort-arrow">▼</span>';
+  };
   let subsHeaders = cData.subjects.map(sub => {
     let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
     let activeSubClass = sOpt.startsWith('sub:' + sub + ':') ? 'th-sort-active' : '';
+    let arrow = sOpt.startsWith('sub:' + sub + ':') ? (sOpt.endsWith(':asc') ? '<span class="sort-arrow">▲</span>' : '<span class="sort-arrow">▼</span>') : '';
     let safeSub = sub.replace(/'/g, "\\'");
-    return `<th class="th-sortable ${activeSubClass}" onclick="toggleTableSort('sub:${safeSub}')">${sub}<br><span style="font-size:10px; color:var(--text-muted); font-weight:normal;">(${max})</span></th>`;
+    return `<th class="th-sortable ${activeSubClass}" onclick="toggleTableSort('sub:${safeSub}')">${sub}${arrow}<br><span style="font-size:10px; color:var(--text-muted); font-weight:normal;">(${max})</span></th>`;
   }).join('');
 
   thead.innerHTML = `
     <th style="width:35px;" class="th-sortable ${isSort('roll_')}" onclick="toggleTableSort('roll')">#</th>
-    <th style="width:50px;" class="th-sortable ${isSort('roll_')}" onclick="toggleTableSort('roll')">رول</th>
-    <th style="min-width:130px; text-align:right;" class="th-sortable ${isSort('name_')}" onclick="toggleTableSort('name')">اسم الطالبۃ</th>
-    <th style="min-width:130px; text-align:right;" class="th-sortable ${isSort('father_')}" onclick="toggleTableSort('father')">اسم الاب</th>
+    <th style="width:50px;" class="th-sortable ${isSort('roll_')}" onclick="toggleTableSort('roll')">رول${sortArrow('roll_')}</th>
+    <th style="min-width:130px; text-align:right;" class="th-sortable ${isSort('name_')}" onclick="toggleTableSort('name')">اسم الطالبۃ${sortArrow('name_')}</th>
+    <th style="min-width:130px; text-align:right;" class="th-sortable ${isSort('father_')}" onclick="toggleTableSort('father')">اسم الاب${sortArrow('father_')}</th>
     ${subsHeaders}
-    <th style="width:75px; background:var(--primary-subtle); color:var(--primary-dark);" class="th-sortable ${isSort('marks_')}" onclick="toggleTableSort('marks')">مجموعہ</th>
-    <th style="width:65px;" class="th-sortable ${isSort('total_')}" onclick="toggleTableSort('total')">کل نمبر</th>
-    <th style="width:65px;" class="th-sortable ${isSort('pct_')}" onclick="toggleTableSort('pct')">فیصد٪</th>
-    <th style="width:70px;" class="th-sortable ${isSort('rank_')}" onclick="toggleTableSort('rank')">پوزیشن</th>
-    <th style="width:75px;" class="th-sortable ${isSort('grade_')}" onclick="toggleTableSort('grade')">تقدیر</th>
+    <th style="width:75px; background:var(--primary-subtle); color:var(--primary-dark);" class="th-sortable ${isSort('marks_')}" onclick="toggleTableSort('marks')">مجموعہ${sortArrow('marks_')}</th>
+    <th style="width:65px;" class="th-sortable ${isSort('total_')}" onclick="toggleTableSort('total')">کل نمبر${sortArrow('total_')}</th>
+    <th style="width:65px;" class="th-sortable ${isSort('pct_')}" onclick="toggleTableSort('pct')">فیصد٪${sortArrow('pct_')}</th>
+    <th style="width:70px;" class="th-sortable ${isSort('rank_')}" onclick="toggleTableSort('rank')">پوزیشن${sortArrow('rank_')}</th>
+    <th style="width:75px;" class="th-sortable ${isSort('grade_')}" onclick="toggleTableSort('grade')">تقدیر${sortArrow('grade_')}</th>
     <th style="width:90px;" class="no-print">عمل</th>
   `;
+  let countBadge = document.getElementById('tableCountBadge');
+  if (countBadge) {
+    countBadge.innerText = `طالبات: ${students.length} از ${cData.students.length}`;
+  }
+  let inlineRoll = document.getElementById('inlineAddRoll');
+  if (inlineRoll && document.activeElement !== inlineRoll) {
+    let nextRoll = cData.students.length > 0 ? (Math.max(...cData.students.map(st => Number(st.roll) || 0)) + 1) : 1;
+    inlineRoll.value = nextRoll;
+  }
+  updateActiveFilterBar(students.length, cData.students.length);
 
   let tbody = document.getElementById('tableBody');
   if (students.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="${cData.subjects.length + 10}" style="padding:28px; color:var(--text-muted); font-size:14px;">کوئی طالب علم موجود نہیں۔ نیا اندراج کریں۔</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="${cData.subjects.length + 10}" style="padding:28px; color:var(--text-muted); font-size:14px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <span>کوئی طالب علم موجود نہیں۔ نیا اندراج کریں یا نمونہ ڈیٹا لوڈ کریں۔</span>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+          <button class="btn btn-primary btn-sm" onclick="openStudentModal()" type="button">+ نیا طالب علم شامل کریں</button>
+          <button class="btn btn-secondary btn-sm" onclick="loadSampleDataNow()" type="button">📥 نمونہ ڈیٹا لوڈ کریں</button>
+        </div>
+      </div>
+    </td></tr>`;
     return;
   }
 
@@ -2899,16 +3405,21 @@ function renderTable(cData, students) {
     let rankBadgeClass = s.rankNum === 1 ? 'rank-1' : (s.rankNum === 2 ? 'rank-2' : (s.rankNum === 3 ? 'rank-3' : 'rank-other'));
     let subTds = cData.subjects.map((sub, sIdx) => {
       let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
+      let maxMark = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
       let minPass = cData.subjectPassMarks && cData.subjectPassMarks[sub] ? cData.subjectPassMarks[sub] : 40;
       let strVal = String(val).trim().toLowerCase();
+      let isEmpty = strVal === '';
       let isExempt = strVal === '-' || strVal === 'مستثنیٰ' || strVal === 'مستثنی' || strVal === 'exempt';
-      let isFail = !isExempt && typeof val === 'number' && val < minPass;
-      let cellClass = isExempt ? 'exempt-cell' : (isFail ? 'fail-cell' : '');
+      let isOverMax = !isExempt && !isEmpty && !isNaN(Number(val)) && Number(val) > maxMark;
+      let isFail = !isExempt && !isEmpty && typeof val === 'number' && val < minPass;
+      let cellClass = isEmpty ? 'empty-cell' : (isOverMax ? 'overmax-cell' : (isExempt ? 'exempt-cell' : (isFail ? 'fail-cell' : '')));
+      let safeSub = sub.replace(/'/g, "\\'");
       return `<td>
-        <input type="text" class="mark-input-cell ${cellClass}" value="${val}" 
+        <input type="text" class="mark-input-cell ${cellClass}" value="${val}" placeholder="—"
           data-orig-index="${s.originalIndex}" data-subject="${sub}" data-row="${idx}" data-col="${sIdx}"
+          title="${sub} (کل: ${maxMark} | پاس: ${minPass})"
           onkeydown="handleTableKeyNav(event, ${idx}, ${sIdx})"
-          onchange="updateStudentMarkInline(${s.originalIndex}, '${sub}', this.value)"
+          onchange="updateStudentMarkInline(${s.originalIndex}, '${safeSub}', this.value)"
           onfocus="this.select()">
       </td>`;
     }).join('');
@@ -2943,15 +3454,42 @@ function renderTable(cData, students) {
   }).join('');
 }
 
+let pendingTableFocus = null;
+
+function normalizeMarkInput(rawVal) {
+  let trimmed = String(rawVal === undefined || rawVal === null ? '' : rawVal).trim();
+  let lower = trimmed.toLowerCase();
+  if (lower === 'g' || lower === 'a' || lower === 'ab' || trimmed === 'غ') return 'غائب';
+  if (lower === 'e' || lower === 'ex' || trimmed === 'م') return 'مستثنیٰ';
+  return trimmed;
+}
+
 function handleTableKeyNav(e, rowIdx, colIdx) {
-  if (e.key === 'Enter' || e.key === 'ArrowDown') {
+  if (e.key === 'Enter' && e.shiftKey) {
     e.preventDefault();
+    pendingTableFocus = { row: rowIdx - 1, col: colIdx };
+    let prev = document.querySelector(`input[data-row="${rowIdx - 1}"][data-col="${colIdx}"]`);
+    if (prev) prev.focus();
+  } else if (e.key === 'Enter' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    pendingTableFocus = { row: rowIdx + 1, col: colIdx };
     let next = document.querySelector(`input[data-row="${rowIdx + 1}"][data-col="${colIdx}"]`);
     if (next) next.focus();
   } else if (e.key === 'ArrowUp') {
     e.preventDefault();
+    pendingTableFocus = { row: rowIdx - 1, col: colIdx };
     let prev = document.querySelector(`input[data-row="${rowIdx - 1}"][data-col="${colIdx}"]`);
     if (prev) prev.focus();
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    pendingTableFocus = { row: rowIdx, col: colIdx + 1 };
+    let nextCol = document.querySelector(`input[data-row="${rowIdx}"][data-col="${colIdx + 1}"]`);
+    if (nextCol) nextCol.focus();
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    pendingTableFocus = { row: rowIdx, col: colIdx - 1 };
+    let prevCol = document.querySelector(`input[data-row="${rowIdx}"][data-col="${colIdx - 1}"]`);
+    if (prevCol) prevCol.focus();
   }
 }
 
@@ -2959,17 +3497,34 @@ function updateStudentMarkInline(originalIndex, subject, value) {
   let cData = getCurrentClassData();
   let student = cData.students[originalIndex];
   if (!student) return;
+  pushUndoSnapshot('نمبرات کی تبدیلی');
   if (!student.marks) student.marks = {};
   if (!student.examMarks) student.examMarks = {};
   if (!student.examMarks[appState.examTitle]) student.examMarks[appState.examTitle] = {};
 
-  let trimmed = String(value || '').trim();
+  let activeEl = document.activeElement;
+  let restoreTarget = pendingTableFocus;
+  if (!restoreTarget && activeEl && activeEl.classList && activeEl.classList.contains('mark-input-cell')) {
+    restoreTarget = {
+      row: Number(activeEl.getAttribute('data-row')),
+      col: Number(activeEl.getAttribute('data-col'))
+    };
+  }
+  pendingTableFocus = null;
+
+  let trimmed = normalizeMarkInput(value);
+  let maxMark = (cData.subjectMaxMarks && cData.subjectMaxMarks[subject] !== undefined) ? cData.subjectMaxMarks[subject] : 100;
   if (trimmed === '' || trimmed === null) {
     delete student.marks[subject];
     delete student.examMarks[appState.examTitle][subject];
   } else if (!isNaN(Number(trimmed))) {
-    student.marks[subject] = Number(trimmed);
-    student.examMarks[appState.examTitle][subject] = Number(trimmed);
+    let numVal = Number(trimmed);
+    if (numVal < 0) numVal = 0;
+    if (numVal > maxMark) {
+      showToast(`انتباہ: "${subject}" کے کل نمبر ${maxMark} ہیں (درج شدہ: ${numVal})`, 'warning');
+    }
+    student.marks[subject] = numVal;
+    student.examMarks[appState.examTitle][subject] = numVal;
   } else {
     student.marks[subject] = trimmed;
     student.examMarks[appState.examTitle][subject] = trimmed;
@@ -2982,6 +3537,14 @@ function updateStudentMarkInline(originalIndex, subject, value) {
   renderCards(cData, students);
   renderQuickEntry(cData);
   renderDmcTab(cData);
+
+  if (restoreTarget && appState.activeTab === 'table') {
+    let el = document.querySelector(`input[data-row="${restoreTarget.row}"][data-col="${restoreTarget.col}"]`);
+    if (el) {
+      el.focus();
+      el.select();
+    }
+  }
 }
 
 function renderCards(cData, students) {
@@ -3080,38 +3643,70 @@ function renderQuickEntry(cData) {
   let container = document.getElementById('quickEntryContainer');
   let students = cData.students;
   if (students.length === 0) {
-    container.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">پہلے طالب علم کا اندراج کریں۔</p>';
+    container.innerHTML = `<div style="text-align:center; padding:24px;">
+      <p style="color:var(--text-muted); margin-bottom:12px;">پہلے طالب علم کا اندراج کریں۔</p>
+      <button class="btn btn-primary btn-sm" onclick="openStudentModal()">+ نیا طالب علم شامل کریں</button>
+    </div>`;
     return;
   }
 
-  if (appState.quickEntryIndex >= students.length) {
+  if (appState.quickEntryIndex >= students.length || appState.quickEntryIndex < 0) {
     appState.quickEntryIndex = 0;
   }
+
+  let completedStudentsCount = students.filter(st => isStudentMarksComplete(st, cData.subjects)).length;
+  let incompleteCount = students.length - completedStudentsCount;
+  let completionPct = students.length > 0 ? Math.round((completedStudentsCount / students.length) * 100) : 0;
 
   let s = students[appState.quickEntryIndex];
   let calc = calculateStudent(s, cData.subjects, cData.totalMarks);
 
-  let subjectsInputs = cData.subjects.map(sub => {
+  let subjectsInputs = cData.subjects.map((sub, subIdx) => {
     let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
     let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100;
+    let safeSub = sub.replace(/'/g, "\\'");
     return `
       <div class="quick-entry-row">
         <div>
           <strong style="font-size:14px;">${sub}</strong>
           <span style="color:var(--text-muted); font-size:11px; display:block;">کل نمبر: ${max}</span>
         </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', ${max})">${max}</button>
-          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', 'غائب')">غائب</button>
-          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${sub}', 'مستثنیٰ')">مستثنیٰ</button>
-          <input type="text" id="quick_input_${sub}" class="quick-entry-input" value="${val}"
-            onchange="updateStudentMarkInline(${appState.quickEntryIndex}, '${sub}', this.value); renderQuickEntry(getCurrentClassData());">
+        <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${safeSub}', ${max})">${max}</button>
+          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${safeSub}', 'غائب')">غائب</button>
+          <button type="button" class="quick-preset-btn" onclick="setQuickInputVal('${safeSub}', 'مستثنیٰ')">مستثنیٰ</button>
+          <input type="text" id="quick_input_${sub}" data-quick-sub-idx="${subIdx}" class="quick-entry-input" value="${val}" placeholder="—"
+            onfocus="this.select()"
+            onkeydown="handleQuickEntryKeyNav(event, ${subIdx}, ${cData.subjects.length}, '${safeSub}')"
+            onchange="updateStudentMarkInline(${appState.quickEntryIndex}, '${safeSub}', this.value); renderQuickEntry(getCurrentClassData());">
         </div>
       </div>
     `;
   }).join('');
 
+  let studentOptions = students.map((st, idx) => {
+    let markIcon = isStudentMarksComplete(st, cData.subjects) ? '✓' : '○';
+    return `<option value="${idx}" ${idx === appState.quickEntryIndex ? 'selected' : ''}>${markIcon} رول ${st.roll} — ${st.name}</option>`;
+  }).join('');
+
   container.innerHTML = `
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; background:var(--surface-alt); padding:9px 12px; border-radius:var(--radius-sm); border:1px solid var(--border);">
+      <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:190px;">
+        <select class="select-native btn-sm" style="flex:1;" onchange="jumpQuickStudent(Number(this.value))" title="کسی بھی طالبہ پر فوراً جائیں">
+          ${studentOptions}
+        </select>
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+        ${incompleteCount > 0 ? `<button type="button" class="btn btn-accent btn-sm" onclick="jumpNextIncompleteStudent()">اگلی نامکمل (${incompleteCount})</button>` : '<span style="font-size:12px; font-weight:700; color:var(--success);">✓ تمام نمبرات مکمل</span>'}
+        <button type="button" class="btn btn-secondary btn-sm" onclick="openStudentModal()">+ نئی طالبہ</button>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="font-size:11.5px; color:var(--text-muted); font-weight:700; white-space:nowrap;">تکمیل: ${completedStudentsCount}/${students.length} (${completionPct}%)</span>
+      <div class="completion-bar-track"><div class="completion-bar-fill" style="width:${completionPct}%"></div></div>
+    </div>
+
     <div class="quick-entry-nav">
       <button class="btn btn-secondary btn-sm" onclick="prevQuickStudent()" ${appState.quickEntryIndex === 0 ? 'disabled' : ''}>
         ← پچھلا طالب علم
@@ -3139,13 +3734,17 @@ function renderQuickEntry(cData) {
       </div>
     </div>
 
+    <div style="font-size:11.5px; color:var(--text-muted); text-align:center;">
+      💡 نمبر لکھ کر <span class="kbd-badge">Enter</span> دبائیں تو خودکار اگلے مضمون یا اگلی طالبہ پر چلا جائے گا
+    </div>
+
     <div style="display:flex; flex-direction:column; gap:10px;">
       ${subjectsInputs}
     </div>
 
-    <div style="display:flex; justify-content:space-between; margin-top:10px;">
+    <div style="display:flex; justify-content:space-between; margin-top:10px; gap:8px; flex-wrap:wrap;">
       <button class="btn btn-secondary" onclick="openStudentModal(${appState.quickEntryIndex})">مکمل تفصیلات میں ترمیم</button>
-      <button class="btn btn-primary" onclick="nextQuickStudent()">محفوظ کریں اور اگلا</button>
+      <button class="btn btn-primary" onclick="nextQuickStudent(true)">محفوظ کریں اور اگلا</button>
     </div>
   `;
 }
@@ -3159,7 +3758,51 @@ function setQuickInputVal(sub, val) {
   }
 }
 
-function nextQuickStudent() {
+function focusQuickEntryInput(subIdx = 0) {
+  setTimeout(() => {
+    let inp = document.querySelector(`input[data-quick-sub-idx="${subIdx}"]`);
+    if (inp) { inp.focus(); inp.select(); }
+  }, 30);
+}
+
+function jumpQuickStudent(index) {
+  let cData = getCurrentClassData();
+  if (index >= 0 && index < cData.students.length) {
+    appState.quickEntryIndex = index;
+    renderQuickEntry(cData);
+    focusQuickEntryInput(0);
+  }
+}
+
+function jumpNextIncompleteStudent() {
+  let cData = getCurrentClassData();
+  let n = cData.students.length;
+  for (let offset = 1; offset <= n; offset++) {
+    let idx = (appState.quickEntryIndex + offset) % n;
+    if (!isStudentMarksComplete(cData.students[idx], cData.subjects)) {
+      appState.quickEntryIndex = idx;
+      renderQuickEntry(cData);
+      focusQuickEntryInput(0);
+      return;
+    }
+  }
+  showToast('ماشاءاللہ! تمام طالبات کے نمبرات مکمل ہیں', 'info');
+}
+
+function handleQuickEntryKeyNav(e, subIdx, totalSubs, subName) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    updateStudentMarkInline(appState.quickEntryIndex, subName, e.target.value);
+    if (subIdx < totalSubs - 1) {
+      renderQuickEntry(getCurrentClassData());
+      focusQuickEntryInput(subIdx + 1);
+    } else {
+      nextQuickStudent(true);
+    }
+  }
+}
+
+function nextQuickStudent(shouldFocus = false) {
   let cData = getCurrentClassData();
   if (appState.quickEntryIndex < cData.students.length - 1) {
     appState.quickEntryIndex++;
@@ -3167,6 +3810,7 @@ function nextQuickStudent() {
     appState.quickEntryIndex = 0;
   }
   renderQuickEntry(cData);
+  if (shouldFocus) focusQuickEntryInput(0);
 }
 
 function prevQuickStudent() {
@@ -3620,10 +4264,10 @@ function openStudentModal(editIndex = null) {
         <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
           <label style="font-size:13px; font-weight:600; min-width:110px;">${sub} (${max}):</label>
           <div style="display:flex; gap:5px; flex:1; min-width:180px;">
-            <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="${val}">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'">مستثنیٰ</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'">${max}</button>
+            <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="${val}" oninput="updateStudentModalLivePreview()">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'; updateStudentModalLivePreview();">غائب</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'; updateStudentModalLivePreview();">مستثنیٰ</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'; updateStudentModalLivePreview();">${max}</button>
           </div>
         </div>
       `;
@@ -3645,25 +4289,48 @@ function openStudentModal(editIndex = null) {
         <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
           <label style="font-size:13px; font-weight:600; min-width:110px;">${sub} (${max}):</label>
           <div style="display:flex; gap:5px; flex:1; min-width:180px;">
-            <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'">غائب</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'">مستثنیٰ</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'">${max}</button>
+            <input type="text" id="modalMark_${sub}" class="form-input-native" style="text-align:center;" value="" oninput="updateStudentModalLivePreview()">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='غائب'; updateStudentModalLivePreview();">غائب</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='مستثنیٰ'; updateStudentModalLivePreview();">مستثنیٰ</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('modalMark_${sub}').value='${max}'; updateStudentModalLivePreview();">${max}</button>
           </div>
         </div>
       `;
     }).join('');
   }
 
+  updateStudentModalLivePreview();
   document.getElementById('studentModal').classList.add('open');
   setTimeout(() => nameInput.focus(), 150);
+}
+
+function updateStudentModalLivePreview() {
+  let cData = getCurrentClassData();
+  let tempMarks = {};
+  cData.subjects.forEach(sub => {
+    let inp = document.getElementById('modalMark_' + sub);
+    if (inp) {
+      let v = normalizeMarkInput(inp.value);
+      if (v !== '') tempMarks[sub] = !isNaN(Number(v)) ? Number(v) : v;
+    }
+  });
+  let calc = calculateStudent({ marks: tempMarks }, cData.subjects, cData.totalMarks, cData);
+  let ob = document.getElementById('modalPreviewObtained');
+  let pc = document.getElementById('modalPreviewPercent');
+  let gr = document.getElementById('modalPreviewGrade');
+  if (ob) ob.innerText = `${calc.obtained} / ${calc.effectiveTotalMarks !== undefined ? calc.effectiveTotalMarks : cData.totalMarks}`;
+  if (pc) pc.innerText = calc.isAbsent ? '-' : `${calc.percentage}%`;
+  if (gr) {
+    gr.className = 'grade-badge ' + getGradeClass(calc.grade);
+    gr.innerText = calc.grade;
+  }
 }
 
 function closeStudentModal() {
   document.getElementById('studentModal').classList.remove('open');
 }
 
-function saveStudentModal() {
+function saveStudentModal(addAnother = false) {
   let cData = getCurrentClassData();
   let editIndex = document.getElementById('editStudentIndex').value;
   let roll = Number(document.getElementById('modalStudentRoll').value) || (cData.students.length + 1);
@@ -3675,14 +4342,17 @@ function saveStudentModal() {
 
   if (!name) {
     showToast('براہ کرم طالب علم کا نام درج کریں', 'warning');
+    document.getElementById('modalStudentName').focus();
     return;
   }
+
+  pushUndoSnapshot(editIndex !== '' ? 'طالب علم کی ترمیم' : 'نیا طالب علم');
 
   let marks = {};
   cData.subjects.forEach(sub => {
     let inp = document.getElementById('modalMark_' + sub);
     if (inp) {
-      let v = inp.value.trim();
+      let v = normalizeMarkInput(inp.value);
       if (v !== '') {
         marks[sub] = !isNaN(Number(v)) ? Number(v) : v;
       }
@@ -3701,9 +4371,13 @@ function saveStudentModal() {
     showToast('نیا طالب علم کامیابی سے شامل کر لیا گیا', 'info');
   }
 
-  closeStudentModal();
   saveToLocalStorage();
   renderApp();
+  if (addAnother) {
+    openStudentModal(null);
+  } else {
+    closeStudentModal();
+  }
 }
 
 function editStudent(index) {
@@ -3717,9 +4391,10 @@ function deleteStudent(index) {
     'طالب علم حذف کریں',
     `کیا آپ واقعی طالبہ "${s.name}" (رول: ${s.roll}) کو حذف کرنا چاہتے ہیں؟ یہ عمل واپس نہیں لیا جا سکتا۔`,
     function() {
+      pushUndoSnapshot('طالب علم حذف');
       cData.students.splice(index, 1);
       renderApp();
-      showToast('طالب علم کامیابی سے حذف ہو گیا', 'info');
+      showToast('طالب علم کامیابی سے حذف ہو گیا (واپس لانے کے لیے Ctrl+Z دبائیں)', 'info');
     }
   );
 }
@@ -4172,10 +4847,14 @@ function updateTopControlsVisibility(tabId) {
   let searchEl = document.querySelector('.search-toolbar');
   let bulkEl = document.querySelector('.bulk-actions-strip');
   let fabEl = document.querySelector('.fab-native');
+  let progEl = document.getElementById('completionProgressStrip');
+  let activeFEl = document.getElementById('activeFilterBar');
   let isListTab = (tabId === 'table' || tabId === 'cards');
   if (statsEl) statsEl.style.display = isListTab ? '' : 'none';
+  if (progEl) progEl.style.display = isListTab ? '' : 'none';
   if (chipsEl) chipsEl.style.display = isListTab ? '' : 'none';
   if (searchEl) searchEl.style.display = isListTab ? '' : 'none';
+  if (activeFEl && !isListTab) activeFEl.classList.remove('visible');
   if (bulkEl) bulkEl.style.display = isListTab ? '' : 'none';
   if (fabEl) fabEl.style.display = isListTab ? '' : 'none';
 }
@@ -4250,6 +4929,7 @@ function bulkMarkAll(status) {
   let cData = getCurrentClassData();
   let msg = status === 'present' ? 'سب کو حاضر (100) کریں؟' : 'سب کو غیر حاضر (غائب) کریں؟';
   openConfirmDialog('اجتماعی کارروائی', msg, function() {
+    pushUndoSnapshot('اجتماعی حاضری');
     cData.students.forEach(s => {
       if (!s.marks) s.marks = {};
       if (!s.examMarks) s.examMarks = {};
@@ -4404,19 +5084,52 @@ function removeLogo() {
   });
 }
 
+let subjectModalMode = { action: 'add', oldSub: '' };
+
+function closeSubjectInputModal() {
+  document.getElementById('subjectInputModal').classList.remove('open');
+}
+
 function addSubjectPrompt() {
   let cls = settingSubjectTarget.class || appState.currentClass;
   let ex = settingSubjectTarget.exam || appState.examTitle;
-  let sub = prompt(`درجہ "${cls}" برائے "${ex}" کے لیے نئے مضمون کا نام درج کریں:`);
-  if (sub && sub.trim()) {
-    let cData = getCurrentClassData(cls, ex);
-    sub = sub.trim();
-    if (!cData.subjects.includes(sub)) {
-      cData.subjects.push(sub);
+  subjectModalMode = { action: 'add', oldSub: '' };
+  document.getElementById('subjectInputModalTitle').innerText = 'نیا مضمون شامل کریں';
+  document.getElementById('subjectInputModalSubtitle').innerText = `درجہ: ${cls} | امتحان: ${ex}`;
+  let field = document.getElementById('subjectInputModalField');
+  field.value = '';
+  document.getElementById('subjectInputModal').classList.add('open');
+  setTimeout(() => field.focus(), 100);
+}
+
+function renameSubjectPrompt(oldSub) {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  subjectModalMode = { action: 'rename', oldSub: oldSub };
+  document.getElementById('subjectInputModalTitle').innerText = 'مضمون کا نام تبدیل کریں';
+  document.getElementById('subjectInputModalSubtitle').innerText = `درجہ: ${cls} | امتحان: ${ex}`;
+  let field = document.getElementById('subjectInputModalField');
+  field.value = oldSub;
+  document.getElementById('subjectInputModal').classList.add('open');
+  setTimeout(() => { field.focus(); field.select(); }, 100);
+}
+
+function submitSubjectInputModal() {
+  let cls = settingSubjectTarget.class || appState.currentClass;
+  let ex = settingSubjectTarget.exam || appState.examTitle;
+  let val = document.getElementById('subjectInputModalField').value.trim();
+  if (!val) {
+    showToast('براہ کرم مضمون کا نام درج کریں', 'warning');
+    return;
+  }
+  let cData = getCurrentClassData(cls, ex);
+  if (subjectModalMode.action === 'add') {
+    if (!cData.subjects.includes(val)) {
+      cData.subjects.push(val);
       if (!cData.subjectMaxMarks) cData.subjectMaxMarks = {};
       if (!cData.subjectPassMarks) cData.subjectPassMarks = {};
-      cData.subjectMaxMarks[sub] = 100;
-      cData.subjectPassMarks[sub] = 40;
+      cData.subjectMaxMarks[val] = 100;
+      cData.subjectPassMarks[val] = 40;
       cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] !== undefined ? cData.subjectMaxMarks[s] : 100), 0);
       if (cData.examConfigs && cData.examConfigs[ex]) {
         cData.examConfigs[ex].subjects = [...cData.subjects];
@@ -4424,31 +5137,28 @@ function addSubjectPrompt() {
         cData.examConfigs[ex].subjectPassMarks = { ...cData.subjectPassMarks };
         cData.examConfigs[ex].totalMarks = cData.totalMarks;
       }
+      closeSubjectInputModal();
       saveToLocalStorage();
       renderApp();
-      showToast(`مضمون "${sub}" درجہ "${cls}" (${ex}) میں شامل ہو گیا`, 'info');
+      showToast(`مضمون "${val}" درجہ "${cls}" (${ex}) میں شامل ہو گیا`, 'info');
     } else {
       showToast('یہ مضمون پہلے سے موجود ہے', 'warning');
     }
-  }
-}
-
-function renameSubjectPrompt(oldSub) {
-  let cls = settingSubjectTarget.class || appState.currentClass;
-  let ex = settingSubjectTarget.exam || appState.examTitle;
-  let newSub = prompt(`مضمون کا نیا نام (درجہ: ${cls} | امتحان: ${ex}):`, oldSub);
-  if (newSub && newSub.trim() && newSub.trim() !== oldSub) {
-    let cData = getCurrentClassData(cls, ex);
-    newSub = newSub.trim();
+  } else {
+    let oldSub = subjectModalMode.oldSub;
+    if (val === oldSub) {
+      closeSubjectInputModal();
+      return;
+    }
     let idx = cData.subjects.indexOf(oldSub);
     if (idx !== -1) {
-      cData.subjects[idx] = newSub;
+      cData.subjects[idx] = val;
       if (cData.subjectMaxMarks && cData.subjectMaxMarks[oldSub] !== undefined) {
-        cData.subjectMaxMarks[newSub] = cData.subjectMaxMarks[oldSub];
+        cData.subjectMaxMarks[val] = cData.subjectMaxMarks[oldSub];
         delete cData.subjectMaxMarks[oldSub];
       }
       if (cData.subjectPassMarks && cData.subjectPassMarks[oldSub] !== undefined) {
-        cData.subjectPassMarks[newSub] = cData.subjectPassMarks[oldSub];
+        cData.subjectPassMarks[val] = cData.subjectPassMarks[oldSub];
         delete cData.subjectPassMarks[oldSub];
       }
       if (cData.examConfigs && cData.examConfigs[ex]) {
@@ -4458,17 +5168,18 @@ function renameSubjectPrompt(oldSub) {
       }
       cData.students.forEach(s => {
         if (s.examMarks && s.examMarks[ex] && s.examMarks[ex][oldSub] !== undefined) {
-          s.examMarks[ex][newSub] = s.examMarks[ex][oldSub];
+          s.examMarks[ex][val] = s.examMarks[ex][oldSub];
           delete s.examMarks[ex][oldSub];
         }
         if (s.marks && s.marks[oldSub] !== undefined && ex === appState.examTitle && cls === appState.currentClass) {
-          s.marks[newSub] = s.marks[oldSub];
+          s.marks[val] = s.marks[oldSub];
           delete s.marks[oldSub];
         }
       });
+      closeSubjectInputModal();
       saveToLocalStorage();
       renderApp();
-      showToast(`مضمون "${oldSub}" تبدیل ہو کر "${newSub}" ہو گیا`, 'info');
+      showToast(`مضمون "${oldSub}" تبدیل ہو کر "${val}" ہو گیا`, 'info');
     }
   }
 }
@@ -5324,9 +6035,20 @@ function initMobileNavScrollHide() {
   }, { passive: true });
 }
 
+let autoSaveTimer = null;
 function saveToLocalStorage() {
   try {
     localStorage.setItem('madrasa_exam_state', JSON.stringify(appState));
+    let pill = document.getElementById('autoSaveIndicator');
+    if (pill) {
+      pill.classList.add('saving');
+      pill.innerText = 'محفوظ ہو رہا ہے...';
+      if (autoSaveTimer) clearTimeout(autoSaveTimer);
+      autoSaveTimer = setTimeout(() => {
+        pill.classList.remove('saving');
+        pill.innerText = '✓ محفوظ';
+      }, 450);
+    }
   } catch (e) {}
 }
 
@@ -5437,6 +6159,93 @@ function handleJsonRestore(event) {
   event.target.value = '';
 }
 
+function clearSampleDataStartFresh() {
+  openConfirmDialog(
+    'نئے سرے سے شروع کریں (ڈیٹا صاف کریں)',
+    'کیا آپ واقعی تمام درجات سے تمام طالبات اور ان کے نمبرات صاف کر کے بالکل نئے سرے سے شروع کرنا چاہتے ہیں؟ (آپ کے جامعہ کا پروفائل، درجات، امتحانات اور مضامین محفوظ رہیں گے)',
+    function() {
+      pushUndoSnapshot('تمام طالبات کا ڈیٹا صاف');
+      let classes = getClassList();
+      classes.forEach(cls => {
+        if (appState.classesData[cls]) {
+          appState.classesData[cls].students = [];
+        }
+      });
+      appState.quickEntryIndex = 0;
+      appState.searchQuery = '';
+      appState.filterOption = 'all';
+      let sInp = document.getElementById('searchInput');
+      if (sInp) sInp.value = '';
+      let cBtn = document.getElementById('searchClearBtn');
+      if (cBtn) cBtn.style.display = 'none';
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.getAttribute('data-filter') === 'all'));
+      saveToLocalStorage();
+      renderApp();
+      showToast('تمام طالبات کا ڈیٹا صاف ہو گیا — اب آپ نئے سرے سے اندراج کر سکتے ہیں! (واپس لانے کے لیے Ctrl+Z)', 'info');
+    }
+  );
+}
+
+function loadSampleDataNow() {
+  let targetClass = 'متوسطہ اول';
+  let existingData = appState.classesData[targetClass];
+  let hasExisting = existingData && existingData.students && existingData.students.length > 0;
+  let applySample = function() {
+    pushUndoSnapshot('نمونہ ڈیٹا لوڈ');
+    if (!getClassList().includes(targetClass)) {
+      appState.classList.unshift(targetClass);
+    }
+    if (!appState.classesData[targetClass]) {
+      initializeClassData(targetClass);
+    }
+    let cData = getCurrentClassData(targetClass, appState.examTitle);
+    let defaultSubs = CLASS_SUBJECT_DEFAULTS[targetClass] || ['اردو پہلی', 'اردو قاعدہ'];
+    defaultSubs.forEach(sub => {
+      if (!cData.subjects.includes(sub)) cData.subjects.push(sub);
+      if (!cData.subjectMaxMarks) cData.subjectMaxMarks = {};
+      if (!cData.subjectPassMarks) cData.subjectPassMarks = {};
+      if (cData.subjectMaxMarks[sub] === undefined) cData.subjectMaxMarks[sub] = 100;
+      if (cData.subjectPassMarks[sub] === undefined) cData.subjectPassMarks[sub] = 40;
+    });
+    cData.totalMarks = cData.subjects.reduce((sum, s) => sum + (cData.subjectMaxMarks[s] !== undefined ? cData.subjectMaxMarks[s] : 100), 0);
+    if (cData.examConfigs && cData.examConfigs[appState.examTitle]) {
+      cData.examConfigs[appState.examTitle].subjects = [...cData.subjects];
+      cData.examConfigs[appState.examTitle].subjectMaxMarks = { ...cData.subjectMaxMarks };
+      cData.examConfigs[appState.examTitle].subjectPassMarks = { ...cData.subjectPassMarks };
+      cData.examConfigs[appState.examTitle].totalMarks = cData.totalMarks;
+    }
+    let sampleList = JSON.parse(JSON.stringify(SAMPLE_STUDENTS_MUTAWASSITA_1));
+    sampleList.forEach(st => {
+      st.examMarks = { [appState.examTitle]: { ...st.marks } };
+    });
+    cData.students = sampleList;
+    appState.currentClass = targetClass;
+    settingSubjectTarget.class = targetClass;
+    appState.quickEntryIndex = 0;
+    appState.searchQuery = '';
+    appState.filterOption = 'all';
+    let sInp = document.getElementById('searchInput');
+    if (sInp) sInp.value = '';
+    let cBtn = document.getElementById('searchClearBtn');
+    if (cBtn) cBtn.style.display = 'none';
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.getAttribute('data-filter') === 'all'));
+    updateHeaderDisplay();
+    saveToLocalStorage();
+    renderApp();
+    showToast(`درجہ "${targetClass}" میں ${sampleList.length} طالبات کا نمونہ ڈیٹا لوڈ ہو گیا!`, 'info');
+  };
+
+  if (hasExisting) {
+    openConfirmDialog(
+      'نمونہ ڈیٹا لوڈ کریں',
+      `درجہ "${targetClass}" میں پہلے سے ${existingData.students.length} طالبات موجود ہیں۔ کیا آپ ان کی جگہ نمونہ ڈیٹا لوڈ کرنا چاہتے ہیں؟`,
+      applySample
+    );
+  } else {
+    applySample();
+  }
+}
+
 function resetToSampleData() {
   openConfirmDialog(
     'نمونہ ڈیٹا پر ری سیٹ',
@@ -5455,6 +6264,269 @@ function resetToSampleData() {
     }
   );
 }
+
+
+/* === ADDITIVE UX & WORKFLOW HELPERS === */
+let undoStack = [];
+const MAX_UNDO_STEPS = 25;
+
+function pushUndoSnapshot(label) {
+  try {
+    undoStack.push({
+      label: label || 'تبدیلی',
+      data: JSON.stringify(appState.classesData)
+    });
+    if (undoStack.length > MAX_UNDO_STEPS) undoStack.shift();
+    updateUndoButtonState();
+  } catch (e) {}
+}
+
+function updateUndoButtonState() {
+  let btn = document.getElementById('undoActionBtn');
+  if (!btn) return;
+  btn.disabled = undoStack.length === 0;
+  btn.title = undoStack.length > 0
+    ? `آخری تبدیلی واپس کریں: ${undoStack[undoStack.length - 1].label} (Ctrl+Z)`
+    : 'آخری تبدیلی واپس کریں (Ctrl+Z)';
+}
+
+function performUndo() {
+  if (undoStack.length === 0) return;
+  let last = undoStack.pop();
+  try {
+    appState.classesData = JSON.parse(last.data);
+    updateUndoButtonState();
+    saveToLocalStorage();
+    renderApp();
+    showToast(`واپس کر دیا گیا: ${last.label}`, 'info');
+  } catch (e) {
+    showToast('واپس کرنے میں خرابی پیش آئی', 'error');
+  }
+}
+
+function isStudentMarksComplete(student, subjects) {
+  if (!subjects || subjects.length === 0) return true;
+  return subjects.every(sub => {
+    let v = student.marks ? student.marks[sub] : undefined;
+    return v !== undefined && v !== null && String(v).trim() !== '';
+  });
+}
+
+function updateUxIndicators(cData, computed) {
+  let totalCells = cData.students.length * cData.subjects.length;
+  let filledCells = 0;
+  let incompleteStudents = 0;
+  cData.students.forEach(s => {
+    let complete = true;
+    cData.subjects.forEach(sub => {
+      let v = s.marks ? s.marks[sub] : undefined;
+      if (v !== undefined && v !== null && String(v).trim() !== '') {
+        filledCells++;
+      } else {
+        complete = false;
+      }
+    });
+    if (!complete) incompleteStudents++;
+  });
+  let pct = totalCells > 0 ? Math.round((filledCells / totalCells) * 100) : 100;
+
+  let progLbl = document.getElementById('completionProgressLabel');
+  let progFill = document.getElementById('completionProgressFill');
+  let progDet = document.getElementById('completionProgressDetail');
+  let nextAct = document.getElementById('completionNextActions');
+  if (progLbl) progLbl.innerText = `نمبرات کی تکمیل: ${pct}%`;
+  if (progFill) progFill.style.width = `${pct}%`;
+  if (progDet) progDet.innerText = `${filledCells} / ${totalCells} خانے`;
+
+  if (nextAct) {
+    if (cData.students.length === 0) {
+      nextAct.innerHTML = `
+        <button class="btn btn-primary btn-sm" onclick="openStudentModal()" type="button">+ پہلی طالبہ شامل کریں</button>
+        <button class="btn btn-secondary btn-sm" onclick="loadSampleDataNow()" type="button">📥 نمونہ ڈیٹا لوڈ کریں</button>
+      `;
+    } else if (incompleteStudents > 0) {
+      nextAct.innerHTML = `
+        <button class="btn btn-secondary btn-sm" onclick="quickFilterByStat('incomplete')" type="button">نامکمل دیکھیں (${incompleteStudents})</button>
+        <button class="btn btn-primary btn-sm" onclick="switchTabDirect('quick'); jumpNextIncompleteStudent();" type="button">⚡ کوئیک انٹری</button>
+      `;
+    } else {
+      nextAct.innerHTML = `
+        <button class="btn btn-success btn-sm" onclick="printGazette()" type="button">✓ گزٹ پرنٹ کریں</button>
+        <button class="btn btn-secondary btn-sm" onclick="exportToExcel()" type="button">ایکسل ایکسپورٹ</button>
+      `;
+    }
+  }
+
+  // Live counts on filter chips
+  let counts = {
+    all: computed.length,
+    top3: computed.filter(s => s.rankNum <= 3 && !s.isAbsent).length,
+    'ممتاز': computed.filter(s => s.grade === 'ممتاز').length,
+    'جید جدا': computed.filter(s => s.grade === 'جید جدا').length,
+    'جید': computed.filter(s => s.grade === 'جید').length,
+    'مقبول': computed.filter(s => s.grade === 'مقبول').length,
+    passed: computed.filter(s => s.grade !== 'راسب' && !s.isAbsent).length,
+    failed: computed.filter(s => s.grade === 'راسب' && !s.isAbsent).length,
+    absent: computed.filter(s => s.isAbsent).length,
+    incomplete: incompleteStudents
+  };
+
+  document.querySelectorAll('.filter-chip[data-filter]').forEach(chip => {
+    let key = chip.getAttribute('data-filter');
+    if (counts[key] !== undefined) {
+      let badge = chip.querySelector('.chip-count');
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'chip-count';
+        chip.appendChild(badge);
+      }
+      badge.innerText = counts[key];
+    }
+  });
+
+  // Highlight active stat card
+  document.querySelectorAll('.stat-card[data-stat-filter]').forEach(card => {
+    let f = card.getAttribute('data-stat-filter');
+    card.classList.toggle('stat-active', appState.filterOption === f && f !== 'all');
+  });
+
+  // Update Print Center readiness banner
+  let pBanner = document.getElementById('printReadinessBanner');
+  if (pBanner) {
+    let statusBadge = incompleteStudents === 0
+      ? `<span style="color:var(--success); font-weight:700;">✓ تمام نمبرات مکمل — پرنٹ کے لیے تیار</span>`
+      : `<span style="color:var(--accent); font-weight:700;">⚠ ${incompleteStudents} طالبات کے نمبرات ابھی نامکمل ہیں</span>`;
+    pBanner.innerHTML = `
+      <div>
+        <div style="font-size:13.5px; font-weight:700; color:var(--text);">پرنٹ کا خلاصہ: ${appState.currentClass} — ${appState.examTitle}</div>
+        <div style="font-size:12px; margin-top:2px;">${statusBadge} | کل طالبات: <strong>${counts.all}</strong> | ٹاپ ۳: <strong>${counts.top3}</strong> | راسب: <strong>${counts.failed}</strong></div>
+      </div>
+      ${incompleteStudents > 0 ? `<button class="btn btn-accent btn-sm" onclick="switchTabDirect('table'); quickFilterByStat('incomplete');" type="button">نامکمل نمبرات مکمل کریں</button>` : ''}
+    `;
+  }
+}
+
+function quickFilterByStat(filterVal) {
+  let targetChip = document.querySelector(`.filter-chip[data-filter="${filterVal}"]`);
+  if (targetChip) {
+    setFilterChip(filterVal, targetChip);
+  }
+}
+
+function updateActiveFilterBar(shownCount, totalCount) {
+  let bar = document.getElementById('activeFilterBar');
+  let txt = document.getElementById('activeFilterText');
+  if (!bar || !txt) return;
+  let hasSearch = (appState.searchQuery || '').trim().length > 0;
+  let hasFilter = appState.filterOption && appState.filterOption !== 'all';
+  if ((hasSearch || hasFilter) && (appState.activeTab === 'table' || appState.activeTab === 'cards')) {
+    bar.classList.add('visible');
+    txt.innerText = `فلٹر فعال ہے — دکھائے جا رہے ہیں: ${shownCount} از ${totalCount} طالبات`;
+  } else {
+    bar.classList.remove('visible');
+  }
+}
+
+function resetAllFilters() {
+  appState.searchQuery = '';
+  let sInp = document.getElementById('searchInput');
+  if (sInp) sInp.value = '';
+  let cBtn = document.getElementById('searchClearBtn');
+  if (cBtn) cBtn.style.display = 'none';
+  let allChip = document.querySelector('.filter-chip[data-filter="all"]');
+  if (allChip) setFilterChip('all', allChip);
+}
+
+function submitQuickInlineAdd() {
+  let cData = getCurrentClassData();
+  let rollEl = document.getElementById('inlineAddRoll');
+  let nameEl = document.getElementById('inlineAddName');
+  let fatherEl = document.getElementById('inlineAddFather');
+  let phoneEl = document.getElementById('inlineAddPhone');
+  let name = (nameEl ? nameEl.value : '').trim();
+  if (!name) {
+    showToast('فوری اندراج کے لیے طالبہ کا نام درج کریں', 'warning');
+    if (nameEl) nameEl.focus();
+    return;
+  }
+  pushUndoSnapshot('فوری نیا اندراج');
+  let nextRoll = cData.students.length > 0 ? (Math.max(...cData.students.map(st => Number(st.roll) || 0)) + 1) : 1;
+  let roll = Number(rollEl ? rollEl.value : 0) || nextRoll;
+  let father = (fatherEl ? fatherEl.value : '').trim();
+  let phone = (phoneEl ? phoneEl.value : '').trim();
+  let reg = 'REG-' + (100 + roll);
+  cData.students.push({ roll, reg, name, father, phone, address: '', marks: {}, examMarks: { [appState.examTitle]: {} } });
+  if (nameEl) nameEl.value = '';
+  if (fatherEl) fatherEl.value = '';
+  if (phoneEl) phoneEl.value = '';
+  saveToLocalStorage();
+  renderApp();
+  showToast(`طالبہ "${name}" (رول ${roll}) شامل ہو گئی`, 'info');
+  if (nameEl) nameEl.focus();
+}
+
+function stepDmcStudent(delta) {
+  let sel = document.getElementById('dmcStudentSelect');
+  if (!sel || sel.options.length === 0) return;
+  let nextIdx = Number(sel.value) + delta;
+  if (nextIdx < 0) nextIdx = sel.options.length - 1;
+  if (nextIdx >= sel.options.length) nextIdx = 0;
+  sel.value = nextIdx;
+  renderSingleDMC(nextIdx);
+}
+
+function shareActiveDmcWhatsApp() {
+  let sel = document.getElementById('dmcStudentSelect');
+  if (!sel || sel.options.length === 0) {
+    showToast('کوئی طالبہ منتخب نہیں ہے', 'warning');
+    return;
+  }
+  shareWhatsAppResult(Number(sel.value));
+}
+
+function scrollToSettingCard(cardId) {
+  let el = document.getElementById(cardId);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function openShortcutsModal() {
+  document.getElementById('shortcutsHelpModal').classList.add('open');
+}
+
+function closeShortcutsModal() {
+  document.getElementById('shortcutsHelpModal').classList.remove('open');
+}
+
+function initGlobalShortcuts() {
+  document.addEventListener('keydown', function(e) {
+    let tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+    let isTyping = tag === 'input' || tag === 'textarea' || tag === 'select';
+
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-backdrop-native.open').forEach(m => m.classList.remove('open'));
+      return;
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !isTyping) {
+      if (undoStack.length > 0) {
+        e.preventDefault();
+        performUndo();
+      }
+      return;
+    }
+    if (e.altKey && e.key.toLowerCase() === 'n') {
+      e.preventDefault();
+      openStudentModal();
+      return;
+    }
+    if (e.key === '/' && !isTyping && (appState.activeTab === 'table' || appState.activeTab === 'cards')) {
+      e.preventDefault();
+      let sInp = document.getElementById('searchInput');
+      if (sInp) { sInp.focus(); sInp.select(); }
+    }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', initGlobalShortcuts);
 
 window.addEventListener('DOMContentLoaded', initApp);
 </script>
