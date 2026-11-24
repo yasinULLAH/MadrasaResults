@@ -12,7 +12,7 @@ SHORT_NAME = "MadrasaResults"
 APP_DESCRIPTION = "نظام امتحانات و نتائج - جامعہ خدیجۃ الکبریٰ للبنات"
 BACKGROUND_COLOR = "#042f2e"
 THEME_COLOR = "#0f766e"
-VERSION = "1.0.9"
+VERSION = "1.0.10"
 
 def get_file_hash(path):
     hasher = hashlib.md5()
@@ -76,14 +76,19 @@ def discover_assets(project_dir, generated_icons):
     precache_list = generated_icons[:]
     existing_urls = {entry['url'] for entry in precache_list}
     html_files = []
-    
+
+    # Files that must NOT be precached by the service worker:
+    # repo/CI docs, backup files, the build script itself, and
+    # Electron desktop files (main.js, package.json) that the browser never requests.
+    EXCLUDE_SUFFIXES = (".pyw", ".bak", ".md", ".gitattributes", ".gitignore")
+    EXCLUDE_FILES = {"version.json", "sw.js", "main.js", "package.json", "package-lock.json"}
     for root, _, files in os.walk(project_dir):
         if any(part.startswith('.') for part in root.split(os.sep)):
             continue
         for file in files:
             file_path = os.path.join(root, file)
             relative_path = os.path.relpath(file_path, project_dir).replace("\\", "/")
-            if relative_path in existing_urls or file == "version.json":
+            if relative_path in existing_urls or file in EXCLUDE_FILES or file.endswith(EXCLUDE_SUFFIXES):
                 continue
             if file.endswith(".html"):
                 html_files.append(file_path)
@@ -116,7 +121,7 @@ def create_manifest(output_dir, icon_metadata, html_files):
         print(f"⚠️ Could not read title from HTML: {e}")
     manifest = {
         "name": app_title_from_html or APP_NAME,
-        "short_name": app_title_from_html or SHORT_NAME,
+        "short_name": SHORT_NAME if (app_title_from_html and len(app_title_from_html) > 12) else (app_title_from_html or SHORT_NAME),
         "description": APP_DESCRIPTION,
         "start_url": start_url,
         "display": "standalone",
@@ -137,7 +142,7 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/7.0.0/workbox
 
 if (workbox) {{
     console.log(`Workbox is loaded.`);
-    
+
     self.addEventListener('message', (event) => {{
       if (event.data && event.data.type === 'SKIP_WAITING') {{
         console.log('Service Worker received SKIP_WAITING message, activating now.');
@@ -211,7 +216,7 @@ def update_html_files(html_files):
     version_data = {"version": int(time.time())}
     with open(os.path.join(PROJECT_DIR, "version.json"), 'w', encoding='utf-8') as f:
         json.dump(version_data, f)
-        
+
     manifest_link_str = '<link rel="manifest" href="manifest.json">'
     favicon_link_str = '<link rel="icon" type="image/x-icon" href="favicon.ico">'
     sw_script_tag = '<script type="module" src="./pwa-register.js"></script>'
@@ -258,7 +263,7 @@ if __name__ == "__main__":
     generated_icons, icon_metadata = generate_pwa_icons(SOURCE_LOGO_PATH, PROJECT_DIR)
 
     precache_list, html_files = discover_assets(PROJECT_DIR, generated_icons + ([favicon_entry] if favicon_entry else []))
-    
+
     if html_files:
         create_manifest(PROJECT_DIR, icon_metadata, html_files)
         create_service_worker(PROJECT_DIR, precache_list)
