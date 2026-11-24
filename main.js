@@ -8,7 +8,7 @@ function createWindow() {
     minWidth: 400,
     minHeight: 600,
     autoHideMenuBar: true,
-    title: 'نظام امتحانات و نتائج - جامعہ فاطمۃ الزہرا للبنات',
+    title: 'نظام امتحانات و نتائج - جامعہ خدیجۃ الکبریٰ للبنات',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
-<title>نظام امتحانات و نتائج - جامعہ فاطمۃ الزہرا للبنات</title>
+<title>نظام امتحانات و نتائج - جامعہ خدیجۃ الکبریٰ للبنات</title>
 <script src="xlsx.full.min.js"></script>
 <script>
 if (typeof XLSX === 'undefined') {
@@ -1631,9 +1631,9 @@ footer.app-footer a {
 <div class="top-bar">
 <div class="top-bar-upper">
 <div class="brand-wrapper" onclick="openClassPickerSheet()">
-<div class="brand-icon" id="headerBrandLogo">ف</div>
+<div class="brand-icon" id="headerBrandLogo"><img alt="لوگو" onerror="this.onerror=null; this.parentElement.innerHTML='<span>ج</span>';" src="logo.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;"/></div>
 <div class="brand-info">
-<h1 class="brand-title" id="headerInstitution">جامعہ فاطمۃ الزہرا للبنات</h1>
+<h1 class="brand-title" id="headerInstitution">جامعہ خدیجۃ الکبریٰ للبنات</h1>
 </div>
 </div>
 <div class="header-actions">
@@ -1912,12 +1912,12 @@ footer.app-footer a {
 </div>
 <div class="form-group-native" style="margin-bottom:10px;">
 <label class="form-label-native">پتہ و مکمل مقام (Address &amp; Location):</label>
-<input class="form-input-native" id="settingInstAddress" onchange="saveGeneralSettings()" placeholder="مثلاً خوڑگئ موسیٰ خیل، تحصیل ڈومیل، ضلع بنوں، خیبر پختونخوا" type="text"/>
+<input class="form-input-native" id="settingInstAddress" onchange="saveGeneralSettings()" placeholder="مثلاً مدینہ ٹاؤن، بالمقابل جامع مسجد، نزد کینال روڈ، لاہور" type="text"/>
 </div>
 <div class="responsive-grid-3" style="margin-bottom:10px;">
 <div class="form-group-native">
 <label class="form-label-native">فون نمبر / واٹس ایپ:</label>
-<input class="form-input-native" id="settingInstPhone" onchange="saveGeneralSettings()" placeholder="مثلاً 0336-1593533" type="text"/>
+<input class="form-input-native" id="settingInstPhone" onchange="saveGeneralSettings()" placeholder="مثلاً 0300-1234567" type="text"/>
 </div>
 <div class="form-group-native">
 <label class="form-label-native">الحاق / رجسٹریشن نمبر:</label>
@@ -2321,7 +2321,7 @@ footer.app-footer a {
 <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:3px;">
 <div id="printGazetteLogo"></div>
 <div>
-<h1 id="printInstitutionName" style="font-size:18pt; font-weight:bold; margin:0; color:#0f766e;">جامعہ فاطمۃ الزہرا للبنات</h1>
+<h1 id="printInstitutionName" style="font-size:18pt; font-weight:bold; margin:0; color:#0f766e;">جامعہ خدیجۃ الکبریٰ للبنات</h1>
 <div id="printInstitutionSub" style="font-size:10.5pt; color:#475569; font-weight:bold;"></div>
 </div>
 </div>
@@ -2367,23 +2367,23 @@ const CLASS_SUBJECT_DEFAULTS = {
 };
 
 const SAMPLE_STUDENTS_MUTAWASSITA_1 = [
-  { roll: 1, reg: 'REG-101', name: 'افرائم', father: 'انصار اللہ', phone: '03361593533', marks: {'اردو پہلی': 60, 'اردو قاعدہ': 70} },
-  { roll: 2, reg: 'REG-102', name: 'فلحیام', father: 'زین اللہ', phone: '03339712345', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
-  { roll: 3, reg: 'REG-103', name: 'زینب', father: 'میرشاہ باز', phone: '03459876543', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
-  { roll: 4, reg: 'REG-104', name: 'عائشہ', father: 'مانور حمن', phone: '03125678901', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
-  { roll: 5, reg: 'REG-105', name: 'حورین', father: 'غنی الرحمن', phone: '03001234567', marks: {'اردو پہلی': 70, 'اردو قاعدہ': 80} },
-  { roll: 6, reg: 'REG-106', name: 'بی بی آمنہ', father: 'زاردئیپ', phone: '03461234567', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
-  { roll: 7, reg: 'REG-107', name: 'فرشتہ', father: 'شاہین', phone: '03211234567', marks: {'اردو پہلی': 30, 'اردو قاعدہ': 40} },
-  { roll: 8, reg: 'REG-108', name: 'ہاجرہ', father: 'لال شہان', phone: '03351234567', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 60} },
-  { roll: 9, reg: 'REG-109', name: 'ایمان', father: 'محمد عمران', phone: '03321234567', marks: {'اردو پہلی': 50, 'اردو قاعدہ': 40} },
-  { roll: 10, reg: 'REG-110', name: 'مدینہ', father: 'شمس الرحمن', phone: '03341234567', marks: {'اردو پہلی': 'غائب', 'اردو قاعدہ': 'غائب'} }
+  { roll: 1, reg: 'REG-101', name: 'فاطمہ زہرا', father: 'حافظ محمد عبد اللہ', phone: '03012345671', marks: {'اردو پہلی': 95, 'اردو قاعدہ': 98} },
+  { roll: 2, reg: 'REG-102', name: 'مریم بی بی', father: 'محمد اسلم خان', phone: '03023456782', marks: {'اردو پہلی': 88, 'اردو قاعدہ': 92} },
+  { roll: 3, reg: 'REG-103', name: 'زینب بی بی', father: 'طارق محمود', phone: '03034567893', marks: {'اردو پہلی': 82, 'اردو قاعدہ': 85} },
+  { roll: 4, reg: 'REG-104', name: 'عائشہ نور', father: 'عبد الرحمن', phone: '03045678904', marks: {'اردو پہلی': 74, 'اردو قاعدہ': 76} },
+  { roll: 5, reg: 'REG-105', name: 'حورین فاطمہ', father: 'محمد عرفان', phone: '03056789015', marks: {'اردو پہلی': 65, 'اردو قاعدہ': 68} },
+  { roll: 6, reg: 'REG-106', name: 'آمنہ بی بی', father: 'ساجد علی', phone: '03067890126', marks: {'اردو پہلی': 58, 'اردو قاعدہ': 60} },
+  { roll: 7, reg: 'REG-107', name: 'ہاجرہ بانو', father: 'بشیر احمد', phone: '03078901237', marks: {'اردو پہلی': 45, 'اردو قاعدہ': 48} },
+  { roll: 8, reg: 'REG-108', name: 'سعدیہ بی بی', father: 'شاہد اقبال', phone: '03089012348', marks: {'اردو پہلی': 32, 'اردو قاعدہ': 42} },
+  { roll: 9, reg: 'REG-109', name: 'ایمان بی بی', father: 'محمد عمران', phone: '03090123459', marks: {'اردو پہلی': 25, 'اردو قاعدہ': 35} },
+  { roll: 10, reg: 'REG-110', name: 'جویریہ بی بی', father: 'شمس الدین', phone: '03101234560', marks: {'اردو پہلی': 'غائب', 'اردو قاعدہ': 'غائب'} }
 ];
 
 let appState = {
-  institution: 'جامعہ فاطمۃ الزہرا للبنات',
-  institutionSubtitle: 'للبنات - خوڑگئ موسیٰ خیل ڈومیل بنوں',
-  institutionAddress: 'خوڑگئ موسیٰ خیل، تحصیل ڈومیل، ضلع بنوں، خیبر پختونخوا',
-  institutionPhone: '0336-1593533',
+  institution: 'جامعہ خدیجۃ الکبریٰ للبنات',
+  institutionSubtitle: 'للبنات - شعبہ تعلیمات و حفظ القرآن',
+  institutionAddress: 'مدینہ ٹاؤن، بالمقابل جامع مسجد، نزد کینال روڈ، لاہور',
+  institutionPhone: '0300-1234567',
   institutionReg: 'الحاق: وفاق المدارس العربیہ پاکستان',
   institutionHead: 'مہتمم جامعہ',
   institutionLogo: '',
@@ -2854,12 +2854,9 @@ function updateHeaderDisplay() {
 
   let logoContainer = document.getElementById('headerBrandLogo');
   if (logoContainer) {
-    if (appState.institutionLogo) {
-      logoContainer.innerHTML = `<img src="${appState.institutionLogo}" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">`;
-    } else {
-      let char = (appState.institution || 'ف').trim().charAt(0) || 'ف';
-      logoContainer.innerHTML = `<span>${char}</span>`;
-    }
+    let logoSrc = appState.institutionLogo || 'logo.png';
+    let char = (appState.institution || 'ج').trim().charAt(0) || 'ج';
+    logoContainer.innerHTML = `<img src="${logoSrc}" alt="لوگو" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" onerror="this.onerror=null; this.parentElement.innerHTML='<span>${char}</span>';">`;
   }
 
   let instInput = document.getElementById('settingInstName');
@@ -4482,7 +4479,7 @@ function applyGradingToAllClasses() {
 
 function saveGeneralSettings() {
   let inst = document.getElementById('settingInstName');
-  if (inst) appState.institution = inst.value.trim() || 'جامعہ فاطمۃ الزہرا للبنات';
+  if (inst) appState.institution = inst.value.trim() || 'جامعہ خدیجۃ الکبریٰ للبنات';
   let sub = document.getElementById('settingInstSubtitle');
   if (sub) appState.institutionSubtitle = sub.value.trim();
   let addr = document.getElementById('settingInstAddress');

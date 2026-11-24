@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
-<title>نظام امتحانات و نتائج - جامعہ فاطمۃ الزہرا للبنات</title>
+<title>نظام امتحانات و نتائج - جامعہ خدیجۃ الکبریٰ للبنات</title>
 <script src="xlsx.full.min.js"></script>
 <script>
 if (typeof XLSX === 'undefined') {
@@ -113,6 +113,15 @@ header.app-bar {
   font-weight: 700;
   box-shadow: 0 4px 8px rgba(13, 148, 136, 0.25);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.brand-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
 }
 
 .brand-info {
@@ -1976,9 +1985,9 @@ table.result-table th.th-sort-active {
 <header class="app-bar">
 <div class="top-bar">
 <div class="brand-wrapper" onclick="openClassPickerSheet()">
-<div class="brand-icon" id="headerBrandLogo">ف</div>
+<div class="brand-icon" id="headerBrandLogo"><img alt="لوگو" onerror="this.onerror=null; this.parentElement.innerHTML='&lt;span&gt;ج&lt;/span&gt;';" src="logo.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;"/></div>
 <div class="brand-info">
-<h1 class="brand-title" id="headerInstitution">جامعہ فاطمۃ الزہرا للبنات</h1>
+<h1 class="brand-title" id="headerInstitution">جامعہ خدیجۃ الکبریٰ للبنات</h1>
 <div class="brand-chips-row">
 <button class="brand-subtitle-btn" id="headerClassBadge" type="button">
 <span id="headerClassText">درجہ: متوسطہ اول</span>
@@ -2413,7 +2422,7 @@ table.result-table th.th-sort-active {
 </div>
 <div style="display:flex; gap:16px; align-items:center; margin-bottom:14px; padding:12px; background:var(--surface-alt); border-radius:var(--radius-sm); border:1px solid var(--border); flex-wrap:wrap;">
 <div id="settingLogoPreview" style="width:68px; height:68px; border-radius:12px; background:var(--surface); border:2px dashed var(--border); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0;">
-<span style="font-size:28px; color:var(--text-muted);">🏛️</span>
+<img alt="لوگو" onerror="this.parentElement.innerHTML='&lt;span style=\'font-size:28px; color:var(--text-muted);\'&gt;🏛️&lt;/span&gt;'" src="logo.png" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px;"/>
 </div>
 <div style="flex:1; min-width:200px;">
 <strong style="font-size:13.5px; display:block; margin-bottom:2px;">جامعہ کا لوگو / مونوگرام:</strong>
@@ -2433,7 +2442,7 @@ table.result-table th.th-sort-active {
 <div class="responsive-grid-2" style="margin-bottom:10px;">
 <div class="form-group-native">
 <label class="form-label-native">جامعہ / مدرسہ کا مکمل نام:</label>
-<input class="form-input-native" id="settingInstName" onchange="saveGeneralSettings()" type="text"/>
+<input class="form-input-native" id="settingInstName" onchange="saveGeneralSettings()" placeholder="مثلاً جامعہ خدیجۃ الکبریٰ للبنات" type="text"/>
 </div>
 <div class="form-group-native">
 <label class="form-label-native">ذیلی عنوان / شعبہ (Tagline):</label>
@@ -2442,12 +2451,12 @@ table.result-table th.th-sort-active {
 </div>
 <div class="form-group-native" style="margin-bottom:10px;">
 <label class="form-label-native">پتہ و مکمل مقام (Address &amp; Location):</label>
-<input class="form-input-native" id="settingInstAddress" onchange="saveGeneralSettings()" placeholder="مثلاً خوڑگئ موسیٰ خیل، تحصیل ڈومیل، ضلع بنوں، خیبر پختونخوا" type="text"/>
+<input class="form-input-native" id="settingInstAddress" onchange="saveGeneralSettings()" placeholder="مثلاً مدینہ ٹاؤن، بالمقابل جامع مسجد، نزد کینال روڈ، لاہور" type="text"/>
 </div>
 <div class="responsive-grid-3" style="margin-bottom:10px;">
 <div class="form-group-native">
 <label class="form-label-native">فون نمبر / واٹس ایپ:</label>
-<input class="form-input-native" id="settingInstPhone" onchange="saveGeneralSettings()" placeholder="مثلاً 0336-1593533" type="text"/>
+<input class="form-input-native" id="settingInstPhone" onchange="saveGeneralSettings()" placeholder="مثلاً 0300-1234567" type="text"/>
 </div>
 <div class="form-group-native">
 <label class="form-label-native">الحاق / رجسٹریشن نمبر:</label>
@@ -3016,9 +3025,9 @@ table.result-table th.th-sort-active {
 </div>
 <div class="modal-body-native">
 <p style="font-size:12px; color:var(--text-muted); margin:0;">ہر سطر میں ایک طالبہ کا ڈیٹا کوما (,) یا ٹیب سے الگ کر کے پیسٹ کریں: <strong>نام, ولدیت, فون نمبر</strong> (ولدیت اور فون اختیاری ہیں)</p>
-<textarea class="form-input-native" id="bulkPasteTextarea" oninput="updateBulkPastePreview()" placeholder="زینب, میر شاہ باز, 03451234567
-عائشہ, منور خان, 03121234567
-فاطمہ, عبدالرحمن" rows="6" style="font-family:inherit; resize:vertical;"></textarea>
+<textarea class="form-input-native" id="bulkPasteTextarea" oninput="updateBulkPastePreview()" placeholder="مریم بی بی, محمد اسلم خان, 03023456782
+عائشہ نور, عبد الرحمن, 03045678904
+فاطمہ زہرا, حافظ محمد عبد اللہ" rows="6" style="font-family:inherit; resize:vertical;"></textarea>
 <div id="bulkPastePreview" style="font-size:12px; color:var(--primary-dark); background:var(--primary-subtle); padding:8px 10px; border-radius:var(--radius-xs);">0 طالبات شناخت ہوئیں</div>
 </div>
 <div class="modal-footer-native">
@@ -3065,7 +3074,7 @@ table.result-table th.th-sort-active {
 <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:3px;">
 <div id="printGazetteLogo"></div>
 <div>
-<h1 id="printInstitutionName" style="font-size:18pt; font-weight:bold; margin:0; color:#0f766e;">جامعہ فاطمۃ الزہرا للبنات</h1>
+<h1 id="printInstitutionName" style="font-size:18pt; font-weight:bold; margin:0; color:#0f766e;">جامعہ خدیجۃ الکبریٰ للبنات</h1>
 <div id="printInstitutionSub" style="font-size:10.5pt; color:#475569; font-weight:bold;"></div>
 </div>
 </div>
@@ -3117,23 +3126,24 @@ const CLASS_SUBJECT_DEFAULTS = {
 };
 
 const SAMPLE_STUDENTS_MUTAWASSITA_1 = [
-  { roll: 1, reg: 'REG-101', name: 'افرائم', father: 'انصار اللہ', phone: '03361593533', marks: {'اردو پہلی': 60, 'اردو قاعدہ': 70} },
-  { roll: 2, reg: 'REG-102', name: 'فلحیام', father: 'زین اللہ', phone: '03339712345', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
-  { roll: 3, reg: 'REG-103', name: 'زینب', father: 'میرشاہ باز', phone: '03459876543', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
-  { roll: 4, reg: 'REG-104', name: 'عائشہ', father: 'مانور حمن', phone: '03125678901', marks: {'اردو پہلی': 15, 'اردو قاعدہ': 40} },
-  { roll: 5, reg: 'REG-105', name: 'حورین', father: 'غنی الرحمن', phone: '03001234567', marks: {'اردو پہلی': 70, 'اردو قاعدہ': 80} },
-  { roll: 6, reg: 'REG-106', name: 'بی بی آمنہ', father: 'زاردئیپ', phone: '03461234567', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 100} },
-  { roll: 7, reg: 'REG-107', name: 'فرشتہ', father: 'شاہین', phone: '03211234567', marks: {'اردو پہلی': 30, 'اردو قاعدہ': 40} },
-  { roll: 8, reg: 'REG-108', name: 'ہاجرہ', father: 'لال شہان', phone: '03351234567', marks: {'اردو پہلی': 100, 'اردو قاعدہ': 60} },
-  { roll: 9, reg: 'REG-109', name: 'ایمان', father: 'محمد عمران', phone: '03321234567', marks: {'اردو پہلی': 50, 'اردو قاعدہ': 40} },
-  { roll: 10, reg: 'REG-110', name: 'مدینہ', father: 'شمس الرحمن', phone: '03341234567', marks: {'اردو پہلی': 'غائب', 'اردو قاعدہ': 'غائب'} }
+  { roll: 1, reg: 'REG-101', name: 'فاطمہ زہرا', father: 'حافظ محمد عبد اللہ', phone: '03012345671', marks: {'اردو پہلی': 95, 'اردو قاعدہ': 98} },
+  { roll: 2, reg: 'REG-102', name: 'مریم بی بی', father: 'محمد اسلم خان', phone: '03023456782', marks: {'اردو پہلی': 88, 'اردو قاعدہ': 92} },
+  { roll: 3, reg: 'REG-103', name: 'زینب بی بی', father: 'طارق محمود', phone: '03034567893', marks: {'اردو پہلی': 82, 'اردو قاعدہ': 85} },
+  { roll: 4, reg: 'REG-104', name: 'عائشہ نور', father: 'عبد الرحمن', phone: '03045678904', marks: {'اردو پہلی': 74, 'اردو قاعدہ': 76} },
+  { roll: 5, reg: 'REG-105', name: 'حورین فاطمہ', father: 'محمد عرفان', phone: '03056789015', marks: {'اردو پہلی': 65, 'اردو قاعدہ': 68} },
+  { roll: 6, reg: 'REG-106', name: 'آمنہ بی بی', father: 'ساجد علی', phone: '03067890126', marks: {'اردو پہلی': 58, 'اردو قاعدہ': 60} },
+  { roll: 7, reg: 'REG-107', name: 'ہاجرہ بانو', father: 'بشیر احمد', phone: '03078901237', marks: {'اردو پہلی': 45, 'اردو قاعدہ': 48} },
+  { roll: 8, reg: 'REG-108', name: 'سعدیہ بی بی', father: 'شاہد اقبال', phone: '03089012348', marks: {'اردو پہلی': 32, 'اردو قاعدہ': 42} },
+  { roll: 9, reg: 'REG-109', name: 'ایمان بی بی', father: 'محمد عمران', phone: '03090123459', marks: {'اردو پہلی': 25, 'اردو قاعدہ': 35} },
+  { roll: 10, reg: 'REG-110', name: 'جویریہ بی بی', father: 'شمس الدین', phone: '03101234560', marks: {'اردو پہلی': 'غائب', 'اردو قاعدہ': 'غائب'} }
 ];
 
 let appState = {
-  institution: 'جامعہ فاطمۃ الزہرا للبنات',
-  institutionSubtitle: 'للبنات - خوڑگئ موسیٰ خیل ڈومیل بنوں',
-  institutionAddress: 'خوڑگئ موسیٰ خیل، تحصیل ڈومیل، ضلع بنوں، خیبر پختونخوا',
-  institutionPhone: '0336-1593533',
+  sampleVersion: 2,
+  institution: 'جامعہ خدیجۃ الکبریٰ للبنات',
+  institutionSubtitle: 'للبنات - شعبہ تعلیمات و حفظ القرآن',
+  institutionAddress: 'مدینہ ٹاؤن، بالمقابل جامع مسجد، نزد کینال روڈ، لاہور',
+  institutionPhone: '0300-1234567',
   institutionReg: 'الحاق: وفاق المدارس العربیہ پاکستان',
   institutionHead: 'مہتمم جامعہ',
   institutionLogo: '',
@@ -3609,12 +3619,9 @@ function updateHeaderDisplay() {
 
   let logoContainer = document.getElementById('headerBrandLogo');
   if (logoContainer) {
-    if (appState.institutionLogo) {
-      logoContainer.innerHTML = `<img src="${appState.institutionLogo}" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">`;
-    } else {
-      let char = (appState.institution || 'ف').trim().charAt(0) || 'ف';
-      logoContainer.innerHTML = `<span>${char}</span>`;
-    }
+    let logoSrc = appState.institutionLogo || 'logo.png';
+    let char = (appState.institution || 'ج').trim().charAt(0) || 'ج';
+    logoContainer.innerHTML = `<img src="${logoSrc}" alt="لوگو" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" onerror="this.onerror=null; this.parentElement.innerHTML='<span>${char}</span>';">`;
   }
 
   let instInput = document.getElementById('settingInstName');
@@ -3632,11 +3639,8 @@ function updateHeaderDisplay() {
 
   let logoPreview = document.getElementById('settingLogoPreview');
   if (logoPreview) {
-    if (appState.institutionLogo) {
-      logoPreview.innerHTML = `<img src="${appState.institutionLogo}" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px;">`;
-    } else {
-      logoPreview.innerHTML = `<span style="font-size:28px; color:var(--text-muted);">🏛️</span>`;
-    }
+    let previewSrc = appState.institutionLogo || 'logo.png';
+    logoPreview.innerHTML = `<img src="${previewSrc}" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px;" onerror="this.parentElement.innerHTML='<span style=\\'font-size:28px; color:var(--text-muted);\\'>🏛️</span>';">`;
   }
 
   let examSelect = document.getElementById('settingExamType');
@@ -4685,7 +4689,7 @@ function generateDmcCardHtml(s, cData) {
       <div class="dmc-header">
         <p style="font-size:12px; margin-bottom:2px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
         <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:3px;">
-          ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:52px; height:52px; object-fit:contain; border-radius:50%; border:1px solid #0f766e;">` : ''}
+          <img src="${appState.institutionLogo || 'logo.png'}" style="width:52px; height:52px; object-fit:contain; border-radius:50%; border:1px solid #0f766e;" onerror="this.style.display='none'">
           <div>
             <h2 style="margin:0; font-size:18pt; color:#0f766e;">${appState.institution}</h2>
             ${appState.institutionSubtitle ? `<div style="font-size:10pt; color:#475569; font-weight:bold;">${appState.institutionSubtitle}</div>` : ''}
@@ -5547,7 +5551,7 @@ function applyGradingToAllClasses() {
 
 function saveGeneralSettings() {
   let inst = document.getElementById('settingInstName');
-  if (inst) appState.institution = inst.value.trim() || 'جامعہ فاطمۃ الزہرا للبنات';
+  if (inst) appState.institution = inst.value.trim() || 'جامعہ خدیجۃ الکبریٰ للبنات';
   let sub = document.getElementById('settingInstSubtitle');
   if (sub) appState.institutionSubtitle = sub.value.trim();
   let addr = document.getElementById('settingInstAddress');
@@ -6212,7 +6216,7 @@ function buildPrintHeaderHtml(title, accentColor = '#0f766e') {
     <div style="text-align:center; padding-bottom:10px; border-bottom:2px solid ${accentColor}; margin-bottom:14px;">
       <p style="font-size:12pt; font-weight:bold; margin-bottom:2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
       <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:3px;">
-        ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:48px; height:48px; object-fit:contain; border-radius:50%; border:1px solid ${accentColor};">` : ''}
+        <img src="${appState.institutionLogo || 'logo.png'}" style="width:48px; height:48px; object-fit:contain; border-radius:50%; border:1px solid ${accentColor};" onerror="this.style.display='none'">
         <div>
           <h1 style="font-size:18pt; font-weight:bold; color:${accentColor}; margin:0;">${appState.institution}</h1>
           ${appState.institutionSubtitle ? `<div style="font-size:10.5pt; color:#475569; font-weight:bold;">${appState.institutionSubtitle}</div>` : ''}
@@ -6277,7 +6281,8 @@ function printGazette() {
   }
   let pLogo = document.getElementById('printGazetteLogo');
   if (pLogo) {
-    pLogo.innerHTML = appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:48px; height:48px; object-fit:contain; border-radius:50%; border:1px solid #0f766e;">` : '';
+    let pLogoSrc = appState.institutionLogo || 'logo.png';
+    pLogo.innerHTML = `<img src="${pLogoSrc}" style="width:48px; height:48px; object-fit:contain; border-radius:50%; border:1px solid #0f766e;" onerror="this.style.display='none'">`;
   }
   let pHeadSign = document.getElementById('printGazetteHeadSign');
   if (pHeadSign) {
@@ -6443,7 +6448,7 @@ function printRollNumberSlips() {
           <div style="text-align:center; border-bottom:1px solid #0f766e; padding-bottom:4px; margin-bottom:8px;">
             <p style="font-size:10pt; font-weight:bold; margin-bottom:1px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
             <div style="display:flex; justify-content:center; align-items:center; gap:8px;">
-              ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:34px; height:34px; object-fit:contain; border-radius:50%;">` : ''}
+              <img src="${appState.institutionLogo || 'logo.png'}" style="width:34px; height:34px; object-fit:contain; border-radius:50%;" onerror="this.style.display='none'">
               <div>
                 <h3 style="font-size:12pt; color:#0f766e; font-weight:bold; margin:0;">${appState.institution}</h3>
                 ${appState.institutionSubtitle ? `<span style="font-size:9pt; color:#64748b; font-weight:bold;">${appState.institutionSubtitle}</span>` : ''}
@@ -6581,6 +6586,16 @@ function loadFromLocalStorage() {
     if (saved) {
       let parsed = JSON.parse(saved);
       appState = { ...appState, ...parsed };
+      if (!appState.sampleVersion || appState.sampleVersion < 2) {
+        appState.institution = 'جامعہ خدیجۃ الکبریٰ للبنات';
+        appState.institutionSubtitle = 'للبنات - شعبہ تعلیمات و حفظ القرآن';
+        appState.institutionAddress = 'مدینہ ٹاؤن، بالمقابل جامع مسجد، نزد کینال روڈ، لاہور';
+        appState.institutionPhone = '0300-1234567';
+        if (appState.classesData && appState.classesData['متوسطہ اول']) {
+          appState.classesData['متوسطہ اول'].students = JSON.parse(JSON.stringify(SAMPLE_STUDENTS_MUTAWASSITA_1));
+        }
+        appState.sampleVersion = 2;
+      }
       if (appState.classesData) {
         let exams = getExamList();
         Object.keys(appState.classesData).forEach(cls => {
@@ -6780,9 +6795,18 @@ function resetToSampleData() {
       appState.examList = ['ششماہی امتحان', 'سالانہ امتحان', 'سہ ماہی امتحان', 'ماہانہ ٹیسٹ'];
       appState.currentClass = 'متوسطہ اول';
       appState.examTitle = 'ششماہی امتحان';
+      appState.sampleVersion = 2;
+      appState.institution = 'جامعہ خدیجۃ الکبریٰ للبنات';
+      appState.institutionSubtitle = 'للبنات - شعبہ تعلیمات و حفظ القرآن';
+      appState.institutionAddress = 'مدینہ ٹاؤن، بالمقابل جامع مسجد، نزد کینال روڈ، لاہور';
+      appState.institutionPhone = '0300-1234567';
+      appState.institutionReg = 'الحاق: وفاق المدارس العربیہ پاکستان';
+      appState.institutionHead = 'مہتمم جامعہ';
+      appState.institutionLogo = '';
       initializeClassData(appState.currentClass);
       updateHeaderDisplay();
       renderApp();
+      saveToLocalStorage();
       showToast('تمام ڈیٹا ابتدائی حالت پر ری سیٹ ہو گیا', 'info');
     }
   );
@@ -7821,7 +7845,7 @@ function printPositionCertificates() {
   view.innerHTML = top3.map(s => `
     <div class="cert-card print-page-break">
       <p style="font-size:13pt; font-weight:bold; color:#0f766e; margin-bottom:4px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-      ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:62px; height:62px; object-fit:contain; border-radius:50%; border:2px solid #d97706; margin-bottom:6px;">` : ''}
+      <img src="${appState.institutionLogo || 'logo.png'}" style="width:62px; height:62px; object-fit:contain; border-radius:50%; border:2px solid #d97706; margin-bottom:6px;" onerror="this.style.display='none'">
       <h1 style="font-size:21pt; color:#0f766e; margin:0;">${appState.institution}</h1>
       ${appState.institutionSubtitle ? `<div style="font-size:11pt; color:#475569; font-weight:bold;">${appState.institutionSubtitle}</div>` : ''}
       <div style="display:inline-block; margin:16px 0; padding:6px 26px; background:#fef3c7; border:2px solid #d97706; border-radius:9999px; font-size:15pt; font-weight:800; color:#b45309;">🏅 سندِ امتیاز و توصیفی سرٹیفکیٹ</div>

@@ -58,11 +58,11 @@ if (workbox) {
     },
     {
         "url": "build pwa make html app offline and installable yasin best working re-run this for updates best for html only.pyw",
-        "revision": "23ac1074e08741b425954fe977ec306c"
+        "revision": "8b06a5e36535c2fdf8cfca963f705e8b"
     },
     {
         "url": "client readme.md",
-        "revision": "beadbe6730a46d0811f252dfa2fb95b5"
+        "revision": "ccff46ffb08db98da6a1c6b4169a7f4b"
     },
     {
         "url": "FEATURES_REPORT.md",
@@ -70,11 +70,11 @@ if (workbox) {
     },
     {
         "url": "index.html",
-        "revision": "3b58d5dfa1abf83e4649e41e9d1f6772"
+        "revision": "800780ea063cfb6d783b0183fd59d9c4"
     },
     {
         "url": "index.html.bak",
-        "revision": "eafca9a732b1b052c11c93f176204ed4"
+        "revision": "384ef42b3c086f6d4f80ba9855c18b7f"
     },
     {
         "url": "logo.png",
@@ -82,11 +82,11 @@ if (workbox) {
     },
     {
         "url": "main.js",
-        "revision": "b35ae88c3ce29c916be2cd2c25733022"
+        "revision": "12b01f9e13fd2de63e65d89c407bfff7"
     },
     {
         "url": "manifest.json",
-        "revision": "f8c84f7b516deb377f43f677d117c6bf"
+        "revision": "d2633b02fadf7ba89ad64ab595155333"
     },
     {
         "url": "offline.html",
@@ -102,11 +102,11 @@ if (workbox) {
     },
     {
         "url": "README.md",
-        "revision": "985ac67ddcbf972553116efd5e47d2a0"
+        "revision": "316feeb88a17cd6ba213319d810acd4b"
     },
     {
         "url": "sw.js",
-        "revision": "4bd1ede91139f7aef8871889e8a24544"
+        "revision": "64a259b7b92b0a5bf7f8fdb45687e446"
     },
     {
         "url": "xlsx.full.min.js",

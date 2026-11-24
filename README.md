@@ -1,4 +1,4 @@
-# 🕌 نظام امتحانات و نتائج - جامعہ فاطمۃ الزہرا للبنات
+# 🕌 نظام امتحانات و نتائج - جامعہ خدیجۃ الکبریٰ للبنات
 ### Madrasa Examination & Result Management System (Web, Mobile & Desktop).
 
 ---
