@@ -1,5 +1,5 @@
 # 🕌 نظام امتحانات و نتائج - جامعہ فاطمۃ الزہرا للبنات
-### Madrasa Examination & Result Management System (Web, Mobile & Desktop)
+### Madrasa Examination & Result Management System (Web, Mobile & Desktop).
 
 ---
 
