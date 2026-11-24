@@ -1833,6 +1833,142 @@ table.result-table th.th-sort-active {
   }
 }
 
+
+/* === PRODUCTION MODULES CSS === */
+.mode-toggle-pills {
+  display: inline-flex;
+  background: var(--surface-alt);
+  padding: 3px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  gap: 3px;
+}
+
+.mode-toggle-pill {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.mode-toggle-pill.active {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 5px rgba(13, 148, 136, 0.25);
+}
+
+.module-section-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 16px;
+}
+
+.module-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.wa-recipient-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-size: 12.5px;
+  flex-wrap: wrap;
+}
+
+.wa-recipient-row.wa-sent {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.seating-hall-card {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.seating-seats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.seating-seat-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 6px 8px;
+  text-align: center;
+  font-size: 11.5px;
+}
+
+.cert-card {
+  background: #ffffff;
+  border: 4px double #d97706;
+  border-radius: 12px;
+  padding: 28px 26px;
+  max-width: 720px;
+  margin: 0 auto 24px auto;
+  text-align: center;
+  position: relative;
+}
+
+.cert-card::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #0f766e;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.storage-meter-box {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+@media (max-width: 819px) {
+  nav.mobile-bottom-bar {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-left: 4px;
+    padding-right: 4px;
+    scrollbar-width: none;
+  }
+  nav.mobile-bottom-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .mobile-nav-item {
+    min-width: 58px;
+    flex: 0 0 auto;
+  }
+}
+
 </style>
 <link href="manifest.json" rel="manifest"/><link href="favicon.ico" rel="icon" type="image/x-icon"/></head>
 <body>
@@ -1900,6 +2036,14 @@ table.result-table th.th-sort-active {
 <button class="desktop-tab-btn" onclick="switchMainTab('printcenter', this)">
 <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
       پرنٹ سنٹر
+    </button>
+<button class="desktop-tab-btn" onclick="switchMainTab('datesheet', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="18" rx="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+      ڈیٹ شیٹ و ہال
+    </button>
+<button class="desktop-tab-btn" onclick="switchMainTab('combined', this)">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+      مجموعی سالانہ نتیجہ
     </button>
 <button class="desktop-tab-btn" onclick="switchMainTab('stats', this)">
 <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg>
@@ -2021,6 +2165,10 @@ table.result-table th.th-sort-active {
 <button class="btn btn-secondary btn-sm" onclick="downloadBlankExcelTemplate()">خالی ایکسل ٹیمپلیٹ</button>
 <button class="btn btn-secondary btn-sm" onclick="renderAllDMCs(); switchTabDirect('dmc')">سب کے DMC پرنٹ کریں</button>
 <button class="btn btn-secondary btn-sm" onclick="clearSampleDataStartFresh()" style="color:var(--danger); border-color:#fecaca;" title="تمام طالبات و نمبرات صاف کر کے نئے سرے سے شروع کریں" type="button">🧹 صاف کریں (نیا آغاز)</button>
+<button class="btn btn-secondary btn-sm" onclick="openGraceMarksModal()" title="بارڈر لائن طالبات کو رعایتی نمبر دیں" type="button">🎁 رعایتی نمبر (Grace)</button>
+<button class="btn btn-secondary btn-sm" onclick="openPromotionModal()" title="کامیاب طالبات کو اگلے درجہ میں ترقی دیں" type="button">🎓 ترقی درجہ (Promote)</button>
+<button class="btn btn-secondary btn-sm" onclick="openBulkPasteModal()" title="واٹس ایپ یا نوٹ پیڈ سے طالبات کی فہرست پیسٹ کریں" type="button">📋 فہرست پیسٹ</button>
+<button class="btn btn-secondary btn-sm" onclick="openWhatsAppCenterModal()" style="color:#15803d; border-color:#bbf7d0; background:#f0fdf4;" title="تمام والدین کو ترتیب وار واٹس ایپ نتیجہ بھیجیں" type="button">💬 واٹس ایپ سنٹر</button>
 <button class="btn btn-secondary btn-sm" onclick="loadSampleDataNow()" title="آزمائشی نمونہ ڈیٹا لوڈ کریں" type="button">📥 نمونہ ڈیٹا لوڈ کریں</button>
 </div>
 <div class="tab-pane active" id="pane-table">
@@ -2105,6 +2253,97 @@ table.result-table th.th-sort-active {
 <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانِ ضمنی (سپلیمنٹری امتحان) کی تیاری کے لیے فیل طالبات کی مضمون وار فہرست۔</p>
 <button class="btn btn-secondary btn-sm" onclick="printFailureList()" style="color:var(--danger);">راسب لسٹ پرنٹ کریں</button>
 </div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--accent); margin-bottom:6px;">🏅 اسنادِ امتیاز (Position Certificates)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">اول، دوم اور سوم پوزیشن حاصل کرنے والی طالبات کے لیے خوبصورت بارڈر والی تعریفی اسناد۔</p>
+<button class="btn btn-accent btn-sm" onclick="printPositionCertificates()" type="button">اسنادِ امتیاز پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">✍️ امتحانی ہال حاضری شیٹ (Attendance Sheet)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">امتحانی کمرے میں نگرانِ امتحان کے لیے طالبات کے دستخط اور پرچہ وار حاضری کا چارٹ۔</p>
+<button class="btn btn-secondary btn-sm" onclick="printAttendanceSheet()" type="button">حاضری شیٹ پرنٹ کریں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:#15803d; margin-bottom:6px;">💬 واٹس ایپ رزلٹ سنٹر (Bulk WhatsApp)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">اپنی مرضی کے اردو پیغام کے ساتھ تمام سرپرستوں کو ترتیب وار نتیجہ بھیجیں اور اسٹیٹس ٹریک کریں۔</p>
+<button class="btn btn-success btn-sm" onclick="openWhatsAppCenterModal()" type="button">واٹس ایپ سنٹر کھولیں</button>
+</div>
+<div class="native-card">
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">📊 مکمل جامعہ ایکسل بک (All Classes Excel)</h3>
+<p style="font-size:12.5px; color:var(--text-muted); margin-bottom:12px;">جامعہ کے تمام درجات کے نتائج ایک ہی ایکسل فائل میں الگ الگ شیٹس کے ساتھ ایکسپورٹ کریں۔</p>
+<button class="btn btn-primary btn-sm" onclick="exportAllClassesExcel()" type="button">تمام درجات ایکسل ایکسپورٹ</button>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="pane-datesheet">
+<div class="module-section-card">
+<div class="module-section-header">
+<div>
+<h3 style="font-size:16px; font-weight:700; color:var(--primary-dark); margin:0;">📅 امتحانی ڈیٹ شیٹ (Exam Schedule / Date Sheet)</h3>
+<p id="dateSheetSubtitle" style="font-size:12px; color:var(--text-muted); margin:2px 0 0 0;">ہر مضمون کی تاریخ، وقت اور کمرہ مقرر کریں — یہ خودکار رول نمبر سلپس میں بھی شامل ہو جائے گا</p>
+</div>
+<div style="display:flex; gap:8px; flex-wrap:wrap;">
+<button class="btn btn-secondary btn-sm" onclick="autoFillDateSheetDates()" type="button">⚡ خودکار تاریخیں بھریں</button>
+<button class="btn btn-primary btn-sm" onclick="printDateSheet()" type="button">🖨️ ڈیٹ شیٹ پرنٹ کریں</button>
+</div>
+</div>
+<div class="table-scroll-container">
+<table class="result-table" id="dateSheetTable">
+<thead>
+<tr>
+<th style="width:45px;">#</th>
+<th style="text-align:right; min-width:140px;">مضمون</th>
+<th style="min-width:145px;">تاریخ (Date)</th>
+<th style="min-width:100px;">دن (Day)</th>
+<th style="min-width:145px;">وقت (Time)</th>
+<th style="min-width:120px;">کمرہ / ہال</th>
+</tr>
+</thead>
+<tbody id="dateSheetTableBody"></tbody>
+</table>
+</div>
+</div>
+<div class="module-section-card">
+<div class="module-section-header">
+<div>
+<h3 style="font-size:16px; font-weight:700; color:var(--primary-dark); margin:0;">🪑 امتحانی ہال و نشست نامہ (Seating Plan Generator)</h3>
+<p style="font-size:12px; color:var(--text-muted); margin:2px 0 0 0;">کمرے اور نشستوں کی تعداد درج کریں تاکہ طالبات کے رول نمبر خودکار کمروں میں تقسیم ہو جائیں</p>
+</div>
+<div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+<label style="font-size:12px; font-weight:700;">فی کمرہ طالبات:</label>
+<input class="form-input-native" id="seatingCapacityInput" max="200" min="2" onchange="renderSeatingPlan()" style="width:72px; padding:5px 8px; text-align:center;" type="number" value="15"/>
+<input class="form-input-native" id="seatingHallPrefixInput" onchange="renderSeatingPlan()" placeholder="کمرہ / ہال" style="width:120px; padding:5px 8px;" type="text" value="امتحانی ہال"/>
+<button class="btn btn-accent btn-sm" onclick="printSeatingPlan()" type="button">🖨️ نشست نامہ پرنٹ</button>
+</div>
+</div>
+<div id="seatingPlanContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:12px;"></div>
+</div>
+</div>
+<div class="tab-pane" id="pane-combined">
+<div class="module-section-card">
+<div class="module-section-header">
+<div>
+<h3 style="font-size:16px; font-weight:700; color:var(--primary-dark); margin:0;">📊 مجموعی سالانہ نتیجہ (Multi-Exam Consolidation)</h3>
+<p id="combinedSubtitle" style="font-size:12px; color:var(--text-muted); margin:2px 0 0 0;">متعدد امتحانات (مثلاً ششماہی + سالانہ) کو وزن (Weightage %) یا کل مجموعہ کی بنیاد پر یکجا کریں</p>
+</div>
+<div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+<select class="select-native btn-sm" id="combinedModeSelect" onchange="renderCombinedTab()">
+<option value="weighted">وزنی اوسط (Weightage %)</option>
+<option value="sum">مکمل مجموعہ (Sum of Marks)</option>
+</select>
+<button class="btn btn-primary btn-sm" onclick="exportCombinedExcel()" type="button">📥 مجموعی ایکسل</button>
+<button class="btn btn-accent btn-sm" onclick="printCombinedResult()" type="button">🖨️ مجموعی گزٹ پرنٹ</button>
+</div>
+</div>
+<div id="combinedExamsConfig" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; padding:10px 12px; background:var(--surface-alt); border-radius:var(--radius-sm); border:1px solid var(--border);"></div>
+<div class="table-scroll-container">
+<table class="result-table" id="combinedResultTable">
+<thead>
+<tr id="combinedTableHeaderRow"></tr>
+</thead>
+<tbody id="combinedTableBody"></tbody>
+</table>
+</div>
 </div>
 </div>
 <div class="tab-pane" id="pane-stats">
@@ -2120,6 +2359,37 @@ table.result-table th.th-sort-active {
 <div class="native-card">
 <h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:8px;">مضمون وار اوسط نمبرات (Subject Averages)</h3>
 <div id="subjectAveragesList" style="display:flex; flex-direction:column; gap:8px;"></div>
+</div>
+</div>
+<div class="module-section-card" style="margin-top:16px;">
+<div class="module-section-header">
+<div>
+<h3 style="font-size:15.5px; font-weight:700; color:var(--primary-dark); margin:0;">🏛️ مجموعی جامعہ رپورٹ — تمام درجات کا تقابلی جائزہ (Whole-Jamia Overview)</h3>
+<p style="font-size:12px; color:var(--text-muted); margin:2px 0 0 0;">فعال امتحانی سیشن میں جامعہ کے تمام درجات کی مجموعی کارکردگی، شرح کامیابی اور اول پوزیشن ہولڈرز</p>
+</div>
+<div style="display:flex; gap:8px; flex-wrap:wrap;">
+<button class="btn btn-primary btn-sm" onclick="exportAllClassesExcel()" type="button">📊 تمام درجات ایکسل</button>
+<button class="btn btn-accent btn-sm" onclick="printJamiaOverview()" type="button">🖨️ جامعہ رپورٹ پرنٹ</button>
+</div>
+</div>
+<div class="table-scroll-container">
+<table class="result-table">
+<thead>
+<tr>
+<th>#</th>
+<th style="text-align:right;">درجہ (کلاس)</th>
+<th>کل طالبات</th>
+<th>حاضر</th>
+<th>کامیاب</th>
+<th>راسب</th>
+<th>شرح کامیابی</th>
+<th>نمایاں نمبر</th>
+<th style="text-align:right;">اول پوزیشن</th>
+<th class="no-print">کھولیں</th>
+</tr>
+</thead>
+<tbody id="jamiaOverviewTableBody"></tbody>
+</table>
 </div>
 </div>
 </div>
@@ -2307,8 +2577,11 @@ table.result-table th.th-sort-active {
 <div id="settingsClassList" style="display:flex; flex-direction:column; gap:8px;"></div>
 </div>
 <div class="native-card" id="settingCardBackup">
-<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:12px;">بیک اپ، امپورٹ و بحالی (Backup &amp; Restore)</h3>
+<h3 style="font-size:15px; font-weight:700; color:var(--primary-dark); margin-bottom:10px;">بیک اپ، امپورٹ و بحالی (Backup &amp; Restore)</h3>
+<div class="storage-meter-box" id="storageUsageMeter">ڈیٹا اسٹوریج کی تفصیلات لوڈ ہو رہی ہیں...</div>
 <div style="display:flex; gap:10px; flex-wrap:wrap;">
+<button class="btn btn-primary" onclick="exportAllClassesExcel()" type="button">📊 تمام درجات ایکسل بک</button>
+<button class="btn btn-secondary" onclick="openPromotionModal()" type="button">🎓 ترقی درجہ (Promotion)</button>
 <button class="btn btn-secondary" onclick="downloadJsonBackup()">
 <svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
             ڈیٹا بیک اپ (JSON)
@@ -2363,6 +2636,18 @@ table.result-table th.th-sort-active {
 <svg fill="none" height="18" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="18"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
 </div>
 <span>پرنٹس</span>
+</button>
+<button class="mobile-nav-item" data-tab="datesheet" onclick="switchMobileNav('datesheet', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="17" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="17"><rect height="18" rx="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+</div>
+<span>ڈیٹ شیٹ</span>
+</button>
+<button class="mobile-nav-item" data-tab="combined" onclick="switchMobileNav('combined', this)">
+<div class="mobile-nav-icon-box">
+<svg fill="none" height="17" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="17"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+</div>
+<span>مجموعی</span>
 </button>
 <button class="mobile-nav-item" data-tab="stats" onclick="switchMobileNav('stats', this)">
 <div class="mobile-nav-icon-box">
@@ -2529,6 +2814,16 @@ table.result-table th.th-sort-active {
 <input class="form-input-native" id="modalStudentAddress" placeholder="علاقہ / گاؤں" type="text"/>
 </div>
 </div>
+<div style="display:grid; grid-template-columns: 1fr 2fr; gap:8px; margin-top:2px;">
+<div class="form-group-native">
+<label class="form-label-native">حاضری (Attendance)</label>
+<input class="form-input-native" id="modalStudentAttendance" placeholder="مثلاً: 185/200" type="text"/>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">کیفیت / ریمارکس (DMC پر ظاہر ہوں گے)</label>
+<input class="form-input-native" id="modalStudentRemarks" placeholder="مثلاً: محنتی و بااخلاق طالبہ، ماشاءاللہ..." type="text"/>
+</div>
+</div>
 <div class="modal-live-preview" id="modalLivePreview">
 <span>مجموعہ: <strong id="modalPreviewObtained" style="color:var(--primary-dark);">0 / 0</strong></span>
 <span>فیصد: <strong id="modalPreviewPercent" style="color:var(--primary-dark);">0%</strong></span>
@@ -2639,6 +2934,131 @@ table.result-table th.th-sort-active {
 </div>
 </div>
 </div>
+<div class="modal-backdrop-native" id="graceMarksModal" onclick="closeOnBackdrop(event, 'graceMarksModal')">
+<div class="modal-sheet" style="max-width:500px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">🎁 رعایتی نمبر (Grace Marks &amp; Auto-Pass)</h3>
+<button class="modal-close-native" onclick="closeGraceMarksModal()">×</button>
+</div>
+<div class="modal-body-native">
+<div class="form-group-native">
+<label class="form-label-native">رعایت کا طریقہ کار:</label>
+<select class="select-native" id="graceModeSelect" onchange="updateGracePreview()">
+<option value="borderline">بارڈر لائن طالبات کو پاس کریں (Auto-Pass Borderline)</option>
+<option value="bonus">مخصوص مضمون میں تمام حاضر طالبات کو بونس نمبر دیں</option>
+</select>
+</div>
+<div class="form-group-native" id="graceSubjectGroup" style="display:none;">
+<label class="form-label-native">مضمون منتخب کریں:</label>
+<select class="select-native" id="graceSubjectSelect" onchange="updateGracePreview()"></select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native" id="graceAmountLabel">زیادہ سے زیادہ رعایتی نمبر (مثلاً 3 یا 5):</label>
+<input class="form-input-native" id="graceAmountInput" max="30" min="1" oninput="updateGracePreview()" type="number" value="3"/>
+</div>
+<div id="gracePreviewBox" style="background:var(--primary-subtle); border:1px solid var(--primary-light); padding:10px 12px; border-radius:var(--radius-sm); font-size:12.5px; color:var(--primary-dark);"></div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeGraceMarksModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="applyGraceMarks()" type="button">رعایتی نمبر لاگو کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="promotionModal" onclick="closeOnBackdrop(event, 'promotionModal')">
+<div class="modal-sheet" style="max-width:500px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">🎓 ترقی درجہ (Promote / Transfer Students)</h3>
+<button class="modal-close-native" onclick="closePromotionModal()">×</button>
+</div>
+<div class="modal-body-native">
+<div class="responsive-grid-2">
+<div class="form-group-native">
+<label class="form-label-native">موجودہ درجہ (From):</label>
+<select class="select-native" id="promoteFromClass" onchange="updatePromotionPreview()"></select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">اگلا درجہ (To):</label>
+<select class="select-native" id="promoteToClass" onchange="updatePromotionPreview()"></select>
+</div>
+</div>
+<div class="responsive-grid-2">
+<div class="form-group-native">
+<label class="form-label-native">کن طالبات کو ترقی دیں:</label>
+<select class="select-native" id="promoteFilterSelect" onchange="updatePromotionPreview()">
+<option value="passed">صرف کامیاب طالبات</option>
+<option value="all">تمام طالبات</option>
+</select>
+</div>
+<div class="form-group-native">
+<label class="form-label-native">منتقلی کا طریقہ:</label>
+<select class="select-native" id="promoteModeSelect" onchange="updatePromotionPreview()">
+<option value="copy">کاپی کریں (پرانے درجہ کا ریکارڈ محفوظ رہے)</option>
+<option value="move">منتقل کریں (پرانے درجہ سے ہٹا دیں)</option>
+</select>
+</div>
+</div>
+<div id="promotionPreviewBox" style="background:var(--primary-subtle); border:1px solid var(--primary-light); padding:10px 12px; border-radius:var(--radius-sm); font-size:12.5px; color:var(--primary-dark);"></div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closePromotionModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="executePromotion()" type="button">ترقی درجہ مکمل کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="bulkPasteModal" onclick="closeOnBackdrop(event, 'bulkPasteModal')">
+<div class="modal-sheet" style="max-width:580px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">📋 فوری فہرست پیسٹ کریں (Bulk Roster Paste)</h3>
+<button class="modal-close-native" onclick="closeBulkPasteModal()">×</button>
+</div>
+<div class="modal-body-native">
+<p style="font-size:12px; color:var(--text-muted); margin:0;">ہر سطر میں ایک طالبہ کا ڈیٹا کوما (,) یا ٹیب سے الگ کر کے پیسٹ کریں: <strong>نام, ولدیت, فون نمبر</strong> (ولدیت اور فون اختیاری ہیں)</p>
+<textarea class="form-input-native" id="bulkPasteTextarea" oninput="updateBulkPastePreview()" placeholder="زینب, میر شاہ باز, 03451234567
+عائشہ, منور خان, 03121234567
+فاطمہ, عبدالرحمن" rows="6" style="font-family:inherit; resize:vertical;"></textarea>
+<div id="bulkPastePreview" style="font-size:12px; color:var(--primary-dark); background:var(--primary-subtle); padding:8px 10px; border-radius:var(--radius-xs);">0 طالبات شناخت ہوئیں</div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="closeBulkPasteModal()" type="button">منسوخ</button>
+<button class="btn btn-primary" onclick="submitBulkPaste()" type="button">تمام طالبات شامل کریں</button>
+</div>
+</div>
+</div>
+<div class="modal-backdrop-native" id="whatsappCenterModal" onclick="closeOnBackdrop(event, 'whatsappCenterModal')">
+<div class="modal-sheet" style="max-width:640px;">
+<div class="modal-grabber"></div>
+<div class="modal-header-native">
+<h3 class="modal-title-native">💬 واٹس ایپ رزلٹ سنٹر (WhatsApp Broadcast Center)</h3>
+<button class="modal-close-native" onclick="closeWhatsAppCenterModal()">×</button>
+</div>
+<div class="modal-body-native">
+<div class="form-group-native">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<label class="form-label-native">پیغام کا ٹیمپلیٹ (Tokens: {name}, {father}, {roll}, {class}, {exam}, {obtained}, {total}, {percent}, {rank}, {grade}, {subjects}):</label>
+<button class="btn btn-secondary btn-sm" onclick="resetWhatsAppTemplate()" style="padding:2px 7px; font-size:11px;" type="button">ڈیفالٹ بحال</button>
+</div>
+<textarea class="form-input-native" id="waTemplateInput" onchange="saveWhatsAppTemplate()" rows="4" style="font-size:12.5px; resize:vertical;"></textarea>
+</div>
+<div style="display:flex; gap:8px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+<select class="select-native btn-sm" id="waFilterSelect" onchange="renderWhatsAppCenterList()">
+<option value="all">تمام طالبات</option>
+<option value="passed">صرف کامیاب طالبات</option>
+<option value="failed">صرف راسب طالبات</option>
+<option value="top3">ٹاپ ۳ پوزیشن ہولڈرز</option>
+</select>
+<span id="waSentCounter" style="font-size:12px; font-weight:700; color:var(--primary-dark);"></span>
+</div>
+<div id="waRecipientsList" style="display:flex; flex-direction:column; gap:7px; max-height:300px; overflow-y:auto;"></div>
+</div>
+<div class="modal-footer-native">
+<button class="btn btn-secondary" onclick="resetWhatsAppSentStatus()" type="button">بھیجے گئے نشان ری سیٹ</button>
+<button class="btn btn-primary" onclick="closeWhatsAppCenterModal()" type="button">بند کریں</button>
+</div>
+</div>
+</div>
 <div class="print-section" id="printGazetteView">
 <div style="text-align:center; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #0f766e;">
 <p style="font-size:13pt; margin-bottom:1px; font-weight:bold;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
@@ -2674,6 +3094,12 @@ table.result-table th.th-sort-active {
 <div class="print-section" id="printAwardSheetView"></div>
 <div class="print-section" id="printRollSlipsView"></div>
 <div class="print-section" id="printFailureListView"></div>
+<div class="print-section" id="printCertificatesView"></div>
+<div class="print-section" id="printAttendanceSheetView"></div>
+<div class="print-section" id="printDateSheetView"></div>
+<div class="print-section" id="printSeatingPlanView"></div>
+<div class="print-section" id="printCombinedView"></div>
+<div class="print-section" id="printJamiaOverviewView"></div>
 <script>
 const CLASS_SUBJECT_DEFAULTS = {
   'متوسطہ اول': ['اردو پہلی', 'اردو قاعدہ'],
@@ -3234,6 +3660,10 @@ function renderApp() {
   renderSettingsTab(cData);
   renderDmcTab(cData);
   renderAwardSheetSubjectOptions(cData);
+  renderDateSheetTab(cData);
+  renderCombinedTab();
+  renderJamiaOverviewTable();
+  updateStorageUsageMeter();
   saveToLocalStorage();
 }
 
@@ -3635,6 +4065,34 @@ function shareWhatsAppResult(index) {
   window.open(url, '_blank');
 }
 
+let quickEntryMode = 'student';
+let quickEntrySubject = '';
+
+function setQuickEntryMode(mode) {
+  quickEntryMode = mode;
+  renderQuickEntry(getCurrentClassData());
+}
+
+function setQuickEntrySubject(sub) {
+  quickEntrySubject = sub;
+  renderQuickEntry(getCurrentClassData());
+}
+
+function handleQuickSubjectKeyNav(e, stIdx, totalSt, subName) {
+  if (e.key === 'Enter' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    updateStudentMarkInline(stIdx, subName, e.target.value);
+    setTimeout(() => {
+      let next = document.querySelector(`input[data-qsub-row="${stIdx + 1}"]`);
+      if (next) { next.focus(); next.select(); }
+    }, 30);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    let prev = document.querySelector(`input[data-qsub-row="${stIdx - 1}"]`);
+    if (prev) { prev.focus(); prev.select(); }
+  }
+}
+
 function renderQuickEntry(cData) {
   let container = document.getElementById('quickEntryContainer');
   let students = cData.students;
@@ -3680,12 +4138,68 @@ function renderQuickEntry(cData) {
     `;
   }).join('');
 
+  if (quickEntryMode === 'subject') {
+    if (!quickEntrySubject || !cData.subjects.includes(quickEntrySubject)) {
+      quickEntrySubject = cData.subjects[0] || '';
+    }
+    let maxMark = (cData.subjectMaxMarks && cData.subjectMaxMarks[quickEntrySubject] !== undefined) ? cData.subjectMaxMarks[quickEntrySubject] : 100;
+    let safeSub = quickEntrySubject.replace(/'/g, "\\'");
+    let filledForSub = students.filter(st => st.marks && st.marks[quickEntrySubject] !== undefined && String(st.marks[quickEntrySubject]).trim() !== '').length;
+    let subPct = students.length > 0 ? Math.round((filledForSub / students.length) * 100) : 0;
+
+    let rowsHtml = students.map((st, idx) => {
+      let val = (st.marks && st.marks[quickEntrySubject] !== undefined) ? st.marks[quickEntrySubject] : '';
+      return `
+        <div class="quick-entry-row">
+          <div>
+            <strong style="font-size:13.5px;">${st.roll}. ${st.name}</strong>
+            <span style="color:var(--text-muted); font-size:11px; display:block;">ولد: ${st.father || '-'}</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="quick-preset-btn" onclick="updateStudentMarkInline(${idx}, '${safeSub}', ${maxMark})">${maxMark}</button>
+            <button type="button" class="quick-preset-btn" onclick="updateStudentMarkInline(${idx}, '${safeSub}', 'غائب')">غائب</button>
+            <button type="button" class="quick-preset-btn" onclick="updateStudentMarkInline(${idx}, '${safeSub}', 'مستثنیٰ')">مستثنیٰ</button>
+            <input type="text" data-qsub-row="${idx}" class="quick-entry-input" value="${val}" placeholder="—"
+              onfocus="this.select()"
+              onkeydown="handleQuickSubjectKeyNav(event, ${idx}, ${students.length}, '${safeSub}')"
+              onchange="updateStudentMarkInline(${idx}, '${safeSub}', this.value)">
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    container.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+        <div class="mode-toggle-pills">
+          <button type="button" class="mode-toggle-pill" onclick="setQuickEntryMode('student')">👤 طالبہ وار</button>
+          <button type="button" class="mode-toggle-pill active" onclick="setQuickEntryMode('subject')">📚 مضمون وار</button>
+        </div>
+        <select class="select-native btn-sm" onchange="setQuickEntrySubject(this.value)" style="min-width:170px;">
+          ${cData.subjects.map(sub => `<option value="${sub}" ${sub === quickEntrySubject ? 'selected' : ''}>${sub} (${cData.subjectMaxMarks && cData.subjectMaxMarks[sub] ? cData.subjectMaxMarks[sub] : 100})</option>`).join('')}
+        </select>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:11.5px; color:var(--text-muted); font-weight:700; white-space:nowrap;">${quickEntrySubject}: ${filledForSub}/${students.length} (${subPct}%)</span>
+        <div class="completion-bar-track"><div class="completion-bar-fill" style="width:${subPct}%"></div></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">${rowsHtml}</div>
+    `;
+    return;
+  }
+
   let studentOptions = students.map((st, idx) => {
     let markIcon = isStudentMarksComplete(st, cData.subjects) ? '✓' : '○';
     return `<option value="${idx}" ${idx === appState.quickEntryIndex ? 'selected' : ''}>${markIcon} رول ${st.roll} — ${st.name}</option>`;
   }).join('');
 
   container.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+      <div class="mode-toggle-pills">
+        <button type="button" class="mode-toggle-pill active" onclick="setQuickEntryMode('student')">👤 طالبہ وار</button>
+        <button type="button" class="mode-toggle-pill" onclick="setQuickEntryMode('subject')">📚 مضمون وار</button>
+      </div>
+      <span style="font-size:11.5px; color:var(--text-muted);">مکمل کلاس کے پرچے تیزی سے درج کریں</span>
+    </div>
     <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; background:var(--surface-alt); padding:9px 12px; border-radius:var(--radius-sm); border:1px solid var(--border);">
       <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:190px;">
         <select class="select-native btn-sm" style="flex:1;" onchange="jumpQuickStudent(Number(this.value))" title="کسی بھی طالبہ پر فوراً جائیں">
@@ -4189,6 +4703,8 @@ function generateDmcCardHtml(s, cData) {
         <div><strong>اسم الاب:</strong> ${s.father || '-'}</div>
         <div><strong>پوزیشن:</strong> <strong style="color:var(--accent); font-size:14px;">${s.rank}</strong></div>
         <div><strong>تاریخ اجراء:</strong> ${new Date().toLocaleDateString('ur-PK')}</div>
+        ${s.attendance ? `<div><strong>حاضری:</strong> ${s.attendance}</div>` : ''}
+        ${s.remarks ? `<div style="grid-column:span 2;"><strong>کیفیت / ریمارکس:</strong> ${s.remarks}</div>` : ''}
       </div>
 
       <table class="dmc-table">
@@ -4252,6 +4768,10 @@ function openStudentModal(editIndex = null) {
     fatherInput.value = s.father || '';
     phoneInput.value = s.phone || '';
     addressInput.value = s.address || '';
+    let attIn = document.getElementById('modalStudentAttendance');
+    if (attIn) attIn.value = s.attendance || '';
+    let remIn = document.getElementById('modalStudentRemarks');
+    if (remIn) remIn.value = s.remarks || '';
 
     marksContainer.innerHTML = cData.subjects.map(sub => {
       let val = s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '';
@@ -4278,6 +4798,10 @@ function openStudentModal(editIndex = null) {
     fatherInput.value = '';
     phoneInput.value = '';
     addressInput.value = '';
+    let attIn = document.getElementById('modalStudentAttendance');
+    if (attIn) attIn.value = '';
+    let remIn = document.getElementById('modalStudentRemarks');
+    if (remIn) remIn.value = '';
 
     marksContainer.innerHTML = cData.subjects.map(sub => {
       let max = cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined ? cData.subjectMaxMarks[sub] : 100;
@@ -4335,6 +4859,8 @@ function saveStudentModal(addAnother = false) {
   let father = document.getElementById('modalStudentFather').value.trim();
   let phone = document.getElementById('modalStudentPhone').value.trim();
   let address = document.getElementById('modalStudentAddress').value.trim();
+  let attendance = (document.getElementById('modalStudentAttendance') ? document.getElementById('modalStudentAttendance').value : '').trim();
+  let remarks = (document.getElementById('modalStudentRemarks') ? document.getElementById('modalStudentRemarks').value : '').trim();
 
   if (!name) {
     showToast('براہ کرم طالب علم کا نام درج کریں', 'warning');
@@ -4360,10 +4886,10 @@ function saveStudentModal(addAnother = false) {
     let existing = cData.students[idx] || {};
     if (!existing.examMarks) existing.examMarks = {};
     existing.examMarks[appState.examTitle] = marks;
-    cData.students[idx] = { ...existing, roll, reg, name, father, phone, address, marks, examMarks: existing.examMarks };
+    cData.students[idx] = { ...existing, roll, reg, name, father, phone, address, attendance, remarks, marks, examMarks: existing.examMarks };
     showToast('طالب علم کا ڈیٹا اپ ڈیٹ ہو گیا', 'info');
   } else {
-    cData.students.push({ roll, reg, name, father, phone, address, marks, examMarks: { [appState.examTitle]: marks } });
+    cData.students.push({ roll, reg, name, father, phone, address, attendance, remarks, marks, examMarks: { [appState.examTitle]: marks } });
     showToast('نیا طالب علم کامیابی سے شامل کر لیا گیا', 'info');
   }
 
@@ -5934,8 +6460,9 @@ function printRollNumberSlips() {
             <div><strong>اسم الاب:</strong> ${s.father || '-'}</div>
             <div style="grid-column: span 2;"><strong>درجہ:</strong> ${appState.currentClass}</div>
           </div>
-          <div style="font-size:9pt; background:#f8fafc; padding:4px 6px; border-radius:4px; border:1px solid #e2e8f0; margin-bottom:8px;">
-            <strong>مضامین:</strong> ${cData.subjects.join('، ')}
+          <div style="font-size:8.5pt; background:#f8fafc; padding:5px 6px; border-radius:4px; border:1px solid #e2e8f0; margin-bottom:8px;">
+            <strong>امتحانی مضامین و شیڈول:</strong>
+            ${buildRollSlipScheduleHtml(cData)}
           </div>
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:9pt; font-weight:bold; border-top:1px dashed #cbd5e1; padding-top:6px;">
             <span>مہرِ جامعہ: [  ]</span>
@@ -6520,6 +7047,970 @@ function initGlobalShortcuts() {
       if (sInp) { sInp.focus(); sInp.select(); }
     }
   });
+}
+
+
+/* =====================================================================
+   COMPLETE PRODUCTION MODULES (DateSheet, Seating, Combined Annual,
+   Grace Marks, Promotion, Bulk Paste, WhatsApp Center, Certificates,
+   Hall Attendance Sheet, Whole-Jamia Overview & All-Classes Excel)
+   ===================================================================== */
+
+// --- 1. DATE SHEET & SEATING PLAN ---
+function getExamDateSheetMap(cData) {
+  let ex = appState.examTitle || 'ششماہی امتحان';
+  if (!cData.examConfigs) cData.examConfigs = {};
+  if (!cData.examConfigs[ex]) getCurrentClassData(appState.currentClass, ex);
+  if (!cData.examConfigs[ex].dateSheet) cData.examConfigs[ex].dateSheet = {};
+  return cData.examConfigs[ex].dateSheet;
+}
+
+const URDU_WEEKDAYS = ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'];
+
+function getUrduDayName(dateStr) {
+  if (!dateStr) return '-';
+  let parts = dateStr.split('-');
+  if (parts.length !== 3) return '-';
+  let d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+  if (isNaN(d.getTime())) return '-';
+  return URDU_WEEKDAYS[d.getDay()] || '-';
+}
+
+function renderDateSheetTab(cData) {
+  let tbody = document.getElementById('dateSheetTableBody');
+  let subLbl = document.getElementById('dateSheetSubtitle');
+  if (subLbl) subLbl.innerText = `درجہ: ${appState.currentClass} | امتحان: ${appState.examTitle} — تاریخ و وقت خودکار رول نمبر سلپس میں شامل ہوں گے`;
+  if (!tbody) return;
+  let dsMap = getExamDateSheetMap(cData);
+  if (!cData.subjects || cData.subjects.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="padding:20px; color:var(--text-muted);">کوئی مضمون مقرر نہیں۔</td></tr>';
+  } else {
+    tbody.innerHTML = cData.subjects.map((sub, idx) => {
+      let entry = dsMap[sub] || { date: '', time: '09:00 AM - 12:00 PM', room: 'ہال نمبر 1' };
+      let safeSub = sub.replace(/'/g, "\\'");
+      return `
+        <tr>
+          <td>${idx + 1}</td>
+          <td style="text-align:right; font-weight:700;">${sub}</td>
+          <td><input type="date" class="form-input-native" style="padding:5px 8px; font-size:12.5px;" value="${entry.date || ''}" onchange="updateDateSheetField('${safeSub}', 'date', this.value)"></td>
+          <td style="font-weight:700; color:var(--primary-dark);">${getUrduDayName(entry.date)}</td>
+          <td><input type="text" class="form-input-native" style="padding:5px 8px; font-size:12.5px; text-align:center;" value="${entry.time || '09:00 AM - 12:00 PM'}" onchange="updateDateSheetField('${safeSub}', 'time', this.value)"></td>
+          <td><input type="text" class="form-input-native" style="padding:5px 8px; font-size:12.5px; text-align:center;" value="${entry.room || 'ہال نمبر 1'}" onchange="updateDateSheetField('${safeSub}', 'room', this.value)"></td>
+        </tr>
+      `;
+    }).join('');
+  }
+  renderSeatingPlan();
+}
+
+function updateDateSheetField(sub, field, value) {
+  let cData = getCurrentClassData();
+  let dsMap = getExamDateSheetMap(cData);
+  if (!dsMap[sub]) dsMap[sub] = { date: '', time: '09:00 AM - 12:00 PM', room: 'ہال نمبر 1' };
+  dsMap[sub][field] = value;
+  saveToLocalStorage();
+  renderDateSheetTab(cData);
+}
+
+function autoFillDateSheetDates() {
+  let cData = getCurrentClassData();
+  let dsMap = getExamDateSheetMap(cData);
+  let d = new Date();
+  d.setDate(d.getDate() + 1);
+  cData.subjects.forEach(sub => {
+    if (d.getDay() === 5) d.setDate(d.getDate() + 1); // Skip Friday
+    let yyyy = d.getFullYear();
+    let mm = String(d.getMonth() + 1).padStart(2, '0');
+    let dd = String(d.getDate()).padStart(2, '0');
+    if (!dsMap[sub]) dsMap[sub] = { date: '', time: '09:00 AM - 12:00 PM', room: 'ہال نمبر 1' };
+    dsMap[sub].date = `${yyyy}-${mm}-${dd}`;
+    d.setDate(d.getDate() + 1);
+  });
+  saveToLocalStorage();
+  renderDateSheetTab(cData);
+  showToast('تمام مضامین کی تاریخیں (بغیر جمعہ) خودکار بھر دی گئیں!', 'info');
+}
+
+function buildRollSlipScheduleHtml(cData) {
+  let dsMap = getExamDateSheetMap(cData);
+  let hasAnyDate = cData.subjects.some(sub => dsMap[sub] && dsMap[sub].date);
+  if (!hasAnyDate) {
+    return `<span>${cData.subjects.join('، ')}</span>`;
+  }
+  return `<table style="width:100%; border-collapse:collapse; margin-top:4px; font-size:8pt; text-align:center;">
+    <thead><tr style="background:#e2e8f0;"><th style="border:1px solid #cbd5e1; padding:2px;">مضمون</th><th style="border:1px solid #cbd5e1; padding:2px;">تاریخ</th><th style="border:1px solid #cbd5e1; padding:2px;">وقت</th></tr></thead>
+    <tbody>
+      ${cData.subjects.map(sub => {
+        let e = dsMap[sub] || {};
+        return `<tr><td style="border:1px solid #cbd5e1; padding:2px; font-weight:bold;">${sub}</td><td style="border:1px solid #cbd5e1; padding:2px;">${e.date || '-'} (${getUrduDayName(e.date)})</td><td style="border:1px solid #cbd5e1; padding:2px;">${e.time || '-'}</td></tr>`;
+      }).join('')}
+    </tbody>
+  </table>`;
+}
+
+function renderSeatingPlan() {
+  let container = document.getElementById('seatingPlanContainer');
+  if (!container) return;
+  let cData = getCurrentClassData();
+  let capEl = document.getElementById('seatingCapacityInput');
+  let prefEl = document.getElementById('seatingHallPrefixInput');
+  let cap = Math.max(2, Number(capEl ? capEl.value : 15) || 15);
+  let prefix = (prefEl ? prefEl.value : 'امتحانی ہال').trim() || 'امتحانی ہال';
+  let sorted = [...cData.students].sort((a, b) => (Number(a.roll) || 0) - (Number(b.roll) || 0));
+  if (sorted.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-muted); font-size:13px;">نشست نامہ کے لیے کم از کم ایک طالبہ کا اندراج ضروری ہے۔</p>';
+    return;
+  }
+  let halls = [];
+  for (let i = 0; i < sorted.length; i += cap) {
+    halls.push(sorted.slice(i, i + cap));
+  }
+  container.innerHTML = halls.map((group, hIdx) => {
+    let firstRoll = group[0].roll;
+    let lastRoll = group[group.length - 1].roll;
+    return `
+      <div class="seating-hall-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:13.5px; color:var(--primary-dark);">
+          <span>${prefix} #${hIdx + 1}</span>
+          <span style="font-size:11.5px; color:var(--text-muted);">رول ${firstRoll} تا ${lastRoll} (${group.length} طالبات)</span>
+        </div>
+        <div class="seating-seats-grid">
+          ${group.map((st, sIdx) => `
+            <div class="seating-seat-box">
+              <div style="font-size:10px; color:var(--text-muted);">نشست ${sIdx + 1}</div>
+              <div style="font-weight:700; color:var(--primary-dark);">رول ${st.roll}</div>
+              <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${st.name}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function printDateSheet() {
+  let cData = getCurrentClassData();
+  let dsMap = getExamDateSheetMap(cData);
+  let view = activatePrintSection('printDateSheetView');
+  view.innerHTML = `
+    ${buildPrintHeaderHtml('امتحانی ڈیٹ شیٹ (Exam Schedule / Date Sheet)', '#0f766e')}
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th style="width:45px;">شمار</th>
+          <th style="text-align:right;">مضمون</th>
+          <th>تاریخ</th>
+          <th>دن</th>
+          <th>وقت</th>
+          <th>کمرہ / ہال</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${cData.subjects.map((sub, idx) => {
+          let e = dsMap[sub] || { date: '-', time: '09:00 AM - 12:00 PM', room: 'ہال نمبر 1' };
+          return `<tr style="height:34px;">
+            <td>${idx + 1}</td>
+            <td style="text-align:right; font-weight:bold;">${sub}</td>
+            <td><strong>${e.date || '-'}</strong></td>
+            <td>${getUrduDayName(e.date)}</td>
+            <td>${e.time || '-'}</td>
+            <td>${e.room || '-'}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+    <div style="margin-top:16px; padding:10px; border:1px dashed #64748b; border-radius:6px; font-size:10pt;">
+      <strong>ہدایات برائے طالبات:</strong> (1) امتحان شروع ہونے سے 15 منٹ قبل امتحانی ہال میں پہنچنا لازمی ہے۔ (2) رول نمبر سلپ ساتھ لانا ضروری ہے۔ (3) کسی قسم کی غیر متعلقہ کتاب یا موبائل لانا سخت منع ہے۔
+    </div>
+    ${buildPrintFooterHtml()}
+  `;
+  window.print();
+}
+
+function printSeatingPlan() {
+  let cData = getCurrentClassData();
+  let capEl = document.getElementById('seatingCapacityInput');
+  let prefEl = document.getElementById('seatingHallPrefixInput');
+  let cap = Math.max(2, Number(capEl ? capEl.value : 15) || 15);
+  let prefix = (prefEl ? prefEl.value : 'امتحانی ہال').trim() || 'امتحانی ہال';
+  let sorted = [...cData.students].sort((a, b) => (Number(a.roll) || 0) - (Number(b.roll) || 0));
+  let halls = [];
+  for (let i = 0; i < sorted.length; i += cap) halls.push(sorted.slice(i, i + cap));
+
+  let view = activatePrintSection('printSeatingPlanView');
+  view.innerHTML = `
+    ${buildPrintHeaderHtml('امتحانی ہال نشست نامہ (Exam Seating Plan)', '#0f766e')}
+    ${halls.map((group, hIdx) => `
+      <div style="margin-bottom:18px; page-break-inside:avoid;">
+        <h3 style="font-size:12pt; color:#0f766e; margin-bottom:6px; border-bottom:1px solid #cbd5e1; padding-bottom:4px;">${prefix} #${hIdx + 1} — رول نمبر ${group[0].roll} تا ${group[group.length - 1].roll} (کل: ${group.length})</h3>
+        <table class="gazette-table">
+          <thead><tr><th>نشست</th><th>رول نمبر</th><th>رجسٹریشن</th><th style="text-align:right;">اسم الطالبۃ</th><th style="text-align:right;">اسم الاب</th></tr></thead>
+          <tbody>
+            ${group.map((st, sIdx) => `<tr><td>${sIdx + 1}</td><td><strong>${st.roll}</strong></td><td>${st.reg || '-'}</td><td style="text-align:right; font-weight:bold;">${st.name}</td><td style="text-align:right;">${st.father || '-'}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    `).join('')}
+    ${buildPrintFooterHtml()}
+  `;
+  window.print();
+}
+
+// --- 2. MULTI-EXAM CONSOLIDATION (COMBINED ANNUAL RESULT) ---
+let combinedWeightsState = {};
+
+function getCombinedExamSettings() {
+  let exams = getExamList();
+  exams.forEach((ex, i) => {
+    if (!combinedWeightsState[ex]) {
+      let enabled = (i < 2);
+      let w = (exams.length >= 2) ? (i === 0 ? 40 : (i === 1 ? 60 : 0)) : 100;
+      combinedWeightsState[ex] = { enabled, weight: w };
+    }
+  });
+  return combinedWeightsState;
+}
+
+function toggleCombinedExam(ex, checked) {
+  let st = getCombinedExamSettings();
+  st[ex].enabled = checked;
+  renderCombinedTab();
+}
+
+function updateCombinedWeight(ex, val) {
+  let st = getCombinedExamSettings();
+  st[ex].weight = Math.max(0, Number(val) || 0);
+  renderCombinedTab();
+}
+
+function computeCombinedRows() {
+  let cData = getCurrentClassData();
+  let exams = getExamList();
+  let st = getCombinedExamSettings();
+  let selectedExams = exams.filter(ex => st[ex] && st[ex].enabled);
+  let mode = (document.getElementById('combinedModeSelect') ? document.getElementById('combinedModeSelect').value : 'weighted');
+  let gCfg = cData.gradingConfig || getDefaultGradingConfig();
+
+  let totalWeight = selectedExams.reduce((acc, ex) => acc + (st[ex].weight || 0), 0);
+
+  let rows = cData.students.map(student => {
+    let perExam = {};
+    let sumObtained = 0;
+    let sumMax = 0;
+    let weightedPctSum = 0;
+    let anyPresent = false;
+
+    selectedExams.forEach(ex => {
+      let exData = getCurrentClassData(appState.currentClass, ex);
+      let exMarks = (student.examMarks && student.examMarks[ex]) ? student.examMarks[ex] : {};
+      let calc = calculateStudent({ ...student, marks: exMarks }, exData.subjects, exData.totalMarks, exData);
+      perExam[ex] = calc;
+      if (!calc.isAbsent) anyPresent = true;
+      sumObtained += calc.obtained;
+      sumMax += (calc.effectiveTotalMarks !== undefined ? calc.effectiveTotalMarks : exData.totalMarks);
+      if (totalWeight > 0) {
+        weightedPctSum += calc.percentage * ((st[ex].weight || 0) / totalWeight);
+      }
+    });
+
+    let finalPct = mode === 'weighted'
+      ? Math.round(weightedPctSum * 100) / 100
+      : (sumMax > 0 ? Math.round((sumObtained / sumMax) * 10000) / 100 : 0);
+
+    let passT = Number(gCfg.passThreshold) || 40;
+    let grade = 'راسب';
+    if (!anyPresent) grade = 'غیر حاضر';
+    else if (finalPct >= (Number(gCfg.mumtaz) || 80) && finalPct >= passT) grade = 'ممتاز';
+    else if (finalPct >= (Number(gCfg.jayyidJiddan) || 70) && finalPct >= passT) grade = 'جید جدا';
+    else if (finalPct >= (Number(gCfg.jayyid) || 60) && finalPct >= passT) grade = 'جید';
+    else if (finalPct >= (Number(gCfg.maqbool) || passT) && finalPct >= passT) grade = 'مقبول';
+
+    return { student, perExam, sumObtained, sumMax, finalPct, grade, isAbsent: !anyPresent };
+  });
+
+  // Restore active exam pointer on cData
+  getCurrentClassData(appState.currentClass, appState.examTitle);
+
+  let presentRows = rows.filter(r => !r.isAbsent).sort((a, b) => b.finalPct - a.finalPct);
+  let rankFmt = gCfg.rankFormat || appState.rankFormat || 'urdu';
+  rows.forEach(r => {
+    if (r.isAbsent) { r.rank = '-'; r.rankNum = 9999; }
+    else {
+      let better = presentRows.filter(o => o.finalPct > r.finalPct).length;
+      r.rankNum = better + 1;
+      r.rank = formatRankValue(r.rankNum, rankFmt);
+    }
+  });
+  return { selectedExams, mode, totalWeight, rows };
+}
+
+function renderCombinedTab() {
+  let cfgDiv = document.getElementById('combinedExamsConfig');
+  let thead = document.getElementById('combinedTableHeaderRow');
+  let tbody = document.getElementById('combinedTableBody');
+  if (!cfgDiv || !thead || !tbody) return;
+
+  let exams = getExamList();
+  let st = getCombinedExamSettings();
+  let mode = (document.getElementById('combinedModeSelect') ? document.getElementById('combinedModeSelect').value : 'weighted');
+
+  cfgDiv.innerHTML = exams.map(ex => {
+    let safeEx = ex.replace(/'/g, "\\'");
+    return `
+      <label style="display:inline-flex; align-items:center; gap:6px; background:var(--surface); padding:6px 10px; border-radius:var(--radius-xs); border:1px solid var(--border); font-size:12.5px; font-weight:700;">
+        <input type="checkbox" ${st[ex].enabled ? 'checked' : ''} onchange="toggleCombinedExam('${safeEx}', this.checked)">
+        <span>${ex}</span>
+        ${mode === 'weighted' ? `<input type="number" min="0" max="100" value="${st[ex].weight}" style="width:52px; padding:2px 4px; text-align:center; border:1px solid var(--border); border-radius:4px;" onchange="updateCombinedWeight('${safeEx}', this.value)">%` : ''}
+      </label>
+    `;
+  }).join('');
+
+  let res = computeCombinedRows();
+  thead.innerHTML = `
+    <th>رول</th>
+    <th style="text-align:right;">اسم الطالبۃ</th>
+    <th style="text-align:right;">اسم الاب</th>
+    ${res.selectedExams.map(ex => `<th>${ex}${mode === 'weighted' ? `<br><span style="font-size:10px; font-weight:normal;">(${st[ex].weight}%)</span>` : ''}</th>`).join('')}
+    <th style="background:var(--primary-subtle); color:var(--primary-dark);">مجموعی نمبر</th>
+    <th>مجموعی فیصد٪</th>
+    <th>پوزیشن</th>
+    <th>تقدیر</th>
+  `;
+
+  if (res.selectedExams.length === 0 || res.rows.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="${res.selectedExams.length + 7}" style="padding:24px; color:var(--text-muted);">کم از کم ایک امتحان اور طالبہ کا ہونا ضروری ہے۔</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = res.rows.map(r => {
+    let rankBadgeClass = r.rankNum === 1 ? 'rank-1' : (r.rankNum === 2 ? 'rank-2' : (r.rankNum === 3 ? 'rank-3' : 'rank-other'));
+    return `
+      <tr>
+        <td><strong>${r.student.roll}</strong></td>
+        <td style="text-align:right; font-weight:700;">${r.student.name}</td>
+        <td style="text-align:right; color:var(--text-muted);">${r.student.father || '-'}</td>
+        ${res.selectedExams.map(ex => {
+          let c = r.perExam[ex];
+          return `<td>${c.isAbsent ? '<span style="color:var(--text-muted);">غائب</span>' : `<strong>${c.obtained}</strong> <span style="font-size:11px; color:var(--text-muted);">(${c.percentage}%)</span>`}</td>`;
+        }).join('')}
+        <td style="font-weight:700; background:var(--primary-subtle); color:var(--primary-dark);">${r.sumObtained} / ${r.sumMax}</td>
+        <td style="font-weight:700;">${r.isAbsent ? '-' : r.finalPct + '%'}</td>
+        <td><span class="badge-rank ${rankBadgeClass}">${r.rank}</span></td>
+        <td><span class="grade-badge ${getGradeClass(r.grade)}">${r.grade}</span></td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function printCombinedResult() {
+  let res = computeCombinedRows();
+  let view = activatePrintSection('printCombinedView');
+  view.innerHTML = `
+    ${buildPrintHeaderHtml('مجموعی سالانہ نتیجہ گزٹ (Consolidated Annual Result)', '#0f766e')}
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th>رول</th>
+          <th style="text-align:right;">اسم الطالبۃ</th>
+          <th style="text-align:right;">اسم الاب</th>
+          ${res.selectedExams.map(ex => `<th>${ex}</th>`).join('')}
+          <th>مجموعی نمبر</th>
+          <th>مجموعی فیصد٪</th>
+          <th>پوزیشن</th>
+          <th>تقدیر</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${res.rows.map(r => `
+          <tr>
+            <td><strong>${r.student.roll}</strong></td>
+            <td style="text-align:right; font-weight:bold;">${r.student.name}</td>
+            <td style="text-align:right;">${r.student.father || '-'}</td>
+            ${res.selectedExams.map(ex => `<td>${r.perExam[ex].isAbsent ? 'غائب' : `${r.perExam[ex].obtained} (${r.perExam[ex].percentage}%)`}</td>`).join('')}
+            <td><strong>${r.sumObtained} / ${r.sumMax}</strong></td>
+            <td><strong>${r.isAbsent ? '-' : r.finalPct + '%'}</strong></td>
+            <td><strong>${r.rank}</strong></td>
+            <td>${r.grade}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+    ${buildPrintFooterHtml()}
+  `;
+  window.print();
+}
+
+function exportCombinedExcel() {
+  if (typeof XLSX === 'undefined') { showToast('SheetJS لوڈ نہیں ہو سکی', 'error'); return; }
+  let res = computeCombinedRows();
+  let header = ['رول نمبر', 'اسم الطالبۃ', 'اسم الاب', ...res.selectedExams, 'مجموعی نمبر', 'کل نمبر', 'مجموعی فیصد٪', 'پوزیشن', 'تقدیر'];
+  let rows = [
+    [`${appState.institution} — مجموعی سالانہ نتیجہ — درجہ: ${appState.currentClass}`],
+    header
+  ];
+  res.rows.forEach(r => {
+    rows.push([
+      r.student.roll, r.student.name, r.student.father || '',
+      ...res.selectedExams.map(ex => r.perExam[ex].isAbsent ? 'غائب' : `${r.perExam[ex].obtained} (${r.perExam[ex].percentage}%)`),
+      r.sumObtained, r.sumMax, r.finalPct, r.rank, r.grade
+    ]);
+  });
+  let ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!views'] = [{ rightToLeft: true }];
+  let wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'مجموعی_نتیجہ');
+  XLSX.writeFile(wb, `${appState.currentClass}_مجموعی_نتیجہ.xlsx`);
+  showToast('مجموعی سالانہ نتیجہ کی ایکسل فائل ڈاؤن لوڈ ہو گئی', 'info');
+}
+
+// --- 3. GRACE MARKS & AUTO-PASS MODAL ---
+function openGraceMarksModal() {
+  let cData = getCurrentClassData();
+  let sel = document.getElementById('graceSubjectSelect');
+  if (sel) sel.innerHTML = cData.subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+  updateGracePreview();
+  document.getElementById('graceMarksModal').classList.add('open');
+}
+
+function closeGraceMarksModal() {
+  document.getElementById('graceMarksModal').classList.remove('open');
+}
+
+function updateGracePreview() {
+  let cData = getCurrentClassData();
+  let mode = document.getElementById('graceModeSelect').value;
+  let subGroup = document.getElementById('graceSubjectGroup');
+  let lbl = document.getElementById('graceAmountLabel');
+  let amt = Math.max(1, Number(document.getElementById('graceAmountInput').value) || 3);
+  let box = document.getElementById('gracePreviewBox');
+
+  if (mode === 'bonus') {
+    subGroup.style.display = 'flex';
+    lbl.innerText = 'بونس نمبرات کی تعداد (+):';
+    let sub = document.getElementById('graceSubjectSelect').value;
+    let eligible = cData.students.filter(s => s.marks && typeof s.marks[sub] === 'number').length;
+    box.innerText = `مضمون "${sub}" میں ${eligible} حاضر طالبات کو +${amt} بونس نمبر دیے جائیں گے (کل نمبر کی حد کے اندر)۔`;
+  } else {
+    subGroup.style.display = 'none';
+    lbl.innerText = 'زیادہ سے زیادہ رعایتی نمبر (Borderline Limit):';
+    let affectedStudents = 0;
+    let affectedCells = 0;
+    cData.students.forEach(s => {
+      let touched = false;
+      cData.subjects.forEach(sub => {
+        let v = s.marks ? s.marks[sub] : undefined;
+        let pass = (cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined) ? cData.subjectPassMarks[sub] : 40;
+        if (typeof v === 'number' && v < pass && (pass - v) <= amt) {
+          affectedCells++;
+          touched = true;
+        }
+      });
+      if (touched) affectedStudents++;
+    });
+    box.innerText = affectedCells > 0
+      ? `${affectedStudents} طالبات کے ${affectedCells} مضامین (جو پاسنگ مارکس سے ${amt} یا کم نمبر پیچھے ہیں) خودکار پاس ہو جائیں گے۔`
+      : `اس وقت کوئی طالبہ ${amt} نمبروں کے اندر بارڈر لائن فیل نہیں ہے۔`;
+  }
+}
+
+function applyGraceMarks() {
+  let cData = getCurrentClassData();
+  let mode = document.getElementById('graceModeSelect').value;
+  let amt = Math.max(1, Number(document.getElementById('graceAmountInput').value) || 3);
+  pushUndoSnapshot('رعایتی نمبر (Grace Marks)');
+  let changed = 0;
+
+  if (mode === 'bonus') {
+    let sub = document.getElementById('graceSubjectSelect').value;
+    let max = (cData.subjectMaxMarks && cData.subjectMaxMarks[sub] !== undefined) ? cData.subjectMaxMarks[sub] : 100;
+    cData.students.forEach(s => {
+      if (s.marks && typeof s.marks[sub] === 'number') {
+        let nv = Math.min(max, s.marks[sub] + amt);
+        s.marks[sub] = nv;
+        if (s.examMarks && s.examMarks[appState.examTitle]) s.examMarks[appState.examTitle][sub] = nv;
+        changed++;
+      }
+    });
+  } else {
+    cData.students.forEach(s => {
+      cData.subjects.forEach(sub => {
+        let v = s.marks ? s.marks[sub] : undefined;
+        let pass = (cData.subjectPassMarks && cData.subjectPassMarks[sub] !== undefined) ? cData.subjectPassMarks[sub] : 40;
+        if (typeof v === 'number' && v < pass && (pass - v) <= amt) {
+          s.marks[sub] = pass;
+          if (s.examMarks && s.examMarks[appState.examTitle]) s.examMarks[appState.examTitle][sub] = pass;
+          changed++;
+        }
+      });
+    });
+  }
+
+  closeGraceMarksModal();
+  saveToLocalStorage();
+  renderApp();
+  showToast(changed > 0 ? `${changed} اندراجات پر رعایتی نمبر کامیابی سے لاگو ہو گئے! (واپس: Ctrl+Z)` : 'کوئی تبدیلی درکار نہیں تھی', 'info');
+}
+
+// --- 4. CLASS PROMOTION / TRANSFER MODAL ---
+function openPromotionModal() {
+  let classes = getClassList();
+  let fromSel = document.getElementById('promoteFromClass');
+  let toSel = document.getElementById('promoteToClass');
+  let curIdx = classes.indexOf(appState.currentClass);
+  let nextCls = classes[(curIdx + 1) % classes.length] || classes[0];
+  fromSel.innerHTML = classes.map(c => `<option value="${c}" ${c === appState.currentClass ? 'selected' : ''}>${c}</option>`).join('');
+  toSel.innerHTML = classes.map(c => `<option value="${c}" ${c === nextCls ? 'selected' : ''}>${c}</option>`).join('');
+  updatePromotionPreview();
+  document.getElementById('promotionModal').classList.add('open');
+}
+
+function closePromotionModal() {
+  document.getElementById('promotionModal').classList.remove('open');
+}
+
+function updatePromotionPreview() {
+  let fromCls = document.getElementById('promoteFromClass').value;
+  let toCls = document.getElementById('promoteToClass').value;
+  let filt = document.getElementById('promoteFilterSelect').value;
+  let box = document.getElementById('promotionPreviewBox');
+  if (fromCls === toCls) {
+    box.innerText = 'براہ کرم ماخذ اور ہدف کے لیے الگ الگ درجات منتخب کریں۔';
+    return;
+  }
+  let cData = getCurrentClassData(fromCls, appState.examTitle);
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
+  let eligible = filt === 'passed' ? computed.filter(s => !s.isAbsent && s.grade !== 'راسب') : computed;
+  box.innerText = `درجہ "${fromCls}" سے ${eligible.length} طالبات کو درجہ "${toCls}" میں نئے رول نمبروں کے ساتھ شامل کیا جائے گا۔`;
+}
+
+function executePromotion() {
+  let fromCls = document.getElementById('promoteFromClass').value;
+  let toCls = document.getElementById('promoteToClass').value;
+  let filt = document.getElementById('promoteFilterSelect').value;
+  let mode = document.getElementById('promoteModeSelect').value;
+  if (fromCls === toCls) { showToast('مختلف درجہ منتخب کریں', 'warning'); return; }
+
+  let fromData = getCurrentClassData(fromCls, appState.examTitle);
+  let toData = getCurrentClassData(toCls, appState.examTitle);
+  let computed = calculateAllRanks(fromData.students, fromData.subjects, fromData.totalMarks, fromData);
+  let eligibleIndices = new Set(
+    (filt === 'passed' ? computed.filter(s => !s.isAbsent && s.grade !== 'راسب') : computed).map(s => s.originalIndex)
+  );
+  if (eligibleIndices.size === 0) {
+    showToast('ترقی کے لیے کوئی اہل طالبہ موجود نہیں', 'warning');
+    return;
+  }
+  pushUndoSnapshot('ترقی درجہ');
+  let nextRoll = toData.students.length > 0 ? Math.max(...toData.students.map(s => Number(s.roll) || 0)) + 1 : 1;
+  fromData.students.forEach((st, idx) => {
+    if (eligibleIndices.has(idx)) {
+      toData.students.push({
+        roll: nextRoll++,
+        reg: st.reg || '',
+        name: st.name,
+        father: st.father || '',
+        phone: st.phone || '',
+        address: st.address || '',
+        marks: {},
+        examMarks: { [appState.examTitle]: {} }
+      });
+    }
+  });
+  if (mode === 'move') {
+    fromData.students = fromData.students.filter((_, idx) => !eligibleIndices.has(idx));
+  }
+  closePromotionModal();
+  appState.currentClass = toCls;
+  settingSubjectTarget.class = toCls;
+  updateHeaderDisplay();
+  saveToLocalStorage();
+  renderApp();
+  showToast(`${eligibleIndices.size} طالبات کو کامیابی سے درجہ "${toCls}" میں ترقی دے دی گئی!`, 'info');
+}
+
+// --- 5. BULK PASTE ROSTER MODAL ---
+function openBulkPasteModal() {
+  document.getElementById('bulkPasteTextarea').value = '';
+  document.getElementById('bulkPastePreview').innerText = '0 طالبات شناخت ہوئیں';
+  document.getElementById('bulkPasteModal').classList.add('open');
+  setTimeout(() => document.getElementById('bulkPasteTextarea').focus(), 100);
+}
+
+function closeBulkPasteModal() {
+  document.getElementById('bulkPasteModal').classList.remove('open');
+}
+
+function parseBulkPasteLines(raw) {
+  return String(raw || '').split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0).map(line => {
+    let parts = line.split(/[,،\t]/).map(p => p.trim());
+    return { name: parts[0] || '', father: parts[1] || '', phone: parts[2] || '' };
+  }).filter(item => item.name.length > 0);
+}
+
+function updateBulkPastePreview() {
+  let items = parseBulkPasteLines(document.getElementById('bulkPasteTextarea').value);
+  document.getElementById('bulkPastePreview').innerText = `${items.length} طالبات شناخت ہوئیں` + (items.length > 0 ? ` — مثال: ${items[0].name} ${items[0].father ? 'ولد ' + items[0].father : ''}` : '');
+}
+
+function submitBulkPaste() {
+  let items = parseBulkPasteLines(document.getElementById('bulkPasteTextarea').value);
+  if (items.length === 0) { showToast('پیسٹ کرنے کے لیے کوئی نام نہیں ملا', 'warning'); return; }
+  let cData = getCurrentClassData();
+  pushUndoSnapshot('فوری فہرست پیسٹ');
+  let nextRoll = cData.students.length > 0 ? Math.max(...cData.students.map(s => Number(s.roll) || 0)) + 1 : 1;
+  items.forEach(item => {
+    let r = nextRoll++;
+    cData.students.push({
+      roll: r,
+      reg: 'REG-' + (100 + r),
+      name: item.name,
+      father: item.father,
+      phone: item.phone,
+      address: '',
+      marks: {},
+      examMarks: { [appState.examTitle]: {} }
+    });
+  });
+  closeBulkPasteModal();
+  saveToLocalStorage();
+  renderApp();
+  showToast(`${items.length} طالبات کامیابی سے شامل کر لی گئیں!`, 'info');
+}
+
+// --- 6. WHATSAPP BROADCAST CENTER ---
+const DEFAULT_WA_TEMPLATE = `السلام علیکم ورحمۃ اللہ وبرکاتہ!
+محترم سرپرست {father}!
+طالبہ: *{name}* (رول نمبر: *{roll}*)
+درجہ: *{class}* | امتحان: *{exam}*
+{subjects}
+مجموعہ نمبرات: *{obtained} / {total}* ({percent}%)
+پوزیشن: *{rank}* | تقدیر: *{grade}*
+🕌 *{institution}*`;
+
+let waSentTracker = {};
+
+function getWhatsAppTemplate() {
+  return appState.whatsappTemplate || DEFAULT_WA_TEMPLATE;
+}
+
+function saveWhatsAppTemplate() {
+  appState.whatsappTemplate = document.getElementById('waTemplateInput').value;
+  saveToLocalStorage();
+}
+
+function resetWhatsAppTemplate() {
+  appState.whatsappTemplate = DEFAULT_WA_TEMPLATE;
+  document.getElementById('waTemplateInput').value = DEFAULT_WA_TEMPLATE;
+  saveToLocalStorage();
+  showToast('ڈیفالٹ واٹس ایپ پیغام بحال ہو گیا', 'info');
+}
+
+function formatCustomWhatsAppMessage(s, cData) {
+  let subsSummary = cData.subjects.map(sub => `• ${sub}: ${s.marks && s.marks[sub] !== undefined ? s.marks[sub] : '-'}`).join('\n');
+  let tpl = getWhatsAppTemplate();
+  return tpl
+    .replace(/\{name\}/g, s.name || '-')
+    .replace(/\{father\}/g, s.father || '-')
+    .replace(/\{roll\}/g, s.roll || '-')
+    .replace(/\{class\}/g, appState.currentClass || '')
+    .replace(/\{exam\}/g, appState.examTitle || '')
+    .replace(/\{obtained\}/g, s.obtained)
+    .replace(/\{total\}/g, s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks)
+    .replace(/\{percent\}/g, s.percentage)
+    .replace(/\{rank\}/g, s.rank)
+    .replace(/\{grade\}/g, s.grade)
+    .replace(/\{subjects\}/g, subsSummary)
+    .replace(/\{institution\}/g, appState.institution || '');
+}
+
+function openWhatsAppCenterModal() {
+  document.getElementById('waTemplateInput').value = getWhatsAppTemplate();
+  renderWhatsAppCenterList();
+  document.getElementById('whatsappCenterModal').classList.add('open');
+}
+
+function closeWhatsAppCenterModal() {
+  document.getElementById('whatsappCenterModal').classList.remove('open');
+}
+
+function resetWhatsAppSentStatus() {
+  waSentTracker = {};
+  renderWhatsAppCenterList();
+  showToast('بھیجے گئے نشان صاف کر دیے گئے', 'info');
+}
+
+function renderWhatsAppCenterList() {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
+  let filt = document.getElementById('waFilterSelect').value;
+  if (filt === 'passed') computed = computed.filter(s => !s.isAbsent && s.grade !== 'راسب');
+  else if (filt === 'failed') computed = computed.filter(s => !s.isAbsent && s.grade === 'راسب');
+  else if (filt === 'top3') computed = computed.filter(s => !s.isAbsent && s.rankNum <= 3);
+
+  let keyPrefix = `${appState.currentClass}|${appState.examTitle}|`;
+  let sentCount = computed.filter(s => waSentTracker[keyPrefix + s.originalIndex]).length;
+  document.getElementById('waSentCounter').innerText = `بھیجے گئے: ${sentCount} / ${computed.length}`;
+
+  let listEl = document.getElementById('waRecipientsList');
+  if (computed.length === 0) {
+    listEl.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:16px;">کوئی طالبہ اس فلٹر میں موجود نہیں۔</p>';
+    return;
+  }
+  listEl.innerHTML = computed.map(s => {
+    let isSent = !!waSentTracker[keyPrefix + s.originalIndex];
+    return `
+      <div class="wa-recipient-row ${isSent ? 'wa-sent' : ''}">
+        <div>
+          <strong>${s.roll}. ${s.name}</strong> <span style="color:var(--text-muted);">(${s.phone || 'فون درج نہیں'})</span>
+          <div style="font-size:11px; color:var(--text-muted);">نمبر: ${s.obtained} (${s.percentage}%) | ${s.grade} | پوزیشن: ${s.rank}</div>
+        </div>
+        <div style="display:flex; gap:5px; align-items:center;">
+          ${isSent ? '<span style="font-size:11px; font-weight:700; color:#15803d;">✓ بھیجا گیا</span>' : ''}
+          <button type="button" class="btn btn-secondary btn-sm" onclick="copyWhatsAppText(${s.originalIndex})">کاپی</button>
+          <button type="button" class="btn-whatsapp" onclick="sendCustomWhatsApp(${s.originalIndex})">بھیجیں</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function sendCustomWhatsApp(origIndex) {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
+  let s = computed[origIndex];
+  if (!s) return;
+  let msg = formatCustomWhatsAppMessage(s, cData);
+  let phone = (s.phone || '').replace(/[^0-9]/g, '');
+  if (phone.startsWith('0')) phone = '92' + phone.substring(1);
+  waSentTracker[`${appState.currentClass}|${appState.examTitle}|${origIndex}`] = true;
+  renderWhatsAppCenterList();
+  let url = phone ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+
+function copyWhatsAppText(origIndex) {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
+  let s = computed[origIndex];
+  if (!s) return;
+  let msg = formatCustomWhatsAppMessage(s, cData);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(msg).then(() => showToast('پیغام کاپی ہو گیا!', 'info')).catch(() => fallbackCopyText(msg));
+  } else {
+    fallbackCopyText(msg);
+  }
+}
+
+function fallbackCopyText(text) {
+  let ta = document.createElement('textarea');
+  ta.value = text;
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); showToast('پیغام کاپی ہو گیا!', 'info'); } catch (e) {}
+  document.body.removeChild(ta);
+}
+
+// --- 7. POSITION CERTIFICATES & HALL ATTENDANCE SHEET ---
+function printPositionCertificates() {
+  let cData = getCurrentClassData();
+  let computed = calculateAllRanks(cData.students, cData.subjects, cData.totalMarks, cData);
+  let top3 = computed.filter(s => !s.isAbsent && s.rankNum <= 3).sort((a, b) => a.rankNum - b.rankNum);
+  if (top3.length === 0) { showToast('اس کلاس میں کوئی پوزیشن ہولڈر موجود نہیں', 'warning'); return; }
+
+  let view = activatePrintSection('printCertificatesView');
+  view.innerHTML = top3.map(s => `
+    <div class="cert-card print-page-break">
+      <p style="font-size:13pt; font-weight:bold; color:#0f766e; margin-bottom:4px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      ${appState.institutionLogo ? `<img src="${appState.institutionLogo}" style="width:62px; height:62px; object-fit:contain; border-radius:50%; border:2px solid #d97706; margin-bottom:6px;">` : ''}
+      <h1 style="font-size:21pt; color:#0f766e; margin:0;">${appState.institution}</h1>
+      ${appState.institutionSubtitle ? `<div style="font-size:11pt; color:#475569; font-weight:bold;">${appState.institutionSubtitle}</div>` : ''}
+      <div style="display:inline-block; margin:16px 0; padding:6px 26px; background:#fef3c7; border:2px solid #d97706; border-radius:9999px; font-size:15pt; font-weight:800; color:#b45309;">🏅 سندِ امتیاز و توصیفی سرٹیفکیٹ</div>
+      <p style="font-size:13pt; line-height:2; margin:10px 18px;">
+        تصدیق کی جاتی ہے کہ عزیزہ <strong style="font-size:16pt; color:#0f766e; border-bottom:1px solid #0f766e; padding:0 8px;">${s.name}</strong>
+        بنت <strong style="border-bottom:1px solid #64748b; padding:0 6px;">${s.father || '___________'}</strong>
+        (رول نمبر: <strong>${s.roll}</strong>) نے درجہ <strong>${appState.currentClass}</strong> کے <strong>${appState.examTitle} (${appState.sessionYear || ''})</strong> میں
+        کل <strong>${s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : cData.totalMarks}</strong> میں سے <strong>${s.obtained}</strong> نمبرات (<strong>${s.percentage}%</strong>) حاصل کر کے
+        نمایاں <strong style="color:#d97706; font-size:15pt;">${s.rank} پوزیشن</strong> اور تقدیر <strong>${s.grade}</strong> حاصل کی۔
+      </p>
+      <p style="font-size:11.5pt; color:#475569; margin-top:8px;">ادارہ ان کی شاندار علمی کامیابی پر دلی مبارکباد پیش کرتا ہے اور مزید ترقی کے لیے دعاگو ہے۔</p>
+      <div style="display:flex; justify-content:space-between; margin-top:44px; padding:0 24px; font-size:11.5pt; font-weight:bold;">
+        <div>تاریخ: ${new Date().toLocaleDateString('ur-PK')}</div>
+        <div>دستخط ناظم امتحانات: ____________</div>
+        <div>دستخط و مہر ${appState.institutionHead || 'مہتمم جامعہ'}: ____________</div>
+      </div>
+    </div>
+  `).join('');
+  window.print();
+}
+
+function printAttendanceSheet() {
+  let cData = getCurrentClassData();
+  let view = activatePrintSection('printAttendanceSheetView');
+  view.innerHTML = `
+    ${buildPrintHeaderHtml('امتحانی ہال حاضری و دستخط شیٹ (Exam Hall Attendance Sheet)', '#0f766e')}
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th style="width:32px;">#</th>
+          <th style="width:48px;">رول</th>
+          <th style="text-align:right; min-width:120px;">اسم الطالبۃ</th>
+          <th style="text-align:right; min-width:110px;">اسم الاب</th>
+          ${cData.subjects.map(sub => `<th>${sub}<br><span style="font-size:8pt; font-weight:normal;">(دستخط)</span></th>`).join('')}
+        </tr>
+      </thead>
+      <tbody>
+        ${cData.students.map((s, idx) => `
+          <tr style="height:28px;">
+            <td>${idx + 1}</td>
+            <td><strong>${s.roll}</strong></td>
+            <td style="text-align:right; font-weight:bold;">${s.name}</td>
+            <td style="text-align:right;">${s.father || '-'}</td>
+            ${cData.subjects.map(() => '<td></td>').join('')}
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+    ${buildPrintFooterHtml()}
+  `;
+  window.print();
+}
+
+// --- 8. WHOLE-JAMIA OVERVIEW & ALL-CLASSES MULTI-SHEET EXCEL ---
+function renderJamiaOverviewTable() {
+  let tbody = document.getElementById('jamiaOverviewTableBody');
+  if (!tbody) return;
+  let classes = getClassList();
+  let rowsHtml = [];
+  let grandTotal = 0, grandAppeared = 0, grandPassed = 0, grandFailed = 0;
+
+  classes.forEach((cls, idx) => {
+    let cd = appState.classesData[cls];
+    if (!cd || !cd.students) {
+      rowsHtml.push(`<tr><td>${idx + 1}</td><td style="text-align:right; font-weight:700;">${cls}</td><td>0</td><td>0</td><td>0</td><td>0</td><td>-</td><td>-</td><td style="text-align:right; color:var(--text-muted);">-</td><td class="no-print"><button class="btn btn-secondary btn-sm" onclick="selectClassDirect('${cls.replace(/'/g, "\\'")}'); switchTabDirect('table');">کھولیں</button></td></tr>`);
+      return;
+    }
+    let activeCd = getCurrentClassData(cls, appState.examTitle);
+    let computed = calculateAllRanks(activeCd.students, activeCd.subjects, activeCd.totalMarks, activeCd);
+    let total = computed.length;
+    let appeared = computed.filter(s => !s.isAbsent).length;
+    let passed = computed.filter(s => !s.isAbsent && s.grade !== 'راسب').length;
+    let failed = appeared - passed;
+    let rate = appeared > 0 ? Math.round((passed / appeared) * 100) : 0;
+    let ranked = computed.filter(s => !s.isAbsent && s.rankNum === 1);
+    let topper = ranked.length > 0 ? ranked.map(s => s.name).join('، ') : '-';
+    let topScore = ranked.length > 0 ? `${ranked[0].obtained}/${ranked[0].effectiveTotalMarks !== undefined ? ranked[0].effectiveTotalMarks : activeCd.totalMarks}` : '-';
+
+    grandTotal += total; grandAppeared += appeared; grandPassed += passed; grandFailed += failed;
+
+    rowsHtml.push(`
+      <tr>
+        <td>${idx + 1}</td>
+        <td style="text-align:right; font-weight:700;">${cls}</td>
+        <td><strong>${total}</strong></td>
+        <td>${appeared}</td>
+        <td style="color:var(--success); font-weight:700;">${passed}</td>
+        <td style="color:var(--danger); font-weight:700;">${failed}</td>
+        <td><strong>${appeared > 0 ? rate + '%' : '-'}</strong></td>
+        <td>${topScore}</td>
+        <td style="text-align:right;">${topper}</td>
+        <td class="no-print"><button class="btn btn-secondary btn-sm" onclick="selectClassDirect('${cls.replace(/'/g, "\\'")}'); switchTabDirect('table');">کھولیں</button></td>
+      </tr>
+    `);
+  });
+
+  // Restore active class data pointer
+  getCurrentClassData(appState.currentClass, appState.examTitle);
+
+  let grandRate = grandAppeared > 0 ? Math.round((grandPassed / grandAppeared) * 100) : 0;
+  rowsHtml.push(`
+    <tr style="background:var(--primary-subtle); font-weight:700;">
+      <td colspan="2" style="text-align:right; color:var(--primary-dark);">مجموعی جامعہ میزان</td>
+      <td>${grandTotal}</td>
+      <td>${grandAppeared}</td>
+      <td style="color:var(--success);">${grandPassed}</td>
+      <td style="color:var(--danger);">${grandFailed}</td>
+      <td style="color:var(--primary-dark);">${grandAppeared > 0 ? grandRate + '%' : '-'}</td>
+      <td colspan="3"></td>
+    </tr>
+  `);
+  tbody.innerHTML = rowsHtml.join('');
+}
+
+function printJamiaOverview() {
+  let tbodyHtml = document.getElementById('jamiaOverviewTableBody').innerHTML;
+  let view = activatePrintSection('printJamiaOverviewView');
+  view.innerHTML = `
+    ${buildPrintHeaderHtml('مجموعی جامعہ امتحانی رپورٹ — تمام درجات کا خلاصہ', '#0f766e')}
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th style="text-align:right;">درجہ</th>
+          <th>کل طالبات</th>
+          <th>حاضر</th>
+          <th>کامیاب</th>
+          <th>راسب</th>
+          <th>شرح کامیابی</th>
+          <th>نمایاں نمبر</th>
+          <th style="text-align:right;">اول پوزیشن</th>
+        </tr>
+      </thead>
+      <tbody>${tbodyHtml.replace(/<td class="no-print">[\s\S]*?<\/td>/g, '')}</tbody>
+    </table>
+    ${buildPrintFooterHtml()}
+  `;
+  window.print();
+}
+
+function exportAllClassesExcel() {
+  if (typeof XLSX === 'undefined') { showToast('SheetJS لوڈ نہیں ہو سکی', 'error'); return; }
+  let wb = XLSX.utils.book_new();
+  let classes = getClassList();
+  let sheetsAdded = 0;
+
+  classes.forEach(cls => {
+    let cd = appState.classesData[cls];
+    if (!cd || !cd.students || cd.students.length === 0) return;
+    let activeCd = getCurrentClassData(cls, appState.examTitle);
+    let computed = calculateAllRanks(activeCd.students, activeCd.subjects, activeCd.totalMarks, activeCd);
+    let header = ['رول نمبر', 'رجسٹریشن', 'اسم الطالبۃ', 'اسم الاب', 'فون', ...activeCd.subjects, 'مجموعہ', 'کل نمبر', 'فیصد٪', 'پوزیشن', 'تقدیر'];
+    let rows = [
+      [`${appState.institution} — ${appState.examTitle} — درجہ: ${cls}`],
+      header
+    ];
+    computed.forEach(s => {
+      rows.push([
+        s.roll, s.reg || '', s.name, s.father || '', s.phone || '',
+        ...activeCd.subjects.map(sub => s.marks && s.marks[sub] !== undefined ? s.marks[sub] : ''),
+        s.obtained, s.effectiveTotalMarks !== undefined ? s.effectiveTotalMarks : activeCd.totalMarks, s.percentage, s.rank, s.grade
+      ]);
+    });
+    let ws = XLSX.utils.aoa_to_sheet(rows);
+    ws['!views'] = [{ rightToLeft: true }];
+    XLSX.utils.book_append_sheet(wb, ws, cls.slice(0, 31));
+    sheetsAdded++;
+  });
+
+  getCurrentClassData(appState.currentClass, appState.examTitle);
+  if (sheetsAdded === 0) {
+    showToast('کسی درجہ میں کوئی طالبہ موجود نہیں', 'warning');
+    return;
+  }
+  let fname = `${appState.institution}_تمام_درجات_${appState.examTitle}.xlsx`;
+  XLSX.writeFile(wb, fname);
+  showToast(`${sheetsAdded} درجات پر مشتمل مکمل ایکسل ورک بک ڈاؤن لوڈ ہو گئی!`, 'info');
+}
+
+function updateStorageUsageMeter() {
+  let box = document.getElementById('storageUsageMeter');
+  if (!box) return;
+  try {
+    let raw = JSON.stringify(appState);
+    let kb = Math.round((raw.length / 1024) * 10) / 10;
+    let totalClasses = getClassList().length;
+    let totalStudents = Object.values(appState.classesData || {}).reduce((acc, cd) => acc + ((cd && cd.students) ? cd.students.length : 0), 0);
+    box.innerHTML = `<strong>💾 اسٹوریج اسٹیٹس:</strong> ${kb} KB استعمال شدہ | کل درجات: <strong>${totalClasses}</strong> | کل طالبات: <strong>${totalStudents}</strong> | تمام ڈیٹا براؤزر میں آف لائن محفوظ ہے۔`;
+  } catch (e) {}
 }
 
 window.addEventListener('DOMContentLoaded', initGlobalShortcuts);

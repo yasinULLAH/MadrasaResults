@@ -70,7 +70,7 @@ if (workbox) {
     },
     {
         "url": "index.html",
-        "revision": "0b20feb8e340a6a7114b36964fab1bc6"
+        "revision": "3b58d5dfa1abf83e4649e41e9d1f6772"
     },
     {
         "url": "index.html.bak",
@@ -102,11 +102,11 @@ if (workbox) {
     },
     {
         "url": "README.md",
-        "revision": "a5e3cbb6d52cd54daaea26b8772fba3b"
+        "revision": "985ac67ddcbf972553116efd5e47d2a0"
     },
     {
         "url": "sw.js",
-        "revision": "c4c32512b8c174e8ac9a289ec7dacaf1"
+        "revision": "4bd1ede91139f7aef8871889e8a24544"
     },
     {
         "url": "xlsx.full.min.js",
