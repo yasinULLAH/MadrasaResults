@@ -3,7 +3,7 @@
 <html dir="rtl" lang="ur">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
 <title>نظام امتحانات و نتائج - جامعہ خدیجۃ الکبریٰ للبنات</title>
 <script src="xlsx.full.min.js"></script>
 <script>
@@ -3393,18 +3393,13 @@ function calculateStudent(student, subjects, totalMarks, cDataOverride) {
         effectiveTotalMarks = Math.max(0, effectiveTotalMarks - maxForSub);
         return;
       }
-      if (typeof val === 'number') {
-        obtained += val;
+      const numericMark = typeof val === 'number' || (typeof val === 'string' && strVal !== '') ? Number(val) : NaN;
+      if (Number.isFinite(numericMark) && numericMark >= 0 && numericMark <= Number(maxForSub)) {
+        obtained += numericMark;
         hasValidMarks = true;
         allAbsent = false;
-        if (val < minPass) failedSubjectsCount++;
-      } else if (!isNaN(Number(val))) {
-        let n = Number(val);
-        obtained += n;
-        hasValidMarks = true;
-        allAbsent = false;
-        if (n < minPass) failedSubjectsCount++;
-      } else if (strVal.includes('غائب')) {
+        if (numericMark < minPass) failedSubjectsCount++;
+      } else if (strVal !== '') {
         failedSubjectsCount++;
       }
     }
@@ -3448,6 +3443,10 @@ function calculateAllRanks(students, subjects, totalMarks, cDataOverride) {
   });
 
   let validForRank = computed.filter(s => !s.isAbsent && (!passedOnly || s.grade !== 'راسب')).sort((a, b) => b.obtained - a.obtained);
+  const rankByScore = new Map();
+  validForRank.forEach((student, index) => {
+    if (!rankByScore.has(student.obtained)) rankByScore.set(student.obtained, index + 1);
+  });
 
   computed.forEach(s => {
     if (s.isAbsent) {
@@ -3457,8 +3456,7 @@ function calculateAllRanks(students, subjects, totalMarks, cDataOverride) {
       s.rank = '-';
       s.rankNum = 9998;
     } else {
-      let betterCount = validForRank.filter(other => other.obtained > s.obtained).length;
-      let r = betterCount + 1;
+      let r = rankByScore.get(s.obtained);
       s.rankNum = r;
       s.rank = formatRankValue(r, rankFmt);
     }
@@ -5750,6 +5748,20 @@ function renderAwardSheetSubjectOptions(cData) {
   }
 }
 
+function getUniqueExcelSheetName(workbook, className) {
+  const forbidden = new Set([':', '\\', '/', '?', '*', '[', ']']);
+  const base = Array.from(String(className), ch => forbidden.has(ch) || ch.charCodeAt(0) < 32 ? '_' : ch).join('').trim().replace(/^'+|'+$/g, '') || 'Sheet';
+  const used = new Set(workbook.SheetNames.map(name => name.toLowerCase()));
+  used.add('history');
+  const fit = (length) => base.slice(0, length).replace(/[\uD800-\uDBFF]$/, '').replace(/'+$/, '').trimEnd() || 'Sheet';
+  let name = fit(31);
+  for (let index = 2; used.has(name.toLowerCase()); index++) {
+    const suffix = ` (${index})`;
+    name = fit(31 - suffix.length) + suffix;
+  }
+  return name;
+}
+
 function exportToExcel() {
   if (typeof XLSX === 'undefined') {
     showToast('SheetJS لائبریری لوڈ نہیں ہو سکی۔', 'error');
@@ -6027,7 +6039,7 @@ function exportToExcel() {
   ws['!views'] = [{ rightToLeft: true }];
   ws['!ref'] = `A1:${lastColLetter}${summaryRowIdx + 1}`;
 
-  XLSX.utils.book_append_sheet(wb, ws, appState.currentClass.slice(0, 31));
+  XLSX.utils.book_append_sheet(wb, ws, getUniqueExcelSheetName(wb, appState.currentClass));
 
   let filename = `${appState.currentClass}_${appState.examTitle}.xlsx`;
   XLSX.writeFile(wb, filename);
@@ -7954,7 +7966,7 @@ function renderJamiaOverviewTable() {
       <td style="color:var(--success);">${grandPassed}</td>
       <td style="color:var(--danger);">${grandFailed}</td>
       <td style="color:var(--primary-dark);">${grandAppeared > 0 ? grandRate + '%' : '-'}</td>
-      <td colspan="3"></td>
+      <td colspan="2"></td><td class="no-print"></td>
     </tr>
   `);
   tbody.innerHTML = rowsHtml.join('');
@@ -8011,7 +8023,7 @@ function exportAllClassesExcel() {
     });
     let ws = XLSX.utils.aoa_to_sheet(rows);
     ws['!views'] = [{ rightToLeft: true }];
-    XLSX.utils.book_append_sheet(wb, ws, cls.slice(0, 31));
+    XLSX.utils.book_append_sheet(wb, ws, getUniqueExcelSheetName(wb, cls));
     sheetsAdded++;
   });
 
@@ -8030,10 +8042,10 @@ function updateStorageUsageMeter() {
   if (!box) return;
   try {
     let raw = JSON.stringify(appState);
-    let kb = Math.round((raw.length / 1024) * 10) / 10;
+    let kb = Math.round((new Blob([raw]).size / 1024) * 10) / 10;
     let totalClasses = getClassList().length;
     let totalStudents = Object.values(appState.classesData || {}).reduce((acc, cd) => acc + ((cd && cd.students) ? cd.students.length : 0), 0);
-    box.innerHTML = `<strong>💾 اسٹوریج اسٹیٹس:</strong> ${kb} KB استعمال شدہ | کل درجات: <strong>${totalClasses}</strong> | کل طالبات: <strong>${totalStudents}</strong> | تمام ڈیٹا براؤزر میں آف لائن محفوظ ہے۔`;
+    box.innerHTML = `<strong>💾 اسٹوریج اسٹیٹس:</strong> ${kb} KiB (JSON کا تخمینی حجم) | کل درجات: <strong>${totalClasses}</strong> | کل طالبات: <strong>${totalStudents}</strong> | تمام ڈیٹا براؤزر میں آف لائن محفوظ ہے۔`;
   } catch (e) {}
 }
 
