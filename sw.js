@@ -70,7 +70,7 @@ if (workbox) {
     },
     {
         "url": "index.html",
-        "revision": "313a0dd2084f1e43b2021f106d98f039"
+        "revision": "0b20feb8e340a6a7114b36964fab1bc6"
     },
     {
         "url": "index.html.bak",
@@ -106,7 +106,7 @@ if (workbox) {
     },
     {
         "url": "sw.js",
-        "revision": "3122161e3ad883c2b3d2ab8b6de20559"
+        "revision": "c4c32512b8c174e8ac9a289ec7dacaf1"
     },
     {
         "url": "xlsx.full.min.js",
